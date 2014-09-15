@@ -1,0 +1,981 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"con",
+				"console.info(message);"
+			],
+			[
+				"js-high",
+				"js-highscore-popup"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"text-a",
+				"text-decoration"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"padding",
+				"padding-box"
+			],
+			[
+				"bacgk",
+				"background-size"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"background-c",
+				"background-color"
+			],
+			[
+				"text-",
+				"text-transform"
+			],
+			[
+				"subs",
+				"subsection"
+			],
+			[
+				"boxes",
+				"boxesRest"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"vari",
+				"variant_i"
+			],
+			[
+				"variant_op",
+				"variant_option_details"
+			],
+			[
+				"white",
+				"white-space"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"backgroun",
+				"background"
+			],
+			[
+				"curre",
+				"currentField"
+			],
+			[
+				"trip-plann",
+				"trip-planner-from"
+			],
+			[
+				"min",
+				"minLength"
+			],
+			[
+				"js-tic",
+				"js-ticket-type-radio-row1"
+			],
+			[
+				"show",
+				"showTicketTypes"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"updat",
+				"updateFormMessage"
+			],
+			[
+				"error",
+				"errorMessages"
+			],
+			[
+				"has",
+				"hasClass"
+			],
+			[
+				"box-",
+				"box-shadow"
+			],
+			[
+				"typea",
+				"typeaheadFilter"
+			],
+			[
+				"ret",
+				"returnDB"
+			],
+			[
+				"new",
+				"newItem"
+			],
+			[
+				"fi",
+				"figcaption"
+			],
+			[
+				"remove",
+				"removeClass"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"artists",
+				"artistIDs"
+			],
+			[
+				"alT",
+				"allThumbs"
+			],
+			[
+				"backgrou",
+				"background-color"
+			],
+			[
+				"tabl",
+				"table-cell"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"temp",
+				"tempptab"
+			],
+			[
+				"cate",
+				"categoryURL"
+			],
+			[
+				"categ",
+				"categories"
+			],
+			[
+				"categr",
+				"categoryURL"
+			],
+			[
+				"cat",
+				"categories"
+			],
+			[
+				"preloa",
+				"preloadImg"
+			],
+			[
+				"url",
+				"urldecode"
+			],
+			[
+				"series",
+				"seriesURL"
+			],
+			[
+				"newSer",
+				"newSeries"
+			],
+			[
+				"newCa",
+				"newCategory"
+			],
+			[
+				"qRes",
+				"qResC"
+			],
+			[
+				"seri",
+				"seriesURL"
+			],
+			[
+				"category",
+				"categoryURL"
+			],
+			[
+				"backgt",
+				"background-position"
+			],
+			[
+				"mysq",
+				"MySqlres"
+			],
+			[
+				"mysql_re",
+				"mysql_real_escape_string"
+			],
+			[
+				"res",
+				"results"
+			],
+			[
+				"qr",
+				"qResI"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"disab",
+				"Package Control: Disable Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"snippet: fore",
+				"Snippet: foreach …"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"prett",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"inden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pag",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 435.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read()) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/dominikwilkowski/Sites/bronze"
+	],
+	"file_history":
+	[
+		"/Users/dominikwilkowski/Sites/sites/bronze/dev/stylus/module/module.styl",
+		"/Users/dominikwilkowski/Sites/sites/bronze/dev/stylus/site.styl",
+		"/Users/dominikwilkowski/Sites/sites/bronze/package.json",
+		"/Users/dominikwilkowski/Sites/sites/bronze/Gruntfile.js",
+		"/Users/dominikwilkowski/Sites/sites/bronze/dev/stylus/bronze.styl",
+		"/Users/dominikwilkowski/Sites/westpac GUI/GUI/Gruntfile.js",
+		"/Users/dominikwilkowski/Sites/sites/bronze/dev/stylus/base/base.styl",
+		"/Users/dominikwilkowski/Sites/sites/bronze/dev/stylus/base/site-settings.styl",
+		"/Users/dominikwilkowski/Sites/sites/bronze/dev/stylus/base/fonts.styl",
+		"/Users/dominikwilkowski/Sites/Westpac CMS/Gruntfile.js",
+		"/Users/dominikwilkowski/Sites/westpac GUI/GUI/BOM/Gruntfile.js",
+		"/Users/dominikwilkowski/Sites/sites/bronze/index.html",
+		"/Users/dominikwilkowski/Sites/sites/bronze/css/bronze-v4.css",
+		"/Users/dominikwilkowski/Sites/sites/bronze/signals.html",
+		"/Users/dominikwilkowski/Sites/sites/bronze/php/ajax_lib.php",
+		"/Users/dominikwilkowski/Sites/sites/bronze/js/bronze.js",
+		"/Users/dominikwilkowski/Sites/sites/bronze/js/bronze-min-v4.js",
+		"/Users/dominikwilkowski/Sites/sites/bronze/css/bronze.css",
+		"/Users/dominikwilkowski/Sites/sites/bronze/php/ini.php",
+		"/Users/dominikwilkowski/Sites/sites/dominik-wilkowski3/scpt/ini.php",
+		"/Users/dominikwilkowski/Sites/spring/JS/spring.js",
+		"/Users/dominikwilkowski/Sites/sites/bronze/js/lightbox.me.js",
+		"/Users/dominikwilkowski/Sites/spring/JS/jquery.lightbox_me.min.js",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/assets/checkout.css.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/snippets/footer.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/config/settings.html",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/templates/search.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/header.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/pagination.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/templates/product.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/snippets/show-sizes.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/snippets/pagination.scss",
+		"/Users/dominikwilkowski/Sites/spring/stylus/base/retina.styl",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/templates/product.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/snippets/out-of-stock.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/assets/esther.css.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/product-information.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/footer.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/open-graph-tags.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/snippets/product-information.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/layout/navigation.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/esther.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/css/base.css",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/templates/collection.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/product-item.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/show-price.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/show-sizes.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/templates/index.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/templates/index.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/templates/collection.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/banner.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/excluded-brands.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/for-looper.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/breadcrumb.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/layout/index.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/assets/shop.js.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/setup/normalize.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/bourbon/addons/_html5-input-types.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/make-image.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/parse-title.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/layout/layout.scss",
+		"/Users/dominikwilkowski/Sites/spring/spring-food-and-wine-4684363/config/settings.html",
+		"/Users/dominikwilkowski/Library/Application Support/Sublime Text 3/Local/Session.sublime_session",
+		"/Users/dominikwilkowski/Library/Application Support/Sublime Text 3/Packages/User/HTML (Liquid).sublime-settings",
+		"/Users/dominikwilkowski/Library/Application Support/Sublime Text 3/Packages/User/HTML Liquid.sublime-settings",
+		"/Users/dominikwilkowski/Library/Application Support/Sublime Text 3/Packages/Color Scheme - Default/Domk.tmTheme",
+		"/Users/dominikwilkowski/Library/Application Support/Sublime Text 3/Installed Packages/Liquid.sublime-package",
+		"/Users/dominikwilkowski/Sites/esther-mobile/esther-development-6442889/snippets/collection-grid-item.liquid",
+		"/Users/dominikwilkowski/Sites/esther-mobile/scss/layout/grid.scss",
+		"/Users/dominikwilkowski/Sites/esther-mobile/.gitignore",
+		"/Users/dominikwilkowski/Sites/sites/arne/php/php_lib.php",
+		"/Users/dominikwilkowski/Sites/sites/arne/php/controller.php",
+		"/Users/dominikwilkowski/Sites/sites/KSK/php/ini.php",
+		"/Users/dominikwilkowski/Sites/sites/cCMS/js/admin.js",
+		"/Users/dominikwilkowski/Sites/sites/KSK/css/admin.css",
+		"/Users/dominikwilkowski/Sites/sites/KSK/php/markdown.php",
+		"/Users/dominikwilkowski/Sites/sites/arne/php/markdown.php",
+		"/Users/dominikwilkowski/Sites/sites/zeha/index.php",
+		"/Users/dominikwilkowski/Sites/sites/KSK/js/jquery.viewport.js",
+		"/Users/dominikwilkowski/Sites/sites/mediencampus/js/mediencampus.js",
+		"/Users/dominikwilkowski/Sites/sites/cCMS/admin.php",
+		"/Users/dominikwilkowski/Sites/sites/autocenter/css/autocenter.css",
+		"/Users/dominikwilkowski/Sites/sites/greeve/index.php",
+		"/Users/dominikwilkowski/Sites/sites/arne/admin.php",
+		"/Users/dominikwilkowski/Sites/sites/KSK/php/ajax_lib.php",
+		"/Users/dominikwilkowski/Sites/sites/KSK/php/lockout.php",
+		"/Users/dominikwilkowski/Sites/sites/KSK/js/ksk.js",
+		"/Users/dominikwilkowski/Sites/sites/R2R/test.php",
+		"/Users/dominikwilkowski/Sites/sites/R2R/css/tflavors.css",
+		"/Users/dominikwilkowski/Sites/sites/R2R/login.php",
+		"/Users/dominikwilkowski/Sites/sites/R2R/scpt/config.php",
+		"/Users/dominikwilkowski/Sites/sites/R2R/cart.php",
+		"/Users/dominikwilkowski/Sites/sites/R2R/scpt/autoload.php",
+		"/Users/dominikwilkowski/Sites/sites/R2R/scpt/rocketship/RocketShipIt.php",
+		"/Users/dominikwilkowski/Sites/sites/R2R/shop.php",
+		"/Users/dominikwilkowski/Sites/sites/R2R/css/ordernow.css",
+		"/Users/dominikwilkowski/Sites/sites/R2R/index.php",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/box.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/library/custom-select.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/tables.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/status-feed.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/base/forms.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/mini-planner.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/landing-page.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/layout/master.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/header.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/footer.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/theme/typography.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_site/widget/widget-planner.css",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_layouts/widget.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_includes/status.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_includes/status/detail.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_includes/status/results.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_layouts/home-interim.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_layouts/timetables.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/timetables-test/index.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/timetables/jekyll-build/index.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/timetables/timetables-test/index.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/base/retina.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/module/mapBox.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/js/mapBox.js",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_includes/mapBox.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/stylus/includes/theme/typographymain.styl",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_site/widget/widget-landscape.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/widget/widget-landscape.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/_site/widget/widget-portrait.html",
+		"/Users/dominikwilkowski/Sites/tfnsw/jekyll-build/widget/widget-portrait.html",
+		"/Users/dominikwilkowski/Desktop/jquery.customselect.js.txt"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 95.0,
+		"where_history":
+		[
+			"*.scss",
+			"",
+			"*.scss",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"*styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"*.js",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"*.css",
+			"*.styl",
+			"_layouts/*",
+			"*.html",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"*.style",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.styl",
+			"",
+			"*.css",
+			"*.styl",
+			"",
+			"*.styl",
+			"*.css",
+			"",
+			"*.styl",
+			"*.css",
+			"",
+			"*.styl",
+			"*.css",
+			"*.styl",
+			"",
+			"*.styl",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"getName",
+			"localization",
+			"currentVersion",
+			"globalConfig",
+			"'",
+			"<%= globalConfig.name  %>.<%= globalConfig.version  %>",
+			"<%= globalConfig.name  %>",
+			"query-",
+			"' | asset_url }}",
+			"{{ '",
+			"globalConfig",
+			"name",
+			"bronze",
+			"uglify",
+			"symbols",
+			"svgmin",
+			"dev/BOM/css/site.min.css",
+			"site",
+			"v3",
+			"nays",
+			"span",
+			"setScore",
+			"conso",
+			"signals[newSignal][0]",
+			"( newSignal + 1)",
+			"newSignal - 1",
+			"newQuestion",
+			"newSignal(",
+			"newSignal",
+			"newQuestion",
+			"consol",
+			"consl",
+			"js-overlay",
+			";//",
+			"js-score-board",
+			"score",
+			"each",
+			"preventDefault",
+			"suffle",
+			"js-canvas",
+			"drawChoices",
+			"newQuestion",
+			",]",
+			"	'",
+			"Image",
+			"question-",
+			"drawQuestions",
+			"newSelection",
+			"left",
+			"padding",
+			"margin",
+			"8666",
+			"<li>",
+			"nav-",
+			"div",
+			"111",
+			"{{ settings.primary-border-colour }}",
+			"border: 1px solid #eee;",
+			"border",
+			"span",
+			"p",
+			"span",
+			"label",
+			"ul",
+			"div",
+			"span",
+			"products-per-page",
+			"9",
+			"8",
+			"4",
+			"articles-per-page",
+			"out-of-stock-wrapper",
+			".product-submit",
+			".product .product-submit",
+			"class",
+			"div",
+			"scrollable",
+			".scrollable",
+			"tab-pane",
+			".tab-pane",
+			"product-information-item",
+			"product-information-item tab-pane",
+			".product-submit",
+			".product .product-submit",
+			"footer-section",
+			"product-price",
+			".show-sizes .size",
+			"5px;",
+			"5px",
+			"<input",
+			"-218px",
+			"main-footer .sub-footer .payment-options",
+			" }",
+			"/* lin",
+			"111",
+			"div",
+			"h1",
+			"quick-shop-modal",
+			".product-information-list-item a",
+			"out-of-stock-wrapper",
+			"font-size",
+			"666",
+			"product-images",
+			"\"",
+			"out-of-stock-wrapper",
+			"out-of-stock",
+			"lightbo",
+			"heading",
+			"product.id",
+			"all_in_stock",
+			"price",
+			"cart.items.size",
+			"22px",
+			"10px",
+			"20px",
+			"25px",
+			"12px",
+			"14px",
+			"666",
+			"ddd",
+			"url(",
+			"20px",
+			"product.",
+			"span",
+			"div",
+			"products-per-row",
+			"footerTwitter",
+			"content-box"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"	",
+			"Contact the ticket outlet for ticket availability and shop accessibility details.",
+			"\"value\"",
+			"\"id\"",
+			"NAME",
+			"ID",
+			"NAME",
+			"",
+			"	\"STOP_NAME",
+			"STOP_NAME\"",
+			"\"STOP_ID\"",
+			"\"id\"",
+			"\":",
+			"\":\"",
+			"ID-to-be-entered",
+			"",
+			"icon icon-size-medium icon-type-lightrail\" title=\"Sydney light rail\"",
+			"icon icon-size-medium icon-type-newcastle-ferry\" title=\"Newcastle ferry\"",
+			"icon icon-size-medium icon-type-ferry\" title=\"Sydney ferries\"",
+			"icon icon-size-medium icon-type-country-bus\" title=\"Regional coaches\"",
+			"icon icon-size-medium icon-type-regional-bus\" title=\"Regional buses\"",
+			"icon icon-size-medium icon-type-country-train\" title=\"Country trains\"",
+			"icon icon-size-medium icon-type-regional-train\" title=\"Regional trains\"",
+			"icon icon-size-medium icon-type-train\" title=\"Sydney trains\"",
+			"icon icon-size-medium icon-type-lightrail",
+			"icon icon-size-medium icon-type-newcastle-ferry",
+			"icon icon-size-medium icon-type-ferry",
+			"icon icon-size-medium icon-type-country-bus",
+			"icon icon-size-medium icon-type-regional-bus",
+			"icon icon-size-medium icon-type-bus",
+			"icon icon-size-medium icon-type-country-train",
+			"icon icon-size-medium icon-type-regional-train",
+			"icon icon-size-medium icon-type-train",
+			"icon icon-size-medium icon-type-country-train",
+			"icon icon-size-medium icon-type-bus",
+			"icon icon-size-medium icon-type-regional-bus",
+			"icon icon-size-medium icon-type-country-bus",
+			"icon icon-size-medium icon-type-ferry",
+			"icon icon-size-medium icon-type-lightrail",
+			"icon icon-size-medium icon-type-newcastle-ferry",
+			"icon icon-size-medium icon-type-ferry",
+			"icon icon-size-medium icon-type-country-bus",
+			"icon icon-size-medium icon-type-regional-bus",
+			"icon icon-size-medium icon-type-bus",
+			"icon icon-size-medium icon-type-country-train",
+			"icon icon-size-medium icon-type-regional-train",
+			"icon icon-size-medium icon-type-train",
+			"kinokind_logo"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 118.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "#bronze.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"setting",
+				"esther-development-6442889/config/settings.html"
+			],
+			[
+				"retin",
+				"stylus/includes/base/retina.styl"
+			],
+			[
+				"mapb",
+				"stylus/includes/module/mapBox.styl"
+			],
+			[
+				"forms",
+				"stylus/includes/base/forms.styl"
+			],
+			[
+				"icon.s",
+				"stylus/includes/base/icons.styl"
+			],
+			[
+				"detail",
+				"jekyll-build/_includes/status/detail.html"
+			],
+			[
+				"footer",
+				"stylus/includes/module/footer.styl"
+			],
+			[
+				"form",
+				"stylus/includes/base/forms.styl"
+			],
+			[
+				"navigat",
+				"stylus/includes/module/navigation.styl"
+			],
+			[
+				"subnav",
+				"stylus/includes/module/subnavigation.styl"
+			],
+			[
+				"navigai",
+				"stylus/includes/module/navigation.styl"
+			],
+			[
+				"styl",
+				"stylus/style.styl"
+			],
+			[
+				"news-lis",
+				"jekyll-build/_layouts/news-listing.html"
+			],
+			[
+				"event",
+				"jekyll-build/_layouts/events-listing.html"
+			],
+			[
+				"status",
+				"stylus/includes/module/status-feed.styl"
+			],
+			[
+				"alerts",
+				"stylus/includes/module/alert.styl"
+			],
+			[
+				"timetable-maps",
+				"stylus/includes/module/timetables-maps.styl"
+			],
+			[
+				"example",
+				"jekyll-build/_includes/example-timetable.html"
+			],
+			[
+				"",
+				"jekyll-build/_includes/example-timetable-ferry.html"
+			],
+			[
+				"timetable-deta",
+				"jekyll-build/_layouts/timetable-detail.html"
+			],
+			[
+				"buy",
+				"jekyll-build/_layouts/buy-tickets.html"
+			],
+			[
+				"navigation/",
+				"jekyll-build/_includes/navigation/tickets.html"
+			],
+			[
+				"na",
+				"jekyll-build/_includes/navigation.html"
+			],
+			[
+				"retina",
+				"stylus/includes/base/retina.styl"
+			],
+			[
+				"retina.",
+				"stylus/includes/base/retina.styl"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Users/dominikwilkowski/Sites/sites/englishinform/#englishinform.sublime-project"
+			],
+			[
+				"sch",
+				"/Users/dominikwilkowski/Sites/schlabe/#schlabe.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 229.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
