@@ -7,12 +7,14 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-includes');
+	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-grunticon');
 	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-copy-to');
+	grunt.loadNpmTasks('grunt-bumpup');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
 
@@ -40,8 +42,23 @@ module.exports = function(grunt) {
 				dest: 'tmp/',
 				options: {
 					flatten: true,
-					includePath: 'HTML-includes/',
+					includePath: 'dev/HTMLincludes/',
 				},
+			},
+		},
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		//replace task
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		replace: {
+			currentVersion: {
+				src: ['tmp/*.html'],
+				overwrite: true,
+				replacements: [{
+					from: '--currentVersion--',
+					to: '<%= currentVersion %>',
+				}],
 			},
 		},
 
@@ -188,6 +205,14 @@ module.exports = function(grunt) {
 
 
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		//bum version
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		bumpup: {
+			files: 'package.json',
+		},
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		//server
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		connect: {
@@ -217,6 +242,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', [
 		'clean:pre',
 		'includes',
+		'replace',
 		'stylus',
 		'autoprefixer',
 		'uglify',
@@ -228,4 +254,5 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('default', ['connect', 'build', 'watch']);
+	grunt.registerTask('new', ['bumpup']);
 };
