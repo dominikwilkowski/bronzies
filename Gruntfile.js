@@ -200,6 +200,15 @@ module.exports = function(grunt) {
 				}],
 			},
 
+			//Node modules
+			Node: {
+				files: [{
+					cwd: 'dev/node/node_modules',
+					src: ['**/*'],
+					dest: ['prod/node/node_modules/'],
+				}],
+			},
+
 			//JSON files
 			JSON: {
 				files: [{
