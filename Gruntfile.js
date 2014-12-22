@@ -16,6 +16,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-copy-to');
 	grunt.loadNpmTasks('grunt-bumpup');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-wakeup');
 
 
 	grunt.initConfig({
@@ -53,7 +54,7 @@ module.exports = function(grunt) {
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		replace: {
 			currentVersion: {
-				src: ['tmp/*.html'],
+				src: ['tmp/**/*.*'],
 				overwrite: true,
 				replacements: [{
 					from: '--currentVersion--',
@@ -95,7 +96,13 @@ module.exports = function(grunt) {
 		uglify: {
 			js: {
 				files: {
-					'prod/js/<%= currentVersion  %>.min.js': ['dev/js/*.js'],
+					'prod/js/<%= currentVersion  %>.min.js': ['dev/js/*.js', '!dev/node/*.js'],
+				},
+			},
+
+			node: {
+				files: {
+					'prod/node/api.min.js': ['dev/node/*.js', '!dev/node/node_modules/**/*'],
 				},
 			},
 		},
@@ -193,12 +200,12 @@ module.exports = function(grunt) {
 				}],
 			},
 
-			//php files
-			PHP: {
+			//JSON files
+			JSON: {
 				files: [{
-					cwd: 'dev/php',
-					src: ['*.php'],
-					dest: ['prod/php/'],
+					cwd: 'dev/json',
+					src: ['*.json'],
+					dest: ['prod/json/'],
 				}],
 			},
 		},
@@ -209,6 +216,14 @@ module.exports = function(grunt) {
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		bumpup: {
 			files: 'package.json',
+		},
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		//Wakeup
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		wakeup: {
+			wakeme: {},
 		},
 
 
@@ -229,10 +244,16 @@ module.exports = function(grunt) {
 		//watch for changes
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		watch: {
-			files: [
-				'dev/**/*',
-			],
-			tasks: ['build'],
+			All: {
+				files: [
+					'dev/**/*',
+					'!dev/node/node_modules/**/*',
+					'!package.json',
+				],
+				tasks: [
+					'build',
+				],
+			},
 		},
 
 	});
@@ -250,9 +271,10 @@ module.exports = function(grunt) {
 		'grunticon',
 		'imagemin',
 		'copyto',
-		'clean:post'
+		'clean:post',
+		'wakeup',
 	]);
 
 	grunt.registerTask('default', ['connect', 'build', 'watch']);
-	grunt.registerTask('new', ['bumpup']);
+	grunt.registerTask('new', ['build', 'bumpup']);
 };
