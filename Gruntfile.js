@@ -204,7 +204,7 @@ module.exports = function(grunt) {
 			Node: {
 				files: [{
 					cwd: 'dev/node/node_modules',
-					src: ['**/*'],
+					src: ['**/*', '../package.json'],
 					dest: ['prod/node/node_modules/'],
 				}],
 			},
