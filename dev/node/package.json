@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "node-json-db": "^0.3.2",
     "restify": "^2.8.4"
   }
 }
