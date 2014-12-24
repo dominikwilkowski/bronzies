@@ -10,5 +10,5 @@
 function getQuestions(req, res, next) {
 	var questions = $QUESTIONS.getData("/");
 
-	res.send(questions);
+	res.send(questions); //output json
 }
