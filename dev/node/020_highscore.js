@@ -10,22 +10,26 @@
 function getHighscore(req, res, next) {
 	var highscore = $HIGHSCORE.getData("/");
 
-	res.send(highscore);
+	res.send(highscore); //output json
 }
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Save current highscore
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
-function pushHighscore(req, res, next, data) {
+function postHighscore(req, res, next) {
 	var highscore = $HIGHSCORE.getData("/");
+	var $data = req.params;
 
-	highscore = highscore.sort(function(firstObject, SecondObject) {
-		return SecondObject.score - firstObject.score;
+	highscore.push( $data ); //add new data to object
+
+	highscore = highscore //sort by score
+		.sort(function(firstObject, SecondObject) {
+			return SecondObject.score - firstObject.score;
 	});
 
 	$HIGHSCORE.push('/', highscore);
-	$HIGHSCORE.save();
+	$HIGHSCORE.save(); //write to json
 
-	res.send(highscore);
+	res.send(highscore); //output json
 }
