@@ -18,7 +18,7 @@ bronzies.com
 
 After that, download, unzip, `cd` into the folder and install all dependencies:
 
-4. [Download this repo](archive/master.zip) and unpack it into a folder of your choice.
+4. [Download this repo](https://github.com/dominikwilkowski/bronze/archive/master.zip) and unpack it into a folder of your choice.
 4. CD into the folder `cd /Users/USERNAME/Sites/THISPROJECT`
 4. Run `npm install` to install all dependencies.
 
