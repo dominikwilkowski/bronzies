@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "cfonts": "^0.0.8",
     "chalk": "^0.5.1",
     "node-json-db": "^0.3.2",
     "restify": "^2.8.4"

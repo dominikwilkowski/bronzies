@@ -1,6 +1,7 @@
 var restify = require('restify');
 var JsonDB = require('node-json-db'); //intermediate step until we find a nice DB a la Mongo
 var chalk = require('chalk'); //making it pretty
+var CFONTS = require('cfonts'); //write in sexy font
 var $HIGHSCORE = new JsonDB("./../json/highscore.json", false, false); //json database for highscore data
 var $QUESTIONS = new JsonDB("./../json/questions.json", false, false); //json database for question data
 
@@ -17,33 +18,13 @@ server.post('/highscore', postHighscore);
 server.get('/questions', getQuestions); //question routes
 
 
-function color1( str ) { //foreground color
-	return chalk.red( str );
-}
-function color2( str ) { //background color
-	return chalk.yellow( str );
-}
+console.log("\n\n");
 
-server.listen(5555, function() {
-	console.log("\n\n" + //showing an awesome logo!
-'     ' + color1('██████') + color2('╗ ') + color1('██████') + color2('╗  ') + color1('██████') + color2('╗') + ' ' +
-color1('███') + color2('╗   ') + color1('██') + color2('╗') + color1('███████') + color2('╗') + color1('██') + color2('╗') +
-color1('███████') + color2('╗') + color1('███████') + color2('╗') + "\n" +
-'     ' + color1('██') + color2('╔══') + color1('██') + color2('╗') + color1('██') + color2('╔══') + color1('██') +
-color2('╗') + color1('██') + color2('╔═══') + color1('██') + color2('╗') + color1('████') + color2('╗  ') + color1('██') +
-color2('║╚══') + color1('███') + color2('╔╝') + color1('██') + color2('║') + color1('██') + color2('╔════╝') +
-color1('██') + color2('╔════╝') + "\n" +
-'     ' + color1('██████') + color2('╔╝') + color1('██████') + color2('╔╝') + color1('██') + color2('║   ') + color1('██') +
-color2('║') + color1('██') + color2('╔') + color1('██') + color2('╗ ') + color1('██') + color2('║  ') + color1('███') +
-color2('╔╝ ') + color1('██') + color2('║') + color1('█████') + color2('╗  ') + color1('███████') + color2('╗') + "\n" +
-'     ' + color1('██') + color2('╔══') + color1('██') + color2('╗') + color1('██') + color2('╔══') + color1('██') +
-color2('╗') + color1('██') + color2('║   ') + color1('██') + color2('║') + color1('██') + color2('║╚') + color1('██') +
-color2('╗') + color1('██') + color2('║ ') + color1('███') + color2('╔╝  ') + color1('██') + color2('║') + color1('██') +
-color2('╔══╝  ╚════') + color1('██') + color2('║') + "\n" +
-'     ' + color1('██████') + color2('╔╝') + color1('██') + color2('║  ') + color1('██') + color2('║╚') + color1('██████') +
-color2('╔╝') + color1('██') + color2('║ ╚') + color1('████') + color2('║') + color1('███████') + color2('╗') +
-color1('██') + color2('║') + color1('███████') + color2('╗') + color1('███████') + color2('║') + "\n" +
-'     ' + color2('╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝╚══════╝╚══════╝') + "\n\n");
-
-	console.log( '     ' + chalk.white.bgBlue.bold('    ' + server.name + ' listening at ' + server.url + '    ') + "\n\n" );
+var cfonts = new CFONTS({
+	'text': ' bronzies', //text to be converted
+	'letterSpacing': 1,
+	'space': false,
+	'colors': ['red', 'yellow'] //define all colors
 });
+
+console.log( "\n" + '      ' + chalk.white.bgBlue.bold('    ' + server.name + ' listening at ' + server.url + '    ') + "\n\n" );
