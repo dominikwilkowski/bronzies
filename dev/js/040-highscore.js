@@ -1,3 +1,19 @@
+(function(App) {
+
+	var module = {};
+
+	module.find = function (query) {
+		console.log('find');
+	};
+
+	App.search = module;
+
+}(App));
+
+
+
+/*
+
 var signals = [
 	['signal1.jpg','To attract attention between a boat and the shore'],
 	['signal2.jpg','Return to shore'],
@@ -146,7 +162,7 @@ function setScore() {
 
 $(function() {
 	if($('.js-signals').length) {
-		/**********************************| CONSTRUCT |**********************************/
+		/**********************************| CONSTRUCT |**********************************//*
 		var mode = $(".js-headnav-link.is-active").attr("data-mode");
 		var score = {
 			yays: 0,
@@ -159,7 +175,7 @@ $(function() {
 		drawScore(score);
 		createPreload();
 
-		/**********************************| CHOICE |**********************************/
+		/**********************************| CHOICE |**********************************//*
 		$('.js-canvas').on('click', '.js-choice', function(e) {
 			e.preventDefault();
 			var $this = $(this);
@@ -184,7 +200,7 @@ $(function() {
 			drawScore(score);
 		});
 
-		/**********************************| NEXT |**********************************/
+		/**********************************| NEXT |**********************************//*
 		$('.js-canvas').on('click', '.js-next', function(e) {
 			e.preventDefault();
 			var mode = $(".js-headnav-link.is-active").attr("data-mode");
@@ -195,7 +211,7 @@ $(function() {
 			newQuestion(mode, signals);
 		});
 
-		/**********************************| CHANGE MODE |**********************************/
+		/**********************************| CHANGE MODE |**********************************//*
 		$(".js-headnav-link").click(function() {
 			$(".js-headnav-link").removeClass("is-active");
 			$(this).addClass("is-active");
@@ -207,7 +223,7 @@ $(function() {
 			newQuestion(mode, signals);
 		});
 
-		/**********************************| HIGHSCORE POPUP |**********************************/
+		/**********************************| HIGHSCORE POPUP |**********************************//*
 		$('.js-score').on('click','.js-highscore',function(e) {
 			e.preventDefault();
 			var popupOptions = {
@@ -282,7 +298,7 @@ $(function() {
 			getScore();
 		});
 
-		/**********************************| CLOSE HIGHSCORE |**********************************/
+		/**********************************| CLOSE HIGHSCORE |**********************************//*
 		$(document).on('click','.js-close-overlay',function(e) {
 			$('.js-close-overlay, .js-highscore-popup').fadeOut(200, function() {
 				$(this).remove();
@@ -290,3 +306,4 @@ $(function() {
 		});
 	}
 });
+*/
