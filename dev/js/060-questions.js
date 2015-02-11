@@ -58,6 +58,8 @@
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Getting questions');
 
 		if( QUESTIONS === undefined ) {
+			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Shooting off Ajax');
+
 			App.loading.start( true );
 
 			$.ajax({
@@ -80,7 +82,10 @@
 			});
 		}
 		else {
-			App.QUESTIONS = QUESTIONS;
+			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Shooting off to database');
+
+			App.QUESTIONS = store.get('questions');
+			callback();
 		}
 
 	};
@@ -92,12 +97,19 @@
 	module.init = function() {
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Initiate questions');
 
-		App.questions.get();
 		App.scaffold.playground();
-		App.questions.draw();
+		App.questions.get(function(){
+			App.questions.draw();
+		});
 
+		//click an answer
 		$('.js-body').on('click', '.js-answer', function() {
 			App.questions.answer( $(this) );
+		});
+
+		//click next button
+		$('.js-body').on('click', '.js-next', function() {
+			App.questions.draw();
 		});
 
 	};
@@ -109,30 +121,46 @@
 	module.draw = function() {
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Dawing questions');
 
-		var QUESTIONS = shuffle( App.QUESTIONS );
-		var AllQuestions = shuffle( store.get('questions') );
+		$('.js-next').addClass('is-hidden');
 
-		var question = 'text';
-		var answer = 'image';
+		if( App.QUESTIONS.length < 1 ) {
+			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Starting new round');
 
-		if( App.VIEW === 'P2T' ) {
-			var question = 'image';
-			var answer = 'text';
+			App.questions.get(function() {
+				App.questions.draw();
+			});
 		}
+		else {
+			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Drawing');
 
-		App.CORRECT = Math.floor( Math.random() * QUESTIONS.length );
-		var questionHTML = renderView( QUESTIONS[ App.CORRECT ], question );
-		$('.js-question').html( questionHTML );
+			var questionRound = shuffle( App.QUESTIONS );
+			var AllQuestions = shuffle( store.get('questions') );
 
-		var answerHTML = '';
+			var question = 'text';
+			var answer = 'image';
 
-		$.each(AllQuestions, function( index, question ) {
-			answerHTML += '<li class="answer">' +
-				'	<button class="js-answer" data-id="' + index + '">' + renderView( question, answer ) + '</button>' +
-				'</li>';
-		});
+			if( App.VIEW === 'P2T' ) {
+				var question = 'image';
+				var answer = 'text';
+			}
 
-		$('.js-answers').html( answerHTML );
+
+			App.PICK = Math.floor( Math.random() * questionRound.length );
+			App.CORRECT = questionRound[ App.PICK ].id;
+
+			var questionHTML = renderView( questionRound[ App.PICK ], question );
+			$('.js-question').html( questionHTML );
+
+			var answerHTML = '';
+
+			$.each(AllQuestions, function( index, question ) {
+				answerHTML += '<li class="answer">' +
+					'	<button class="js-answer" data-id="' + question.id + '">' + renderView( question, answer ) + '</button>' +
+					'</li>';
+			});
+
+			$('.js-answers').html( answerHTML );
+		}
 
 	};
 
@@ -143,7 +171,27 @@
 	module.answer = function( $this ) {
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Executing answer');
 
-		console.log($this.attr('data-id'));
+		var answer = $this.attr('data-id');
+		if( answer == App.CORRECT ) {
+			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Correct answer chosen');
+
+			App.YAYS++;
+			// App.highscore.add();
+
+			App.QUESTIONS.splice(App.PICK, 1); //remove from this round
+
+			$this.addClass('is-correct');
+			$('.js-next').removeClass('is-hidden');
+		}
+		else {
+			if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'Wrong answer chosen: id:' + answer + ' correct:' + App.CORRECT);
+
+			App.NAYS++;
+			App.WRONGS.push( answer );
+			// App.highscore.sub();
+
+			$this.addClass('is-wrong');
+		}
 
 	};
 

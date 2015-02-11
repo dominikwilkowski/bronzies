@@ -67,7 +67,8 @@
 				'	</nav>' +
 				'</header>' +
 				'<main class="playground">' +
-				'	<button class="js-question question"></button>' +
+				'	<button class="js-next next is-hidden">Next question</button>' +
+				'	<div class="js-question question"></div>' +
 				'	<ul class="js-answers answers"></ul>' +
 				'</main>';
 

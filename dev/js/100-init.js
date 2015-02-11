@@ -26,10 +26,7 @@ var HIGHSCORE = store.get('highscore');
 if( QUESTIONS === undefined ) {
 	if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'No data found in localStorage');
 
-	App.questions.get(function() {
-		App.scaffold.playground();
-		App.questions.draw();
-	});
+	App.questions.init();
 }
 //if everything is in storage already
 else {
