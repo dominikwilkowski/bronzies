@@ -54,6 +54,7 @@
 		}
 	};
 
+
 	App.loading = module;
 
 }(App));

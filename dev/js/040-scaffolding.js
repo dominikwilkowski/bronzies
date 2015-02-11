@@ -84,6 +84,7 @@
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Scaffolding highscore');
 	};
 
+
 	App.scaffold = module;
 
 }(App));

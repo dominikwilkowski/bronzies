@@ -98,6 +98,7 @@
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Initiate questions');
 
 		App.scaffold.playground();
+		App.progress.draw();
 		App.questions.get(function(){
 			App.questions.draw();
 		});
@@ -112,44 +113,47 @@
 			App.questions.draw();
 		});
 
+		//click switch button
+		$('.js-body').on('click', '.js-switchview', function() {
+			App.questions.view();
+		});
+
 	};
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// draw next round
+	// draw next step
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.draw = function() {
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Dawing questions');
 
 		$('.js-next').addClass('is-hidden');
 
+		// new round
 		if( App.QUESTIONS.length < 1 ) {
 			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Starting new round');
 
 			App.questions.get(function() {
+				App.progress.draw();
 				App.questions.draw();
 			});
 		}
+
+		//same round
 		else {
 			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Drawing');
 
 			var questionRound = shuffle( App.QUESTIONS );
 			var AllQuestions = shuffle( store.get('questions') );
 
-			var question = 'text';
-			var answer = 'image';
-
-			if( App.VIEW === 'P2T' ) {
-				var question = 'image';
-				var answer = 'text';
-			}
-
+			var question = App.VIEW === 'P2T' ? 'image' : 'text';
+			var answer = App.VIEW === 'P2T' ? 'text' : 'image';
 
 			App.PICK = Math.floor( Math.random() * questionRound.length );
 			App.CORRECT = questionRound[ App.PICK ].id;
 
 			var questionHTML = renderView( questionRound[ App.PICK ], question );
-			$('.js-question').html( questionHTML );
+			$('.js-question').html( questionHTML ).attr('data-text', questionRound[ App.PICK ].text);
 
 			var answerHTML = '';
 
@@ -171,24 +175,30 @@
 	module.answer = function( $this ) {
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Executing answer');
 
-		var answer = $this.attr('data-id');
-		if( answer == App.CORRECT ) {
+		var answerID = $this.attr('data-id');
+		var question = $('.js-question').attr('data-text');
+
+		//correct
+		if( answerID == App.CORRECT ) {
 			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Correct answer chosen');
 
 			App.YAYS++;
-			// App.highscore.add();
+			App.highscore.update();
+
+			$('.js-answer').attr('disabled', 'disabled');
 
 			App.QUESTIONS.splice(App.PICK, 1); //remove from this round
 
 			$this.addClass('is-correct');
 			$('.js-next').removeClass('is-hidden');
 		}
+		//wrong
 		else {
-			if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'Wrong answer chosen: id:' + answer + ' correct:' + App.CORRECT);
+			if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'Wrong answer chosen: id:' + answerID + ' correct:' + App.CORRECT);
 
 			App.NAYS++;
-			App.WRONGS.push( answer );
-			// App.highscore.sub();
+			App.WRONGS[question] = App.WRONGS[question] > 0 ? App.WRONGS[question] + 1 : 1;
+			App.highscore.update();
 
 			$this.addClass('is-wrong');
 		}
@@ -202,7 +212,8 @@
 	module.view = function() {
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Changing view');
 
-		//
+		App.VIEW = App.VIEW === 'P2T' ? 'T2P' : 'P2T';
+		App.questions.draw();
 
 	};
 

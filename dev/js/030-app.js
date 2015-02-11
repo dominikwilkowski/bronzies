@@ -23,7 +23,7 @@ var App = (function() {
 		VIEW: 'P2T', //text-to-picture or picture-to-text [T2P, P2T]
 		YAYS: 0, //correct answer count
 		NAYS: 0, //wrong answer count
-		WRONGS: [] //wrong answers
+		WRONGS: {} //wrong answers
 	}
 
 }());

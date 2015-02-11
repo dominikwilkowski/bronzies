@@ -43,7 +43,7 @@
 	module.draw = function() {
 		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Dawing highscore');
 
-		App.highscore.drawProgress();
+		App.progress.draw();
 		//more logic
 	};
 
@@ -51,31 +51,14 @@
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// add to highscore
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.add = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Adding to highscore');
+	module.update = function() {
+		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Updating highscore');
 
-		App.highscore.drawProgress();
-		//more logic
-	};
+		$('.js-scoreyay').text( App.YAYS );
+		$('.js-scorenay').text( App.NAYS );
+		$('.js-score').text( ( App.YAYS - App.NAYS ) );
 
-
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// substract from highscore
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.sub = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Substract from highscore');
-
-		App.highscore.drawProgress();
-		//more logic
-	};
-
-
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// draw progress
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.drawProgress = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Draw progress');
-
+		App.progress.update( true );
 		//more logic
 	};
 
