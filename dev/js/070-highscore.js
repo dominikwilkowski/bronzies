@@ -1,12 +1,72 @@
+/***************************************************************************************************************************************************************
+ *
+ * Highscore
+ *
+ **************************************************************************************************************************************************************/
+
+
 (function(App) {
 
 	var module = {};
 
-	module.find = function (query) {
-		console.log('find');
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// get highscore from REST API
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.get = function() {
+		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Getting highscore');
+
+		App.loading.start( true );
+
+		$.ajax({
+			url: App.HIGHSCOREGET,
+			dataType: 'json',
+			timeout: App.TIMEOUT,
+			success: function( data ) {
+				if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Recived highscore');
+
+				store.set('highscore', data);
+
+				App.scaffold.highscore();
+				App.highscore.draw();
+				App.loading.start( false );
+			},
+			error: function(jqXHR, status, errorThrown) {
+				if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'Highscore json errored out with: ' + status);
+			}
+		});
 	};
 
-	App.search = module;
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// draw the highscore
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.draw = function() {
+		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Dawing highscore');
+
+		var HIGHSCORE = store.get('highscore');
+		//more logic
+	};
+
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// open the highscore
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.open = function() {
+		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Opening highscore');
+
+		var HIGHSCORE = store.get('highscore');
+		//more logic
+	};
+
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// post new highscore
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.post = function() {
+		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Posting highscore');
+	};
+
+	App.highscore = module;
 
 }(App));
 

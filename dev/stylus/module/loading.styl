@@ -1,0 +1,56 @@
+.loading
+	position fixed
+	top 0
+	bottom 0
+	left 0
+	right 0
+	background url(../img/cover.jpg) no-repeat
+	background-size 100% auto
+	display flex
+	justify-content center
+	align-items center
+	opacity 0
+	transition opacity 0.4s ease
+	z-index 1000
+
+	.loading-wrapper
+		text-align center
+		width 100%
+
+	.loading-logo
+		width 200px
+
+	.is-loading-animation
+		text-align center
+		color #fff
+		letter-spacing 2px
+
+		&:before
+		&:after
+			content ""
+			display inline-block
+			vertical-align middle
+			margin 0 5px
+			width 30%
+			border-bottom 5px solid #fff
+			animation loading 3s forwards linear
+			animation-iteration-count infinite
+
+	.no-flexbox &
+		.loading-wrapper
+			position absolute
+			top 50%
+			margin-top -130px
+			width 100%
+			left 0
+
+@keyframes loading
+	0%
+		width 0em
+		opacity 0.1
+	70%
+		width 15%
+		opacity 1.0
+	100%
+		width 20%
+		opacity 0.0
