@@ -76,7 +76,7 @@
 					App.loading.start( false );
 				},
 				error: function(jqXHR, status, errorThrown) {
-					App.debugging('Question json errored out with: ' + status, 'error');
+					App.debugging('Question get json errored out with: ' + status, 'error');
 
 					App.questions.get( callback );
 				}
@@ -112,12 +112,14 @@
 			App.questions.answer( $(this) );
 		});
 
+
 		//click next button
 		$('.js-body').on('click', '.js-next', function() {
 			App.debugging('Next button clicked', 'interaction');
 
 			App.questions.draw();
 		});
+
 
 		//click switch button
 		$('.js-body').on('click', '.js-switchview', function() {

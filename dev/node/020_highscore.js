@@ -4,11 +4,13 @@
  * Interact with the highscore
  **************************************************************************************************************************************************************/
 
+var sanitizer = require('sanitizer');
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Get current highscore
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 function getHighscore(req, res, next) {
-	var highscore = $HIGHSCORE.getData("/");
+	var highscore = HIGHSCORE.getData("/");
 
 	res.send(highscore); //output json
 }
@@ -18,18 +20,24 @@ function getHighscore(req, res, next) {
 // Save current highscore
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 function postHighscore(req, res, next) {
-	var highscore = $HIGHSCORE.getData("/");
-	var $data = req.params;
+	var highscore = HIGHSCORE.getData("/");
+	var data = req.params;
 
-	highscore.push( $data ); //add new data to object
+	data.name = sanitizer.escape( data.name );
+	data.nays = sanitizer.escape( data.nays );
+	data.score = sanitizer.escape( data.score );
+	data.date = sanitizer.escape( data.date );
+	data.justadded = true;
+
+	highscore.push( data ); //add new data to object
 
 	highscore = highscore //sort by score
 		.sort(function(firstObject, SecondObject) {
 			return SecondObject.score - firstObject.score;
 	});
 
-	$HIGHSCORE.push('/', highscore);
-	$HIGHSCORE.save(); //write to json
+	HIGHSCORE.push('/', highscore);
+	HIGHSCORE.save(); //write to json
 
 	res.send(highscore); //output json
 }
