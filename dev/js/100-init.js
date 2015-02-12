@@ -24,11 +24,11 @@ var HIGHSCORE = store.get('highscore');
 
 //if nothing has been stored yet
 if( QUESTIONS === undefined ) {
-	if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'No data found in localStorage');
+	App.debugging('No data found in localStorage', 'error');
 }
 //if everything is in storage already
 else {
-	if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Data found in localStorage');
+	App.debugging('Data found in localStorage', 'report');
 }
 
 App.questions.init();

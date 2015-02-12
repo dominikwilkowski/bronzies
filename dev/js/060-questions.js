@@ -33,7 +33,7 @@
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// privat function: render HTML depending on an option
+	// privat function: render HTML depending on a string option: 'image' or 'text'
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function renderView( item, option ) {
 		var result = '';
@@ -55,10 +55,10 @@
 	// get questions from REST API or localStorage
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.get = function( callback ) {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Getting questions');
+		App.debugging('Getting questions', 'report');
 
 		if( QUESTIONS === undefined ) {
-			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Shooting off Ajax');
+			App.debugging('Shooting off Ajax', 'report');
 
 			App.loading.start( true );
 
@@ -67,7 +67,7 @@
 				dataType: 'json',
 				timeout: App.TIMEOUT,
 				success: function( data ) {
-					if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Recived questions');
+					App.debugging('Questions recived', 'report');
 
 					store.set('questions', data);
 					App.QUESTIONS = data;
@@ -76,13 +76,14 @@
 					App.loading.start( false );
 				},
 				error: function(jqXHR, status, errorThrown) {
-					if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'Question json errored out with: ' + status);
+					App.debugging('Question json errored out with: ' + status, 'error');
+
 					App.questions.get( callback );
 				}
 			});
 		}
 		else {
-			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Shooting off to database');
+			App.debugging('Shooting off to database', 'report');
 
 			App.QUESTIONS = store.get('questions');
 			callback();
@@ -95,26 +96,33 @@
 	// initiate game
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.init = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Initiate questions');
+		App.debugging('Initiating questions', 'report');
 
 		App.scaffold.playground();
-		App.progress.draw();
+		App.highscore.init();
 		App.questions.get(function(){
 			App.questions.draw();
 		});
 
+
 		//click an answer
 		$('.js-body').on('click', '.js-answer', function() {
+			App.debugging('Answer clicked', 'interaction');
+
 			App.questions.answer( $(this) );
 		});
 
 		//click next button
 		$('.js-body').on('click', '.js-next', function() {
+			App.debugging('Next button clicked', 'interaction');
+
 			App.questions.draw();
 		});
 
 		//click switch button
 		$('.js-body').on('click', '.js-switchview', function() {
+			App.debugging('Switch button clicked', 'interaction');
+
 			App.questions.view();
 		});
 
@@ -125,13 +133,13 @@
 	// draw next step
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.draw = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Dawing questions');
+		App.debugging('Dawing questions', 'report');
 
 		$('.js-next').addClass('is-hidden');
 
 		// new round
 		if( App.QUESTIONS.length < 1 ) {
-			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Starting new round');
+			App.debugging('Starting new round', 'report');
 
 			App.questions.get(function() {
 				App.progress.draw();
@@ -141,7 +149,9 @@
 
 		//same round
 		else {
-			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Drawing');
+			App.debugging('Drawing same round', 'report');
+
+			App.progress.next();
 
 			var questionRound = shuffle( App.QUESTIONS );
 			var AllQuestions = shuffle( store.get('questions') );
@@ -173,17 +183,17 @@
 	// click an answer
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.answer = function( $this ) {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Executing answer');
+		App.debugging('Executing answer', 'report');
 
 		var answerID = $this.attr('data-id');
 		var question = $('.js-question').attr('data-text');
 
 		//correct
 		if( answerID == App.CORRECT ) {
-			if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Correct answer chosen');
+			App.debugging('Correct answer chosen', 'report');
 
 			App.YAYS++;
-			App.highscore.update();
+			App.highscore.update( true );
 
 			$('.js-answer').attr('disabled', 'disabled');
 
@@ -194,11 +204,11 @@
 		}
 		//wrong
 		else {
-			if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'Wrong answer chosen: id:' + answerID + ' correct:' + App.CORRECT);
+			App.debugging('Wrong answer chosen: id:' + answerID + ' correct:' + App.CORRECT, 'error');
 
 			App.NAYS++;
 			App.WRONGS[question] = App.WRONGS[question] > 0 ? App.WRONGS[question] + 1 : 1;
-			App.highscore.update();
+			App.highscore.update( false );
 
 			$this.addClass('is-wrong');
 		}
@@ -210,7 +220,7 @@
 	// change view
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.view = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Changing view');
+		App.debugging('Changing view', 'report');
 
 		App.VIEW = App.VIEW === 'P2T' ? 'T2P' : 'P2T';
 		App.questions.draw();

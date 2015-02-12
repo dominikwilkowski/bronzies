@@ -1,6 +1,6 @@
 /***************************************************************************************************************************************************************
  *
- * Loading
+ * Progress
  *
  **************************************************************************************************************************************************************/
 
@@ -13,7 +13,7 @@
 	// draw progress
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.draw = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Draw progress');
+		App.debugging('Drawing progress', 'report');
 
 		var roundSteps = store.get('questions').length;
 		var HTML = '';
@@ -30,7 +30,25 @@
 	// update progress
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.update = function( win ) {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Update progress');
+		App.debugging('Updating progress', 'report');
+
+		var $thisStep = $('.js-progress-step.is-active');
+		var _hasWrong = $thisStep.hasClass('is-wrong');
+
+		if( win && !_hasWrong ) {
+			$thisStep.addClass('is-right');
+		}
+		else {
+			$thisStep.addClass('is-wrong');
+		}
+	};
+
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// next progress
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.next = function() {
+		App.debugging('Select next progress', 'report');
 
 		var roundSteps = store.get('questions').length;
 		var processSteps = $('.js-progress li').length;
@@ -42,14 +60,10 @@
 		var thisRoundSteps = App.QUESTIONS.length;
 		var currentStep = roundSteps - thisRoundSteps;
 		var $thisStep = $('.js-progress-step:eq(' + currentStep + ')');
-		var _hasWrong = $thisStep.hasClass('is-wrong');
 
-		if( win && !_hasWrong ) {
-			$thisStep.addClass('is-right');
-		}
-		else {
-			$thisStep.addClass('is-wrong');
-		}
+		$('.js-progress-step').removeClass('is-active');
+		$thisStep.addClass('is-active')
+
 	};
 
 

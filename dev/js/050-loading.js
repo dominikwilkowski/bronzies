@@ -35,7 +35,7 @@
 	// start or stop the loading animation
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.start = function( start ) {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Loading ' + (start ? 'started' : 'stopped') );
+		App.debugging('Loading ' + (start ? 'started' : 'stopped'), 'report');
 
 		if(start) {
 			App.scaffold.loading();
@@ -47,7 +47,7 @@
 
 			var transitionEvent = whichTransitionEvent();
 			$('.js-loading').one(transitionEvent, function() {
-				if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Loading transition finished');
+				App.debugging('Loading transition finished', 'report');
 
 				$('.js-loading').remove();
 			});

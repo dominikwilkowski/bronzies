@@ -13,7 +13,7 @@
 	// loading screen
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.loading = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Scaffolding loading screen');
+		App.debugging('Scaffolding loading scree', 'report');
 
 		$('.js-loading').remove();
 
@@ -32,13 +32,13 @@
 	// playground with everything we need for the game
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.playground = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Scaffolding playground');
+		App.debugging('Scaffolding playground', 'report');
 
 		if( !$('.js-playground').length ) {
 			var HTML = '<header class="header-wrapper">' +
 				'	<ul class="header">' +
 				'		<li>' +
-				'			<button class="js-menu header-menu">' +
+				'			<button class="js-menubutton header-menu">' +
 				'				Open menu' +
 				'				<span class="header-button-l"></span>' +
 				'				<span class="header-button-l"></span>' +
@@ -51,7 +51,7 @@
 				'			<span class="js-scorenay header-scorenay">0</span>' +
 				'		</li>' +
 				'		<li>' +
-				'			<img src="img/slsa-logo.png" alt="SLSA Logo">' +
+				'			<img class="logo" src="img/slsa-logo.png" alt="SLSA Logo">' +
 				'		</li>' +
 				'	</ul>' +
 				'	<nav class="nav-wrapper">' +
@@ -62,6 +62,18 @@
 				'			<li>' +
 				'				<span class="nav-progresstitle">Progress</span>' +
 				'				<ul class="js-progress nav-progress"></ul>' +
+				'			</li>' +
+				'		</ul>' +
+				'		<ul class="js-menu menu is-invisible">' +
+				'			<li>' +
+				'				<button class="js-highscore menu-link">' +
+				'					Highscore' +
+				'				</button>' +
+				'			</li>' +
+				'			<li>' +
+				'				<button class="js-about menu-link">' +
+				'					About' +
+				'				</button>' +
 				'			</li>' +
 				'		</ul>' +
 				'	</nav>' +
@@ -81,7 +93,17 @@
 	// highscore screen
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.highscore = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Scaffolding highscore');
+		App.debugging('Scaffolding highscore', 'report');
+
+	};
+
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// about screen
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.about = function() {
+		App.debugging('Scaffolding about', 'report');
+
 	};
 
 

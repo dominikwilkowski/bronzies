@@ -23,7 +23,28 @@ var App = (function() {
 		VIEW: 'P2T', //text-to-picture or picture-to-text [T2P, P2T]
 		YAYS: 0, //correct answer count
 		NAYS: 0, //wrong answer count
-		WRONGS: {} //wrong answers
+		WRONGS: {}, //wrong answers
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		// debugging prettiness
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		debugging: function( text, code ) {
+
+			if( code === 'report' ) {
+				if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', text);
+			}
+
+			else if( code === 'error' ) {
+				if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', text);
+			}
+
+			else if( code === 'interaction' ) {
+				if(DEBUG) console.log('%c\u261C ', 'color: blue; font-size: 18px;', text);
+			}
+
+		}
+
 	}
 
 }());

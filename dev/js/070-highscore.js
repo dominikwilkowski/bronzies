@@ -13,7 +13,7 @@
 	// get highscore from REST API
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.get = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Getting highscore');
+		App.debugging('Getting highscore', 'report');
 
 		App.loading.start( true );
 
@@ -22,7 +22,7 @@
 			dataType: 'json',
 			timeout: App.TIMEOUT,
 			success: function( data ) {
-				if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Recived highscore');
+				App.debugging('Recived highscore', 'report');
 
 				store.set('highscore', data);
 
@@ -31,34 +31,51 @@
 				App.loading.start( false );
 			},
 			error: function(jqXHR, status, errorThrown) {
-				if(DEBUG) console.log('%c\u2612 ', 'color: red; font-size: 18px;', 'Highscore json errored out with: ' + status);
+				App.debugging('Highscore json errored out with: ' + status, 'report');
 			}
 		});
 	};
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// draw the highscore
+	// initiate highscore
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.draw = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Dawing highscore');
+	module.init = function() {
+		App.debugging('Initiating highscore', 'report');
 
 		App.progress.draw();
-		//more logic
+
+
+		//click menu button
+		$('.js-body').on('click', '.js-menubutton', function() {
+			App.debugging('Menu button clicked', 'interaction');
+
+			$('.js-menu').toggleClass('is-invisible');
+		});
+	};
+
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// draw highscore
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.draw = function() {
+		App.debugging('Dawing highscore', 'report');
+
+		//
 	};
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// add to highscore
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.update = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Updating highscore');
+	module.update = function( win ) {
+		App.debugging('Updating highscore', 'report');
 
 		$('.js-scoreyay').text( App.YAYS );
 		$('.js-scorenay').text( App.NAYS );
 		$('.js-score').text( ( App.YAYS - App.NAYS ) );
 
-		App.progress.update( true );
+		App.progress.update( win );
 		//more logic
 	};
 
@@ -67,7 +84,7 @@
 	// open the highscore
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.open = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Opening highscore');
+		App.debugging('Opening highscore', 'report');
 
 		var HIGHSCORE = store.get('highscore');
 		//more logic
@@ -78,7 +95,7 @@
 	// post new highscore
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.post = function() {
-		if(DEBUG) console.log('%c\u2611 ', 'color: green; font-size: 18px;', 'Posting highscore');
+		App.debugging('Posting highscore', 'report');
 
 		//more logic
 	};
