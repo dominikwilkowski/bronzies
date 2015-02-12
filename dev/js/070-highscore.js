@@ -120,6 +120,39 @@
 				'</li>';
 		});
 
+		//building highscore blob
+		var tuples = [];
+		var HTML = '';
+		var i = 0;
+
+		var pushups = (10 * App.NAYS) - (5 * App.YAYS); //push ups calculation
+
+		HTML += '<p><em class="highscore-blob-pushups">' +
+			'	According to your score you should be doing ' + pushups + ' push ups!' +
+			'</em></p>' +
+			'<h5 class="highscore-blob-headline">Questions you got wrong most frequently</h5>' +
+			'<ul class="highscore-blob-wrongs">';
+
+		for(var key in App.WRONGS) { //we have to create an array from the object we populate
+			tuples.push([key, App.WRONGS[key]]);
+		}
+
+		tuples.sort(function(a, b) { //then we sort it by one of it's value
+			return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0
+		});
+
+		for (var i = 0; i < tuples.length; i++) { //build the HTML
+			HTML += '	<li>' + tuples[i][0] + ' (' + tuples[i][1] + ' nays)</li>';
+
+			if( i >= 4 ) { //show a max of 5
+				break;
+			}
+		};
+
+		HTML += '</ul>'
+
+		$('.js-highscore-blob').html( HTML );
+
 		$('.js-highscores').html( highscoreHTML );
 	};
 
@@ -145,12 +178,14 @@
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// open the highscore
+	// open a popup
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.open = function( id, open ) {
 		App.debugging('Opening ' + id, 'report');
 
 		var $target = $('.js-popover[data-id=\'' + id + '\']');
+
+		$('.js-popover').addClass('is-invisible');
 
 		if(open) {
 			$target.removeClass('is-invisible');
