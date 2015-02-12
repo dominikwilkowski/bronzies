@@ -99,8 +99,8 @@
 		App.debugging('Initiating questions', 'report');
 
 		App.scaffold.playground();
-		App.highscore.init();
-		App.questions.get(function(){
+		App.questions.get(function() {
+			App.highscore.init();
 			App.questions.draw();
 		});
 

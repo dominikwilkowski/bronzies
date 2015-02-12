@@ -13,7 +13,7 @@
 	// loading screen
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.loading = function() {
-		App.debugging('Scaffolding loading scree', 'report');
+		App.debugging('Scaffolding loading screen', 'report');
 
 		$('.js-loading').remove();
 

@@ -43,4 +43,6 @@ http://bronzies.com:5555/highscore
 http://bronzies.com:5555/highscore
 ```
 
+_The newly added entry will have an aditional key to id it: `justadded: true`_
+
 (use: `curl -i -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name": "Superman","nays": 55,"score": 5555555,"date": 777}' http://localhost:5555/highscore`)
