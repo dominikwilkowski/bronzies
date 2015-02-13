@@ -37,11 +37,13 @@
 	module.start = function( start ) {
 		App.debugging('Loading ' + (start ? 'started' : 'stopped'), 'report');
 
+		//start loading
 		if(start) {
 			App.scaffold.loading();
 
 			$('.js-loading').css({ opacity: 0 }).css({ opacity: 1 });
 		}
+		//stop loading
 		else {
 			$('.js-loading').css({ opacity: 0 });
 
@@ -49,7 +51,7 @@
 			$('.js-loading').one(transitionEvent, function() {
 				App.debugging('Loading transition finished', 'report');
 
-				$('.js-loading').remove();
+				$('.js-loading').remove(); //remove after transition has finished
 			});
 		}
 	};

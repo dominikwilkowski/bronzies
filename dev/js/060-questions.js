@@ -38,11 +38,13 @@
 	function renderView( item, option ) {
 		var result = '';
 
+		//image
 		if(option === 'image') {
-			result = '<img src="' + item.image + '" alt="question">'
+			result = '<img src="' + item.image + '" alt="question">';
 		}
+		//other, likely text
 		else {
-			result = '<h2>' + item.text + '</h2>'
+			result = '<h2>' + item.text + '</h2>';
 		}
 
 		return result;
@@ -54,13 +56,15 @@
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// get questions from REST API or localStorage
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.get = function( callback ) {
-		App.debugging('Getting questions', 'report');
+	module.get = function( background, callback ) {
+		App.debugging('Getting questions' + ( background ? ' in the background' : '' ), 'report');
 
-		if( QUESTIONS === undefined ) {
+		if( QUESTIONS === undefined || background ) { //if we haven't got anything in localStorage or this is a background task
 			App.debugging('Shooting off Ajax', 'report');
 
-			App.loading.start( true );
+			if(!background) { //don't show the loading screen if this is a background task
+				App.loading.start( true );
+			}
 
 			$.ajax({
 				url: App.QUESTIONGET,
@@ -69,24 +73,30 @@
 				success: function( data ) {
 					App.debugging('Questions recived', 'report');
 
-					store.set('questions', data);
+					store.set('questions', data); //set in localStorage
 					App.QUESTIONS = data;
 
-					callback();
-					App.loading.start( false );
+					if(callback instanceof Function) {
+						callback();
+					}
+
+					App.loading.start( false ); //close loading (even if we haven't started one)
 				},
 				error: function(jqXHR, status, errorThrown) {
 					App.debugging('Question get json errored out with: ' + status, 'error');
 
-					App.questions.get( callback );
+					App.questions.get( false, callback ); //if timeout has been reached, just try again...
 				}
 			});
 		}
 		else {
 			App.debugging('Shooting off to database', 'report');
 
-			App.QUESTIONS = store.get('questions');
-			callback();
+			App.QUESTIONS = store.get('questions'); //get from localStorage
+
+			if(callback instanceof Function) {
+				callback();
+			}
 		}
 
 	};
@@ -99,9 +109,10 @@
 		App.debugging('Initiating questions', 'report');
 
 		App.scaffold.playground();
-		App.questions.get(function() {
+		App.questions.get( false, function() {
 			App.highscore.init();
 			App.questions.draw();
+			App.questions.get( true ); //load new questions in the background to keep this app updated
 		});
 
 
@@ -139,11 +150,11 @@
 
 		$('.js-next').addClass('is-hidden');
 
-		// new round
+		// new round, all questions in this round have been asked, starting all over
 		if( App.QUESTIONS.length < 1 ) {
 			App.debugging('Starting new round', 'report');
 
-			App.questions.get(function() {
+			App.questions.get( false, function() {
 				App.progress.draw();
 				App.questions.draw();
 			});
@@ -155,18 +166,23 @@
 
 			App.progress.next();
 
+			//shuffle everything
 			var questionRound = shuffle( App.QUESTIONS );
 			var AllQuestions = shuffle( store.get('questions') );
 
+			//determine the view
 			var question = App.VIEW === 'P2T' ? 'image' : 'text';
 			var answer = App.VIEW === 'P2T' ? 'text' : 'image';
 
+			//pick a question from this round
 			App.PICK = Math.floor( Math.random() * questionRound.length );
 			App.CORRECT = questionRound[ App.PICK ].id;
+			App.PICKTEXT = questionRound[ App.PICK ].text
 
 			var questionHTML = renderView( questionRound[ App.PICK ], question );
-			$('.js-question').html( questionHTML ).attr('data-text', questionRound[ App.PICK ].text);
+			$('.js-question').html( questionHTML );
 
+			//render all answers
 			var answerHTML = '';
 
 			$.each(AllQuestions, function( index, question ) {
@@ -187,17 +203,18 @@
 	module.answer = function( $this ) {
 		App.debugging('Executing answer', 'report');
 
-		var answerID = $this.attr('data-id');
-		var question = $('.js-question').attr('data-text');
+		var answerID = $this.attr('data-id'); //the clicked answer
+		var question = App.PICKTEXT; //the current question text for wrongs
 
 		//correct
 		if( answerID == App.CORRECT ) {
 			App.debugging('Correct answer chosen', 'report');
 
+			//YAY!
 			App.YAYS++;
 			App.highscore.update( true );
 
-			$('.js-answer').attr('disabled', 'disabled');
+			$('.js-answer').attr('disabled', 'disabled'); //disable the rest to make it clear you can go to the next question
 
 			App.QUESTIONS.splice(App.PICK, 1); //remove from this round
 
@@ -208,8 +225,9 @@
 		else {
 			App.debugging('Wrong answer chosen: id:' + answerID + ' correct:' + App.CORRECT, 'error');
 
+			//Nooooo!
 			App.NAYS++;
-			App.WRONGS[question] = App.WRONGS[question] > 0 ? App.WRONGS[question] + 1 : 1;
+			App.WRONGS[question] = App.WRONGS[question] > 0 ? App.WRONGS[question] + 1 : 1; //increment this questions to be wrongly answered
 			App.highscore.update( false );
 
 			$this.addClass('is-wrong');
@@ -224,9 +242,8 @@
 	module.view = function() {
 		App.debugging('Changing view', 'report');
 
-		App.VIEW = App.VIEW === 'P2T' ? 'T2P' : 'P2T';
+		App.VIEW = App.VIEW === 'P2T' ? 'T2P' : 'P2T'; //simple thing to do...
 		App.questions.draw();
-
 	};
 
 

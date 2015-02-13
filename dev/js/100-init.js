@@ -13,7 +13,7 @@ $('.js-nojs').remove();
 
 // check storeJS support
 if(!store.enabled) {
-	alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
+	alert('localStorage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
 }
 
 
@@ -26,9 +26,9 @@ var HIGHSCORE = store.get('highscore');
 if( QUESTIONS === undefined ) {
 	App.debugging('No data found in localStorage', 'error');
 }
-//if everything is in storage already
+//if everything is in localStorage already
 else {
 	App.debugging('Data found in localStorage', 'report');
 }
 
-App.questions.init();
+App.questions.init(); //start the app

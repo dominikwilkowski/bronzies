@@ -15,7 +15,7 @@
 	module.get = function( callback ) {
 		App.debugging('Getting highscore', 'report');
 
-		App.debugging('Shooting off Ajax', 'report');
+		App.debugging('Shooting off Ajax', 'report'); //we shoot it off right away here
 
 		App.loading.start( true );
 
@@ -26,15 +26,18 @@
 			success: function( data ) {
 				App.debugging('Highscore recived', 'report');
 
-				store.set('highscore', data);
+				store.set('highscore', data); //save in localStorage
 
-				callback();
+				if(callback instanceof Function) {
+					callback();
+				}
+
 				App.loading.start( false );
 			},
 			error: function(jqXHR, status, errorThrown) {
 				App.debugging('Highscore get json errored out with: ' + status, 'error');
 
-				App.highscore.get( callback );
+				App.highscore.get( callback ); //just simply try again
 			}
 		});
 
@@ -64,7 +67,7 @@
 		$('.js-body').on('click', '.js-highscore', function() {
 			App.debugging('Highscore button clicked', 'interaction');
 
-			App.highscore.open( 'highscore', true );
+			App.popup.open( 'highscore', true );
 
 			App.highscore.get(function() {
 				App.highscore.draw();
@@ -76,17 +79,17 @@
 		$('.js-body').on('click', '.js-about', function() {
 			App.debugging('About button clicked', 'interaction');
 
-			App.highscore.open( 'about', true );
+			App.popup.open( 'about', true );
 		});
 
 
-		//click menu close button
+		//click popover close button
 		$('.js-body').on('click', '.js-popover-close', function() {
 			App.debugging('Menu button clicked', 'interaction');
 
 			var target = $(this).attr('data-id');
 
-			App.highscore.open( target, false );
+			App.popup.open( target, false );
 		});
 
 
@@ -94,7 +97,7 @@
 		$('.js-body').on('submit', '.js-form', function(e) {
 			e.preventDefault();
 
-			App.highscore.post($(this).serialize(), function() {
+			App.highscore.post( $(this).serialize(), function() {
 				App.highscore.draw();
 			});
 		});
@@ -112,6 +115,7 @@
 
 		var highscoreHTML = '';
 
+		//render highscore rows
 		$.each(HIGHSCORE, function( index, score ) {
 			highscoreHTML += '<li class="js-highscores-item highscores-item' + ( score.justadded ? ' is-active' : '' ) + '">' +
 				'	<span class="highscores-name">' + score.name + '</span>' +
@@ -141,7 +145,7 @@
 			return a[1] < b[1] ? 1 : a[1] > b[1] ? -1 : 0
 		});
 
-		for (var i = 0; i < tuples.length; i++) { //build the HTML
+		for(var i = 0; i < tuples.length; i++) { //build the HTML
 			HTML += '	<li>' + tuples[i][0] + ' (' + tuples[i][1] + ' nays)</li>';
 
 			if( i >= 4 ) { //show a max of 5
@@ -150,6 +154,7 @@
 		};
 
 		HTML += '</ul>'
+
 
 		$('.js-highscore-blob').html( HTML );
 
@@ -163,36 +168,18 @@
 	module.update = function( win ) {
 		App.debugging('Updating highscore', 'report');
 
-		var score = App.YAYS - App.NAYS;
+		var score = App.YAYS - App.NAYS; //simple enough, try to cheat THAT!
 
+		//update score in header
 		$('.js-scoreyay').text( App.YAYS );
 		$('.js-scorenay').text( App.NAYS );
 		$('.js-score').text( score );
 
+		//update score in form
 		$('.js-form-nays').val( App.NAYS );
 		$('.js-form-score').val( score );
 
 		App.progress.update( win );
-		//more logic
-	};
-
-
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// open a popup
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.open = function( id, open ) {
-		App.debugging('Opening ' + id, 'report');
-
-		var $target = $('.js-popover[data-id=\'' + id + '\']');
-
-		$('.js-popover').addClass('is-invisible');
-
-		if(open) {
-			$target.removeClass('is-invisible');
-		}
-		else {
-			$target.addClass('is-invisible');
-		}
 	};
 
 
@@ -203,12 +190,12 @@
 		App.debugging('Posting highscore', 'report');
 
 		var _hasName = $('.js-form-name').val() != '';
-		var date = $('.js-form-date').val();
+		submitData += '--' + new Date().toJSON(); //add end date
 
 		if( _hasName ) {
 			App.debugging('Shooting off Ajax', 'report');
 
-			$('.js-form-error').html('');
+			$('.js-form-error').html(''); //clear errors
 			App.loading.start( true );
 
 			$.ajax({
@@ -220,21 +207,24 @@
 				success: function( data ) {
 					App.debugging('Highscore recived', 'report');
 
-					store.set('highscore', data);
+					store.set('highscore', data); //save to localStorage
 
-					$('.js-form-name').val('');
+					$('.js-form-name').val(''); //go again if you want... double post protection?
 
-					callback();
+					if(callback instanceof Function) {
+						callback();
+					}
 
 					App.loading.start( false );
 				},
 				error: function(jqXHR, status, errorThrown) {
 					App.debugging('Highscore post json errored out with: ' + status, 'error');
 
-					App.highscore.post( submitData, callback );
+					App.highscore.post( submitData, callback ); //try again... pretty please?
 				}
 			});
 		}
+		//you gotta provide a name for the highscore, anything...
 		else {
 			App.debugging('No username given', 'error');
 

@@ -15,7 +15,7 @@
 	module.loading = function() {
 		App.debugging('Scaffolding loading screen', 'report');
 
-		$('.js-loading').remove();
+		$('.js-loading').remove(); //remove all previously opened loading screens
 
 		var HTML = '<div class="js-loading loading">' +
 			' <div class="loading-wrapper">' +
@@ -135,7 +135,10 @@
 			'		<button class="js-popover-close" data-id="about">close</button>' +
 			'		<h1 class="about-headline">About</h1>' +
 			'		<p class="about-blob">' +
-			'			This app has been developed by <a href="http://dominik-wilkowski.com" target="_blank">Dominik Wilkowski</a>.' +
+			'			This app has been developed by <a href="http://dominik-wilkowski.com" target="_blank">Dominik Wilkowski</a>' +
+			'			and designed my <a href="http://conley.com.au/">Dylan Conley</a>.' +
+			'		</p>' +
+			'		<p class="about-blob">' +
 			'			Let me know if you <a href="https://github.com/dominikwilkowski/bronzies/issues" target="_blank">have any issues</a>.' +
 			'		</p>' +
 			'	</div>' +

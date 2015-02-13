@@ -20,6 +20,7 @@ var App = (function() {
 		QUESTIONS: [], //current question round
 		CORRECT: 0, //current correct answer
 		PICK: 0, //current picked answer
+		PICKTEXT: '', //current picked answer text for wrongs
 		VIEW: 'P2T', //text-to-picture or picture-to-text [T2P, P2T]
 		YAYS: 0, //correct answer count
 		NAYS: 0, //wrong answer count

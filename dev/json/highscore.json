@@ -144,10 +144,24 @@
 		"date": 0
 	},
 	{
+		"name": "domy",
+		"nays": "2",
+		"score": "1",
+		"date": "2015-02-13T00:58:22.822Z",
+		"justadded": true
+	},
+	{
 		"name": "Iron Mike",
 		"nays": 0,
 		"score": 0,
 		"date": 0
+	},
+	{
+		"name": "domy2",
+		"nays": "3",
+		"score": "-1",
+		"date": "2015-02-13T01:00:14.526Z--2015-02-13T01:00:35.434Z",
+		"justadded": true
 	},
 	{
 		"name": "Dom (turns out writing this app does not mean I learn that shit any easier)",

@@ -18,6 +18,7 @@
 		var roundSteps = store.get('questions').length;
 		var HTML = '';
 
+		//render the progress dots
 		for(var i = roundSteps - 1; i >= 0; i--) {
 			HTML += '<li class="js-progress-step nav-progress-step">question</li>';
 		};
@@ -32,10 +33,10 @@
 	module.update = function( win ) {
 		App.debugging('Updating progress', 'report');
 
-		var $thisStep = $('.js-progress-step.is-active');
+		var $thisStep = $('.js-progress-step.is-active'); //current question
 		var _hasWrong = $thisStep.hasClass('is-wrong');
 
-		if( win && !_hasWrong ) {
+		if( win && !_hasWrong ) { //if it was a win and hasn't been answered wrong before
 			$thisStep.addClass('is-right');
 		}
 		else {
@@ -53,7 +54,7 @@
 		var roundSteps = store.get('questions').length;
 		var processSteps = $('.js-progress li').length;
 
-		if( roundSteps !== processSteps ) { //if the progress steps are unequal to the json steps
+		if( roundSteps !== processSteps ) { //if the progress steps are unequal to the localStorage steps (background sync)
 			App.progess.draw();
 		}
 
@@ -62,7 +63,7 @@
 		var $thisStep = $('.js-progress-step:eq(' + currentStep + ')');
 
 		$('.js-progress-step').removeClass('is-active');
-		$thisStep.addClass('is-active')
+		$thisStep.addClass('is-active'); //mark current progress dot
 
 	};
 
