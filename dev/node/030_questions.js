@@ -8,7 +8,7 @@
 // Get questions
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 function getQuestions(req, res, next) {
-	var questions = QUESTIONS.getData("/");
+	var questions = QUESTIONS.getData('/');
 
 	res.send(questions); //output json
 }

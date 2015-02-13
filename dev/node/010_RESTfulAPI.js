@@ -8,8 +8,8 @@ var restify = require('restify');
 var JsonDB = require('node-json-db'); //intermediate step until we find a nice DB a la Mongo
 var chalk = require('chalk'); //making it pretty
 var CFONTS = require('cfonts');
-var HIGHSCORE = new JsonDB("./../json/highscore.json", false, false); //json database for highscore data
-var QUESTIONS = new JsonDB("./../json/questions.json", false, false); //json database for question data
+var HIGHSCORE = new JsonDB('./../json/highscore.json', false, false); //json database for highscore data
+var QUESTIONS = new JsonDB('./../json/questions.json', false, false); //json database for question data
 
 
 var server = restify.createServer({ name: 'Bronzies-RESTful-API' }); //start server

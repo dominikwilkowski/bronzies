@@ -10,7 +10,7 @@ var sanitizer = require('sanitizer');
 // Get current highscore
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 function getHighscore(req, res, next) {
-	var highscore = HIGHSCORE.getData("/");
+	var highscore = HIGHSCORE.getData('/');
 
 	res.send(highscore); //output json
 }
@@ -20,14 +20,13 @@ function getHighscore(req, res, next) {
 // Save current highscore
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 function postHighscore(req, res, next) {
-	var highscore = HIGHSCORE.getData("/");
+	var highscore = HIGHSCORE.getData('/');
 	var data = req.params;
 
 	data.name = sanitizer.escape( data.name );
 	data.nays = sanitizer.escape( data.nays );
 	data.score = sanitizer.escape( data.score );
 	data.date = sanitizer.escape( data.date );
-	data.justadded = true;
 
 	highscore.push( data ); //add new data to object
 
@@ -38,6 +37,9 @@ function postHighscore(req, res, next) {
 
 	HIGHSCORE.push('/', highscore);
 	HIGHSCORE.save(); //write to json
+
+	// identify this entry and mark it... also: doublepost protection...
+	// data.justadded = true;
 
 	res.send(highscore); //output json
 }
