@@ -4,11 +4,26 @@
  * Get all Questions
  **************************************************************************************************************************************************************/
 
+var questionsDB = db.collection('questions');
+
+
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Get questions
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 function getQuestions(req, res, next) {
-	var questions = QUESTIONS.getData('/');
+	CONFIG.debugging( 'Questions requested', 'interaction' );
 
-	res.send(questions); //output json
+	questionsDB.find({}, {}, function(error, docs) {
+		if( error || !docs ) {
+			CONFIG.debugging( 'Questions DB find error with: ' + error, 'error' );
+		}
+		else {
+
+			CONFIG.debugging( 'Got questions from DB', 'report' );
+
+			var questions = docs;
+
+			res.send(questions); //output json
+		}
+	});
 }

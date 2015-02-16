@@ -176,7 +176,7 @@
 
 			//pick a question from this round
 			App.PICK = Math.floor( Math.random() * questionRound.length );
-			App.CORRECT = questionRound[ App.PICK ].id;
+			App.CORRECT = questionRound[ App.PICK ]._id;
 			App.PICKTEXT = questionRound[ App.PICK ].text
 
 			var questionHTML = renderView( questionRound[ App.PICK ], question );
@@ -187,7 +187,7 @@
 
 			$.each(AllQuestions, function( index, question ) {
 				answerHTML += '<li class="answer">' +
-					'	<button class="js-answer" data-id="' + question.id + '">' + renderView( question, answer ) + '</button>' +
+					'	<button class="js-answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
 					'</li>';
 			});
 
