@@ -1,11 +1,12 @@
 {
 	"name": "bronze-RESTfull-API",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"private": true,
 	"devDependencies": {
 		"cfonts": "^0.0.10",
 		"chalk": "^0.5.1",
-		"node-json-db": "^0.3.2",
+		"mongodb": "^1.4.30",
+		"mongojs": "^0.18.1",
 		"restify": "^2.8.4",
 		"sanitizer": "^0.1.2"
 	}

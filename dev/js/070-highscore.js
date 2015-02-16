@@ -133,9 +133,14 @@
 
 		HTML += '<p><em class="highscore-blob-pushups">' +
 			'	According to your score you should be doing ' + pushups + ' push ups!' +
-			'</em></p>' +
-			'<h5 class="highscore-blob-headline">Questions you got wrong most frequently</h5>' +
-			'<ul class="highscore-blob-wrongs">';
+			'</em></p>';
+
+
+		if( App.NAYS > 0 ) { //only show if we actually have some wrongs
+			HTML += '<h5 class="highscore-blob-headline">Questions you got wrong most frequently</h5>';
+		}
+
+		HTML += '<ul class="highscore-blob-wrongs">';
 
 		for(var key in App.WRONGS) { //we have to create an array from the object we populate
 			tuples.push([key, App.WRONGS[key]]);

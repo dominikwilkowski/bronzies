@@ -63,6 +63,10 @@ _The newly added entry will have an aditional key to id it: `justadded: true`_
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# Release History
+# Release History App
 * 0.1.0 - Completely refactored the code, No Design yet
 * 0.0.3 - Moved an old version into the repo and developed the RESTful API
+
+# Release History RestAPI
+* 0.0.2 - moved to MongoDB
+* 0.0.1 - Created server, routes and endpoints
