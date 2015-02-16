@@ -8,7 +8,7 @@
 (function(App) {
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// privat function: what transistion prefix is supported in this browser?
+	// private function: what transistion prefix is supported in this browser?
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function whichTransitionEvent() { //By David Walsh: http://davidwalsh.name/css-animation-callback
 		var t;
@@ -39,9 +39,11 @@
 
 		//start loading
 		if(start) {
-			App.scaffold.loading();
+			if( !$('.js-loading').length ) { //rescaffold only if not exist yet
+				App.scaffold.loading();
 
-			$('.js-loading').css({ opacity: 0 }).css({ opacity: 1 });
+				$('.js-loading').css({ opacity: 0 }).css({ opacity: 1 });
+			}
 		}
 		//stop loading
 		else {

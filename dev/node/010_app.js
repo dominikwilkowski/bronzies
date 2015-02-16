@@ -1,13 +1,24 @@
+/***************************************************************************************************************************************************************
+ * API server APP
+ *
+ * Settings and debugger
+ **************************************************************************************************************************************************************/
+
 'use strict';
 
-var CONFIG = (function() {
+
+var App = (function() {
+
+	var mongojs = require('mongojs'); //DB a la Mongo
+	var chalk = require('chalk'); //making it pretty
+
 
 	return {
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		// settings
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		debug: true, //debugging infos
-		dbconnection: 'mongodb://localhost:27017/bronzies', //mongo DB connection string
+		db: mongojs( 'mongodb://127.0.0.1:27017/bronzies', ['highscore', 'questions'] ), //mongo DB connection
 
 
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -16,15 +27,15 @@ var CONFIG = (function() {
 		debugging: function( text, code ) {
 
 			if( code === 'report' ) {
-				if(CONFIG.debug) console.log( chalk.green('\u2713 ') + text );
+				if(App.debug) console.log( chalk.green('\u2713 ') + text );
 			}
 
 			else if( code === 'error' ) {
-				if(CONFIG.debug) console.log( chalk.red('\u2717 ') + text );
+				if(App.debug) console.log( chalk.red('\u2717 ') + text );
 			}
 
 			else if( code === 'interaction' ) {
-				if(CONFIG.debug) console.log( chalk.blue('\u261C ') + text );
+				if(App.debug) console.log( chalk.blue('\u261C ') + text );
 			}
 
 		}
