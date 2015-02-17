@@ -21,7 +21,8 @@
 	// starting the server and db connection
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.init = function() {
-		// plugins
+
+		//plugins
 		server
 			.use(restify.fullResponse())
 			.use(restify.bodyParser()); //plugins
@@ -29,7 +30,7 @@
 		App.debugging( 'Restify plugins installed', 'report' );
 
 
-		// routes
+		//routes
 		server.get( '/highscore', App.highscore.get ); //highscore routes
 		server.post( '/highscore', App.highscore.post );
 
@@ -38,7 +39,7 @@
 		App.debugging( 'Routes established', 'report' );
 
 
-		// server
+		//server
 		server.listen(5555, function() {
 
 			console.log("\n\n");
