@@ -18,10 +18,9 @@
 		$('.js-loading').remove(); //remove all previously opened loading screens
 
 		var HTML = '<div class="js-loading loading">' +
-			' <div class="loading-wrapper">' +
-			'	 <img class="loading-logo" src="img/slsa-logo.png" alt="SLSA logo">' +
-			'	 <h1 class="js-loading-animation is-loading-animation">Loading</h1>' +
-			' </div>' +
+			'	<div class="loading-wrapper">' +
+			'		<h1 class="js-loading-animation loading-animation">Loading</h1>' +
+			'	</div>' +
 			'</div>';
 
 		$('.js-body').prepend(HTML);
@@ -35,7 +34,12 @@
 		App.debugging('Scaffolding playground', 'report');
 
 		if( !$('.js-playground').length ) {
-			var HTML = '<header class="header-wrapper">' +
+			var HTML = '<div class="js-splash splash">' +
+				'	<div class="splash-wrapper">' +
+				'		<img class="splash-logo" src="img/slsa-logo.png" alt="SLSA logo">' +
+				'	</div>' +
+				'</div>' +
+				'<header class="header-wrapper">' +
 				'	<ul class="header">' +
 				'		<li>' +
 				'			<button class="js-menubutton header-menu">' +

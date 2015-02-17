@@ -1,0 +1,51 @@
+.splash
+	position fixed
+	top 0
+	bottom 0
+	left 0
+	right 0
+	background url(../img/cover2.jpg) no-repeat
+	background-size 100% auto
+	display flex
+	justify-content center
+	align-items center
+	transition opacity 0.8s ease
+	z-index 900
+	pointer-events auto
+	visibility visible
+	animation splash 4s forwards linear
+	@media screen and (max-width: 1131px)
+		background url(../img/cover.jpg) no-repeat
+		background-size 100% auto
+
+	.splash-wrapper
+		text-align center
+		width 100%
+
+	.splash-logo
+		width 200px
+		margin-bottom 81px
+
+	.no-flexbox &
+		.splash-wrapper
+			position absolute
+			top 50%
+			margin-top -130px
+			width 100%
+			left 0
+
+@keyframes splash
+	0%
+		opacity 1
+	90%
+		opacity 1
+	99.99%
+		opacity 0
+		display flex
+		visibility visible
+		pointer-events auto
+	100%
+		opacity 0
+		display none
+		visibility hidden
+		pointer-events none
