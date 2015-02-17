@@ -40,7 +40,7 @@
 
 		//image
 		if(option === 'image') {
-			result = '<img src="' + item.image + '" alt="question">';
+			result = '<div class="signals ' + item.image + '"></div>';
 		}
 		//other, likely text
 		else {

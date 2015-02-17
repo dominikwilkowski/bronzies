@@ -18,7 +18,7 @@
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function formatHighscore( res, mark, ID ) {
 
-		highscoreDB.find().sort( { score: -1 }, function(error, docs) {
+		highscoreDB.find().limit( 50 ).sort( { score: -1 }, function(error, docs) {
 			if( error || !docs ) {
 				App.debugging( 'Highscore DB find error with: ' + error, 'error' );
 
