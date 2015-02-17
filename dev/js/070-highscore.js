@@ -115,6 +115,8 @@
 
 		var highscoreHTML = '';
 
+		$('.js-form-date').val( new Date().toJSON() ); //update time
+
 		//render highscore rows
 		$.each(HIGHSCORE, function( index, score ) {
 			highscoreHTML += '<li class="js-highscores-item highscores-item' + ( score.justadded ? ' is-active' : '' ) + '">' +

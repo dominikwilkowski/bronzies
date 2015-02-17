@@ -4,6 +4,7 @@
  * Interact with the highscore
  **************************************************************************************************************************************************************/
 
+
 (function(App) {
 
 	var module = {};
@@ -15,7 +16,7 @@
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// private function: format highscore
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function formatHighscore( res, mark ) {
+	function formatHighscore( res, mark, ID ) {
 
 		highscoreDB.find().sort( { score: -1 }, function(error, docs) {
 			if( error || !docs ) {
@@ -52,7 +53,7 @@
 	module.get = function( req, res, next ) {
 		App.debugging( 'Highscore requested', 'interaction' );
 
-		formatHighscore( res, false );
+		formatHighscore( res, false, '' );
 	};
 
 
@@ -82,10 +83,11 @@
 			if( error ) {
 				App.debugging( 'Highscore DB find error with: ' + error, 'error' );
 			}
-			else if( docs ) {
+			else if( docs.length ) {
 				App.debugging( 'Highscore post already exists', 'error' );
+				console.info(docs.length);
 
-				formatHighscore( res, false );
+				formatHighscore( res, false, '' );
 			}
 			else {
 
@@ -93,13 +95,15 @@
 				highscoreDB.insert(newEntry, function(error, thisInsert) {
 					if( error || !thisInsert ) {
 						App.debugging( 'Highscore DB insert error with: ' + error, 'error' );
+
+						res.send({"code": "InternalError", "message": "Highscore DB insert error with: " + error }); //output json
 					}
 					else {
 						App.debugging( 'Inserted highscore to DB', 'report' );
 
 						var ID = thisInsert._id; //last insert ID
 
-						formatHighscore( res, true );
+						formatHighscore( res, true, ID );
 					}
 				});
 
