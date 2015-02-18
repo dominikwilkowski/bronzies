@@ -1,7 +1,9 @@
 /***************************************************************************************************************************************************************
- * HIGHSCORE
  *
- * Interact with the highscore
+ *  HIGHSCORE
+ *
+ * Getting latest and saving new highscores
+ *
  **************************************************************************************************************************************************************/
 
 
@@ -15,8 +17,12 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// private function: format highscore
+	//
+	// res  resource  Restify resource object
+	// ID   string    ID to be highlighted
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function formatHighscore( res, mark, ID ) {
+	function formatHighscore( res, ID ) {
+		App.debugging( 'Running formatHighscore' + ( ID ? ' with ' + ID : '' ), 'report' );
 
 		highscoreDB.find().limit( 50 ).sort( { score: -1 }, function(error, docs) {
 			if( error || !docs ) {
@@ -29,10 +35,10 @@
 
 				var highscore = docs;
 
-				if( mark ) {
+				if( ID.length ) {
 					for(var i = highscore.length - 1; i >= 0; i--) {
 
-						if( ID.toString() === highscore[i]._id.toString() ) {
+						if( ID === highscore[i]._id.toString() ) {
 							highscore[i].justadded = true;
 							break;
 						}
@@ -49,16 +55,24 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// Get current highscore
+	//
+	// req   object  Restify req object
+	// res   object  Restify res object
+	// next  object  Restify next object
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.get = function( req, res, next ) {
 		App.debugging( 'Highscore requested', 'interaction' );
 
-		formatHighscore( res, false, '' );
+		formatHighscore( res, '' );
 	};
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// Save current highscore
+	//
+	// req   object  Restify req object
+	// res   object  Restify res object
+	// next  object  Restify next object
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.post = function( req, res, next ) {
 		App.debugging( 'Highscore posted', 'interaction' );
@@ -87,7 +101,7 @@
 				App.debugging( 'Highscore post already exists', 'error' );
 				console.info(docs.length);
 
-				formatHighscore( res, false, '' );
+				formatHighscore( res, '' );
 			}
 			else {
 
@@ -103,7 +117,7 @@
 
 						var ID = thisInsert._id; //last insert ID
 
-						formatHighscore( res, true, ID );
+						formatHighscore( res, ID.toString() );
 					}
 				});
 
