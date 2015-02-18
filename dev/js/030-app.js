@@ -44,6 +44,14 @@ var App = (function() {
 				alert('localStorage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
 			}
 
+			//click on splash screen
+			$('.js-body').on('click', '.js-splash', function() {
+				App.debugging('Splash screen clicked', 'interaction');
+
+				$(this).removeClass('is-animating').addClass('is-closing');
+
+			});
+
 			App.questions.init(); //start the app
 		},
 

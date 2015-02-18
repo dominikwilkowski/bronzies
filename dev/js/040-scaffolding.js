@@ -34,7 +34,7 @@
 		App.debugging('Scaffolding playground', 'report');
 
 		if( !$('.js-playground').length ) {
-			var HTML = '<div class="js-splash splash">' +
+			var HTML = '<div class="js-splash splash is-animating">' +
 				'	<div class="splash-wrapper">' +
 				'		<img class="splash-logo" src="img/slsa-logo.png" alt="SLSA logo">' +
 				'	</div>' +

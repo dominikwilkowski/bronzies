@@ -113,8 +113,7 @@
 	module.draw = function() {
 		App.debugging('Dawing highscore', 'report');
 
-		HIGHSCORE = store.get('highscore');
-
+		var HIGHSCORE = store.get('highscore');
 		var highscoreHTML = '';
 
 		$('.js-form-date').val( new Date().toJSON() ); //update time

@@ -9,14 +9,18 @@
 	display flex
 	justify-content center
 	align-items center
-	transition opacity 0.8s ease
 	z-index 900
-	pointer-events auto
-	visibility visible
-	animation splash 4s forwards linear
+	transition opacity 0.4s ease
+	opacity 1
 	@media screen and (max-width: 1131px)
 		background url(../img/cover.jpg) no-repeat
 		background-size 100% auto
+	&.is-closing
+		animation close 0.4s forwards linear
+	&.is-animating
+		pointer-events auto
+		visibility visible
+		animation splash 4s forwards linear
 
 	.splash-wrapper
 		text-align center
@@ -44,6 +48,15 @@
 		display flex
 		visibility visible
 		pointer-events auto
+	100%
+		opacity 0
+		display none
+		visibility hidden
+		pointer-events none
+
+@keyframes close
+	0%
+		opacity 1
 	100%
 		opacity 0
 		display none
