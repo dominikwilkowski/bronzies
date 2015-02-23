@@ -39,35 +39,14 @@
 				'		<img class="splash-logo" src="img/slsa-logo.png" alt="SLSA logo">' +
 				'	</div>' +
 				'</div>' +
-				'<header class="header-wrapper">' +
-				'	<ul class="header">' +
-				'		<li>' +
-				'			<button class="js-menubutton header-menu">' +
-				'				Open menu' +
-				'				<span class="header-button-l"></span>' +
-				'				<span class="header-button-l"></span>' +
-				'				<span class="header-button-l"></span>' +
-				'			</button>' +
-				'		</li>' +
-				'		<li>' +
-				'			<span class="js-score header-score">0</span>' +
-				'			<span class="js-scoreyay header-scoreyay">0</span>' +
-				'			<span class="js-scorenay header-scorenay">0</span>' +
-				'		</li>' +
-				'		<li>' +
-				'			<img class="logo" src="img/slsa-logo.png" alt="SLSA Logo">' +
-				'		</li>' +
-				'	</ul>' +
-				'	<nav class="nav-wrapper">' +
-				'		<ul class="nav">' +
-				'			<li>' +
-				'				<button class="js-switchview nav-view">Switch view</button>' +
-				'			</li>' +
-				'			<li>' +
-				'				<span class="nav-progresstitle">Progress</span>' +
-				'				<ul class="js-progress nav-progress"></ul>' +
-				'			</li>' +
-				'		</ul>' +
+				'<header class="header-wrapper js-header">' +
+				'	<button class="js-menubutton header-menu">' +
+				'		Open menu' +
+				'		<span class="header-button-l"></span>' +
+				'		<span class="header-button-l"></span>' +
+				'		<span class="header-button-l"></span>' +
+				'	</button>' +
+				'	<nav class="menu-wrapper">' +
 				'		<ul class="js-menu menu is-invisible">' +
 				'			<li>' +
 				'				<button class="js-highscore menu-link">' +
@@ -81,8 +60,29 @@
 				'			</li>' +
 				'		</ul>' +
 				'	</nav>' +
+				'	<img class="logo-img" itemscope itemtype="http://schema.org/Organization" src="img/slsa-logo.png" alt="SLSA Logo">' +
+				'	<h1 class="logo">Bronzies</h1>' +
+				'	<ul class="header">' +
+				'		<li>' +
+				'			<button class="js-switchview nav-view">Switch view</button>' +
+				'		</li>' +
+				'		<li>' +
+				'			<div class="score">' +
+				'				<strong class="score-text">Score</strong>' +
+				'				<span class="js-score score-count">0</span>' +
+				'				<div class="score-yaynays">' +
+				'					<span class="js-scoreyay score-yay">0</span>' +
+				'					<span class="js-scorenay score-nay">0</span>' +
+				'				</div>' +
+				'			</div>' +
+				'		</li>' +
+				'	</ul>' +
+				'	<div class="progress-wrapper">' +
+				'		<span class="progress-title">Progress</span>' +
+				'		<ul class="js-progress progress"></ul>' +
+				'	</div>' +
 				'</header>' +
-				'<main class="playground">' +
+				'<main class="playground js-main">' +
 				'	<button class="js-next next is-hidden">Next question</button>' +
 				'	<div class="js-question question"></div>' +
 				'	<ul class="js-answers answers"></ul>' +
@@ -99,9 +99,10 @@
 	module.highscore = function() {
 		App.debugging('Scaffolding highscore', 'report');
 
-		var HTML = '<div class="js-popover highscore-wrapper is-invisible" data-id="highscore">' +
-			'	<div class="highscore">' +
-			'		<button class="js-popover-close" data-id="highscore">close</button>' +
+		var HTML = '<div class="js-popup popup highscore-wrapper" data-id="highscore">' +
+			'	<div class="js-popup-screen popup-screen"></div>' +
+			'	<div class="popup-content highscore">' +
+			'		<button class="js-popup-close popup-close" data-id="highscore">close</button>' +
 			'		<h1 class="highscore-headline">Highscore</h1>' +
 			'		<h4>' +
 			'			Your score:' +
@@ -121,8 +122,7 @@
 			'		</form>' +
 			'		<ol class="js-highscores highscores"></ol>' +
 			'	</div>' +
-			'</div>' +
-			'<div class="js-popover-screen popover-screen"></div>';
+			'</div>';
 
 		$('.js-body').append(HTML);
 	};
@@ -134,9 +134,10 @@
 	module.about = function() {
 		App.debugging('Scaffolding about', 'report');
 
-		var HTML = '<div class="js-popover about-wrapper is-invisible" data-id="about">' +
-			'	<div class="about">' +
-			'		<button class="js-popover-close" data-id="about">close</button>' +
+		var HTML = '<div class="js-popup popup about-wrapper" data-id="about">' +
+			'	<div class="js-popup-screen popup-screen"></div>' +
+			'	<div class="popup-content about">' +
+			'		<button class="js-popup-close popup-close" data-id="about">close</button>' +
 			'		<h1 class="about-headline">About</h1>' +
 			'		<p class="about-blob">' +
 			'			This app has been developed by <a href="http://dominik-wilkowski.com" target="_blank">Dominik Wilkowski</a>' +
@@ -146,8 +147,7 @@
 			'			Let me know if you <a href="https://github.com/dominikwilkowski/bronzies/issues" target="_blank">have any issues</a>.' +
 			'		</p>' +
 			'	</div>' +
-			'</div>' +
-			'<div class="js-popover-screen popover-screen"></div>';
+			'</div>';
 
 		$('.js-body').append(HTML);
 	};

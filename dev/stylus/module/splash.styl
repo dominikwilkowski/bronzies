@@ -1,11 +1,19 @@
+/***************************************************************************************************************************************************************
+ *
+ * Splash screen
+ *
+ **************************************************************************************************************************************************************/
+
+
 .splash
 	position fixed
 	top 0
 	bottom 0
 	left 0
 	right 0
-	background #fff url(../img/cover2.jpg) no-repeat
-	background-size 100% auto
+	// background #fff url(../img/cover2.jpg) no-repeat center
+	// background-size 100% auto
+	background #ccc
 	display flex
 	justify-content center
 	align-items center
@@ -13,8 +21,8 @@
 	transition opacity 0.4s ease
 	opacity 1
 	@media screen and (max-width: 1131px)
-		background url(../img/cover.jpg) no-repeat
-		background-size 100% auto
+		// background #fff url(../img/cover.jpg) no-repeat center
+		// background-size 100% auto
 	&.is-closing
 		animation close 0.4s forwards linear
 	&.is-animating

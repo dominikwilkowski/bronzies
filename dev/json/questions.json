@@ -1,90 +1,90 @@
 [
 	{
-		"image": "img/game/signal1",
+		"image": "signal1",
 		"text": "To attract attention between a boat and the shore"
 	},
 	{
-		"image": "img/game/signal2",
+		"image": "signal2",
 		"text": "Return to shore"
 	},
 	{
-		"image": "img/game/signal3",
+		"image": "signal3",
 		"text": "Remain stationary"
 	},
 	{
-		"image": "img/game/signal4",
+		"image": "signal4",
 		"text": "Message not clear, repeat"
 	},
 	{
-		"image": "img/game/signal5",
+		"image": "signal5",
 		"text": "Pick up swimmers"
 	},
 	{
-		"image": "img/game/signal6",
+		"image": "signal6",
 		"text": "Investigate submerged object"
 	},
 	{
-		"image": "img/game/signal7",
+		"image": "signal7",
 		"text": "Proceed further out to sea"
 	},
 	{
-		"image": "img/game/signal8",
+		"image": "signal8",
 		"text": "Go to the left or the right"
 	},
 	{
-		"image": "img/game/signal9",
+		"image": "signal9",
 		"text": "Message understood, all clear"
 	},
 	{
-		"image": "img/game/signal10",
+		"image": "signal10",
 		"text": "Pick up or adjust buoys"
 	},
 	{
-		"image": "img/game/signal11",
+		"image": "signal11",
 		"text": "Assistance required"
 	},
 	{
-		"image": "img/game/signal12",
+		"image": "signal12",
 		"text": "Boat wishes to return to shore"
 	},
 	{
-		"image": "img/game/signal13",
+		"image": "signal13",
 		"text": "Emergency evacuation alarm (Water to beach)"
 	},
 	{
-		"image": "img/game/signal14",
+		"image": "signal14",
 		"text": "Shore signal received and understood"
 	},
 	{
-		"image": "img/game/signal15",
+		"image": "signal15",
 		"text": "Search completed"
 	},
 	{
-		"image": "img/game/signal16",
+		"image": "signal16",
 		"text": "Emergency evacuation flag"
 	},
 	{
-		"image": "img/game/signal17",
+		"image": "signal17",
 		"text": "Emergency evacuation alarm"
 	},
 	{
-		"image": "img/game/signal18",
+		"image": "signal18",
 		"text": "Mass rescue"
 	},
 	{
-		"image": "img/game/signal19",
+		"image": "signal19",
 		"text": "Helicopter signal—request to enter"
 	},
 	{
-		"image": "img/game/signal20",
+		"image": "signal20",
 		"text": "Signal Flag"
 	},
 	{
-		"image": "img/game/signal21",
+		"image": "signal21",
 		"text": "Submerged Patient Missing"
 	},
 	{
-		"image": "img/game/signal22",
+		"image": "signal22",
 		"text": "All Clear/OK"
 	}
 ]

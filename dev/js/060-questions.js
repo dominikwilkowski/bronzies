@@ -104,6 +104,10 @@
 
 			App.QUESTIONS = store.get('questions'); //get from localStorage
 
+			if( App.QUESTIONS.length < 1 ) {
+				App.debugging('No questions in storage', 'error');
+			}
+
 			if(callback instanceof Function) {
 				callback();
 			}
@@ -119,6 +123,7 @@
 		App.debugging('Initiating questions', 'report');
 
 		App.scaffold.playground();
+		App.popup.init();
 		App.questions.get( false, function() {
 			App.highscore.init();
 			App.questions.draw();
@@ -161,7 +166,7 @@
 		$('.js-next').addClass('is-hidden');
 
 		// new round, all questions in this round have been asked, starting all over
-		if( App.QUESTIONS.length < 1 ) {
+		if( App.QUESTIONS.length < 1 && store.get('questions').length > 0 ) {
 			App.debugging('Starting new round', 'report');
 
 			App.questions.get( false, function() {
@@ -196,8 +201,8 @@
 			var answerHTML = '';
 
 			$.each(AllQuestions, function( index, question ) {
-				answerHTML += '<li class="answer">' +
-					'	<button class="js-answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
+				answerHTML += '<li>' +
+					'	<button class="js-answer answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
 					'</li>';
 			});
 

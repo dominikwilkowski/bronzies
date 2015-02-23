@@ -10,23 +10,42 @@
 	var module = {};
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// initiate popups
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	module.init = function() {
+		App.debugging( 'Initiate popups', 'report' );
+
+		//click to close popup
+		$('.js-body').on('click', '.js-popup-close, .js-popup-screen', function() {
+			App.debugging('Popup close button or screen clicked', 'interaction');
+
+			App.popup.open( '', false );
+		});
+	};
+
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// open or close a popup
 	//
-	// id    string  Data-id of popup to open/close
+	// id    string  Data-id of popup to open, we don't need an id to close it
 	// open  boolen  Open popup?
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.open = function( id, open ) {
 		App.debugging( ( open ? 'Opening ' : 'Closing ' ) + id + ' popup', 'report' );
 
-		var $target = $('.js-popover[data-id=\'' + id + '\']'); //get the popup you want to open
-
-		$('.js-popover').addClass('is-invisible'); //close all of them
+		$('.js-popup').removeClass('is-visible'); //close all of them
 
 		if(open) {
-			$target.removeClass('is-invisible');
+			var $target = $('.js-popup[data-id=\'' + id + '\']'); //get the popup you want to open
+
+			$target.addClass('is-visible');
+			$('.js-header, .js-main').addClass('is-blurry');
 		}
 		else {
-			$target.addClass('is-invisible');
+			var $target = $('.js-popup'); //get all popup to close
+
+			$target.removeClass('is-visible');
+			$('.js-header, .js-main').removeClass('is-blurry');
 		}
 	};
 

@@ -13,9 +13,9 @@ var App = (function() {
 	// settings
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	return {
-		QUESTIONGET: 'http://127.0.0.1:5555/questions', //REST URL for getting questions
-		HIGHSCOREGET: 'http://127.0.0.1:5555/highscore', //REST URL for getting highscore
-		HIGHSCOREPOST: 'http://127.0.0.1:5555/highscore', //REST URL for posting highscore
+		QUESTIONGET: 'http://bronzies.com:5555/questions', //REST URL for getting questions
+		HIGHSCOREGET: 'http://bronzies.com:5555/highscore', //REST URL for getting highscore
+		HIGHSCOREPOST: 'http://bronzies.com:5555/highscore', //REST URL for posting highscore
 		TIMEOUT: 7000, //Ajax timeout
 
 		DEBUG: true, //debugging infos

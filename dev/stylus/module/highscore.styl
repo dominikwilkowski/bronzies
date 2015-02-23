@@ -1,25 +1,22 @@
 /***************************************************************************************************************************************************************
  *
- * Base styles
+ * Highscore
  *
  **************************************************************************************************************************************************************/
 
 
-body
-html
-	height 100%
-	font-size 16px
-	line-height 1.2
-	padding 0
-	margin 0
+.highscore
+	.form-name
+		padding 10px
 
-body
-	line-height 1.2
-	font-size 16px
+	.highscore-nays
+		font-style italic
+		font-size 11px
 
-html
-	-webkit-text-size-adjust 100%
-	-ms-text-size-adjust 100%
-
-a
-	color Color-primary
+		&:before
+		&:after
+			content "("
+			display inline-block
+			font-style italic
+		&:after
+			content ")"

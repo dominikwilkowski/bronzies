@@ -1,0 +1,149 @@
+/***************************************************************************************************************************************************************
+ *
+ * Header
+ *
+ **************************************************************************************************************************************************************/
+
+
+.header-wrapper
+	overflow hidden
+	padding 10px
+	position relative
+
+	//menu button
+	.header-menu
+		text-indent -9999em
+		overflow hidden
+		appearance none
+		border 0 none
+		background transparent
+		padding 4px 10px 10px 10px
+		float left
+		&:focus
+			outline none
+
+		.header-button-l
+			background-color Color-secondary
+			display block
+			height 4px
+			margin -10px 0 15px 0
+			width 40px
+
+	//menu
+	.menu
+		list-style none
+		padding 0
+		margin 0
+		position absolute
+		top 55px
+		left 15px
+		transition opacity 0.4s ease
+		background-color #fff
+		float left
+		&.is-invisible
+			pointer-events none
+
+		.menu-link
+			width 100%
+			padding 10px 20px
+			appearance none
+			border 2px Color-secondary solid
+			border-top none
+			background transparent
+			text-align left
+
+	//logo
+	.logo
+		margin 0
+		text-align center
+		overflow hidden
+		margin-top 7px
+
+	.logo-img
+		max-width 50px
+		float right
+
+	//second header line
+	.header
+		list-style none
+		padding 0
+		margin 0
+		overflow hidden
+		width 100%
+		li
+			display inline
+
+		.nav-view
+			padding 16px 14px 12px 14px
+
+		//score
+		.score
+			float right
+
+			.score-text
+			.score-count
+				font-weight 400
+				font-size 20px
+				float left
+				margin 12px 5px 0 0
+
+			.score-yaynays
+				overflow hidden
+				float right
+				margin-left 10px
+				.score-yay
+				.score-nay
+					padding 5px
+					font-size 11px
+					display block
+					background-color Color-primary
+				.score-yay
+					background-color Color-tertiary
+
+	//progress
+	.progress-wrapper
+		padding 10px
+		border-bottom #b5b5b5 1px solid
+		overflow hidden
+
+		.progress-title
+			float left
+
+		.progress
+			list-style none
+			text-align justify
+			margin 0 0 -20px 0
+			padding 0 0 0 10px
+			overflow hidden
+
+			&:after
+				content " "
+				display inline-block
+				width 100%
+				height 0
+				overflow hidden
+
+			& > .progress-step
+				display inline-block
+
+				.progress-step-dot
+					text-indent -999em;
+					overflow hidden
+					border-radius 50%
+					background-color #000
+					width 5px
+					height 5px
+					margin 0 3px
+					display block
+					transition border, background 0.3s ease
+
+				&.is-active
+					.progress-step-dot
+						background-color #fff
+						border 1px #000 solid
+				&.is-wrong
+					.progress-step-dot
+						background-color Color-primary
+				&.is-right
+					.progress-step-dot
+						background-color green

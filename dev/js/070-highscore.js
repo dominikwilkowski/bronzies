@@ -85,16 +85,6 @@
 		});
 
 
-		//click popover close button
-		$('.js-body').on('click', '.js-popover-close', function() {
-			App.debugging('Menu button clicked', 'interaction');
-
-			var target = $(this).attr('data-id');
-
-			App.popup.open( target, false );
-		});
-
-
 		//submit new highscore
 		$('.js-body').on('submit', '.js-form', function(e) {
 			e.preventDefault();
@@ -121,9 +111,9 @@
 		//render highscore rows
 		$.each(HIGHSCORE, function( index, score ) {
 			highscoreHTML += '<li class="js-highscores-item highscores-item' + ( score.justadded ? ' is-active' : '' ) + '">' +
-				'	<span class="highscores-name">' + score.name + '</span>' +
-				'	<span class="highscores-score">' + score.score + '</span>' +
-				'	<span class="highscores-nays">' + score.nays + '</span>' +
+				'	<span class="highscore-name">' + score.name + '</span>' +
+				'	<span class="highscore-score">' + score.score + '</span>' +
+				'	<span class="highscore-nays">' + score.nays + '</span>' +
 				'</li>';
 		});
 
