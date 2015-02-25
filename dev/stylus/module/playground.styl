@@ -26,9 +26,20 @@
 			border 1px #b5b5b5 solid
 			border-right none
 			border-left none
+			transition background 0.3s ease
+			&.is-wrong
+				background Color-primary
+			&.is-correct
+				background green
+			&:disabled
+				opacity 0.5
+
+			.signals
+				margin auto
 
 	.next
 		position fixed
 		top 50%
 		right 0
 		padding 20px
+		z-index 300

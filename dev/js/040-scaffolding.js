@@ -101,10 +101,10 @@
 
 		var HTML = '<div class="js-popup popup highscore-wrapper" data-id="highscore">' +
 			'	<div class="js-popup-screen popup-screen"></div>' +
-			'	<div class="popup-content highscore">' +
+			'	<div class="js-popup-content popup-content highscore" id="test">' +
 			'		<button class="js-popup-close popup-close" data-id="highscore">close</button>' +
 			'		<h1 class="highscore-headline">Highscore</h1>' +
-			'		<h4>' +
+			'		<h4 class="highscore-mine">' +
 			'			Your score:' +
 			'			<span class="js-score highscore-score">0</span>' +
 			'			<span class="js-scorenay highscore-nays">0</span>' +
@@ -136,7 +136,7 @@
 
 		var HTML = '<div class="js-popup popup about-wrapper" data-id="about">' +
 			'	<div class="js-popup-screen popup-screen"></div>' +
-			'	<div class="popup-content about">' +
+			'	<div class="js-popup-content popup-content about">' +
 			'		<button class="js-popup-close popup-close" data-id="about">close</button>' +
 			'		<h1 class="about-headline">About</h1>' +
 			'		<p class="about-blob">' +

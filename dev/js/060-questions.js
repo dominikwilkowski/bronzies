@@ -143,6 +143,7 @@
 		$('.js-body').on('click', '.js-next', function() {
 			App.debugging('Next button clicked', 'interaction');
 
+			$('html, body').animate({ scrollTop: 65 }, 250);
 			App.questions.draw();
 		});
 

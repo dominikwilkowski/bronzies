@@ -9,9 +9,29 @@
 	.form-name
 		padding 10px
 
+	.highscores-item
+		padding 10px
+
+		&:nth-child(2n)
+			background-color #eee
+
+		&.is-active
+			background-color rgba(Color-tertiary, 0.4)
+
+	.highscore-score
+		font-weight 900
+		color green
+		margin-left 10px
+		min-width 30px
+
+	.highscore-score
+	.highscore-nays
+		float right
+
 	.highscore-nays
 		font-style italic
-		font-size 11px
+		font-size 0.6em
+		margin 0.3em 10px 0 10px
 
 		&:before
 		&:after
@@ -20,3 +40,6 @@
 			font-style italic
 		&:after
 			content ")"
+
+	.highscore-mine
+		font-size 2em

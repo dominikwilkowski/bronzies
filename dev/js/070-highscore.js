@@ -87,10 +87,38 @@
 
 		//submit new highscore
 		$('.js-body').on('submit', '.js-form', function(e) {
+			App.debugging('Saving Score', 'interaction');
+
 			e.preventDefault();
 
 			App.highscore.post( $(this).serialize(), function() {
+				App.debugging('Score saved, emptying score', 'report');
+
 				App.highscore.draw();
+
+				//clear score
+				App.CORRECT = 0;
+				App.PICK = 0;
+				App.PICKTEXT = '';
+				App.YAYS = 0;
+				App.NAYS = 0;
+				App.WRONGS = {};
+
+				//update score in header
+				$('.js-scoreyay').text('0');
+				$('.js-scorenay').text('0');
+				$('.js-score').text('0');
+
+				//update score in form
+				$('.js-form-nays').val('0');
+				$('.js-form-score').val('0');
+
+				App.questions.get( false, function() {
+					App.progress.draw();
+					App.questions.draw();
+				});
+
+				App.progress.draw();
 			});
 		});
 
@@ -122,11 +150,13 @@
 		var HTML = '';
 		var i = 0;
 
-		var pushups = (10 * App.NAYS) - (5 * App.YAYS); //push ups calculation
+		var pushups = Math.ceil( (10 * App.NAYS) * (App.NAYS / ( App.YAYS > 0 ? App.YAYS : 1 )) ); //push ups calculation
 
-		HTML += '<p><em class="highscore-blob-pushups">' +
-			'	According to your score you should be doing ' + pushups + ' push ups!' +
-			'</em></p>';
+		if( !isNaN(pushups) && pushups > 0 ) {
+			HTML += '<p><em class="highscore-blob-pushups">' +
+				'	According to your score you should be doing ' + pushups + ' push ups!' +
+				'</em></p>';
+			}
 
 
 		if( App.NAYS > 0 ) { //only show if we actually have some wrongs
@@ -155,8 +185,19 @@
 
 
 		$('.js-highscore-blob').html( HTML );
-
 		$('.js-highscores').html( highscoreHTML );
+
+
+		//scroll to just submitted highscore
+		if( $('.js-highscores-item.is-active').length ) {
+			App.debugging('Scroll to score', 'report');
+
+			var topPos = parseInt( $('.js-highscores-item.is-active').offset().top ) + parseInt( $('.js-popup-content').scrollTop() ) - 22;
+
+			console.log(topPos);
+
+			$('.js-popup-content').animate({ scrollTop: topPos }, 400);
+		}
 	};
 
 

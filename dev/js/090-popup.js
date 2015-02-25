@@ -40,12 +40,14 @@
 
 			$target.addClass('is-visible');
 			$('.js-header, .js-main').addClass('is-blurry');
+			$('.js-body').addClass('has-popup');
 		}
 		else {
 			var $target = $('.js-popup'); //get all popup to close
 
 			$target.removeClass('is-visible');
 			$('.js-header, .js-main').removeClass('is-blurry');
+			$('.js-body').removeClass('has-popup');
 		}
 	};
 
