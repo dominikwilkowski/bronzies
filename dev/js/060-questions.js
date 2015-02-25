@@ -9,11 +9,13 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// private function: shuffle an array
+	//
+	// array  array  Array to be shuffled
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function shuffle(array) {
 		var currentIndex = array.length;
 		var temporaryValue;
-		var randomIndex ;
+		var randomIndex;
 
 		//while there remain elements to shuffle
 		while(0 !== currentIndex) {
@@ -33,14 +35,17 @@
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// private function: render HTML depending on a string option: 'image' or 'text'
+	// private function: render question HTML
+	//
+	// item    object  Question object
+	// option  string  Option to display the object as either text or image: image,text
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function renderView( item, option ) {
 		var result = '';
 
 		//image
 		if(option === 'image') {
-			result = '<img src="' + item.image + '" alt="question">';
+			result = '<div class="signals ' + item.image + '"></div>';
 		}
 		//other, likely text
 		else {
@@ -55,12 +60,17 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// get questions from REST API or localStorage
+	//
+	// background  boolen    Is this to be done in the background?
+	// callback    function  Callback function
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.get = function( background, callback ) {
 		App.debugging('Getting questions' + ( background ? ' in the background' : '' ), 'report');
 
+		var QUESTIONS = store.get('questions');
+
 		if( QUESTIONS === undefined || background ) { //if we haven't got anything in localStorage or this is a background task
-			App.debugging('Shooting off Ajax', 'report');
+			if( !background ) App.debugging('No data found in localStorage, requesting now', 'error');
 
 			if(!background) { //don't show the loading screen if this is a background task
 				App.loading.start( true );
@@ -90,9 +100,13 @@
 			});
 		}
 		else {
-			App.debugging('Shooting off to database', 'report');
+			App.debugging('Getting questions from database', 'report');
 
 			App.QUESTIONS = store.get('questions'); //get from localStorage
+
+			if( App.QUESTIONS.length < 1 ) {
+				App.debugging('No questions in storage', 'error');
+			}
 
 			if(callback instanceof Function) {
 				callback();
@@ -109,6 +123,7 @@
 		App.debugging('Initiating questions', 'report');
 
 		App.scaffold.playground();
+		App.popup.init();
 		App.questions.get( false, function() {
 			App.highscore.init();
 			App.questions.draw();
@@ -128,6 +143,7 @@
 		$('.js-body').on('click', '.js-next', function() {
 			App.debugging('Next button clicked', 'interaction');
 
+			$('html, body').animate({ scrollTop: 65 }, 250);
 			App.questions.draw();
 		});
 
@@ -151,7 +167,7 @@
 		$('.js-next').addClass('is-hidden');
 
 		// new round, all questions in this round have been asked, starting all over
-		if( App.QUESTIONS.length < 1 ) {
+		if( App.QUESTIONS.length < 1 && store.get('questions').length > 0 ) {
 			App.debugging('Starting new round', 'report');
 
 			App.questions.get( false, function() {
@@ -186,8 +202,8 @@
 			var answerHTML = '';
 
 			$.each(AllQuestions, function( index, question ) {
-				answerHTML += '<li class="answer">' +
-					'	<button class="js-answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
+				answerHTML += '<li>' +
+					'	<button class="js-answer answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
 					'</li>';
 			});
 
@@ -199,6 +215,8 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// click an answer
+	//
+	// $this  jQuery-object  DOM node of answer clicked on
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.answer = function( $this ) {
 		App.debugging('Executing answer', 'report');

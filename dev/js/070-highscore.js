@@ -11,6 +11,8 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// get highscore from REST API
+	//
+	// callback  function  Callback function
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.get = function( callback ) {
 		App.debugging('Getting highscore', 'report');
@@ -83,22 +85,40 @@
 		});
 
 
-		//click popover close button
-		$('.js-body').on('click', '.js-popover-close', function() {
-			App.debugging('Menu button clicked', 'interaction');
-
-			var target = $(this).attr('data-id');
-
-			App.popup.open( target, false );
-		});
-
-
 		//submit new highscore
 		$('.js-body').on('submit', '.js-form', function(e) {
+			App.debugging('Saving Score', 'interaction');
+
 			e.preventDefault();
 
 			App.highscore.post( $(this).serialize(), function() {
+				App.debugging('Score saved, emptying score', 'report');
+
 				App.highscore.draw();
+
+				//clear score
+				App.CORRECT = 0;
+				App.PICK = 0;
+				App.PICKTEXT = '';
+				App.YAYS = 0;
+				App.NAYS = 0;
+				App.WRONGS = {};
+
+				//update score in header
+				$('.js-scoreyay').text('0');
+				$('.js-scorenay').text('0');
+				$('.js-score').text('0');
+
+				//update score in form
+				$('.js-form-nays').val('0');
+				$('.js-form-score').val('0');
+
+				App.questions.get( false, function() {
+					App.progress.draw();
+					App.questions.draw();
+				});
+
+				App.progress.draw();
 			});
 		});
 
@@ -111,16 +131,17 @@
 	module.draw = function() {
 		App.debugging('Dawing highscore', 'report');
 
-		HIGHSCORE = store.get('highscore');
-
+		var HIGHSCORE = store.get('highscore');
 		var highscoreHTML = '';
+
+		$('.js-form-date').val( new Date().toJSON() ); //update time
 
 		//render highscore rows
 		$.each(HIGHSCORE, function( index, score ) {
 			highscoreHTML += '<li class="js-highscores-item highscores-item' + ( score.justadded ? ' is-active' : '' ) + '">' +
-				'	<span class="highscores-name">' + score.name + '</span>' +
-				'	<span class="highscores-score">' + score.score + '</span>' +
-				'	<span class="highscores-nays">' + score.nays + '</span>' +
+				'	<span class="highscore-name">' + score.name + '</span>' +
+				'	<span class="highscore-score">' + score.score + '</span>' +
+				'	<span class="highscore-nays">' + score.nays + '</span>' +
 				'</li>';
 		});
 
@@ -129,11 +150,13 @@
 		var HTML = '';
 		var i = 0;
 
-		var pushups = (10 * App.NAYS) - (5 * App.YAYS); //push ups calculation
+		var pushups = Math.ceil( (10 * App.NAYS) * (App.NAYS / ( App.YAYS > 0 ? App.YAYS : 1 )) ); //push ups calculation
 
-		HTML += '<p><em class="highscore-blob-pushups">' +
-			'	According to your score you should be doing ' + pushups + ' push ups!' +
-			'</em></p>';
+		if( !isNaN(pushups) && pushups > 0 ) {
+			HTML += '<p><em class="highscore-blob-pushups">' +
+				'	According to your score you should be doing ' + pushups + ' push ups!' +
+				'</em></p>';
+			}
 
 
 		if( App.NAYS > 0 ) { //only show if we actually have some wrongs
@@ -162,13 +185,26 @@
 
 
 		$('.js-highscore-blob').html( HTML );
-
 		$('.js-highscores').html( highscoreHTML );
+
+
+		//scroll to just submitted highscore
+		if( $('.js-highscores-item.is-active').length ) {
+			App.debugging('Scroll to score', 'report');
+
+			var topPos = parseInt( $('.js-highscores-item.is-active').offset().top ) + parseInt( $('.js-popup-content').scrollTop() ) - 22;
+
+			console.log(topPos);
+
+			$('.js-popup-content').animate({ scrollTop: topPos }, 400);
+		}
 	};
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// add to highscore
+	//
+	// win  boolen  Correct answer?
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.update = function( win ) {
 		App.debugging('Updating highscore', 'report');
@@ -190,6 +226,9 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// post new highscore
+	//
+	// submitData  string    Serialize form data
+	// callback    function  Callback function
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.post = function( submitData, callback ) {
 		App.debugging('Posting highscore', 'report');

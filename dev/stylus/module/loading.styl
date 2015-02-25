@@ -1,11 +1,16 @@
+/***************************************************************************************************************************************************************
+ *
+ * Loading animation
+ *
+ **************************************************************************************************************************************************************/
+
+
 .loading
 	position fixed
 	top 0
 	bottom 0
 	left 0
 	right 0
-	background url(../img/cover.jpg) no-repeat
-	background-size 100% auto
 	display flex
 	justify-content center
 	align-items center
@@ -17,24 +22,30 @@
 		text-align center
 		width 100%
 
-	.loading-logo
-		width 200px
-
-	.is-loading-animation
+	.loading-animation
+		margin-top 200px
 		text-align center
 		color #fff
 		letter-spacing 2px
+		text-shadow 0 0 5px rgba(Color-primary, 0.5)
 
 		&:before
 		&:after
 			content ""
 			display inline-block
 			vertical-align middle
-			margin 0 5px
+			margin 0 15px
 			width 30%
 			border-bottom 5px solid #fff
 			animation loading 3s forwards linear
 			animation-iteration-count infinite
+			box-shadow 0 0 3px 0 Color-primary
+		&:after
+			border-top-right-radius 3px
+			border-bottom-right-radius 3px
+		&:before
+			border-top-left-radius 3px
+			border-bottom-left-radius 3px
 
 	.no-flexbox &
 		.loading-wrapper

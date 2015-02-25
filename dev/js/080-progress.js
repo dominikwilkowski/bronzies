@@ -20,7 +20,7 @@
 
 		//render the progress dots
 		for(var i = roundSteps - 1; i >= 0; i--) {
-			HTML += '<li class="js-progress-step nav-progress-step">question</li>';
+			HTML += '<li class="js-progress-step progress-step"><span class="progress-step-dot">question</span></li>';
 		};
 
 		$('.js-progress').html( HTML );
@@ -29,6 +29,8 @@
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// update progress
+	//
+	// win  boolen  Correct answer?
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.update = function( win ) {
 		App.debugging('Updating progress', 'report');
