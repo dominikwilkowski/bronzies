@@ -7,9 +7,21 @@
 
 .header-wrapper
 	overflow hidden
-	padding 10px
+	padding 12px
 	position relative
-	text-align: center;
+	text-align center
+	border-bottom 1px solid Color-border
+	position fixed
+	left 0
+	right 0
+	top 0
+	height 69px
+	z-index 100
+	background-color #fff
+	transition top 0.4s ease
+
+	.is-scrolled &
+		top -65px
 
 
 	//switch
@@ -17,17 +29,22 @@
 		-webkit-appearance none
 		appearance none
 		border 0 none
-		background-color #e6e6e6
+		background-color Color-border
 		border-radius 20px
 		width 50px
 		height 12px
 		font-size 0
 		color transparent
 		padding 0
-		margin 18px
-		text-indent -99999em;
+		margin 18px 0
+		text-indent -99999em
 		position relative
 		float left
+		opacity 1
+		transition opacity 0.3s ease
+
+		.is-scrolled &
+			opacity 0
 
 		&:after
 			content ' '
@@ -49,34 +66,144 @@
 			height 24px
 			margin-left -24px
 			border-radius 50%
-			background-color #ed3024
+			background-color Color-primary
 			transition left 0.4s ease, background 0.4s ease
 
 		&.is-t2p
 			.switch-toggle
 				left 100%
-				background-color #fbae17
+				background-color Color-tertiary
 
 
 	//logo
 	.logo-img
 		margin 0
 		max-width 50px
+		opacity 1
+		transition opacity 0.3s ease
+
+		.is-scrolled &
+			opacity 0
+
+
+	//highscore link
+	.highscore-link
+		float right
+		width 50px
+		height 50px
+		text-align right
+		clear right
+		text-indent -999em
+		overflow hidden
+		-webkit-appearance none
+		appearance none
+		padding 0
+		margin 0
+		background transparent
+		border 0 none
+		opacity 1
+		transition opacity 0.3s ease
+
+		.is-scrolled &
+			opacity 0
+
+		&:focus
+			outline none
+
+
+	//progress
+	.progress-wrapper
+		width 100%
+		white-space nowrap
+		position relative
+		height 18px
+
+		.is-scrolled &
+			height 6px
+
+		.progress-title
+			font-size 0
+			color transparent
+			position absolute
+			width 1px
+			height 1px
+			overflow hidden
+
+		.progress
+			list-style none
+			margin 0
+			padding 0
+			display flex
+			position absolute
+			left 0
+			right 37px
+			top 0
+
+			.progress-step
+				display inline-block
+				flex 1
+				height 18px
+
+				.is-scrolled &
+					height 6px
+					margin 0 2px
+
+				&-dot
+					text-indent -999em
+					overflow hidden
+					border-radius 50%
+					background-color #fff
+					border 1px solid Color-background
+					width 6px
+					height 6px
+					margin 5px auto
+					display block
+					transition all 0.3s ease
+
+					.is-scrolled &
+						margin 0
+						border-radius 0
+						height 0
+						width 100%
+
+				&.is-active
+					.progress-step-dot
+						border-width 3px
+						height 2px
+
+						.is-scrolled &
+							width 6px
+							height 0
+							border-width 2px
+
+				&.is-wrong
+					.progress-step-dot
+						border-color Color-primary
+
+				&.is-right
+					.progress-step-dot
+						border-color Color-correct
 
 
 	//score
 	.score
-		float right
-		width 86px
+		position absolute
+		right 0
+		top 0
+		width 37px
+		height 18px
 		text-align right
-		clear right
+		line-height 1
 
 		.score-count
 			display inline-block
 			font-weight 400
-			font-size 24px
-			margin 12px 5px 0 0
+			font-size 18px
+			margin 0
 			transition color 0.4s ease
+
+			.is-scrolled &
+				font-size 16px
 
 			&.is-negative
 				color red
@@ -86,55 +213,3 @@
 
 		.score-yaynays
 			display none
-
-
-	//progress
-	.progress-wrapper
-		clear both
-		padding 10px
-		border-bottom #b5b5b5 1px solid
-		overflow hidden
-
-		.progress-title
-			float left
-			font-size 11px
-			margin-top 4px
-
-		.progress
-			list-style none
-			text-align justify
-			margin 0 0 -20px 0
-			padding 0 0 0 5px
-			overflow hidden
-
-			&:after
-				content " "
-				display inline-block
-				width 100%
-				height 0
-				overflow hidden
-
-			& > .progress-step
-				display inline-block
-
-				.progress-step-dot
-					text-indent -999em;
-					overflow hidden
-					border-radius 50%
-					background-color #000
-					width 5px
-					height 5px
-					margin 0 2px
-					display block
-					transition border, background 0.3s ease
-
-				&.is-active
-					.progress-step-dot
-						background-color #fff
-						border 1px #000 solid
-				&.is-wrong
-					.progress-step-dot
-						background-color Color-primary
-				&.is-right
-					.progress-step-dot
-						background-color green

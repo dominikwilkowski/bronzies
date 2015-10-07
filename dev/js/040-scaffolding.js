@@ -45,19 +45,28 @@
 				'		<span class="switch-toggle">Switch view</span>' +
 				'	</button>' +
 				'	<img class="logo-img" itemscope itemtype="http://schema.org/Organization" src="img/slsa-logo.png" alt="SLSA Logo">' +
-				'	<div class="score">' +
-				'		<span class="js-score score-count">0</span>' +
-				'		<div class="score-yaynays">' +
-				'			<span class="js-scoreyay score-yay">0</span>' +
-				'			<span class="js-scorenay score-nay">0</span>' +
-				'		</div>' +
-				'	</div>' +
+				'	<button class="js-highscore highscore-link">' +
+				'		<svg aria-labelledby="title" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"' +
+				'			 width="50px" height="50px" viewBox="-404 213.6 50 50" style="enable-background:new -404 213.6 50 50;" xml:space="preserve">' +
+				'			<title id="title" lang="en">Highscore</title>' +
+				'			<path fill="#b3b3b3" d="M-355.3,239.7l1.3-1.1l-1.3-1.1l1-1.3l-1.5-0.9l0.7-1.5l-1.6-0.5l0.3-1.7l-1.7-0.2v-1.7l-1.7,0.2l-0.3-1.7' +
+				'				l-1.6,0.5l-0.7-1.5l-1.5,0.9l-1-1.4l-1.3,1.1l-1.3-1.1l-1,1.4l-1.5-0.9l-0.7,1.5l-1.6-0.5l-0.3,1.7l-1.7-0.1v1.7l-1.7,0.2l0.3,1.7' +
+				'				l-1.6,0.5l0.7,1.5l-1.5,0.9l1,1.3l-1.3,1.1l1.3,1.1l-1,1.3l1.5,0.9l-0.7,1.5l1.6,0.5l-0.3,1.7l1.7,0.2v1.7l1.7-0.2l0.3,1.7l1.6-0.5' +
+				'				l0.7,1.5l1.5-0.9l1,1.4l1.3-1.1l1.3,1.1l1-1.4l1.5,0.9l0.7-1.5l1.6,0.5l0.3-1.7l1.7,0.2v-1.7l1.7-0.2l-0.3-1.7l1.6-0.5l-0.7-1.5' +
+				'				l1.5-0.9L-355.3,239.7z M-362.3,239.2l-0.7,0.5l0.3,0.9l1.4,4.7l-4-2.8l-0.7-0.5l-0.7,0.5l-4,2.8l1.4-4.7l0.3-0.9l-0.7-0.5' +
+				'				l-3.9-2.9l4.9-0.1h0.9l0.3-0.8l1.6-4.6l1.6,4.6l0.3,0.8h0.9l4.9,0.1L-362.3,239.2z"/>' +
+				'		</svg>' +
+				'	</button>' +
 				'	<div class="progress-wrapper">' +
 				'		<span class="progress-title">Progress</span>' +
 				'		<ul class="js-progress progress"></ul>' +
-				'		<button class="js-highscore highscore-link">' +
-				'			Highscore' +
-				'		</button>' +
+				'		<div class="score">' +
+				'			<span class="js-score score-count">0</span>' +
+				'			<div class="score-yaynays">' +
+				'				<span class="js-scoreyay score-yay">0</span>' +
+				'				<span class="js-scorenay score-nay">0</span>' +
+				'			</div>' +
+				'		</div>' +
 				'	</div>' +
 				'</header>' +
 				'<main class="playground js-main">' +

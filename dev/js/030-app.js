@@ -54,6 +54,7 @@ var App = (function() {
 
 			App.scaffold.playground();
 			App.popup.init();
+			App.scroll.init();
 			App.questions.get( false, function() {
 				App.highscore.init();
 				App.questions.draw();
