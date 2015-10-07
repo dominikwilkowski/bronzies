@@ -9,99 +9,88 @@
 	overflow hidden
 	padding 10px
 	position relative
+	text-align: center;
 
-	//menu button
-	.header-menu
-		text-indent -9999em
-		overflow hidden
+
+	//switch
+	.switch
+		-webkit-appearance none
 		appearance none
 		border 0 none
-		background transparent
-		padding 4px 10px 10px 10px
+		background-color #e6e6e6
+		border-radius 20px
+		width 50px
+		height 12px
+		font-size 0
+		color transparent
+		padding 0
+		margin 18px
+		text-indent -99999em;
+		position relative
 		float left
+
+		&:after
+			content ' '
+			position absolute
+			top -24px
+			right -24px
+			bottom -24px
+			left -24px
+
 		&:focus
 			outline none
 
-		.header-button-l
-			background-color Color-secondary
+		.switch-toggle
 			display block
-			height 4px
-			margin -10px 0 15px 0
-			width 40px
+			position absolute
+			top -6px
+			left 24px
+			width 24px
+			height 24px
+			margin-left -24px
+			border-radius 50%
+			background-color #ed3024
+			transition left 0.4s ease, background 0.4s ease
 
-	//menu
-	.menu
-		list-style none
-		padding 0
-		margin 0
-		position absolute
-		top 55px
-		left 15px
-		transition opacity 0.4s ease
-		background-color #fff
-		float left
-		&.is-invisible
-			pointer-events none
+		&.is-t2p
+			.switch-toggle
+				left 100%
+				background-color #fbae17
 
-		.menu-link
-			width 100%
-			padding 10px 20px
-			appearance none
-			border 2px Color-secondary solid
-			border-top none
-			background transparent
-			text-align left
 
 	//logo
-	.logo
-		margin 0
-		text-align center
-		overflow hidden
-		margin-top 7px
-
 	.logo-img
-		max-width 50px
-		float right
-
-	//second header line
-	.header
-		list-style none
-		padding 0
 		margin 0
-		overflow hidden
-		width 100%
-		li
-			display inline
+		max-width 50px
 
-		.nav-view
-			padding 16px 14px 12px 14px
 
-		//score
-		.score
-			float right
+	//score
+	.score
+		float right
+		width 86px
+		text-align right
+		clear right
 
-			.score-text
-			.score-count
-				font-weight 400
-				font-size 20px
-				float left
-				margin 12px 5px 0 0
+		.score-count
+			display inline-block
+			font-weight 400
+			font-size 24px
+			margin 12px 5px 0 0
+			transition color 0.4s ease
 
-			.score-yaynays
-				overflow hidden
-				float right
-				margin-left 10px
-				.score-yay
-				.score-nay
-					padding 5px
-					font-size 11px
-					display block
-					background-color Color-primary
-				.score-yay
-					background-color green
+			&.is-negative
+				color red
+
+			&.is-positive
+				color #000
+
+		.score-yaynays
+			display none
+
 
 	//progress
 	.progress-wrapper
+		clear both
 		padding 10px
 		border-bottom #b5b5b5 1px solid
 		overflow hidden

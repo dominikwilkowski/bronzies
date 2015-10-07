@@ -52,7 +52,14 @@ var App = (function() {
 
 			});
 
-			App.questions.init(); //start the app
+			App.scaffold.playground();
+			App.popup.init();
+			App.questions.get( false, function() {
+				App.highscore.init();
+				App.questions.draw();
+				App.questions.get( true ); //load new questions in the background to keep this app updated
+			});
+			App.questions.init();
 		},
 
 

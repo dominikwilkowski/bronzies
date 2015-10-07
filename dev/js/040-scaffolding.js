@@ -34,56 +34,33 @@
 		App.debugging('Scaffolding playground', 'report');
 
 		if( !$('.js-playground').length ) {
-			var HTML = '<div class="js-splash splash is-animating">' +
+			var HTML = '' +
+				'<div class="js-splash splash is-animating">' +
 				'	<div class="splash-wrapper">' +
 				'		<img class="splash-logo" src="img/slsa-logo.png" alt="SLSA logo">' +
 				'	</div>' +
 				'</div>' +
 				'<header class="header-wrapper js-header">' +
-				'	<button class="js-menubutton header-menu">' +
-				'		Open menu' +
-				'		<span class="header-button-l"></span>' +
-				'		<span class="header-button-l"></span>' +
-				'		<span class="header-button-l"></span>' +
+				'	<button class="js-switchview switch">' +
+				'		<span class="switch-toggle">Switch view</span>' +
 				'	</button>' +
-				'	<nav class="menu-wrapper">' +
-				'		<ul class="js-menu menu is-invisible">' +
-				'			<li>' +
-				'				<button class="js-highscore menu-link">' +
-				'					Highscore' +
-				'				</button>' +
-				'			</li>' +
-				'			<li>' +
-				'				<button class="js-about menu-link">' +
-				'					About' +
-				'				</button>' +
-				'			</li>' +
-				'		</ul>' +
-				'	</nav>' +
 				'	<img class="logo-img" itemscope itemtype="http://schema.org/Organization" src="img/slsa-logo.png" alt="SLSA Logo">' +
-				'	<h1 class="logo">Bronzies</h1>' +
-				'	<ul class="header">' +
-				'		<li>' +
-				'			<button class="js-switchview nav-view">Switch view</button>' +
-				'		</li>' +
-				'		<li>' +
-				'			<div class="score">' +
-				'				<strong class="score-text">Score</strong>' +
-				'				<span class="js-score score-count">0</span>' +
-				'				<div class="score-yaynays">' +
-				'					<span class="js-scoreyay score-yay">0</span>' +
-				'					<span class="js-scorenay score-nay">0</span>' +
-				'				</div>' +
-				'			</div>' +
-				'		</li>' +
-				'	</ul>' +
+				'	<div class="score">' +
+				'		<span class="js-score score-count">0</span>' +
+				'		<div class="score-yaynays">' +
+				'			<span class="js-scoreyay score-yay">0</span>' +
+				'			<span class="js-scorenay score-nay">0</span>' +
+				'		</div>' +
+				'	</div>' +
 				'	<div class="progress-wrapper">' +
 				'		<span class="progress-title">Progress</span>' +
 				'		<ul class="js-progress progress"></ul>' +
+				'		<button class="js-highscore highscore-link">' +
+				'			Highscore' +
+				'		</button>' +
 				'	</div>' +
 				'</header>' +
 				'<main class="playground js-main">' +
-				'	<button class="js-next next is-hidden">Next question</button>' +
 				'	<div class="js-question question"></div>' +
 				'	<ul class="js-answers answers"></ul>' +
 				'</main>';
@@ -128,29 +105,29 @@
 	};
 
 
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// about screen
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	module.about = function() {
-		App.debugging('Scaffolding about', 'report');
+	// //------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// // about screen
+	// //------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// module.about = function() {
+	// 	App.debugging('Scaffolding about', 'report');
 
-		var HTML = '<div class="js-popup popup about-wrapper" data-id="about">' +
-			'	<div class="js-popup-screen popup-screen"></div>' +
-			'	<div class="js-popup-content popup-content about">' +
-			'		<button class="js-popup-close popup-close" data-id="about">close</button>' +
-			'		<h1 class="about-headline">About</h1>' +
-			'		<p class="about-blob">' +
-			'			This app has been developed by <a href="http://dominik-wilkowski.com" target="_blank">Dominik Wilkowski</a>' +
-			'			and designed my <a href="http://conley.com.au/">Dylan Conley</a>.' +
-			'		</p>' +
-			'		<p class="about-blob">' +
-			'			Let me know if you <a href="https://github.com/dominikwilkowski/bronzies/issues" target="_blank">have any issues</a>.' +
-			'		</p>' +
-			'	</div>' +
-			'</div>';
+	// 	var HTML = '<div class="js-popup popup about-wrapper" data-id="about">' +
+	// 		'	<div class="js-popup-screen popup-screen"></div>' +
+	// 		'	<div class="js-popup-content popup-content about">' +
+	// 		'		<button class="js-popup-close popup-close" data-id="about">close</button>' +
+	// 		'		<h1 class="about-headline">About</h1>' +
+	// 		'		<p class="about-blob">' +
+	// 		'			This app has been developed by <a href="http://dominik-wilkowski.com" target="_blank">Dominik Wilkowski</a>' +
+	// 		'			and designed my <a href="http://conley.com.au/">Dylan Conley</a>.' +
+	// 		'		</p>' +
+	// 		'		<p class="about-blob">' +
+	// 		'			Let me know if you <a href="https://github.com/dominikwilkowski/bronzies/issues" target="_blank">have any issues</a>.' +
+	// 		'		</p>' +
+	// 		'	</div>' +
+	// 		'</div>';
 
-		$('.js-body').append(HTML);
-	};
+	// 	$('.js-body').append(HTML);
+	// };
 
 
 	App.scaffold = module;

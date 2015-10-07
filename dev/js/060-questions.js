@@ -122,15 +122,6 @@
 	module.init = function() {
 		App.debugging('Initiating questions', 'report');
 
-		App.scaffold.playground();
-		App.popup.init();
-		App.questions.get( false, function() {
-			App.highscore.init();
-			App.questions.draw();
-			App.questions.get( true ); //load new questions in the background to keep this app updated
-		});
-
-
 		//click an answer
 		$('.js-body').on('click', '.js-answer', function() {
 			App.debugging('Answer clicked', 'interaction');
@@ -152,6 +143,7 @@
 		$('.js-body').on('click', '.js-switchview', function() {
 			App.debugging('Switch button clicked', 'interaction');
 
+			$(this).toggleClass('is-t2p');
 			App.questions.view();
 		});
 
@@ -204,6 +196,7 @@
 			$.each(AllQuestions, function( index, question ) {
 				answerHTML += '<li>' +
 					'	<button class="js-answer answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
+					'	<button class="js-next next is-hidden">Next question</button>' +
 					'</li>';
 			});
 
