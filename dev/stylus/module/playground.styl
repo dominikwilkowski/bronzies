@@ -19,29 +19,75 @@
 		list-style none
 		margin 0 0 20px 0
 		padding 0
+		border-top 1px Color-border solid
 
 		.answer
 			display block
 			width 100%
 			background #fff
+			-webkit-appearance none
 			appearance none
-			border 1px #b5b5b5 solid
+			padding 12px
+			border 0 none
 			border-right none
 			border-left none
-			transition background 0.3s ease
+			transition background 0.3s ease, opcaity 0.3s ease, color 0.3s ease
+			font-weight 100
+			font-size 21px
+			line-height 1.2
+
+			&:focus
+				outline none
+
 			&.is-wrong
 				background Color-primary
+				color #fff
+
 			&.is-correct
-				background green
+				background Color-correct
+				color #fff
+
 			&:disabled
 				opacity 0.5
 
 			.signals
 				margin auto
 
+		&-item
+			overflow hidden
+			position relative
+
 	.next
-		position fixed
-		top 50%
+		position absolute
+		top 0
+		bottom 0
 		right 0
-		padding 20px
-		z-index 300
+		width 110px
+		vertical-align middle
+		transition right 0.3s ease
+		-webkit-appearance none
+		appearance none
+		border 0
+		background-color rgba(255, 255, 255, 0.7)
+		color Color-correct
+		font-size 12px
+
+		&:focus
+			outline none
+
+		&.is-offcanvas
+			right -110px
+
+		.next-text
+			position relative
+			display block
+
+			&:after
+				content ' '
+				position absolute
+				right 0
+				top 1px
+				border-top 7px solid transparent
+				border-bottom 7px solid transparent
+				border-right 0 solid transparent
+				border-left 7px solid Color-correct

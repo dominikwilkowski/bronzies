@@ -49,7 +49,7 @@
 		}
 		//other, likely text
 		else {
-			result = '<h2>' + item.text + '</h2>';
+			result = item.text;
 		}
 
 		return result;
@@ -156,7 +156,7 @@
 	module.draw = function() {
 		App.debugging('Dawing questions', 'report');
 
-		$('.js-next').addClass('is-hidden');
+		// $('.js-next').addClass('is-offcanvas');
 
 		// new round, all questions in this round have been asked, starting all over
 		if( App.QUESTIONS.length < 1 && store.get('questions').length > 0 ) {
@@ -194,9 +194,9 @@
 			var answerHTML = '';
 
 			$.each(AllQuestions, function( index, question ) {
-				answerHTML += '<li>' +
+				answerHTML += '<li class="answers-item">' +
 					'	<button class="js-answer answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
-					'	<button class="js-next next is-hidden">Next question</button>' +
+					'	<button class="js-next next is-offcanvas"><span class="next-text">Next question</span></button>' +
 					'</li>';
 			});
 
@@ -230,7 +230,7 @@
 			App.QUESTIONS.splice(App.PICK, 1); //remove from this round
 
 			$this.addClass('is-correct');
-			$('.js-next').removeClass('is-hidden');
+			$this.next('.js-next').removeClass('is-offcanvas');
 		}
 		//wrong
 		else {

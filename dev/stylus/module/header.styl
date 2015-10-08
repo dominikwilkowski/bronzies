@@ -18,10 +18,11 @@
 	height 69px
 	z-index 100
 	background-color #fff
-	transition top 0.4s ease
+	transition top 0.4s ease, box-shadow 0.4s ease
 
 	.is-scrolled &
 		top -65px
+		box-shadow 0 2px 5px rgba(0, 0, 0, 0.1)
 
 
 	//switch
@@ -41,7 +42,7 @@
 		position relative
 		float left
 		opacity 1
-		transition opacity 0.3s ease
+		transition opacity 0.2s ease
 
 		.is-scrolled &
 			opacity 0
@@ -80,7 +81,7 @@
 		margin 0
 		max-width 50px
 		opacity 1
-		transition opacity 0.3s ease
+		transition opacity 0.2s ease
 
 		.is-scrolled &
 			opacity 0
@@ -102,7 +103,7 @@
 		background transparent
 		border 0 none
 		opacity 1
-		transition opacity 0.3s ease
+		transition opacity 0.2s ease
 
 		.is-scrolled &
 			opacity 0
@@ -167,12 +168,16 @@
 						width 100%
 
 				&.is-active
+					.is-scrolled &
+						margin 0 3px
+
 					.progress-step-dot
 						border-width 3px
 						height 2px
+						width 2px
 
 						.is-scrolled &
-							width 6px
+							width 100%
 							height 0
 							border-width 2px
 
