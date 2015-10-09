@@ -1,0 +1,110 @@
+/***************************************************************************************************************************************************************
+ *
+ * Animations
+ *
+ **************************************************************************************************************************************************************/
+
+
+.animations-canvas
+	height 25px
+	position absolute
+	bottom 0
+	left 0
+	right 0
+
+	.animations-shark
+		position absolute
+		height 25px
+		width auto
+		right -50px
+		bottom -50px
+		animation-fill-mode both
+
+		.has-animated-shark&
+			animation shark 50s forwards
+
+	.animations-flag1
+	.animations-flag2
+		position absolute
+		height 25px
+		width auto
+		right 30%
+		bottom -21px
+		transform rotate(-150deg)
+
+		.has-animated-flags&
+			animation flagsUp 5s forwards, flagsDown 5s 20s forwards
+
+	.animations-flag1
+		right 74%
+
+		.has-animated-flags&
+			animation flagsUp 5s 2s forwards, flagsDown 5s 18s forwards
+
+
+@keyframes shark
+	from
+		bottom -16px
+		right -50px
+		height 15px
+		transform scaleX(1)
+
+	30.0001%
+		transform scaleX(-1)
+
+	30%
+		bottom -3px
+		height 15px
+		right 40%
+		transform scaleX(1)
+
+	60%
+		bottom -1px
+		right 5%
+		transform scaleX(-1)
+
+	60.0001%
+		transform scaleX(1)
+
+	80%
+		bottom 0
+
+	to
+		bottom -5px
+		right 110%
+		height 25px
+		transform scaleX(1)
+
+
+bottom = -21px
+
+@keyframes flagsUp
+	from
+		transform rotate(-150deg)
+		bottom bottom
+
+	30%
+		transform rotate(-60deg)
+		bottom bottom + 5px
+
+	60%
+		transform rotate(-30deg)
+		bottom bottom + 18px
+
+	to
+		transform rotate(0deg)
+		bottom bottom + 21px
+
+
+@keyframes flagsDown
+	from
+		transform rotate(0deg)
+		bottom bottom + 21px
+
+	75%
+		transform rotate(-20deg)
+		bottom bottom + 11px
+
+	to
+		transform rotate(-150deg)
+		bottom bottom - 5px

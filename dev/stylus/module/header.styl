@@ -7,7 +7,7 @@
 
 .header-wrapper
 	overflow hidden
-	padding 12px
+	padding 6px 12px 18px 12px
 	position relative
 	text-align center
 	border-bottom 1px solid Color-border
@@ -16,6 +16,7 @@
 	right 0
 	top 0
 	height 69px
+	font-size 0
 	z-index 100
 	background-color #fff
 	transition top 0.4s ease, box-shadow 0.4s ease
@@ -118,9 +119,12 @@
 		white-space nowrap
 		position relative
 		height 18px
+		margin-top 0
+		transition margin 0.3s ease
 
 		.is-scrolled &
 			height 6px
+			margin-top 10px
 
 		.progress-title
 			font-size 0
@@ -144,6 +148,7 @@
 				display inline-block
 				flex 1
 				height 18px
+				position relative
 
 				.is-scrolled &
 					height 6px
@@ -157,7 +162,7 @@
 					border 1px solid Color-background
 					width 6px
 					height 6px
-					margin 5px auto
+					margin 5px 0
 					display block
 					transition all 0.3s ease
 
@@ -169,7 +174,7 @@
 
 				&.is-active
 					.is-scrolled &
-						margin 0 3px
+						margin 0 3px 0 1px
 
 					.progress-step-dot
 						border-width 3px
@@ -188,6 +193,22 @@
 				&.is-right
 					.progress-step-dot
 						border-color Color-correct
+
+		.progress-flag
+			position absolute
+			top -13px
+			left 3px
+			width auto
+			height 52px
+			pointer-events none
+			animation-fill-mode both
+
+			&.progress-flag-start
+				animation progressflagsstart 1.4s 5s, fade 0.6s 8s forwards
+
+			&.progress-flag-end
+				left -20px
+				animation progressflagsend 1.4s 6s, fade 0.6s 9s forwards
 
 
 	//score
@@ -218,3 +239,74 @@
 
 		.score-yaynays
 			display none
+
+
+//animations
+height = 52px
+top = -13px
+
+@keyframes progressflagsstart
+	from
+		height height
+		top top
+
+	10%, 20%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height - 5px
+		top top + 5
+
+	30%, 50%, 70%, 90%
+		transform rotate3d(0, 0, 1, 3deg)
+		height height + 20px
+		top top - 20px
+
+	40%, 60%, 80%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height + 20px
+		top top - 20px
+
+	to
+		height height
+		top top
+
+
+height = 52px
+top = -13px
+left = -20px
+
+@keyframes progressflagsend
+	from
+		height height
+		top top
+		left left
+
+	10%, 20%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height - 5px
+		top top + 5
+		left left + 5
+
+	30%, 50%, 70%, 90%
+		transform rotate3d(0, 0, 1, 3deg)
+		height height + 20px
+		top top - 20px
+		left left - 20px
+
+	40%, 60%, 80%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height + 20px
+		top top - 20px
+		left left - 20px
+
+	to
+		height height
+		top top
+		left left
+
+
+@keyframes fade
+	from
+		opacity 1
+
+	to
+		opacity 0

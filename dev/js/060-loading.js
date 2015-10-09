@@ -7,28 +7,6 @@
 
 (function(App) {
 
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// private function: what transistion prefix is supported in this browser?
-	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function whichTransitionEvent() { //By David Walsh: http://davidwalsh.name/css-animation-callback
-		var t;
-		var el = document.createElement("fakeelement");
-
-		var transitions = {
-			"transition": "transitionend",
-			"OTransition": "oTransitionEnd",
-			"MozTransition": "transitionend",
-			"WebkitTransition": "webkitTransitionEnd"
-		}
-
-		for( t in transitions ) {
-			if( el.style[t] !== undefined ) {
-				return transitions[t];
-			}
-		}
-	}
-
-
 	var module = {};
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +29,7 @@
 		else {
 			$('.js-loading').css({ opacity: 0 });
 
-			var transitionEvent = whichTransitionEvent();
+			var transitionEvent = App.whichTransitionEvent();
 			$('.js-loading').one(transitionEvent, function() {
 				App.debugging('Loading transition finished', 'report');
 

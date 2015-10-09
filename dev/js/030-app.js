@@ -61,6 +61,29 @@ var App = (function() {
 				App.questions.get( true ); //load new questions in the background to keep this app updated
 			});
 			App.questions.init();
+			App.animations.init();
+		},
+
+
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// what transistion prefix is supported in this browser?
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		whichTransitionEvent: function() { //By David Walsh: http://davidwalsh.name/css-animation-callback
+			var t;
+			var el = document.createElement("fakeelement");
+
+			var transitions = {
+				"transition": "transitionend",
+				"OTransition": "oTransitionEnd",
+				"MozTransition": "transitionend",
+				"WebkitTransition": "webkitTransitionEnd"
+			}
+
+			for( t in transitions ) {
+				if( el.style[t] !== undefined ) {
+					return transitions[t];
+				}
+			}
 		},
 
 

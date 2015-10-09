@@ -20,7 +20,22 @@
 
 		//render the progress dots
 		for(var i = roundSteps - 1; i >= 0; i--) {
-			HTML += '<li class="js-progress-step progress-step"><span class="progress-step-dot">question</span></li>';
+			var flagIcon = '';
+
+			if( i === ( roundSteps - 1 ) ) {
+				flagIcon = '<svg class="progress-flag progress-flag-start" aria-labelledby="title" viewBox="0 0 159 141">' +
+				'	<title id="title" lang="en">Start</title>' +
+				'	<use xlink:href="#start"></use>' +
+				'</svg>';
+			}
+			if( i === 0 ) {
+				flagIcon = '<svg class="progress-flag progress-flag-end" aria-labelledby="title" viewBox="0 0 159 141">' +
+				'	<title id="title" lang="en">End</title>' +
+				'	<use xlink:href="#end"></use>' +
+				'</svg>';
+			}
+
+			HTML += '<li class="js-progress-step progress-step">' + flagIcon + '<span class="progress-step-dot">question</span></li>';
 		};
 
 		$('.js-progress').html( HTML );
