@@ -126,13 +126,19 @@
 			'		<use xlink:href="#shark"></use>' +
 			'	</svg>' +
 			'	<svg class="animations-flags animations-flag1" aria-labelledby="title" viewBox="0 0 100 202">' +
-			'		<title id="title" lang="en">Shark fin</title>' +
+			'		<title id="title" lang="en">Beach flag</title>' +
 			'		<use xlink:href="#flag1"></use>' +
 			'	</svg>' +
 			'	<svg class="animations-flags animations-flag2" aria-labelledby="title" viewBox="0 0 74 223">' +
-			'		<title id="title" lang="en">Shark fin</title>' +
+			'		<title id="title" lang="en">Beach flag</title>' +
 			'		<use xlink:href="#flag2"></use>' +
 			'	</svg>' +
+			'	<div class="animations-ball-wrapper">' +
+			'		<svg class="animations-ball" aria-labelledby="title" viewBox="0 0 180 183">' +
+			'			<title id="title" lang="en">Ball</title>' +
+			'			<use xlink:href="#ball"></use>' +
+			'		</svg>' +
+			'	</div>' +
 			'</div>';
 
 		$('.js-header').append(HTML);

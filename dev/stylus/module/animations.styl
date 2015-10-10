@@ -12,6 +12,7 @@
 	left 0
 	right 0
 
+	//shark
 	.animations-shark
 		position absolute
 		height 25px
@@ -23,13 +24,13 @@
 		.has-animated-shark&
 			animation shark 50s forwards
 
-	.animations-flag1
-	.animations-flag2
+	//flags
+	.animations-flags
 		position absolute
 		height 25px
 		width auto
 		right 30%
-		bottom -21px
+		bottom -26px
 		transform rotate(-150deg)
 
 		.has-animated-flags&
@@ -41,7 +42,31 @@
 		.has-animated-flags&
 			animation flagsUp 5s 2s forwards, flagsDown 5s 18s forwards
 
+	//ball
+	.animations-ball-wrapper
+		position absolute
+		height 35px
+		width 35px
+		left 55%
+		bottom -60px
 
+		.animations-ball
+			position absolute
+			height 18px
+			width auto
+			right 0
+			bottom 0
+			margin-top -18px
+
+		.has-animated-ball&
+			animation ball-momentum 5s cubic-bezier(0.37, 0.35, 0.76, 0.35) forwards,
+				ball-move 6s ease-out forwards
+
+			.animations-ball
+				animation: ball-jump 0.4s infinite cubic-bezier(0.05, 0.51, 0.57, 0.85) alternate,
+					ball-rotation 6s infinite linear
+
+//shark
 @keyframes shark
 	from
 		bottom -16px
@@ -49,13 +74,13 @@
 		height 15px
 		transform scaleX(1)
 
-	30.0001%
+	40.0001%
 		transform scaleX(-1)
 
-	30%
+	40%
 		bottom -3px
 		height 15px
-		right 40%
+		right 70%
 		transform scaleX(1)
 
 	60%
@@ -76,7 +101,8 @@
 		transform scaleX(1)
 
 
-bottom = -21px
+//flags
+bottom = -26px
 
 @keyframes flagsUp
 	from
@@ -93,13 +119,13 @@ bottom = -21px
 
 	to
 		transform rotate(0deg)
-		bottom bottom + 21px
+		bottom bottom + 26px
 
 
 @keyframes flagsDown
 	from
 		transform rotate(0deg)
-		bottom bottom + 21px
+		bottom bottom + 26px
 
 	75%
 		transform rotate(-20deg)
@@ -108,3 +134,41 @@ bottom = -21px
 	to
 		transform rotate(-150deg)
 		bottom bottom - 5px
+
+
+//ball
+@keyframes ball-momentum
+	from
+		height 35px
+
+	80%
+		height 0
+
+	to
+		height 0
+
+@keyframes ball-rotation
+	from
+		transform rotate(0deg)
+
+	to
+		transform rotate(-1800deg)
+
+@keyframes ball-move
+	from
+		left 55%
+		bottom -60px
+
+	2%
+		bottom 0
+
+	to
+		left -35px
+		bottom 0
+
+@keyframes ball-jump
+	from
+		bottom 0
+
+	to
+		bottom 100%
