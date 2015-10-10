@@ -52,7 +52,7 @@
 				'		<use xlink:href="#logo"></use>' +
 				'	</svg>' +
 				'	<button class="js-highscore highscore-link">' +
-				'		<svg aria-labelledby="title" viewBox="0 0 50 50">' +
+				'		<svg class="highscore-link-svg" aria-labelledby="title" viewBox="0 0 50 50">' +
 				'			<title id="title" lang="en">Highscore</title>' +
 				'			<use xlink:href="#highscore"></use>' +
 				'		</svg>' +
