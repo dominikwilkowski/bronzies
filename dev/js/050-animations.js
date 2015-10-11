@@ -15,7 +15,7 @@
 	module.play = function() {
 		App.debugging( 'Animations: play animation', 'report' );
 
-		var animations = ['flags', 'shark', 'ball'];
+		var animations = ['flags', 'shark', 'ball', 'tube'];
 		var animation = Math.floor( Math.random() * animations.length );
 		var className = 'has-animated-' + animations[ animation ];
 

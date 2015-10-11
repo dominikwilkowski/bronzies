@@ -121,24 +121,28 @@
 		App.debugging('Scaffolding animations', 'report');
 
 		var HTML = '<div class="animations-canvas js-animation">' +
-			'	<svg class="animations-shark" aria-labelledby="title" viewBox="0 0 79 54">' +
-			'		<title id="title" lang="en">Shark fin</title>' +
+			'	<svg class="animations-shark" aria-labelledby="title1" viewBox="0 0 79 54">' +
+			'		<title id="title1" lang="en">Shark fin</title>' +
 			'		<use xlink:href="#shark"></use>' +
 			'	</svg>' +
-			'	<svg class="animations-flags animations-flag1" aria-labelledby="title" viewBox="0 0 100 202">' +
-			'		<title id="title" lang="en">Beach flag</title>' +
+			'	<svg class="animations-flags animations-flag1" aria-labelledby="title2" viewBox="0 0 100 202">' +
+			'		<title id="title2" lang="en">Beach flag</title>' +
 			'		<use xlink:href="#flag1"></use>' +
 			'	</svg>' +
-			'	<svg class="animations-flags animations-flag2" aria-labelledby="title" viewBox="0 0 74 223">' +
-			'		<title id="title" lang="en">Beach flag</title>' +
+			'	<svg class="animations-flags animations-flag2" aria-labelledby="title3" viewBox="0 0 74 223">' +
+			'		<title id="title3" lang="en">Beach flag</title>' +
 			'		<use xlink:href="#flag2"></use>' +
 			'	</svg>' +
 			'	<div class="animations-ball-wrapper">' +
-			'		<svg class="animations-ball" aria-labelledby="title" viewBox="0 0 180 183">' +
-			'			<title id="title" lang="en">Ball</title>' +
+			'		<svg class="animations-ball" aria-labelledby="title4" viewBox="0 0 180 183">' +
+			'			<title id="title4" lang="en">Ball</title>' +
 			'			<use xlink:href="#ball"></use>' +
 			'		</svg>' +
 			'	</div>' +
+			'	<svg class="animations-tube" aria-labelledby="title5" viewBox="0 0 286 66">' +
+			'		<title id="title5" lang="en">Rescue tube</title>' +
+			'		<use xlink:href="#tube"></use>' +
+			'	</svg>' +
 			'</div>';
 
 		$('.js-header').append(HTML);
