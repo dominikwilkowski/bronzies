@@ -47,7 +47,7 @@
 		position absolute
 		height 35px
 		width 35px
-		left 55%
+		left 300px
 		bottom -60px
 
 		.animations-ball
@@ -82,6 +82,45 @@
 				tube-throw-up 1.5s cubic-bezier(0, 0, 0, 1.15) forwards,
 				tube-throw-down 1.5s 1.4s cubic-bezier(0.9, 0.04, 1, 0.9) forwards,
 				tube-perspective 3s ease-out forwards
+
+
+	//water
+	.animations-water
+		background url(../img/water.png) repeat-x
+		background-size 304px 10px
+		background-position-x 0
+		position absolute
+		height 400px
+		width 100%
+		top 40px
+		opacity 0.7
+		pointer-events none
+
+		.animations-water-fish
+			position absolute
+			width 20px
+			height auto
+			top 180px
+			left 18%
+
+		.has-animated-water&
+			animation: water-rising 15s cubic-bezier(0.42, 0, 0.9, 0.58) forwards,
+				water-rising 5s 45s 1 reverse cubic-bezier(0.42, 0, 0.9, 0.58) forwards
+
+			.animations-water-fish
+				animation: water-fish 20s 20s ease-in forwards
+
+
+	//IRB
+	.animations-irb
+		position absolute
+		height 25px
+		width auto
+		left -80px
+		bottom 0
+
+		.has-animated-irb&
+			animation: irb 15s linear
 
 
 //shark
@@ -174,14 +213,14 @@ bottom = -26px
 
 @keyframes ball-move
 	from
-		left 55%
+		left 300px
 		bottom -60px
 
 	2%
 		bottom 0
 
 	to
-		left -35px
+		left -45px
 		bottom 0
 
 @keyframes ball-jump
@@ -227,3 +266,64 @@ bottom = -26px
 
 	to
 		width 80px
+
+
+//water
+@keyframes water-rising
+	from
+		background-size 304px 0px
+		transform rotate(-1deg)
+		top 40px
+		background-position-x 0
+
+	25%
+		transform rotate(1deg)
+
+	40%
+		transform rotate(-0.5deg)
+		background-size 304px 50px
+
+	60%
+		transform rotate(0deg)
+
+	to
+		top -140px
+		transform rotate(0deg)
+		background-size 304px 750px
+		background-position-x -1000px
+
+@keyframes water-fish
+	from
+		top 180px
+		left 18%
+
+	30%
+		top 140px
+
+	50%
+		top 150px
+
+	70%
+		top 140px
+
+	to
+		top 180px
+		left 110%
+
+
+//IRB
+@keyframes irb
+	from
+		left -80px
+		transform rotate(0deg)
+
+	70%
+		left 30%
+		transform rotate(0deg)
+
+	75%
+		transform rotate(-7deg)
+
+	to
+		left 105%
+		transform rotate(-7deg)

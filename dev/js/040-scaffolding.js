@@ -125,24 +125,46 @@
 			'		<title id="title1" lang="en">Shark fin</title>' +
 			'		<use xlink:href="#shark"></use>' +
 			'	</svg>' +
-			'	<svg class="animations-flags animations-flag1" aria-labelledby="title2" viewBox="0 0 100 202">' +
-			'		<title id="title2" lang="en">Beach flag</title>' +
+			'	<svg class="animations-flags animations-flag1" aria-labelledby="title-flag1" viewBox="0 0 100 202">' +
+			'		<title id="title-flag1" lang="en">Beach flag</title>' +
 			'		<use xlink:href="#flag1"></use>' +
 			'	</svg>' +
-			'	<svg class="animations-flags animations-flag2" aria-labelledby="title3" viewBox="0 0 74 223">' +
-			'		<title id="title3" lang="en">Beach flag</title>' +
+			'	<svg class="animations-flags animations-flag2" aria-labelledby="title-flag2" viewBox="0 0 74 223">' +
+			'		<title id="title-flag2" lang="en">Beach flag</title>' +
 			'		<use xlink:href="#flag2"></use>' +
 			'	</svg>' +
 			'	<div class="animations-ball-wrapper">' +
-			'		<svg class="animations-ball" aria-labelledby="title4" viewBox="0 0 180 183">' +
-			'			<title id="title4" lang="en">Ball</title>' +
+			'		<svg class="animations-ball" aria-labelledby="title-ball" viewBox="0 0 180 183">' +
+			'			<title id="title-ball" lang="en">Ball</title>' +
 			'			<use xlink:href="#ball"></use>' +
 			'		</svg>' +
 			'	</div>' +
-			'	<svg class="animations-tube" aria-labelledby="title5" viewBox="0 0 286 66">' +
-			'		<title id="title5" lang="en">Rescue tube</title>' +
+			'	<svg class="animations-tube" aria-labelledby="title-tube" viewBox="0 0 286 66">' +
+			'		<title id="title-tube" lang="en">Rescue tube</title>' +
 			'		<use xlink:href="#tube"></use>' +
 			'	</svg>' +
+			'	<svg class="animations-irb" aria-labelledby="title-irb" viewBox="0 0 386.4 146.4">' +
+			'		<title id="title-irb" lang="en">IRB</title>' +
+			'		<use xlink:href="#irb"></use>' +
+			'	</svg>' +
+			'	<div class="animations-water">' +
+			'		<svg class="animations-water-bubble" aria-labelledby="title-bubble" viewBox="0 0 180 183">' +
+			'			<title id="title-bubble" lang="en">bubble</title>' +
+			'			<use xlink:href="#bubble"></use>' +
+			'		</svg>' +
+			'		<svg class="animations-water-bubble" aria-labelledby="title-bubble" viewBox="0 0 180 183">' +
+			'			<title id="title-bubble" lang="en">bubble</title>' +
+			'			<use xlink:href="#bubble"></use>' +
+			'		</svg>' +
+			'		<svg class="animations-water-bubble" aria-labelledby="title-bubble" viewBox="0 0 180 183">' +
+			'			<title id="title-bubble" lang="en">bubble</title>' +
+			'			<use xlink:href="#bubble"></use>' +
+			'		</svg>' +
+			'		<svg class="animations-water-fish" aria-labelledby="title-fish" viewBox="0 0 244.1 159.3">' +
+			'			<title id="title-fish" lang="en">fish</title>' +
+			'			<use xlink:href="#fish"></use>' +
+			'		</svg>' +
+			'	</div>' +
 			'</div>';
 
 		$('.js-header').append(HTML);
