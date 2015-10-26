@@ -63,7 +63,7 @@
 				ball-move 6s ease-out forwards
 
 			.animations-ball
-				animation: ball-jump 0.4s infinite cubic-bezier(0.05, 0.51, 0.57, 0.85) alternate,
+				animation ball-jump 0.4s infinite cubic-bezier(0.05, 0.51, 0.57, 0.85) alternate,
 					ball-rotation 6s infinite linear
 
 
@@ -77,7 +77,7 @@
 		bottom -80px
 
 		.has-animated-tube&
-			animation: tube-move 3s ease-out forwards,
+			animation tube-move 3s ease-out forwards,
 				tube-rotation 3s ease-in forwards,
 				tube-throw-up 1.5s cubic-bezier(0, 0, 0, 1.15) forwards,
 				tube-throw-down 1.5s 1.4s cubic-bezier(0.9, 0.04, 1, 0.9) forwards,
@@ -86,8 +86,8 @@
 
 	//water
 	.animations-water
-		background url(../img/water.png) repeat-x
-		background-size 304px 10px
+		background url(../img/water.svg) repeat-x
+		background-size 10px 10px
 		background-position-x 0
 		position absolute
 		height 400px
@@ -104,11 +104,10 @@
 			left 18%
 
 		.has-animated-water&
-			animation: water-rising 15s cubic-bezier(0.42, 0, 0.9, 0.58) forwards,
-				water-rising 5s 45s 1 reverse cubic-bezier(0.42, 0, 0.9, 0.58) forwards
+			animation water-filling 50s cubic-bezier(0.42, 0, 0.9, 0.58)
 
 			.animations-water-fish
-				animation: water-fish 20s 20s ease-in forwards
+				animation water-fish 20s 20s ease-in forwards
 
 
 	//IRB
@@ -120,7 +119,7 @@
 		bottom 0
 
 		.has-animated-irb&
-			animation: irb 15s linear
+			animation irb 15s linear
 
 
 //shark
@@ -269,28 +268,49 @@ bottom = -26px
 
 
 //water
-@keyframes water-rising
+@keyframes water-filling
 	from
-		background-size 304px 0px
+		background-size 10px 10px
 		transform rotate(-1deg)
 		top 40px
-		background-position-x 0
+		// background-position-x 100%
 
-	25%
+	5%
 		transform rotate(1deg)
 
-	40%
+	8%
 		transform rotate(-0.5deg)
-		background-size 304px 50px
+		background-size 50px 50px
 
-	60%
+	12%
 		transform rotate(0deg)
+
+	20%
+		top -140px
+		background-size 750px 750px
+		// background-position-x 200%
+
+
+	90%
+		top -140px
+		background-size 750px 750px
+		// background-position-x 200%
+
+	94%
+		transform rotate(0deg)
+
+	96%
+		transform rotate(-0.5deg)
+
+	97.5%
+		transform rotate(1deg)
 
 	to
-		top -140px
-		transform rotate(0deg)
-		background-size 304px 750px
-		background-position-x -1000px
+		background-size 10px 10px
+		transform rotate(-1deg)
+		top 40px
+		// background-position-x 400%
+
 
 @keyframes water-fish
 	from

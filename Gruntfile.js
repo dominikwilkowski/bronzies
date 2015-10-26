@@ -191,6 +191,15 @@ module.exports = function(grunt) {
 				}],
 			},
 
+			//svgs
+			Fonts: {
+				files: [{
+					cwd: 'dev/img',
+					src: ['**/*.svg'],
+					dest: ['prod/img/'],
+				}],
+			},
+
 			//html template
 			Templates: {
 				files: [{

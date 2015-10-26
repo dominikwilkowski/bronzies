@@ -47,10 +47,12 @@
 				'	<button class="js-switchview switch">' +
 				'		<span class="switch-toggle">Switch view</span>' +
 				'	</button>' +
-				'	<svg class="logo-img" aria-labelledby="title" itemscope itemtype="http://schema.org/Organization" viewBox="0 0 85 85">' +
-				'		<title id="title" lang="en">SLSA logo</title>' +
-				'		<use xlink:href="#logo"></use>' +
-				'	</svg>' +
+				'	<a href="?" class="js-logo">' +
+				'		<svg class="logo-img" aria-labelledby="title" itemscope itemtype="http://schema.org/Organization" viewBox="0 0 85 85">' +
+				'			<title id="title" lang="en">SLSA logo</title>' +
+				'			<use xlink:href="#logo"></use>' +
+				'		</svg>' +
+				'	</a>' +
 				'	<button class="js-highscore highscore-link">' +
 				'		<svg class="highscore-link-svg" aria-labelledby="title" viewBox="0 0 50 50">' +
 				'			<title id="title" lang="en">Highscore</title>' +
