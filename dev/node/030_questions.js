@@ -24,12 +24,11 @@
 	module.get = function( req, res, next ) {
 		App.debugging( 'Questions requested', 'interaction' );
 
-		questionsDB.find({}, {}, function(error, docs) {
+		questionsDB.find({}, function(error, docs) {
 			if( error || !docs ) {
 				App.debugging( 'Questions DB find error with: ' + error, 'error' );
 			}
 			else {
-
 				App.debugging( 'Got questions from DB', 'report' );
 
 				var questions = docs;

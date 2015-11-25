@@ -7,34 +7,6 @@ bronzies.com
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## Run this repo
-
-### MAC
-2. Download [NodeJS](http://nodejs.org/) and install on your computer.
-2. Run `npm install npm -g` to update to the newest NPM version.
-2. Run `npm install -g grunt-cli` to install grunt globally (You might need to install the xCode command line tools)
-
-### PC
-3. Download [NodeJS](http://nodejs.org/) and install on your computer.
-3. Run `npm install npm -g` to update to the newest NPM version.
-3. Run `npm install -g grunt-cli` to install grunt globally
-
-
-### Both
-
-After that, download, unzip, `cd` into the folder and install all dependencies:
-
-4. [Download this repo](https://github.com/dominikwilkowski/bronze/archive/master.zip) and unpack it into a folder of your choice.
-4. CD into the folder `cd /Users/USERNAME/Sites/THISPROJECT`
-4. Run `npm install` to install all dependencies.
-
-5. Run  `node api.min.js` in the `prod/node/` folder to run the RESTful API
-5. Run `grunt` for the watch
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 ## RESTful API endpoints
 
 *GET questions*
@@ -63,7 +35,54 @@ _The newly added entry will have an aditional key to id it: `justadded: true`_
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+## Run the build
+
+```shell
+npm i
+grunt
+```
+
+## Run web app
+
+Navigate your browser to the `dev/` folder.
+
+## Run the server
+
+*Run mongoDB*
+
+```shell
+mongod
+```
+
+*Run RESTful API*
+
+```shell
+node prod/node/api.min.js
+```
+
+## Run the cordova build
+
+```shell
+cordova create app com.bronzies.app Bronzies
+cd app
+cordova platform add ios
+cordova plugin add cordova-plugin-transport-security
+cordova plugin add cordova-plugin-statusbar
+```
+
+run grunt to move all appropriate files into their folders
+
+```shell
+grunt
+cordova run ios
+```
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 # Release History App
+* 0.1.4 - Added cordova build
 * 0.1.3 - Fixed CSS and highscore issues
 * 0.1.2 - Added basic layout for first alpha tests
 * 0.1.1 - Changes to API endpoint, fixes
