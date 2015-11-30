@@ -10,9 +10,9 @@
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// private function: shuffle an array
 	//
-	// array  array  Array to be shuffled
+	// array  [array]  Array to be shuffled
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function shuffle(array) {
+	function shuffle( array ) {
 		var currentIndex = array.length;
 		var temporaryValue;
 		var randomIndex;
@@ -35,10 +35,36 @@
 
 
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	// private function: limit answers
+	//
+	// array  [array]  Array of answers to be limited
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function limit( answers ) {
+		var answerCount = 0;
+
+		var newAnswers = [];
+
+		$.each(answers, function( index, question ) {
+			if( question._id !== App.CORRECT && answerCount < ( App.ANSWERS - 1 ) ) { //get wrong answers to mix in
+				newAnswers.push( question );
+
+				answerCount++;
+			}
+
+			if( question._id === App.CORRECT ) { //add correct answer
+				newAnswers.push( question );
+			}
+		});
+
+		return newAnswers;
+	}
+
+
+	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// private function: render question HTML
 	//
-	// item    object  Question object
-	// option  string  Option to display the object as either text or image: image,text
+	// item    [object]  Question object
+	// option  [string]  Option to display the object as either text or image: image,text
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function renderView( item, option ) {
 		var result = '';
@@ -61,8 +87,8 @@
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// get questions from REST API or localStorage
 	//
-	// background  boolen    Is this to be done in the background?
-	// callback    function  Callback function
+	// background  [boolen]    Is this to be done in the background?
+	// callback    [function]  Callback function
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.get = function( background, callback ) {
 		App.debugging('Getting questions' + ( background ? ' in the background' : '' ), 'report');
@@ -179,23 +205,26 @@
 			var AllQuestions = shuffle( store.get('questions') );
 
 			//determine the view
-			var question = App.VIEW === 'P2T' ? 'image' : 'text';
-			var answer = App.VIEW === 'P2T' ? 'text' : 'image';
+			var questionView = App.VIEW === 'P2T' ? 'image' : 'text';
+			var answerView = App.VIEW === 'P2T' ? 'text' : 'image';
 
 			//pick a question from this round
 			App.PICK = Math.floor( Math.random() * questionRound.length );
 			App.CORRECT = questionRound[ App.PICK ]._id;
 			App.PICKTEXT = questionRound[ App.PICK ].text
 
-			var questionHTML = renderView( questionRound[ App.PICK ], question );
+			//limit answers
+			var LimitedQuestions = shuffle( limit( AllQuestions ) );
+
+			var questionHTML = renderView( questionRound[ App.PICK ], questionView );
 			$('.js-question').html( questionHTML );
 
 			//render all answers
 			var answerHTML = '';
 
-			$.each(AllQuestions, function( index, question ) {
+			$.each(LimitedQuestions, function( index, question ) {
 				answerHTML += '<li class="answers-item">' +
-					'	<button class="js-answer answer" data-id="' + question._id + '">' + renderView( question, answer ) + '</button>' +
+					'	<button class="js-answer answer" data-id="' + question._id + '">' + renderView( question, answerView ) + '</button>' +
 					'	<button class="js-next next is-offcanvas"><span class="next-text">Next question</span></button>' +
 					'</li>';
 			});
@@ -209,7 +238,7 @@
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// click an answer
 	//
-	// $this  jQuery-object  DOM node of answer clicked on
+	// $this  [jQuery-object]  DOM node of answer clicked on
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	module.answer = function( $this ) {
 		App.debugging('Executing answer', 'report');

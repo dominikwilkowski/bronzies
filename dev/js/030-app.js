@@ -27,6 +27,7 @@ var App = (function() {
 		YAYS: 0, //correct answer count
 		NAYS: 0, //wrong answer count
 		WRONGS: {}, //wrong answers
+		ANSWERS: 5, //amount of answers to be shown
 
 
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------

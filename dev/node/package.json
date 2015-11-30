@@ -5,9 +5,9 @@
 	"devDependencies": {
 		"cfonts": "^0.0.10",
 		"chalk": "^0.5.1",
-		"mongodb": "^1.4.30",
-		"mongojs": "^0.18.1",
-		"restify": "^2.8.4",
+		"mongodb": "^2.0.47",
+		"mongojs": "^1.4.1",
+		"restify": "^4.0.3",
 		"sanitizer": "^0.1.2"
 	}
 }
