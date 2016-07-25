@@ -12,19 +12,19 @@ bronzies.com
 *GET questions*
 
 ```
-http://bronzies.com:5555/questions
+https://bronzies.com/api/questions
 ```
 
 *GET highscore*
 
 ```
-http://bronzies.com:5555/highscore
+https://bronzies.com/api/highscore
 ```
 
 *POST highscore*
 
 ```
-http://bronzies.com:5555/highscore
+https://bronzies.com/api/highscore
 ```
 
 _The newly added entry will have an aditional key to id it: `justadded: true`_
@@ -60,21 +60,38 @@ mongod
 node prod/node/api.min.js
 ```
 
-## Run the cordova build
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+## Install on server
+
+The API runs behind an [NGINX proxy](https://github.com/dominikwilkowski/bronzies/blob/master/bronzies.com).
+In case the server has to reboot we need a way to start it up so let's create a cron task:
+
+### CRON task
+
+To make sure the blender is started when the system has to reboot, make sure you add a cron task after reboot:
 
 ```shell
-cordova create app com.bronzies.app Bronzies
-cd app
-cordova platform add ios
-cordova plugin add cordova-plugin-transport-security
-cordova plugin add cordova-plugin-statusbar
+chmod 700 /www/bronzies/node/starter.sh #the starter.sh of this repo
+crontab -e
 ```
 
-run grunt to move all appropriate files into their folders
+and add:
 
 ```shell
-grunt
-cordova run ios
+@reboot /www/bronzies/node/starter.sh
+```
+
+### FOREVER node deamon
+
+Now we still have to make sure the node app is restarted if it crashes for some uncaught reason. Install [forever](https://github.com/foreverjs/forever) and
+register the task:
+
+```shell
+npm i forever -g
+forever start -l blender.log --append -o blenderOut.log -e blenderError.log server.js
 ```
 
 
@@ -82,6 +99,7 @@ cordova run ios
 
 
 # Release History App
+* 0.1.5 - Removed cordova build, changed endpoints
 * 0.1.4 - Added cordova build
 * 0.1.3 - Fixed CSS and highscore issues
 * 0.1.2 - Added basic layout for first alpha tests
@@ -90,5 +108,6 @@ cordova run ios
 * 0.0.3 - Moved an old version into the repo and developed the RESTful API
 
 # Release History RestAPI
+* 0.0.3 - fixed dependencies, changed endpoints
 * 0.0.2 - moved to MongoDB
 * 0.0.1 - Created server, routes and endpoints

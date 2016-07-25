@@ -5,6 +5,7 @@ module.exports = function(grunt) {
 	//dependencies
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-includes');
 	grunt.loadNpmTasks('grunt-text-replace');
@@ -17,6 +18,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-bumpup');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-wakeup');
+	// grunt.loadNpmTasks('grunt-svg2storeicons');
 
 
 	grunt.initConfig({
@@ -109,6 +111,18 @@ module.exports = function(grunt) {
 
 
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		// JS concat
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		concat: {
+			node: {
+				files: {
+					'prod/node/api.js': ['dev/node/*.js', '!dev/node/node_modules/**/*'],
+				},
+			},
+		},
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		// minify svgs
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		svgmin: {
@@ -121,6 +135,21 @@ module.exports = function(grunt) {
 				}],
 			},
 		},
+
+
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		// svg2storeicons
+		//----------------------------------------------------------------------------------------------------------------------------------------------------------
+		// svg2storeicons: {
+		// 	icons: {
+		// 		options: {
+		// 			profiles: ['default', 'ios', 'android'],
+		// 		},
+
+		// 		src: 'dev/res/svg/icon.svg',
+		// 		dest: 'app/res',
+		// 	},
+		// },
 
 
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -213,7 +242,12 @@ module.exports = function(grunt) {
 			Node: {
 				files: [{
 					cwd: 'dev/node/node_modules',
-					src: ['**/*', '../package.json'],
+					src: [
+						'**/*',
+						'../package.json',
+						'../local.crt',
+						'../local.key',
+					],
 					dest: ['prod/node/node_modules/'],
 				}],
 			},
@@ -226,6 +260,43 @@ module.exports = function(grunt) {
 					dest: ['prod/json/'],
 				}],
 			},
+
+			//cordova files
+			// cordova: {
+			// 	options: {
+			// 		ignore: [
+			// 			'prod/node/{,/**/*}',
+			// 			'prod/node',
+			// 			'dev/res/svg/{,/**/*}',
+			// 			'dev/res/svg',
+			// 		],
+			// 	},
+			// 	files: [{
+			// 		cwd: 'prod/',
+			// 		src: [
+			// 			'**/*',
+			// 			'dev/res/**/*',
+			// 		],
+			// 		dest: 'app/www/',
+			// 	}],
+			// },
+
+			//icons
+			// icons: {
+			// 	options: {
+			// 		ignore: [
+			// 			'dev/res/svg/{,/**/*}',
+			// 			'dev/res/svg',
+			// 		],
+			// 	},
+			// 	files: [{
+			// 		cwd: 'dev/res/',
+			// 		src: [
+			// 			'**/*',
+			// 		],
+			// 		dest: 'app/www/',
+			// 	}],
+			// },
 		},
 
 
@@ -243,6 +314,7 @@ module.exports = function(grunt) {
 		wakeup: {
 			wakeme: {
 				randomize: true,
+				notifications: true,
 			},
 		},
 
@@ -264,10 +336,6 @@ module.exports = function(grunt) {
 		// watch for changes
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
 		watch: {
-			options: {
-				livereload: true,
-			},
-
 			All: {
 				files: [
 					'dev/**/*',
@@ -294,7 +362,9 @@ module.exports = function(grunt) {
 		'stylus',
 		'autoprefixer',
 		'uglify',
+		'concat',
 		'svgmin',
+		// 'svg2storeicons',
 		'grunticon',
 		'imagemin',
 		'copyto',

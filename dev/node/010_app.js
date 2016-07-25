@@ -41,10 +41,10 @@ var App = (function() {
 
 
 			//routes
-			server.get( '/highscore', App.highscore.get ); //highscore routes
-			server.post( '/highscore', App.highscore.post );
+			server.get( '/api/highscore', App.highscore.get ); //highscore routes
+			server.post( '/api/highscore', App.highscore.post );
 
-			server.get('/questions', App.questions.get); //question routes
+			server.get('/api/questions', App.questions.get); //question routes
 
 			App.debugging( 'Routes established', 'report' );
 
@@ -54,14 +54,19 @@ var App = (function() {
 
 				console.log("\n\n");
 
-				var fonts = new CFONTS({
-					'text': '  Bronzies',
-					'colors': ['red', 'yellow'],
-					'letterSpacing': 0,
-					'space': false
+				CFONTS.say('Bronzies', {
+					colors: ['red', 'yellow'],
+					letterSpacing: 0,
+					align: 'center',
+					space: false,
 				});
 
-				console.log( "\n" + '      ' + chalk.white.bgBlue.bold('    ' + server.name + ' listening at ' + server.url + '     ') + "\n\n" );
+				CFONTS.say( server.name + ' listening at ' + server.url, {
+					font: 'console',
+					colors: ['white'],
+					letterSpacing: 0,
+					align: 'center',
+				});
 
 				App.debugging( 'Server started', 'report' );
 			});

@@ -13,9 +13,9 @@ var App = (function() {
 	// settings
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	return {
-		QUESTIONGET: 'http://bronzies.com:5555/questions', //REST URL for getting questions
-		HIGHSCOREGET: 'http://bronzies.com:5555/highscore', //REST URL for getting highscore
-		HIGHSCOREPOST: 'http://bronzies.com:5555/highscore', //REST URL for posting highscore
+		QUESTIONGET: 'https://bronzies.com/api/questions', //REST URL for getting questions
+		HIGHSCOREGET: 'https://bronzies.com/api/highscore', //REST URL for getting highscore
+		HIGHSCOREPOST: 'https://bronzies.com/api/highscore', //REST URL for posting highscore
 		TIMEOUT: 7000, //Ajax timeout
 
 		DEBUG: true, //debugging infos
