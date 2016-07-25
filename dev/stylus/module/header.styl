@@ -7,145 +7,311 @@
 
 .header-wrapper
 	overflow hidden
-	padding 10px
+	padding 26px 12px 18px 12px
 	position relative
+	text-align center
+	border-bottom 1px solid Color-border
+	position fixed
+	left 0
+	right 0
+	top 0
+	height 69px
+	font-size 0
+	z-index 100
+	background url(../img/background.png) repeat-x
+	transition top 0.4s ease, box-shadow 0.4s ease
 
-	//menu button
-	.header-menu
-		text-indent -9999em
-		overflow hidden
+	.is-scrolled &
+		top -65px
+		box-shadow 0 2px 5px rgba(0, 0, 0, 0.1)
+
+
+	//switch
+	.switch
+		-webkit-appearance none
 		appearance none
 		border 0 none
-		background transparent
-		padding 4px 10px 10px 10px
+		background-color #fff
+		border-radius 20px
+		width 50px
+		height 12px
+		font-size 0
+		color transparent
+		padding 0
+		margin 18px 0
+		text-indent -99999em
+		position relative
 		float left
+		opacity 1
+		transition opacity 0.2s ease
+
+		.is-scrolled &
+			opacity 0
+
+		&:after
+			content ' '
+			position absolute
+			top -24px
+			right -24px
+			bottom -24px
+			left -24px
+
 		&:focus
 			outline none
 
-		.header-button-l
-			background-color Color-secondary
+		.switch-toggle
 			display block
-			height 4px
-			margin -10px 0 15px 0
-			width 40px
+			position absolute
+			top -6px
+			left 24px
+			width 24px
+			height 24px
+			margin-left -24px
+			border-radius 50%
+			background-color Color-primary
+			transition left 0.4s ease, background 0.4s ease
 
-	//menu
-	.menu
-		list-style none
-		padding 0
-		margin 0
-		position absolute
-		top 55px
-		left 15px
-		transition opacity 0.4s ease
-		background-color #fff
-		float left
-		&.is-invisible
-			pointer-events none
+		&.is-t2p
+			.switch-toggle
+				left 100%
+				background-color Color-tertiary
 
-		.menu-link
-			width 100%
-			padding 10px 20px
-			appearance none
-			border 2px Color-secondary solid
-			border-top none
-			background transparent
-			text-align left
 
 	//logo
-	.logo
-		margin 0
-		text-align center
-		overflow hidden
-		margin-top 7px
-
 	.logo-img
+		margin 0
 		max-width 50px
-		float right
+		opacity 1
+		transition opacity 0.2s ease
 
-	//second header line
-	.header
-		list-style none
+		.is-scrolled &
+			opacity 0
+
+
+	//highscore link
+	.highscore-link
+		float right
+		width 50px
+		height 50px
+		text-align right
+		clear right
+		text-indent -999em
+		overflow hidden
+		-webkit-appearance none
+		appearance none
 		padding 0
 		margin 0
-		overflow hidden
-		width 100%
-		li
-			display inline
+		background transparent
+		border 0 none
+		opacity 1
+		transition opacity 0.2s ease
 
-		.nav-view
-			padding 16px 14px 12px 14px
+		.is-scrolled &
+			opacity 0
 
-		//score
-		.score
-			float right
+		&:focus
+			outline none
 
-			.score-text
-			.score-count
-				font-weight 400
-				font-size 20px
-				float left
-				margin 12px 5px 0 0
+		.highscore-link-svg
+			height 34px
+			width auto
+			margin 8px -9px 0 0
 
-			.score-yaynays
-				overflow hidden
-				float right
-				margin-left 10px
-				.score-yay
-				.score-nay
-					padding 5px
-					font-size 11px
-					display block
-					background-color Color-primary
-				.score-yay
-					background-color green
 
 	//progress
 	.progress-wrapper
-		padding 10px
-		border-bottom #b5b5b5 1px solid
-		overflow hidden
+		width 100%
+		white-space nowrap
+		position relative
+		height 18px
+		margin-top 0
+		transition margin 0.3s ease
+
+		.is-scrolled &
+			height 6px
+			margin-top 10px
 
 		.progress-title
-			float left
-			font-size 11px
-			margin-top 4px
+			font-size 0
+			color transparent
+			position absolute
+			width 1px
+			height 1px
+			overflow hidden
 
 		.progress
 			list-style none
-			text-align justify
-			margin 0 0 -20px 0
-			padding 0 0 0 5px
-			overflow hidden
+			margin 0
+			padding 0
+			display flex
+			position absolute
+			left 0
+			right 37px
+			top 0
 
-			&:after
-				content " "
+			.progress-step
 				display inline-block
-				width 100%
-				height 0
-				overflow hidden
+				flex 1
+				height 18px
+				position relative
 
-			& > .progress-step
-				display inline-block
+				.is-scrolled &
+					height 6px
+					margin 0 2px
 
-				.progress-step-dot
-					text-indent -999em;
+				&-dot
+					text-indent -999em
 					overflow hidden
 					border-radius 50%
-					background-color #000
-					width 5px
-					height 5px
-					margin 0 2px
+					background-color #fff
+					border 1px solid Color-background
+					width 6px
+					height 6px
+					margin 5px 0
 					display block
-					transition border, background 0.3s ease
+					transition all 0.3s ease
+
+					.is-scrolled &
+						margin 0
+						border-radius 0
+						height 0
+						width 100%
 
 				&.is-active
+					.is-scrolled &
+						margin 0 3px 0 1px
+
 					.progress-step-dot
-						background-color #fff
-						border 1px #000 solid
+						border-width 3px
+						height 2px
+						width 2px
+
+						.is-scrolled &
+							width 100%
+							height 0
+							border-width 2px
+
 				&.is-wrong
 					.progress-step-dot
-						background-color Color-primary
+						border-color Color-primary
+
 				&.is-right
 					.progress-step-dot
-						background-color green
+						border-color Color-correct
+
+		.progress-flag
+			position absolute
+			top -13px
+			left 3px
+			width auto
+			height 52px
+			pointer-events none
+			animation-fill-mode both
+
+			&.progress-flag-start
+				animation progressflagsstart 1.4s 5s, fade 0.6s 8s forwards
+
+			&.progress-flag-end
+				left -20px
+				animation progressflagsend 1.4s 6s, fade 0.6s 9s forwards
+
+
+	//score
+	.score
+		position absolute
+		right 0
+		top 0
+		width 37px
+		height 18px
+		text-align right
+		line-height 1
+
+		.score-count
+			display inline-block
+			font-weight 400
+			font-size 18px
+			margin 0
+			transition color 0.4s ease
+
+			.is-scrolled &
+				font-size 16px
+
+			&.is-negative
+				color red
+
+			&.is-positive
+				color #000
+
+		.score-yaynays
+			display none
+
+
+//animations
+height = 52px
+top = -13px
+
+@keyframes progressflagsstart
+	from
+		height height
+		top top
+
+	10%, 20%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height - 5px
+		top top + 5
+
+	30%, 50%, 70%, 90%
+		transform rotate3d(0, 0, 1, 3deg)
+		height height + 20px
+		top top - 20px
+
+	40%, 60%, 80%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height + 20px
+		top top - 20px
+
+	to
+		height height
+		top top
+
+
+height = 52px
+top = -13px
+left = -20px
+
+@keyframes progressflagsend
+	from
+		height height
+		top top
+		left left
+
+	10%, 20%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height - 5px
+		top top + 5
+		left left + 5
+
+	30%, 50%, 70%, 90%
+		transform rotate3d(0, 0, 1, 3deg)
+		height height + 20px
+		top top - 20px
+		left left - 20px
+
+	40%, 60%, 80%
+		transform rotate3d(0, 0, 1, -3deg)
+		height height + 20px
+		top top - 20px
+		left left - 20px
+
+	to
+		height height
+		top top
+		left left
+
+
+@keyframes fade
+	from
+		opacity 1
+
+	to
+		opacity 0

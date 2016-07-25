@@ -7,52 +7,24 @@ bronzies.com
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-## Run this repo
-
-### MAC
-2. Download [NodeJS](http://nodejs.org/) and install on your computer.
-2. Run `npm install npm -g` to update to the newest NPM version.
-2. Run `npm install -g grunt-cli` to install grunt globally (You might need to install the xCode command line tools)
-
-### PC
-3. Download [NodeJS](http://nodejs.org/) and install on your computer.
-3. Run `npm install npm -g` to update to the newest NPM version.
-3. Run `npm install -g grunt-cli` to install grunt globally
-
-
-### Both
-
-After that, download, unzip, `cd` into the folder and install all dependencies:
-
-4. [Download this repo](https://github.com/dominikwilkowski/bronze/archive/master.zip) and unpack it into a folder of your choice.
-4. CD into the folder `cd /Users/USERNAME/Sites/THISPROJECT`
-4. Run `npm install` to install all dependencies.
-
-5. Run  `node api.min.js` in the `prod/node/` folder to run the RESTful API
-5. Run `grunt` for the watch
-
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 ## RESTful API endpoints
 
 *GET questions*
 
 ```
-http://bronzies.com:5555/questions
+https://bronzies.com/api/questions
 ```
 
 *GET highscore*
 
 ```
-http://bronzies.com:5555/highscore
+https://bronzies.com/api/highscore
 ```
 
 *POST highscore*
 
 ```
-http://bronzies.com:5555/highscore
+https://bronzies.com/api/highscore
 ```
 
 _The newly added entry will have an aditional key to id it: `justadded: true`_
@@ -63,7 +35,72 @@ _The newly added entry will have an aditional key to id it: `justadded: true`_
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+## Run the build
+
+```shell
+npm i
+grunt
+```
+
+## Run web app
+
+Navigate your browser to the `dev/` folder.
+
+## Run the server
+
+*Run mongoDB*
+
+```shell
+mongod
+```
+
+*Run RESTful API*
+
+```shell
+node prod/node/api.min.js
+```
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+## Install on server
+
+The API runs behind an [NGINX proxy](https://github.com/dominikwilkowski/bronzies/blob/master/bronzies.com).
+In case the server has to reboot we need a way to start it up so let's create a cron task:
+
+### CRON task
+
+To make sure the blender is started when the system has to reboot, make sure you add a cron task after reboot:
+
+```shell
+chmod 700 /www/bronzies/node/starter.sh #the starter.sh of this repo
+crontab -e
+```
+
+and add:
+
+```shell
+@reboot /www/bronzies/node/starter.sh
+```
+
+### FOREVER node deamon
+
+Now we still have to make sure the node app is restarted if it crashes for some uncaught reason. Install [forever](https://github.com/foreverjs/forever) and
+register the task:
+
+```shell
+npm i forever -g
+forever start -l blender.log --append -o blenderOut.log -e blenderError.log server.js
+```
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 # Release History App
+* 0.1.5 - Removed cordova build, changed endpoints
+* 0.1.4 - Added cordova build
 * 0.1.3 - Fixed CSS and highscore issues
 * 0.1.2 - Added basic layout for first alpha tests
 * 0.1.1 - Changes to API endpoint, fixes
@@ -71,5 +108,6 @@ _The newly added entry will have an aditional key to id it: `justadded: true`_
 * 0.0.3 - Moved an old version into the repo and developed the RESTful API
 
 # Release History RestAPI
+* 0.0.3 - fixed dependencies, changed endpoints
 * 0.0.2 - moved to MongoDB
 * 0.0.1 - Created server, routes and endpoints

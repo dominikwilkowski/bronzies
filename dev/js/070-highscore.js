@@ -53,7 +53,7 @@
 		App.debugging('Initiating highscore', 'report');
 
 		App.scaffold.highscore();
-		App.scaffold.about();
+		// App.scaffold.about();
 		App.progress.draw();
 
 
@@ -78,11 +78,11 @@
 
 
 		//click about button
-		$('.js-body').on('click', '.js-about', function() {
-			App.debugging('About button clicked', 'interaction');
+		// $('.js-body').on('click', '.js-about', function() {
+		// 	App.debugging('About button clicked', 'interaction');
 
-			App.popup.open( 'about', true );
-		});
+		// 	App.popup.open( 'about', true );
+		// });
 
 
 		//submit new highscore
@@ -210,11 +210,16 @@
 		App.debugging('Updating highscore', 'report');
 
 		var score = App.YAYS - App.NAYS; //simple enough, try to cheat THAT!
+		var state = score > 0 ? 'is-positive' : 'is-negative';
 
 		//update score in header
 		$('.js-scoreyay').text( App.YAYS );
 		$('.js-scorenay').text( App.NAYS );
-		$('.js-score').text( score );
+		$('.js-score')
+			.text( score )
+			.removeClass('is-positive')
+			.removeClass('is-negative')
+			.addClass( state );
 
 		//update score in form
 		$('.js-form-nays').val( App.NAYS );

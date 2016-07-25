@@ -13,9 +13,9 @@ var App = (function() {
 	// settings
 	//------------------------------------------------------------------------------------------------------------------------------------------------------------
 	return {
-		QUESTIONGET: 'http://bronzies.com:5555/questions', //REST URL for getting questions
-		HIGHSCOREGET: 'http://bronzies.com:5555/highscore', //REST URL for getting highscore
-		HIGHSCOREPOST: 'http://bronzies.com:5555/highscore', //REST URL for posting highscore
+		QUESTIONGET: 'https://bronzies.com/api/questions', //REST URL for getting questions
+		HIGHSCOREGET: 'https://bronzies.com/api/highscore', //REST URL for getting highscore
+		HIGHSCOREPOST: 'https://bronzies.com/api/highscore', //REST URL for posting highscore
 		TIMEOUT: 7000, //Ajax timeout
 
 		DEBUG: true, //debugging infos
@@ -27,6 +27,7 @@ var App = (function() {
 		YAYS: 0, //correct answer count
 		NAYS: 0, //wrong answer count
 		WRONGS: {}, //wrong answers
+		ANSWERS: 5, //amount of answers to be shown
 
 
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,7 +53,38 @@ var App = (function() {
 
 			});
 
-			App.questions.init(); //start the app
+			App.scaffold.playground();
+			App.popup.init();
+			App.scroll.init();
+			App.questions.get( false, function() {
+				App.highscore.init();
+				App.questions.draw();
+				App.questions.get( true ); //load new questions in the background to keep this app updated
+			});
+			App.questions.init();
+			App.animations.init();
+		},
+
+
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// what transistion prefix is supported in this browser?
+		//------------------------------------------------------------------------------------------------------------------------------------------------------------
+		whichTransitionEvent: function() { //By David Walsh: http://davidwalsh.name/css-animation-callback
+			var t;
+			var el = document.createElement("fakeelement");
+
+			var transitions = {
+				"transition": "transitionend",
+				"OTransition": "oTransitionEnd",
+				"MozTransition": "transitionend",
+				"WebkitTransition": "webkitTransitionEnd"
+			}
+
+			for( t in transitions ) {
+				if( el.style[t] !== undefined ) {
+					return transitions[t];
+				}
+			}
 		},
 
 
