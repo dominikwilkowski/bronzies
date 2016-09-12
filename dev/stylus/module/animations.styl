@@ -122,6 +122,20 @@
 			animation irb 15s linear
 
 
+.cpr-animation
+	display block
+	width 28vw
+	height 25vw
+	animation heartbeat 0.5s infinite
+
+.cpr-bpm
+	position absolute
+	z-index 2
+	color #fff
+	font-weight 900
+	font-size 3vw
+
+
 //shark
 @keyframes shark
 	from
@@ -156,6 +170,14 @@
 		height 25px
 		transform scaleX(1)
 
+//CPR
+@keyframes heartbeat
+	from
+	to
+		transform scale3D(1, 1, 1)
+
+	50%
+		transform scale3D(1.7, 1.5, 1.4)
 
 //flags
 bottom = -26px

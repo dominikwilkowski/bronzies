@@ -27,28 +27,27 @@
 	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'
+		http://bronzies.com:5555/questions http://bronzies.com:5555/highscore">
+
 	include "modernizr.html"
 
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+	<![endif]-->
 </head>
-<body class="index js-index">
+<body class="js-body">
+	include "sprite.svg"
 
-	<header class="header">
-	</header>
+	<main class="main-index" style="background: url(img/splash.jpg);background-size: cover; margin: 0; height: 100%; padding: 21px;">
+		<span class="cpr-bpm">120 bpm</span>
 
-	<main class="main main-index">
-		<ul class="main-list">
-			<li class="main-list-item">
-				<a class="main-list-link" href="signals.html">Learn signals</a>
-			</li>
-			<li class="main-list-item">
-				or
-			</li>
-			<li class="main-list-item">
-				<a class="main-list-link" href="cpr.html">See CPR rhythm</a>
-			</li>
-		</ul>
+		<svg class="cpr-animation" aria-labelledby="title" viewBox="0 0 645 585">
+			<title id="title" lang="en">Heart beat</title>
+			<use xlink:href="#cpr"></use>
+		</svg>
 	</main>
 
-	<script type="text/javascript" src="js/--currentVersion--.min.js"></script>
 </body>
 </html>
