@@ -38,14 +38,29 @@
 	include "sprite.svg"
 
 	<main class="main-index" style="background: url(img/splash.jpg);background-size: cover; margin: 0; height: 100%;">
+
 		<a class="crp-link" href="./">Back</a>
+
+		<button class="cpr-mute js-mute is-muted">
+			<svg class="cpr-mutesvg" aria-labelledby="title-mute" viewBox="0 0 75 75">
+				<title id="title-mute" lang="en">mute/unmute</title>
+				<polygon points="39.389,13.769 22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769"
+					style="stroke:#222;stroke-width:5;stroke-linejoin:round;fill:#222;"/>
+				<path class="mutesvg-cross" d="M 48.651772,50.269646 69.395223,25.971024" style="fill:none;stroke:#222;stroke-width:5;stroke-linecap:round"/>
+				<path class="mutesvg-cross" d="M 69.395223,50.269646 48.651772,25.971024" style="fill:none;stroke:#222;stroke-width:5;stroke-linecap:round"/>
+			</svg>
+		</button>
+
 		<span class="cpr-bpm">120 bpm</span>
 
-		<svg class="cpr-animation" aria-labelledby="title" viewBox="0 0 645 585">
-			<title id="title" lang="en">Heart beat</title>
-			<use xlink:href="#cpr"></use>
-		</svg>
+		<div class="cpr-animation js-heart">
+			<svg class="cpr-heartsvg" aria-labelledby="title" viewBox="0 0 645 585">
+				<title id="title" lang="en">Heart beat</title>
+				<use xlink:href="#cpr"></use>
+			</svg>
+		</div>
 	</main>
 
+	<script type="text/javascript" src="js/cpr---currentVersion--.min.js"></script>
 </body>
 </html>

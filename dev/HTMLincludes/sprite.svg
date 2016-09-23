@@ -458,5 +458,11 @@
 				565.31255,378.67493 466.68622,450.30098 C 402.0054,497.27462 328.80148,568.34684 323.70555,578.32901 C 317.79007,589.91654 323.42339,580.14491
 				297.29747,550.86823 z"/>
 		</symbol>
+		<symbol id="mute">
+			<polygon points="39.389,13.769 22.235,28.606 6,28.606 6,47.699 21.989,47.699 39.389,62.75 39.389,13.769"
+				style="stroke:#222;stroke-width:5;stroke-linejoin:round;fill:#222;"/>
+			<path class="mutesvg-cross" d="M 48.651772,50.269646 69.395223,25.971024" style="fill:none;stroke:#222;stroke-width:5;stroke-linecap:round"/>
+			<path class="mutesvg-cross" d="M 69.395223,50.269646 48.651772,25.971024" style="fill:none;stroke:#222;stroke-width:5;stroke-linecap:round"/>
+		</symbol>
 	</defs>
 </svg>

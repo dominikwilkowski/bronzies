@@ -1,0 +1,68 @@
+/***************************************************************************************************************************************************************
+ *
+ * CPR page
+ *
+ **************************************************************************************************************************************************************/
+
+.cpr-animation
+	.cpr-heartsvg
+		display block
+		width 28vw
+		height 25vw
+
+	&.has-animation .cpr-heartsvg
+		animation heartbeat 0.3s
+
+.cpr-bpm
+	position absolute
+	top 50%
+	left 0
+	margin-top -1em
+	width 100%
+	text-align center
+	z-index 2
+	color #fff
+	font-weight 900
+	font-size 3vw
+
+.cpr-mute
+	position absolute
+	top 0
+	right 1em
+	padding 1em
+	margin 0
+	width 7em
+	height 7em
+	-webkit-appearance none
+	background transparent
+	border none
+	opacity 0.5
+	transition opacity 0.2s ease
+
+	&:hover
+		opacity 1
+
+	.cpr-mutesvg
+		max-width 100%
+		height auto
+
+	.mutesvg-cross
+		transition opacity 0.4s ease
+
+	&.is-muted .mutesvg-cross
+		opacity 0
+
+.crp-link
+	position absolute
+	left 1em
+	top 1em
+	font-size 2em
+
+//animation
+@keyframes heartbeat
+	from
+	to
+		transform scale3D(1, 1, 1)
+
+	50%
+		transform scale3D(1.7, 1.5, 1.4)

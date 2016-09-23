@@ -98,7 +98,13 @@ module.exports = function(grunt) {
 		uglify: {
 			js: {
 				files: {
-					'prod/js/<%= currentVersion  %>.min.js': ['dev/js/*.js', '!dev/node/*.js'],
+					'prod/js/<%= currentVersion  %>.min.js': ['dev/js/*.js', '!dev/js/cpr/*.js'],
+				},
+			},
+
+			cpr: {
+				files: {
+					'prod/js/cpr-<%= currentVersion  %>.min.js': ['dev/js/cpr/*.js'],
 				},
 			},
 
@@ -235,6 +241,24 @@ module.exports = function(grunt) {
 					cwd: 'tmp',
 					src: ['*.html'],
 					dest: ['prod/'],
+				}],
+			},
+
+			//media
+			Media: {
+				files: [{
+					cwd: 'dev/media',
+					src: ['**/*'],
+					dest: ['prod/media/'],
+				}],
+			},
+
+			//swf
+			SWF: {
+				files: [{
+					cwd: 'dev/swf',
+					src: ['**/*'],
+					dest: ['prod/swf/'],
 				}],
 			},
 
