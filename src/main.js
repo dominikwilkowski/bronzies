@@ -53,6 +53,7 @@ function Main() {
 	const [ score, setScore ] = useState( 0 );
 	const [ game, setgameRounds ] = useState( 0 );
 	const [ rounds, setRounds ] = useState( 0 );
+	const [ correct, setCorrect ] = useState( false );
 	const [ questionAsImage, setQuestionAsImage ] = useState( true );
 	const { image2text, text2image, setImage2text, setText2image } = useQuestions();
 	const newTextAnswers = getNewAnswers( image2text[ game ], image2text );
@@ -71,7 +72,7 @@ function Main() {
 
 		if( gameSet[ game ].image === answer ) {
 			setPossibleAnswers( tagAnswer( possibleAnswers, answer, 'correct' ) );
-			setgameRounds( game + 1 );
+			setCorrect( true );
 			console.log('correct');
 		}
 		else {
@@ -79,6 +80,11 @@ function Main() {
 			console.log('wrong');
 		}
 		setAnswer( null );
+	};
+
+	function handleNextQuestion() {
+		setCorrect( false );
+		setgameRounds( game + 1 );
 	};
 
 
@@ -101,9 +107,12 @@ function Main() {
 						: <TextView text={ text2image[ game ].text } />
 				}
 
-				<fieldset>
+				<fieldset css={{
+					overflow: 'hidden',
+					padding: 0,
+				}}>
 					<legend>Answers:</legend>
-					<Choices items={ possibleAnswers } questionAsImage={ questionAsImage } action={ setAnswer } />
+					<Choices items={ possibleAnswers } questionAsImage={ questionAsImage } onAnswer={ setAnswer } onSuccess={ handleNextQuestion } correct={ correct } />
 				</fieldset>
 			</form>
 		</main>
