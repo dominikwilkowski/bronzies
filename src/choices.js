@@ -38,9 +38,13 @@ function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 							fontSize: '21px',
 							lineHeight: 1.2,
 							'&:disabled': {
-								color: '#fff',
+								color: item.status
+								? item.status=== 'correct'
+									? '#fff'
+									: '#000'
+								: '#000',
 							}
-						}} type='submit' onClick={ event => onAnswer( item.image ) } disabled={ item.status }>
+						}} type='submit' onClick={ event => onAnswer( item.image ) } disabled={ correct }>
 							{
 								questionAsImage
 									? <TextView text={ item.text } />

@@ -51,19 +51,20 @@ export function tagAnswer( answers, image, tag ) {
 // The main game where we pull each components together
 function Main() {
 	const [ score, setScore ] = useState( 0 );
-	const [ game, setgameRounds ] = useState( 0 );
+	let [ game, setgameRounds ] = useState( 0 );
 	const [ rounds, setRounds ] = useState( 0 );
 	const [ correct, setCorrect ] = useState( false );
-	const [ questionAsImage, setQuestionAsImage ] = useState( true );
+	let [ questionAsImage, setQuestionAsImage ] = useState( true );
 	const { image2text, text2image, setImage2text, setText2image } = useQuestions();
-	const newTextAnswers = getNewAnswers( image2text[ game ], image2text );
-	const newImageAnswers = getNewAnswers( text2image[ game ], text2image );
+	let newTextAnswers = getNewAnswers( image2text[ game ], image2text );
+	let newImageAnswers = getNewAnswers( text2image[ game ], text2image );
 	const [ possibleAnswers, setPossibleAnswers ] = useState( newTextAnswers );
 	const [ answer, setAnswer ] = useState();
 
 	function reverseDirection() {
-		setQuestionAsImage( !questionAsImage );
-		setPossibleAnswers( !questionAsImage ? newTextAnswers : newImageAnswers );
+		questionAsImage = !questionAsImage;
+		setQuestionAsImage( questionAsImage );
+		setPossibleAnswers( questionAsImage ? newTextAnswers : newImageAnswers );
 	};
 
 	function handleAnswer( event ) {
@@ -84,7 +85,11 @@ function Main() {
 
 	function handleNextQuestion() {
 		setCorrect( false );
-		setgameRounds( game + 1 );
+		game ++;
+		setgameRounds( game );
+		newTextAnswers = getNewAnswers( image2text[ game ], image2text );
+		newImageAnswers = getNewAnswers( text2image[ game ], text2image );
+		setPossibleAnswers( questionAsImage ? newTextAnswers : newImageAnswers );
 	};
 
 
