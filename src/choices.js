@@ -29,10 +29,13 @@ function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 							appearance: 'none',
 							width: '100%',
 							background: item.status
-								? item.status=== 'correct'
+								? item.status === 'correct'
 									? colors[ 3 ]
 									: colors[ 0 ]
 								: 'transparent',
+							color: item.status
+								? '#fff'
+								: '#000',
 							padding: '12px',
 							border: 'none',
 							transition: 'background 0.3s ease, opcaity 0.3s ease, color 0.3s ease',
@@ -43,9 +46,6 @@ function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 							},
 							'&:disabled': {
 								opacity: 0.3,
-								color: item.status === 'correct'
-									? '#fff'
-									: '#000',
 							}
 						}} type='submit' onClick={ event => onAnswer( item.image ) } disabled={ correct }>
 							{
