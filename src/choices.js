@@ -37,18 +37,20 @@ function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 							transition: 'background 0.3s ease, opcaity 0.3s ease, color 0.3s ease',
 							fontSize: '21px',
 							lineHeight: 1.2,
+							'&:hover': {
+								cursor: 'pointer',
+							},
 							'&:disabled': {
-								color: item.status
-								? item.status=== 'correct'
+								opacity: 0.3,
+								color: item.status === 'correct'
 									? '#fff'
-									: '#000'
-								: '#000',
+									: '#000',
 							}
 						}} type='submit' onClick={ event => onAnswer( item.image ) } disabled={ correct }>
 							{
 								questionAsImage
 									? <TextView text={ item.text } />
-									: <ImageView item={ item.image } />
+									: <ImageView image={ item.image } alt={ item.alt } />
 							}
 						</button>
 						<animated.div style={{ right }} css={{
@@ -67,7 +69,10 @@ function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 								border: 'none',
 								fontSize: '21px',
 								lineHeight: 1.2,
-							}}>Next question</button>
+								'&:hover': {
+									cursor: 'pointer',
+								},
+							}}>Next question ⇢</button>
 						</animated.div>
 					</li>
 				))

@@ -50,7 +50,7 @@ export function tagAnswer( answers, image, tag ) {
 
 // The main game where we pull each components together
 function Main() {
-	const [ score, setScore ] = useState( 0 );
+	let [ score, setScore ] = useState( 0 );
 	let [ game, setgameRounds ] = useState( 0 );
 	const [ rounds, setRounds ] = useState( 0 );
 	const [ correct, setCorrect ] = useState( false );
@@ -74,18 +74,28 @@ function Main() {
 		if( gameSet[ game ].image === answer ) {
 			setPossibleAnswers( tagAnswer( possibleAnswers, answer, 'correct' ) );
 			setCorrect( true );
-			console.log('correct');
+			score ++;
+			setScore( score );
 		}
 		else {
 			setPossibleAnswers( tagAnswer( possibleAnswers, answer, 'wrong' ) );
-			console.log('wrong');
+			score --;
+			setScore( score );
 		}
+
 		setAnswer( null );
 	};
 
 	function handleNextQuestion() {
 		setCorrect( false );
+
 		game ++;
+		if( game === image2text.length ) {
+			game = 0;
+			setImage2text( shuffle( image2text ) );
+			setText2image( shuffle( text2image ) );
+		}
+
 		setgameRounds( game );
 		newTextAnswers = getNewAnswers( image2text[ game ], image2text );
 		newImageAnswers = getNewAnswers( text2image[ game ], text2image );
@@ -96,7 +106,7 @@ function Main() {
 	return (
 		<main>
 			<header>
-				<label>Switch <input type='checkbox' onClick={ reverseDirection } /></label>
+				<label>Switch <input type='checkbox' onClick={ reverseDirection } disabled={ correct } /></label>
 				questions: { image2text.length }
 				rounds: { rounds }
 				game: { game }
@@ -108,7 +118,7 @@ function Main() {
 			<form onSubmit={ ( event ) => handleAnswer( event ) }>
 				{
 					questionAsImage
-						? <ImageView item={ image2text[ game ].image } />
+						? <ImageView image={ image2text[ game ].image } alt={ image2text[ game ].alt } />
 						: <TextView text={ text2image[ game ].text } />
 				}
 

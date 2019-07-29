@@ -2,17 +2,16 @@
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 
-function ImageView({ item }) {
+function ImageView({ image, alt }) {
 	return (
 		<figure>
-			<img src={`${ item }.jpg`} alt="Elephant at sunset" />
-			<figcaption>Figcaption</figcaption>
+			<img src={`${ image }.jpg`} alt={ alt } />
 		</figure>
 	);
 };
 
 ImageView.propTypes = {
-	item: PropTypes.string.isRequired,
+	image: PropTypes.string.isRequired,
 };
 
 export default ImageView;
