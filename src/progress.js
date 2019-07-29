@@ -7,9 +7,9 @@ import { colors } from './theme';
 /**
  * A component to show the progress as dashes
  *
- * @param {array} options.questions - An array of questions
- * @param {integer} options.current - The current index
- * @param {integer} options.rounds  - how many rounds have been played
+ * @param {array}   options.questions - An array of questions
+ * @param {integer} options.current   - The current index
+ * @param {integer} options.rounds    - how many rounds have been played
  */
 function Progress({ questions, current, rounds }) {
 	return (
@@ -27,7 +27,7 @@ function Progress({ questions, current, rounds }) {
 						<li key={ i } css={{
 							display: 'inline-block',
 							flex: 1,
-							borderTop: `2px solid ${
+							borderTop: `4px solid ${
 								current === i
 									? colors[ 2 ] // if it's the current question
 									: i < current // if it was in the past
