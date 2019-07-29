@@ -4,6 +4,7 @@ import ImageView from './imageView';
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import TextView from './textView';
+import { colors } from './theme';
 
 function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 	const { right } = useSpring({
@@ -29,8 +30,8 @@ function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 							width: '100%',
 							background: item.status
 								? item.status=== 'correct'
-									? '#325C3B'
-									: '#EA1C2E'
+									? colors[ 3 ]
+									: colors[ 0 ]
 								: 'transparent',
 							padding: '12px',
 							border: 'none',

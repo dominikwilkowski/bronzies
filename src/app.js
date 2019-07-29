@@ -20,13 +20,17 @@ export function shuffle( array ) {
 	return newArray;
 }
 
-// Context for questions from REST API
+/**
+ * Context for questions from REST API
+ */
 const QuestionContext = createContext();
 export function useQuestions() {
 	return useContext( QuestionContext );
 };
 
-// Where we get the data from the server
+/**
+ * Where we get the data from the server
+ */
 const QuestionProvider = ({ children }) => {
 	const [ image2text, setImage2text ] = useState([]);
 	const [ text2image, setText2image ] = useState([]);
@@ -57,7 +61,9 @@ const QuestionProvider = ({ children }) => {
 	);
 };
 
-// The main App that loads data first then switches to main app
+/**
+ * The main App that loads data first then switches to main app
+ */
 function App() {
 	return (
 		<Fragment>

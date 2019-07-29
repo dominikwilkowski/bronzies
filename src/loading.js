@@ -5,7 +5,9 @@ import { useQuestions } from './app';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
-// Animation showing a spinner
+/**
+ * Animation showing a spinner
+ */
 function Animation() {
 	const loading = keyframes({
 		from: {
@@ -62,7 +64,11 @@ function Animation() {
 	);
 };
 
-// Component to switch between loading spinner and component
+/**
+ * Component to switch between loading spinner and component
+ *
+ * @param {function} options.Component - A component to display after loading is done
+ */
 function Loading({ Component }) {
 	const { image2text, text2image } = useQuestions();
 	const isLoading = image2text.length > 0 && text2image.length > 0;
