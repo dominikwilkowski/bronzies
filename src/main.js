@@ -69,7 +69,7 @@ function Main() {
 	let [ game, setgameRounds ] = useState( 0 );
 	let [ rounds, setRounds ] = useState( 1 );
 	const [ correct, setCorrect ] = useState( false );
-	let [ questionAsImage, setQuestionAsImage ] = useState( true );
+	const [ questionAsImage, setQuestionAsImage ] = useState( true );
 	const { image2text, text2image, setImage2text, setText2image } = useQuestions();
 	let newTextAnswers = getNewAnswers( image2text[ game ], image2text );
 	let newImageAnswers = getNewAnswers( text2image[ game ], text2image );
@@ -79,10 +79,8 @@ function Main() {
 	/**
 	 * If we swap directions we toggle questionAsImage and switch to another question array
 	 */
-	function reverseDirection() {
-		questionAsImage = !questionAsImage;
-		setQuestionAsImage( questionAsImage );
-		setPossibleAnswers( questionAsImage ? newTextAnswers : newImageAnswers );
+	function reverseDirection( event ) {
+		setQuestionAsImage( !event.target.checked );
 	};
 
 	/**
