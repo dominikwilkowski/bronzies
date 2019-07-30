@@ -1,11 +1,30 @@
 /** @jsx jsx */
-import { shuffle, useQuestions } from './app';
-import ImageView from './imageView';
+import ChoseFromImage from './choseFromImage';
+import ChoseFromText from './choseFromText';
 import { jsx } from '@emotion/core';
-import TextView from './textView';
-import Progress from './progress';
 import { useState } from 'react';
-import Choices from './choices';
+
+/**
+ * Simple Fisher–Yates shuffle function https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+ *
+ * @param  {array} array - An array to be shuffled
+ *
+ * @return {array}       - The shuffled array
+ */
+export function shuffle( array ) {
+	const newArray = [ ...array ]; // cloning so we don't manipulate the input data
+	let index = newArray.length;
+
+	while( index ) {
+		const randIndex = Math.floor( Math.random() * index-- );
+		const value = newArray[ index ];
+
+		newArray[ index ] = newArray[ randIndex ];
+		newArray[ randIndex ] = value;
+	}
+
+	return newArray;
+}
 
 /**
  * A pure function (for testing) to pick a subset of random items from an array including a previously picked one
@@ -63,81 +82,62 @@ export function cleanTags( questions, tagName ) {
 	});
 };
 
-// The main game where we pull each components together
+/**
+ * The user has found the right answer, let's now go to the next question
+ */
+export function handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
+	setCorrect( null );
+
+	let newIndex = index;
+	if( index === questions.length - 1 ) {
+		setQuestions( shuffle( cleanTags( questions, 'correct' ) ) );
+		setRounds( rounds + 1 );
+		setIndex( 0 );
+	}
+	else {
+		newIndex ++;
+		setIndex( newIndex );
+	}
+	const newChoices = getNewAnswers( questions[ newIndex ], questions );
+	setChoices( newChoices );
+};
+
+/**
+ * The user has chosen and we now figure out what to do
+ *
+ * @param  {object} event - The event object to prevent default
+ */
+export function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score, setScore ) {
+	event.preventDefault();
+
+	if( questions[ index ].image === userAnswer ) {
+		setChoices( tagAnswer( choices, userAnswer, 'status', 'correct' ) );
+		setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', true ) );
+		setCorrect( true );
+		setScore( score ++ );
+	}
+	else {
+		setChoices( tagAnswer( choices, userAnswer, 'status', 'wrong' ) );
+		setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', false ) );
+		setCorrect( false );
+		setScore( score -- );
+	}
+
+	setUserAnswer( null );
+};
+
+/**
+ * The main game where we pull each components together
+ */
 function Main() {
-	let [ score, setScore ] = useState( 0 );
-	let [ game, setgameRounds ] = useState( 0 );
-	let [ rounds, setRounds ] = useState( 1 );
-	const [ correct, setCorrect ] = useState( false );
 	const [ questionAsImage, setQuestionAsImage ] = useState( true );
-	const { image2text, text2image, setImage2text, setText2image } = useQuestions();
-	let newTextAnswers = getNewAnswers( image2text[ game ], image2text );
-	let newImageAnswers = getNewAnswers( text2image[ game ], text2image );
-	const [ possibleAnswers, setPossibleAnswers ] = useState( newTextAnswers );
-	const [ userAnswer, setUserAnswer ] = useState();
+	const [ score, setScore ] = useState( 0 );
 
 	/**
 	 * If we swap directions we toggle questionAsImage and switch to another question array
 	 */
 	function reverseDirection( event ) {
-		setQuestionAsImage( !event.target.checked );
-	};
-
-	/**
-	 * The user has chosen and we now figure out what to do
-	 *
-	 * @param  {object} event - The event object to prevent default
-	 */
-	function handleAnswer( event ) {
-		event.preventDefault();
-		const gameSet = questionAsImage ? image2text : text2image;
-
-		if( gameSet[ game ].image === userAnswer ) {
-			setPossibleAnswers( tagAnswer( possibleAnswers, userAnswer, 'status', 'correct' ) );
-			if( questionAsImage ) {
-				setImage2text( tagAnswer( image2text, image2text[ game ].image, 'correct', true ) );
-			}
-			else {
-				setText2image( tagAnswer( text2image, image2text[ game ].image, 'correct', true ) );
-			}
-			setCorrect( true );
-			score ++;
-			setScore( score );
-		}
-		else {
-			setPossibleAnswers( tagAnswer( possibleAnswers, userAnswer, 'status', 'wrong' ) );
-			if( questionAsImage ) {
-				setImage2text( tagAnswer( image2text, image2text[ game ].image, 'correct', false ) );
-			}
-			else {
-				setText2image( tagAnswer( text2image, image2text[ game ].image, 'correct', false ) );
-			}
-			score --;
-			setScore( score );
-		}
-
-		setUserAnswer( null );
-	};
-
-	/**
-	 * The user has found the right answer, let's now go to the next question
-	 */
-	function handleNextQuestion() {
-		setCorrect( false );
-
-		game ++;
-		if( game === image2text.length ) {
-			game = 0;
-			setImage2text( shuffle( cleanTags( image2text, 'correct' ) ) );
-			setText2image( shuffle( cleanTags( text2image, 'correct' ) ) );
-			rounds ++;
-			setRounds( rounds );
-		}
-
-		setgameRounds( game );
-		newTextAnswers = getNewAnswers( image2text[ game ], image2text );
-		newImageAnswers = getNewAnswers( text2image[ game ], text2image );
-		setPossibleAnswers( questionAsImage ? newTextAnswers : newImageAnswers );
+		setQuestionAsImage( !questionAsImage );
 	};
 
 	/**
@@ -145,30 +145,11 @@ function Main() {
 	 */
 	return (
 		<main>
-			<header>
-				<label>Switch <input type='checkbox' onClick={ reverseDirection } disabled={ correct } /></label>
-				<Progress questions={ questionAsImage ? image2text : text2image } current={ game } rounds={ rounds } />
-				game: { game }
-				Logo
-				Highscore
-				Score: { score }
-			</header>
-
-			<form onSubmit={ ( event ) => handleAnswer( event ) }>
-				{
-					questionAsImage
-						? <ImageView image={ image2text[ game ].image } alt={ image2text[ game ].alt } />
-						: <TextView text={ text2image[ game ].text } />
-				}
-
-				<fieldset css={{
-					overflow: 'hidden',
-					padding: 0,
-				}}>
-					<legend>Answers:</legend>
-					<Choices items={ possibleAnswers } questionAsImage={ questionAsImage } onAnswer={ setUserAnswer } onSuccess={ handleNextQuestion } correct={ correct } />
-				</fieldset>
-			</form>
+			{
+				questionAsImage
+					? <ChoseFromText questionAsImage={ questionAsImage } score={ score } setScore={ setScore } reverseDirection={ reverseDirection } />
+					: <ChoseFromImage questionAsImage={ questionAsImage } score={ score } setScore={ setScore } reverseDirection={ reverseDirection } />
+			}
 		</main>
 	);
 };

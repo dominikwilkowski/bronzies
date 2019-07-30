@@ -12,6 +12,7 @@ function ImageView({ image, alt }) {
 
 ImageView.propTypes = {
 	image: PropTypes.string.isRequired,
+	alt: PropTypes.string.isRequired,
 };
 
 export default ImageView;

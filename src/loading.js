@@ -70,8 +70,8 @@ function Animation() {
  * @param {function} options.Component - A component to display after loading is done
  */
 function Loading({ Component }) {
-	const { image2text, text2image } = useQuestions();
-	const isLoading = image2text.length > 0 && text2image.length > 0;
+	const { questionsDB } = useQuestions();
+	const isLoading = questionsDB.length > 0;
 	const transitions = useTransition( !isLoading, null, {
 		initial: { opacity: 1 },
 		from: { opacity: 1 },
