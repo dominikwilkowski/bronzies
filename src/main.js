@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import ChoseFromImage from './choseFromImage';
-import ChoseFromText from './choseFromText';
+import Body from './body';
+import { useQuestions } from './app';
 import { jsx } from '@emotion/core';
 import { useState } from 'react';
 
@@ -83,53 +83,29 @@ export function cleanTags( questions, tagName ) {
 };
 
 /**
- * The user has found the right answer, let's now go to the next question
- */
-export function handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
-	setCorrect( null );
-
-	let newIndex = index;
-	if( index === questions.length - 1 ) {
-		setQuestions( shuffle( cleanTags( questions, 'correct' ) ) );
-		setRounds( rounds + 1 );
-		setIndex( 0 );
-	}
-	else {
-		newIndex ++;
-		setIndex( newIndex );
-	}
-	const newChoices = getNewAnswers( questions[ newIndex ], questions );
-	setChoices( newChoices );
-};
-
-/**
- * The user has chosen and we now figure out what to do
- *
- * @param  {object} event - The event object to prevent default
- */
-export function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score, setScore ) {
-	event.preventDefault();
-
-	if( questions[ index ].image === userAnswer ) {
-		setChoices( tagAnswer( choices, userAnswer, 'status', 'correct' ) );
-		setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', true ) );
-		setCorrect( true );
-		setScore( score ++ );
-	}
-	else {
-		setChoices( tagAnswer( choices, userAnswer, 'status', 'wrong' ) );
-		setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', false ) );
-		setCorrect( false );
-		setScore( score -- );
-	}
-
-	setUserAnswer( null );
-};
-
-/**
- * The main game where we pull each components together
+ * The main game where we pull each components together and store all the state we need for each game mode
  */
 function Main() {
+	const { questionsDB } = useQuestions();
+
+	// state for image-to-text mode
+	const [ questionsImage, setQuestionsImage ] = useState( shuffle( questionsDB ) );
+	const [ indexImage, setIndexImage ] = useState( 0 );
+	const newChoicesImage = getNewAnswers( questionsImage[ indexImage ], questionsImage );
+	const [ choicesImage, setChoicesImage ] = useState( newChoicesImage );
+	const [ correctImage, setCorrectImage ] = useState( null );
+	const [ userAnswerImage, setUserAnswerImage ] = useState();
+	const [ roundsImage, setRoundsImage ] = useState( 1 );
+
+	// state for text-to-image mode
+	const [ questionsText, setQuestionsText ] = useState( shuffle( questionsDB ) );
+	const [ indexText, setIndexText ] = useState( 0 );
+	const newChoicesText = getNewAnswers( questionsText[ indexText ], questionsText );
+	const [ choicesText, setChoicesText ] = useState( newChoicesText );
+	const [ correctText, setCorrectText ] = useState( null );
+	const [ userAnswerText, setUserAnswerText ] = useState();
+	const [ roundsText, setRoundsText ] = useState( 1 );
+
 	const [ questionAsImage, setQuestionAsImage ] = useState( true );
 	const [ score, setScore ] = useState( 0 );
 
@@ -141,15 +117,74 @@ function Main() {
 	};
 
 	/**
+	 * The user has found the right answer, let's now go to the next question
+	 */
+	function handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
+		setCorrect( null );
+
+		let newIndex = index;
+		if( index === questions.length - 1 ) {
+			setQuestions( shuffle( cleanTags( questions, 'correct' ) ) );
+			setRounds( rounds + 1 );
+			setIndex( 0 );
+		}
+		else {
+			newIndex ++;
+			setIndex( newIndex );
+		}
+		const newChoices = getNewAnswers( questions[ newIndex ], questions );
+		setChoices( newChoices );
+	};
+
+	/**
+	 * The user has chosen and we now figure out what to do
+	 *
+	 * @param  {object} event - The event object to prevent default
+	 */
+	function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score, setScore ) {
+		event.preventDefault();
+
+		if( questions[ index ].image === userAnswer ) {
+			setChoices( tagAnswer( choices, userAnswer, 'status', 'correct' ) );
+			setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', true ) );
+			setCorrect( true );
+			setScore( score + 1 );
+		}
+		else {
+			setChoices( tagAnswer( choices, userAnswer, 'status', 'wrong' ) );
+			setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', false ) );
+			setCorrect( false );
+			setScore( score - 1 );
+		}
+
+		setUserAnswer( null );
+	};
+
+	/**
 	 * =~=~=~=~=~=~=~=~=~=
 	 */
 	return (
 		<main>
-			{
-				questionAsImage
-					? <ChoseFromText questionAsImage={ questionAsImage } score={ score } setScore={ setScore } reverseDirection={ reverseDirection } />
-					: <ChoseFromImage questionAsImage={ questionAsImage } score={ score } setScore={ setScore } reverseDirection={ reverseDirection } />
-			}
+			<Body
+				questions={ questionAsImage ? questionsImage : questionsText }
+				setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
+				index={ questionAsImage ? indexImage : indexText }
+				setIndex={ questionAsImage ? setIndexImage : setIndexText }
+				choices={ questionAsImage ? choicesImage : choicesText }
+				setChoices={ questionAsImage ? setChoicesImage : setChoicesText }
+				correct={ questionAsImage ? correctImage : correctText }
+				setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
+				userAnswer={ questionAsImage ? userAnswerImage : userAnswerText }
+				setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
+				rounds={ questionAsImage ? roundsImage : roundsText }
+				setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
+				questionAsImage={ questionAsImage }
+				score={ score }
+				setScore={ setScore }
+				reverseDirection={ reverseDirection }
+				handleNextQuestion={ handleNextQuestion }
+				handleAnswer={ handleAnswer }
+			/>
 		</main>
 	);
 };
