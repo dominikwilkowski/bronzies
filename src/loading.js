@@ -8,7 +8,7 @@ import { Fragment } from 'react';
 /**
  * Animation showing a spinner
  */
-function Animation() {
+function Animation({ loadingState }) {
 	const loading = keyframes({
 		from: {
 			backgroundPosition: '0px 0px',
@@ -17,6 +17,12 @@ function Animation() {
 			backgroundPosition: '-16px 0px',
 		}
 	});
+
+	const messages = {
+		loading: 'Loading',
+		stale: `... still loading data, hang tight`,
+		failed: 'An error occurred, try refreshing the page',
+	};
 
 	return (
 		<div css={{
@@ -45,7 +51,7 @@ function Animation() {
 					backgroundSize: '16px 16px',
 					backgroundPosition: '0% 0%',
 					animation: `${ loading } 1s infinite linear`,
-					'&:after': {
+					':after': {
 						content: '""',
 						display: 'block',
 						position: 'absolute',
@@ -56,9 +62,21 @@ function Animation() {
 						border: '1px #000 solid',
 						boxSizing: 'border-box',
 						borderRadius: '100%',
-					}
+					},
+					':before': loadingState === 'failed'
+						? {
+								content: '"!"',
+								position: 'absolute',
+								width: '3rem',
+								textAlign: 'center',
+								left: '0',
+								top: '0',
+								fontSize: '3rem',
+								lineHeight: '1',
+							}
+						: {},
 				}}></div>
-				<span>Loading</span>
+				<span>{ messages[ loadingState ] }</span>
 			</div>
 		</div>
 	);
@@ -70,7 +88,7 @@ function Animation() {
  * @param {function} options.Component - A component to display after loading is done
  */
 function Loading({ Component }) {
-	const { questionsDB } = useQuestions();
+	const { questionsDB, loadingState } = useQuestions();
 	const isLoading = questionsDB.length > 0;
 	const transitions = useTransition( !isLoading, null, {
 		initial: { opacity: 1 },
@@ -92,7 +110,7 @@ function Loading({ Component }) {
 								left: 0,
 								right: 0,
 								zIndex: 2,
-							}}><Animation /></animated.div>
+							}}><Animation loadingState={ loadingState } /></animated.div>
 						: <animated.div key='loaded' style={ props } css={{
 								position: 'absolute',
 								top: 0,

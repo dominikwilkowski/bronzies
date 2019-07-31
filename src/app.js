@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, useState, useEffect, createContext, useContext } from 'react';
+import { Fragment, useState, useEffect, createContext, useContext, useRef } from 'react';
 import { jsx, Global } from '@emotion/core';
 import Loading from './loading';
 import Main from './main';
@@ -17,17 +17,27 @@ export function useQuestions() {
  */
 const QuestionProvider = ({ children }) => {
 	const [ questionsDB, setQuestionsDB ] = useState([]);
+	const [ loadingState, setLoadingState ] = useState('loading');
+	const loadingStateRef = useRef( loadingState );
 
 	useEffect( () => {
+		setTimeout( () => {
+			if( loadingStateRef.current === 'loading' ) setLoadingState('stale');
+		}, 3000);
+
 		const getData = async () => {
 			try {
 				const data = await fetch('http://localhost:5555/api/questions');
-				// const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
-				// await Sleep(5000)
+				const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
+				await Sleep( 5000 );
+				loadingStateRef.current = 'loaded';
 				setQuestionsDB( await data.json() );
+				setLoadingState( loadingStateRef.current );
 			}
 			catch( error ) {
 				console.error( error );
+				loadingStateRef.current = 'failed';
+				setLoadingState( loadingStateRef.current );
 			}
 		}
 
@@ -36,7 +46,7 @@ const QuestionProvider = ({ children }) => {
 
 
 	return (
-		<QuestionContext.Provider value={{ questionsDB }}>
+		<QuestionContext.Provider value={{ questionsDB, loadingState }}>
 			{ children }
 		</QuestionContext.Provider>
 	);
