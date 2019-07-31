@@ -19,7 +19,7 @@ function Body({
 	userAnswer, setUserAnswer,
 	rounds, setRounds,
 	questionAsImage,
-	score, setScore,
+	score,
 	reverseDirection,
 	handleNextQuestion,
 	handleAnswer,
@@ -46,7 +46,6 @@ function Body({
 				setCorrect,
 				tagAnswer,
 				score,
-				setScore
 			)}>
 				{
 					questionAsImage
@@ -87,8 +86,7 @@ Body.propTypes = {
 	setRounds: PropTypes.func.isRequired,
 	questionAsImage: PropTypes.bool.isRequired,
 	score: PropTypes.number.isRequired,
-	setScore: PropTypes.func.isRequired,
-	reverseDirection: PropTypes.bool.isRequired,
+	reverseDirection: PropTypes.func.isRequired,
 	handleNextQuestion: PropTypes.func.isRequired,
 	handleAnswer: PropTypes.func.isRequired,
 };

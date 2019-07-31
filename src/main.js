@@ -93,8 +93,8 @@ function Main() {
 	const [ indexImage, setIndexImage ] = useState( 0 );
 	const newChoicesImage = getNewAnswers( questionsImage[ indexImage ], questionsImage );
 	const [ choicesImage, setChoicesImage ] = useState( newChoicesImage );
-	const [ correctImage, setCorrectImage ] = useState( null );
-	const [ userAnswerImage, setUserAnswerImage ] = useState();
+	const [ correctImage, setCorrectImage ] = useState( false );
+	const [ userAnswerImage, setUserAnswerImage ] = useState('');
 	const [ roundsImage, setRoundsImage ] = useState( 1 );
 
 	// state for text-to-image mode
@@ -102,11 +102,13 @@ function Main() {
 	const [ indexText, setIndexText ] = useState( 0 );
 	const newChoicesText = getNewAnswers( questionsText[ indexText ], questionsText );
 	const [ choicesText, setChoicesText ] = useState( newChoicesText );
-	const [ correctText, setCorrectText ] = useState( null );
-	const [ userAnswerText, setUserAnswerText ] = useState();
+	const [ correctText, setCorrectText ] = useState( false );
+	const [ userAnswerText, setUserAnswerText ] = useState('');
 	const [ roundsText, setRoundsText ] = useState( 1 );
 
+	// state for both modes
 	const [ questionAsImage, setQuestionAsImage ] = useState( true );
+	const [ history, setHistory ] = useState({});
 	const [ score, setScore ] = useState( 0 );
 
 	/**
@@ -129,7 +131,7 @@ function Main() {
 	 * @param  {function} setChoices   - The state setter for choices array
 	 */
 	function handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
-		setCorrect( null );
+		setCorrect( false );
 
 		let newIndex = index;
 		if( index === questions.length - 1 ) {
@@ -159,9 +161,8 @@ function Main() {
 	 * @param  {function} setCorrect    - The state setter for correct boolean
 	 * @param  {function} tagAnswer     - A function to tag the answer within the questions array
 	 * @param  {integer}  score         - The current score
-	 * @param  {function} setScore      - The state setter for score
 	 */
-	function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score, setScore ) {
+	function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score ) {
 		event.preventDefault();
 
 		if( questions[ index ].image === userAnswer ) {
@@ -173,11 +174,13 @@ function Main() {
 		else {
 			setChoices( tagAnswer( choices, userAnswer, 'status', 'wrong' ) );
 			setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', false ) );
+			history[ questions[ index ].image ] = history[ questions[ index ].image ] ? history[ questions[ index ].image ] + 1 : 1;
+			setHistory( history );
 			setCorrect( false );
 			setScore( score - 1 );
 		}
 
-		setUserAnswer( null );
+		setUserAnswer('');
 	};
 
 	/**
@@ -200,7 +203,6 @@ function Main() {
 				setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
 				questionAsImage={ questionAsImage }
 				score={ score }
-				setScore={ setScore }
 				reverseDirection={ reverseDirection }
 				handleNextQuestion={ handleNextQuestion }
 				handleAnswer={ handleAnswer }
