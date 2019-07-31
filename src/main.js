@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import Body from './body';
 import { useQuestions } from './app';
 import { jsx } from '@emotion/core';
 import { useState } from 'react';
+import Body from './body';
 
 /**
  * Simple Fisher–Yates shuffle function https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
@@ -135,7 +135,7 @@ function Main() {
 
 		let newIndex = index;
 		if( index === questions.length - 1 ) {
-			setQuestions( shuffle( cleanTags( questions, 'correct' ) ) );
+			setQuestions( shuffle( questionsDB ) ); // we only take the questionsDB on new round to not disrupt the round mid-way
 			setRounds( rounds + 1 );
 			setIndex( 0 );
 		}

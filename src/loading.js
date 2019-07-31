@@ -21,7 +21,13 @@ function Animation({ loadingState }) {
 	const messages = {
 		loading: 'Loading',
 		stale: `... still loading data, hang tight`,
-		failed: 'An error occurred, try refreshing the page',
+		failed: <Fragment>
+			I can't seem to fetch the data I need
+			<span css={{
+				display: 'block',
+				fontSize: '1rem',
+			}}>Try refreshing the page and if that doesn't work contact the maintainer <a href="https://dominik-wilkowski.com/">Dom</a></span>
+		</Fragment>,
 	};
 
 	return (

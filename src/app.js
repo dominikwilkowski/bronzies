@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { Fragment, useState, useEffect, createContext, useContext, useRef } from 'react';
 import { jsx, Global } from '@emotion/core';
+import { colors } from './theme';
 import Loading from './loading';
 import Main from './main';
 
@@ -20,18 +21,31 @@ const QuestionProvider = ({ children }) => {
 	const [ loadingState, setLoadingState ] = useState('loading');
 	const loadingStateRef = useRef( loadingState );
 
+	/**
+	 * Let's load load data and keep track of the loading state
+	 */
 	useEffect( () => {
 		setTimeout( () => {
 			if( loadingStateRef.current === 'loading' ) setLoadingState('stale');
 		}, 3000);
 
 		const getData = async () => {
+			// first we check local storage for questions
+			const local = JSON.parse( localStorage.getItem('questions') );
+			if( local ) {
+				setQuestionsDB( local );
+				loadingStateRef.current = 'loaded';
+				setLoadingState( loadingStateRef.current );
+			}
+
+			// then we check the server and add the fresh questions to our state for the next round
 			try {
 				const data = await fetch('http://localhost:5555/api/questions');
-				const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
-				await Sleep( 5000 );
+				// const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
+				// await Sleep( 2000 );
+				localStorage.setItem( 'questions', JSON.stringify( await data.json() ) );
+				setQuestionsDB( JSON.parse( localStorage.getItem('questions') ) );
 				loadingStateRef.current = 'loaded';
-				setQuestionsDB( await data.json() );
 				setLoadingState( loadingStateRef.current );
 			}
 			catch( error ) {
@@ -62,6 +76,9 @@ function App() {
 				'body, html': {
 					fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", ' +
 						'"Segoe UI Symbol"',
+					'a': {
+						color: colors[ 0 ],
+					}
 				}
 			}} />
 			<QuestionProvider>
