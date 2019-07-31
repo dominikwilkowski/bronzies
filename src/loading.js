@@ -26,7 +26,7 @@ function Animation({ loadingState }) {
 			<span css={{
 				display: 'block',
 				fontSize: '1rem',
-			}}>Try refreshing the page and if that doesn't work contact the maintainer <a href="https://dominik-wilkowski.com/">Dom</a></span>
+			}}>Try refreshing the page and if that doesn't work contact the maintainer <a href="https://dominik-wilkowski.com/">Dominik</a></span>
 		</Fragment>,
 	};
 
