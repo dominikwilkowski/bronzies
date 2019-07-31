@@ -118,6 +118,15 @@ function Main() {
 
 	/**
 	 * The user has found the right answer, let's now go to the next question
+	 *
+	 * @param  {array}    questions    - An array of question objects
+	 * @param  {function} setQuestions - The state setter for questions
+	 * @param  {integer}  index        - The current position we are at within the questions
+	 * @param  {function} setIndex     - The state setter for index
+	 * @param  {integer}  rounds       - The amount of rounds we have gone round about
+	 * @param  {function} setRounds    - The state setter for rounds
+	 * @param  {function} setCorrect   - The state setter for correct boolean
+	 * @param  {function} setChoices   - The state setter for choices array
 	 */
 	function handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
 		setCorrect( null );
@@ -139,7 +148,18 @@ function Main() {
 	/**
 	 * The user has chosen and we now figure out what to do
 	 *
-	 * @param  {object} event - The event object to prevent default
+	 * @param  {object}   event         - The event object to prevent default
+	 * @param  {array}    questions     - An array of question objects
+	 * @param  {function} setQuestions  - The state setter for questions
+	 * @param  {array}    choices       - An array of choices for this questions
+	 * @param  {function} setChoices    - The state setter for choices
+	 * @param  {integer}  index         - The current position we are at within the questions
+	 * @param  {string}   userAnswer    - The answer the user has given (image part)
+	 * @param  {function} setUserAnswer - The state setter for answers
+	 * @param  {function} setCorrect    - The state setter for correct boolean
+	 * @param  {function} tagAnswer     - A function to tag the answer within the questions array
+	 * @param  {integer}  score         - The current score
+	 * @param  {function} setScore      - The state setter for score
 	 */
 	function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score, setScore ) {
 		event.preventDefault();

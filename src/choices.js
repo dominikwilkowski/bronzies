@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 import TextView from './textView';
 import { colors } from './theme';
 
-function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
+/**
+ * The Choices component shows the choices and validates the correctness and shows the next question button
+ */
+function Choices({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 	const { right } = useSpring({
 		right: correct ? '0px' : '-300px',
 	});
@@ -82,11 +85,12 @@ function Choises({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 	);
 };
 
-Choises.propTypes = {
+Choices.propTypes = {
 	items: PropTypes.array.isRequired,
 	questionAsImage: PropTypes.bool.isRequired,
 	onAnswer: PropTypes.func.isRequired,
 	onSuccess: PropTypes.func.isRequired,
+	correct: PropTypes.bool.isRequired,
 };
 
-export default Choises;
+export default Choices;

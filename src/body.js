@@ -8,6 +8,9 @@ import Progress from './progress';
 import { Fragment } from 'react';
 import Choices from './choices';
 
+/**
+ * The body component shows the questions and choices respecting the direction of `questionAsImage`
+ */
 function Body({
 	questions, setQuestions,
 	index, setIndex,
@@ -70,22 +73,24 @@ function Body({
 };
 
 Body.propTypes = {
+	questions: PropTypes.array.isRequired,
+	setQuestions: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
+	setIndex: PropTypes.func.isRequired,
+	choices: PropTypes.array.isRequired,
+	setChoices: PropTypes.func.isRequired,
+	correct: PropTypes.bool.isRequired,
+	setCorrect: PropTypes.func.isRequired,
+	userAnswer: PropTypes.string.isRequired,
+	setUserAnswer: PropTypes.func.isRequired,
+	rounds: PropTypes.number.isRequired,
+	setRounds: PropTypes.func.isRequired,
 	questionAsImage: PropTypes.bool.isRequired,
-	setScore: PropTypes.func.isRequired,
-	reverseDirection: PropTypes.func.isRequired,
 	score: PropTypes.number.isRequired,
-
-	// questions, setQuestions,
-	// index, setIndex,
-	// choices, setChoices,
-	// correct, setCorrect,
-	// userAnswer, setUserAnswer,
-	// rounds, setRounds,
-	// questionAsImage,
-	// score, setScore,
-	// reverseDirection,
-	// handleNextQuestion,
-	// handleAnswer
+	setScore: PropTypes.func.isRequired,
+	reverseDirection: PropTypes.bool.isRequired,
+	handleNextQuestion: PropTypes.func.isRequired,
+	handleAnswer: PropTypes.func.isRequired,
 };
 
 export default Body;
