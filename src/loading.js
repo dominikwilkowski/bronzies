@@ -95,8 +95,8 @@ function Animation({ loadingState }) {
  */
 function Loading({ Component }) {
 	const { questionsDB, loadingState } = useQuestions();
-	const isLoading = questionsDB.length > 0;
-	const transitions = useTransition( !isLoading, null, {
+	const isLoading = questionsDB.length === 0;
+	const transitions = useTransition( isLoading, null, {
 		initial: { opacity: 1 },
 		from: { opacity: 1 },
 		enter: { opacity: 1 },

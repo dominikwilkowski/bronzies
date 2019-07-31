@@ -17,32 +17,34 @@ export function useQuestions() {
  * Where we get the data from the server
  */
 const QuestionProvider = ({ children }) => {
-	const [ questionsDB, setQuestionsDB ] = useState([]);
-	const [ loadingState, setLoadingState ] = useState('loading');
+	// first we check local storage for questions
+	const local = JSON.parse( localStorage.getItem('questions') );
+	let initialQuestionsDB = [];
+	let initialLoadingState = 'loading';
+	if( local ) {
+		initialQuestionsDB = local;
+		initialLoadingState = 'loaded';
+	}
+
+	const [ questionsDB, setQuestionsDB ] = useState( initialQuestionsDB );
+	const [ loadingState, setLoadingState ] = useState( initialLoadingState );
 	const loadingStateRef = useRef( loadingState );
 
 	/**
 	 * Let's load load data and keep track of the loading state
 	 */
 	useEffect( () => {
+		// we'll mark the fetch stale after a little while to give users feedback
 		setTimeout( () => {
 			if( loadingStateRef.current === 'loading' ) setLoadingState('stale');
 		}, 3000);
 
+		// then we check the server and add the fresh questions to our state for the next round
 		const getData = async () => {
-			// first we check local storage for questions
-			const local = JSON.parse( localStorage.getItem('questions') );
-			if( local ) {
-				setQuestionsDB( local );
-				loadingStateRef.current = 'loaded';
-				setLoadingState( loadingStateRef.current );
-			}
-
-			// then we check the server and add the fresh questions to our state for the next round
 			try {
 				const data = await fetch('http://localhost:5555/api/questions');
 				// const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
-				// await Sleep( 2000 );
+				// await Sleep( 3500 );
 				localStorage.setItem( 'questions', JSON.stringify( await data.json() ) );
 				setQuestionsDB( JSON.parse( localStorage.getItem('questions') ) );
 				loadingStateRef.current = 'loaded';
@@ -53,11 +55,10 @@ const QuestionProvider = ({ children }) => {
 				loadingStateRef.current = 'failed';
 				setLoadingState( loadingStateRef.current );
 			}
-		}
+		};
 
 		getData();
 	}, []);
-
 
 	return (
 		<QuestionContext.Provider value={{ questionsDB, loadingState }}>

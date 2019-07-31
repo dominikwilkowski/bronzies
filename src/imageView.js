@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 function ImageView({ image, alt }) {
 	return (
 		<figure>
-			<img src={`${ image }.jpg`} alt={ alt } />
+			<img src={`${ image }.jpg`} alt={ alt } css={{
+				width: 'auto',
+				maxHeight: '150px',
+			}} />
 		</figure>
 	);
 };
