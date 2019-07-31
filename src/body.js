@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { tagAnswer } from './main';
 import ImageView from './imageView';
 import { jsx } from '@emotion/core';
+import { tagAnswer } from './main';
 import PropTypes from 'prop-types';
 import TextView from './textView';
 import Progress from './progress';

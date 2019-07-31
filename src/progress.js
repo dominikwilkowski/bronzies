@@ -6,10 +6,6 @@ import { colors } from './theme';
 
 /**
  * A component to show the progress as dashes
- *
- * @param {array}   options.questions - An array of questions
- * @param {integer} options.current   - The current index
- * @param {integer} options.rounds    - how many rounds have been played
  */
 function Progress({ questions, current, rounds }) {
 	return (
@@ -29,12 +25,12 @@ function Progress({ questions, current, rounds }) {
 							flex: 1,
 							borderTop: `4px solid ${
 								current === i
-									? colors[ 2 ] // if it's the current question
-									: i < current // if it was in the past
+									? colors[ 2 ]   // if it's the current question
+									: i < current   // if it was in the past and ...
 										? !question.correct
-											? colors[ 0 ] // if it was the wrong answer
-											: colors[ 3 ] // right answer
-										: colors[ 4 ] // in the future
+											? colors[ 0 ] // ... it was the wrong answer
+											: colors[ 3 ] // ... it was the right answer
+										: colors[ 4 ] // if it's in the future
 								}`,
 							margin: '0 2px',
 						}}></li>
