@@ -257,25 +257,27 @@ function Main() {
 	 */
 	return (
 		<main>
-			<Loading data={ questionsDB } loadingState={ loadingState } Component={ () => <Body
-				questions={ questions }
-				setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
-				index={ index }
-				setIndex={ questionAsImage ? setIndexImage : setIndexText }
-				choices={ choices }
-				setChoices={ questionAsImage ? setChoicesText : setChoicesImage }
-				correct={ correct }
-				setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
-				userAnswer={ userAnswer }
-				setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
-				rounds={ questionAsImage ? roundsImage : roundsText }
-				setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
-				questionAsImage={ questionAsImage }
-				score={ score }
-				reverseDirection={ reverseDirection }
-				handleNextQuestion={ handleNextQuestion }
-				handleAnswer={ handleAnswer }
-			/> } />
+			<Loading data={ questionsDB } loadingState={ loadingState }>
+				<Body
+					questions={ questions }
+					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
+					index={ index }
+					setIndex={ questionAsImage ? setIndexImage : setIndexText }
+					choices={ choices }
+					setChoices={ questionAsImage ? setChoicesText : setChoicesImage }
+					correct={ correct }
+					setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
+					userAnswer={ userAnswer }
+					setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
+					rounds={ questionAsImage ? roundsImage : roundsText }
+					setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
+					questionAsImage={ questionAsImage }
+					score={ score }
+					reverseDirection={ reverseDirection }
+					handleNextQuestion={ handleNextQuestion }
+					handleAnswer={ handleAnswer }
+				/>
+			</Loading>
 		</main>
 	);
 };

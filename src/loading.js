@@ -93,7 +93,7 @@ function Animation({ loadingState }) {
  *
  * @param {function} options.Component - A component to display after loading is done
  */
-function Loading({ data, loadingState, Component }) {
+function Loading({ data, loadingState, children }) {
 	const isLoading = data.length === 0;
 	const transitions = useTransition( isLoading, null, {
 		initial: { opacity: 1 },
@@ -122,7 +122,7 @@ function Loading({ data, loadingState, Component }) {
 								left: 0,
 								right: 0,
 								zIndex: 1,
-							}}><Component /></animated.div>
+							}}>{ children }</animated.div>
 				}
 			)}
 		</Fragment>
@@ -130,7 +130,7 @@ function Loading({ data, loadingState, Component }) {
 };
 
 Loading.propTypes = {
-	Component: PropTypes.func.isRequired,
+	children: PropTypes.node.isRequired,
 };
 
 export default Loading;
