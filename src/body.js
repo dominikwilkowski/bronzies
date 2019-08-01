@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import { Link } from '@reach/router';
 import ImageView from './imageView';
 import { jsx } from '@emotion/core';
 import { tagAnswer } from './main';
@@ -31,7 +32,7 @@ function Body({
 				<Progress questions={ questions } current={ index } rounds={ rounds } />
 				index: { index }
 				Logo
-				Highscore
+				<Link to='highscore'>Highscore</Link>
 				Score: { score }
 			</header>
 			<form onSubmit={ ( event ) => handleAnswer(

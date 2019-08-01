@@ -1,7 +1,9 @@
 /** @jsx jsx */
-import { useQuestions } from './app';
+import useRemoteData from './useRemoteData';
+import { useState, useEffect } from 'react';
+import { useGameData } from './app';
 import { jsx } from '@emotion/core';
-import { useState } from 'react';
+import Loading from './loading';
 import Body from './body';
 
 /**
@@ -75,47 +77,86 @@ export function tagAnswer( answers, image, tagName, tag ) {
  *
  * @return {array}            - A new array without the tags
  */
-export function cleanTags( questions, tagName ) {
-	return [ ...questions ].map( answer => {
-		delete answer[ tagName ];
-		return answer;
-	});
+// export function cleanTags( questions, tagName ) {
+// 	return [ ...questions ].map( answer => {
+// 		delete answer[ tagName ];
+// 		return answer;
+// 	});
+// };
+
+export function restartRound({
+	questionsDB,
+	getNewAnswers,
+	setQuestions,
+	setIndex,
+	setChoices,
+	setCorrect,
+	setUserAnswer,
+	rounds, setRounds,
+}) {
+	const newQuestions = shuffle( questionsDB );
+	setQuestions( newQuestions );
+	setIndex( 0 );
+	const newChoices = getNewAnswers( newQuestions[ 0 ], newQuestions );
+	setChoices( newChoices );
+	setCorrect( false );
+	setUserAnswer('');
+	const newRounds = rounds + 1;
+	setRounds( newRounds );
+
+	return {
+		questions: newQuestions,
+		index: 0,
+		choices: newChoices,
+		correct: false,
+		userAnswer: '',
+		rounds: newRounds,
+	}
 };
 
 /**
  * The main game where we pull each components together and store all the state we need for each game mode
  */
 function Main() {
-	const { questionsDB } = useQuestions();
+	const {
+		questionsDB, setQuestionsDB,
+		questionsImage, setQuestionsImage,
+		indexImage, setIndexImage,
+		choicesImage, setChoicesImage,
+		correctImage, setCorrectImage,
+		userAnswerImage, setUserAnswerImage,
+		roundsImage, setRoundsImage,
+		questionsText, setQuestionsText,
+		indexText, setIndexText,
+		choicesText, setChoicesText,
+		correctText, setCorrectText,
+		userAnswerText, setUserAnswerText,
+		roundsText, setRoundsText,
+		questionAsImage, setQuestionAsImage,
+		history, setHistory,
+		score, setScore,
+		wasNoLocalStorage,
+	} = useGameData();
 
-	// state for image-to-text mode
-	const [ questionsImage, setQuestionsImage ] = useState( shuffle( questionsDB ) );
-	const [ indexImage, setIndexImage ] = useState( 0 );
-	const newChoicesImage = getNewAnswers( questionsImage[ indexImage ], questionsImage );
-	const [ choicesImage, setChoicesImage ] = useState( newChoicesImage );
-	const [ correctImage, setCorrectImage ] = useState( false );
-	const [ userAnswerImage, setUserAnswerImage ] = useState('');
-	const [ roundsImage, setRoundsImage ] = useState( 1 );
-
-	// state for text-to-image mode
-	const [ questionsText, setQuestionsText ] = useState( shuffle( questionsDB ) );
-	const [ indexText, setIndexText ] = useState( 0 );
-	const newChoicesText = getNewAnswers( questionsText[ indexText ], questionsText );
-	const [ choicesText, setChoicesText ] = useState( newChoicesText );
-	const [ correctText, setCorrectText ] = useState( false );
-	const [ userAnswerText, setUserAnswerText ] = useState('');
-	const [ roundsText, setRoundsText ] = useState( 1 );
-
-	// state for both modes
-	const [ questionAsImage, setQuestionAsImage ] = useState( true );
-	const [ history, setHistory ] = useState({});
-	const [ score, setScore ] = useState( 0 );
+	let questions = questionAsImage ? questionsImage : questionsText;
+	let index = questionAsImage ? indexImage : indexText;
+	let choices = questionAsImage ? choicesText : choicesImage;
+	let correct = questionAsImage ? correctImage : correctText;
+	let userAnswer = questionAsImage ? userAnswerImage : userAnswerText;
+	let rounds = questionAsImage ? roundsImage : roundsText;
 
 	/**
 	 * If we swap directions we toggle questionAsImage and switch to another question array
 	 */
 	function reverseDirection( event ) {
-		setQuestionAsImage( !questionAsImage );
+		const newDirection = !questionAsImage;
+		setQuestionAsImage( newDirection );
+		questions = newDirection ? questionsImage : questionsText;
+		index = newDirection ? indexImage : indexText;
+		choices = newDirection ? choicesText : choicesImage;
+		correct = newDirection ? correctImage : correctText;
+		userAnswer = newDirection ? userAnswerImage : userAnswerText;
+		rounds = newDirection ? roundsImage : roundsText;
 	};
 
 	/**
@@ -183,21 +224,49 @@ function Main() {
 		setUserAnswer('');
 	};
 
+	// now let's get the latest from the server
+	const { data, loadingState } = useRemoteData( 'http://localhost:5555/api/questions' );
+	useEffect( () => {
+		if( loadingState === 'loaded' ) {
+			setQuestionsDB( data );
+			if( wasNoLocalStorage ) {
+				({
+					questions,
+					index,
+					choices,
+					correct,
+					userAnswer,
+					rounds,
+				} = restartRound({
+					questionsDB: data,
+					getNewAnswers,
+					setQuestions: questionAsImage ? setQuestionsImage : setQuestionsText,
+					setIndex: questionAsImage ? setIndexImage : setIndexText,
+					setChoices: questionAsImage ? setChoicesText : setChoicesImage,
+					setCorrect: questionAsImage ? setCorrectImage : setCorrectText,
+					setUserAnswer: questionAsImage ? setUserAnswerImage : setUserAnswerText,
+					rounds: questionAsImage ? roundsImage : roundsText,
+					setRounds: questionAsImage ? setRoundsImage : setRoundsText,
+				}));
+			}
+		}
+	}, [ loadingState ]);
+
 	/**
 	 * =~=~=~=~=~=~=~=~=~=
 	 */
 	return (
 		<main>
-			<Body
-				questions={ questionAsImage ? questionsImage : questionsText }
+			<Loading data={ questionsDB } loadingState={ loadingState } Component={ () => <Body
+				questions={ questions }
 				setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
-				index={ questionAsImage ? indexImage : indexText }
+				index={ index }
 				setIndex={ questionAsImage ? setIndexImage : setIndexText }
-				choices={ questionAsImage ? choicesImage : choicesText }
-				setChoices={ questionAsImage ? setChoicesImage : setChoicesText }
-				correct={ questionAsImage ? correctImage : correctText }
+				choices={ choices }
+				setChoices={ questionAsImage ? setChoicesText : setChoicesImage }
+				correct={ correct }
 				setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
-				userAnswer={ questionAsImage ? userAnswerImage : userAnswerText }
+				userAnswer={ userAnswer }
 				setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
 				rounds={ questionAsImage ? roundsImage : roundsText }
 				setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
@@ -206,7 +275,7 @@ function Main() {
 				reverseDirection={ reverseDirection }
 				handleNextQuestion={ handleNextQuestion }
 				handleAnswer={ handleAnswer }
-			/>
+			/> } />
 		</main>
 	);
 };

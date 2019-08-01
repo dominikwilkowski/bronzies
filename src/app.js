@@ -1,16 +1,17 @@
 /** @jsx jsx */
-import { Fragment, useState, useEffect, createContext, useContext, useRef } from 'react';
+import { Fragment, useState, createContext, useContext } from 'react';
+import Main, { shuffle, getNewAnswers } from './main';
 import { jsx, Global } from '@emotion/core';
+import { Router } from '@reach/router';
+import Highscore from './highscore';
 import { colors } from './theme';
-import Loading from './loading';
-import Main from './main';
 
 /**
- * Context for questions from REST API
+ * Context for all game data
  */
-const QuestionContext = createContext();
-export function useQuestions() {
-	return useContext( QuestionContext );
+const GameContext = createContext();
+export function useGameData() {
+	return useContext( GameContext );
 };
 
 /**
@@ -20,50 +21,60 @@ const QuestionProvider = ({ children }) => {
 	// first we check local storage for questions
 	const local = JSON.parse( localStorage.getItem('questions') );
 	let initialQuestionsDB = [];
-	let initialLoadingState = 'loading';
+	let wasNoLocalStorage = true;
 	if( local ) {
 		initialQuestionsDB = local;
-		initialLoadingState = 'loaded';
+		wasNoLocalStorage = false;
 	}
 
+	// state for question database and loading state
 	const [ questionsDB, setQuestionsDB ] = useState( initialQuestionsDB );
-	const [ loadingState, setLoadingState ] = useState( initialLoadingState );
-	const loadingStateRef = useRef( loadingState );
 
-	/**
-	 * Let's load load data and keep track of the loading state
-	 */
-	useEffect( () => {
-		// we'll mark the fetch stale after a little while to give users feedback
-		setTimeout( () => {
-			if( loadingStateRef.current === 'loading' ) setLoadingState('stale');
-		}, 3000);
+	// state for image-to-text mode
+	const [ questionsImage, setQuestionsImage ] = useState( shuffle( questionsDB ) );
+	const [ indexImage, setIndexImage ] = useState( 0 );
+	const newChoicesImage = getNewAnswers( questionsImage[ indexImage ], questionsImage );
+	const [ choicesImage, setChoicesImage ] = useState( newChoicesImage );
+	const [ correctImage, setCorrectImage ] = useState( false );
+	const [ userAnswerImage, setUserAnswerImage ] = useState('');
+	const [ roundsImage, setRoundsImage ] = useState( 1 );
 
-		// then we check the server and add the fresh questions to our state for the next round
-		const getData = async () => {
-			try {
-				const data = await fetch('http://localhost:5555/api/questions');
-				// const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
-				// await Sleep( 3500 );
-				localStorage.setItem( 'questions', JSON.stringify( await data.json() ) );
-				setQuestionsDB( JSON.parse( localStorage.getItem('questions') ) );
-				loadingStateRef.current = 'loaded';
-				setLoadingState( loadingStateRef.current );
-			}
-			catch( error ) {
-				console.error( error );
-				loadingStateRef.current = 'failed';
-				setLoadingState( loadingStateRef.current );
-			}
-		};
+	// state for text-to-image mode
+	const [ questionsText, setQuestionsText ] = useState( shuffle( questionsDB ) );
+	const [ indexText, setIndexText ] = useState( 0 );
+	const newChoicesText = getNewAnswers( questionsText[ indexText ], questionsText );
+	const [ choicesText, setChoicesText ] = useState( newChoicesText );
+	const [ correctText, setCorrectText ] = useState( false );
+	const [ userAnswerText, setUserAnswerText ] = useState('');
+	const [ roundsText, setRoundsText ] = useState( 1 );
 
-		getData();
-	}, []);
+	// state for both modes
+	const [ questionAsImage, setQuestionAsImage ] = useState( true );
+	const [ history, setHistory ] = useState({});
+	const [ score, setScore ] = useState( 0 );
 
 	return (
-		<QuestionContext.Provider value={{ questionsDB, loadingState }}>
+		<GameContext.Provider value={{
+			questionsDB, setQuestionsDB,
+			questionsImage, setQuestionsImage,
+			indexImage, setIndexImage,
+			choicesImage, setChoicesImage,
+			correctImage, setCorrectImage,
+			userAnswerImage, setUserAnswerImage,
+			roundsImage, setRoundsImage,
+			questionsText, setQuestionsText,
+			indexText, setIndexText,
+			choicesText, setChoicesText,
+			correctText, setCorrectText,
+			userAnswerText, setUserAnswerText,
+			roundsText, setRoundsText,
+			questionAsImage, setQuestionAsImage,
+			history, setHistory,
+			score, setScore,
+			wasNoLocalStorage,
+		}}>
 			{ children }
-		</QuestionContext.Provider>
+		</GameContext.Provider>
 	);
 };
 
@@ -83,7 +94,10 @@ function App() {
 				}
 			}} />
 			<QuestionProvider>
-				<Loading Component={ () => <Main /> } />
+				<Router>
+					<Main path='/' />
+					<Highscore path='/highscore' />
+				</Router>
 			</QuestionProvider>
 		</Fragment>
 	);

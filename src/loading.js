@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useTransition, animated } from 'react-spring';
 import { jsx, keyframes } from '@emotion/core';
-import { useQuestions } from './app';
+import { useGameData } from './app';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
@@ -93,9 +93,8 @@ function Animation({ loadingState }) {
  *
  * @param {function} options.Component - A component to display after loading is done
  */
-function Loading({ Component }) {
-	const { questionsDB, loadingState } = useQuestions();
-	const isLoading = questionsDB.length === 0;
+function Loading({ data, loadingState, Component }) {
+	const isLoading = data.length === 0;
 	const transitions = useTransition( isLoading, null, {
 		initial: { opacity: 1 },
 		from: { opacity: 1 },

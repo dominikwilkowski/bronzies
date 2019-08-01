@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 
 function ImageView({ image, alt }) {
 	return (
-		<figure>
+		<figure css={{
+			textAlign: 'center',
+		}}>
 			<img src={`${ image }.jpg`} alt={ alt } css={{
 				width: 'auto',
-				maxHeight: '150px',
+				height: '150px',
 			}} />
 		</figure>
 	);
