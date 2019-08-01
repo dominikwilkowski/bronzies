@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import useRemoteData from './useRemoteData';
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
 import Loading from './loading';
@@ -70,51 +70,6 @@ export function tagAnswer( answers, image, tagName, tag ) {
 };
 
 /**
- * Cleaning questions off tags from prior rounds
- *
- * @param  {array}  questions - An array of questions
- * @param  {string} tagName   - The name of the tag to be removed
- *
- * @return {array}            - A new array without the tags
- */
-// export function cleanTags( questions, tagName ) {
-// 	return [ ...questions ].map( answer => {
-// 		delete answer[ tagName ];
-// 		return answer;
-// 	});
-// };
-
-export function restartRound({
-	questionsDB,
-	getNewAnswers,
-	setQuestions,
-	setIndex,
-	setChoices,
-	setCorrect,
-	setUserAnswer,
-	rounds, setRounds,
-}) {
-	const newQuestions = shuffle( questionsDB );
-	setQuestions( newQuestions );
-	setIndex( 0 );
-	const newChoices = getNewAnswers( newQuestions[ 0 ], newQuestions );
-	setChoices( newChoices );
-	setCorrect( false );
-	setUserAnswer('');
-	const newRounds = rounds + 1;
-	setRounds( newRounds );
-
-	return {
-		questions: newQuestions,
-		index: 0,
-		choices: newChoices,
-		correct: false,
-		userAnswer: '',
-		rounds: newRounds,
-	}
-};
-
-/**
  * The main game where we pull each components together and store all the state we need for each game mode
  */
 function Main() {
@@ -138,25 +93,21 @@ function Main() {
 		wasNoLocalStorage,
 	} = useGameData();
 
-	let questions = questionAsImage ? questionsImage : questionsText;
-	let index = questionAsImage ? indexImage : indexText;
-	let choices = questionAsImage ? choicesText : choicesImage;
-	let correct = questionAsImage ? correctImage : correctText;
-	let userAnswer = questionAsImage ? userAnswerImage : userAnswerText;
-	let rounds = questionAsImage ? roundsImage : roundsText;
+	const questionsImageRef = useRef( questionsImage );
+	const choicesImageRef = useRef( choicesImage );
+	const correctImageRef = useRef( correctImage );
+	const userAnswerImageRef = useRef( userAnswerImage );
+
+	const questionsTextRef = useRef( questionsText );
+	const choicesTextRef = useRef( choicesText );
+	const correctTextRef = useRef( correctText );
+	const userAnswerTextRef = useRef( userAnswerText );
 
 	/**
 	 * If we swap directions we toggle questionAsImage and switch to another question array
 	 */
 	function reverseDirection( event ) {
-		const newDirection = !questionAsImage;
-		setQuestionAsImage( newDirection );
-		questions = newDirection ? questionsImage : questionsText;
-		index = newDirection ? indexImage : indexText;
-		choices = newDirection ? choicesText : choicesImage;
-		correct = newDirection ? correctImage : correctText;
-		userAnswer = newDirection ? userAnswerImage : userAnswerText;
-		rounds = newDirection ? roundsImage : roundsText;
+		setQuestionAsImage( !questionAsImage );
 	};
 
 	/**
@@ -230,24 +181,23 @@ function Main() {
 		if( loadingState === 'loaded' ) {
 			setQuestionsDB( data );
 			if( wasNoLocalStorage ) {
-				({
-					questions,
-					index,
-					choices,
-					correct,
-					userAnswer,
-					rounds,
-				} = restartRound({
-					questionsDB: data,
-					getNewAnswers,
-					setQuestions: questionAsImage ? setQuestionsImage : setQuestionsText,
-					setIndex: questionAsImage ? setIndexImage : setIndexText,
-					setChoices: questionAsImage ? setChoicesText : setChoicesImage,
-					setCorrect: questionAsImage ? setCorrectImage : setCorrectText,
-					setUserAnswer: questionAsImage ? setUserAnswerImage : setUserAnswerText,
-					rounds: questionAsImage ? roundsImage : roundsText,
-					setRounds: questionAsImage ? setRoundsImage : setRoundsText,
-				}));
+				questionsImageRef.current = shuffle( data );
+				setQuestionsImage( questionsImageRef.current );
+				choicesImageRef.current = getNewAnswers( questionsImageRef.current[ 0 ], questionsImageRef.current );
+				setChoicesImage( choicesImageRef.current );
+				correctImageRef.current = false;
+				setCorrectImage( correctImageRef.current );
+				userAnswerImageRef.current = '';
+				setUserAnswerImage( userAnswerImageRef.current );
+
+				questionsTextRef.current = shuffle( data );
+				setQuestionsText( questionsTextRef.current );
+				choicesTextRef.current = getNewAnswers( questionsTextRef.current[ 0 ], questionsTextRef.current );
+				setChoicesText( choicesTextRef.current );
+				correctTextRef.current = false;
+				setCorrectText( correctTextRef.current );
+				userAnswerTextRef.current = '';
+				setUserAnswerText( userAnswerTextRef.current );
 			}
 		}
 	}, [ loadingState ]);
@@ -259,15 +209,15 @@ function Main() {
 		<main>
 			<Loading data={ questionsDB } loadingState={ loadingState }>
 				<Body
-					questions={ questions }
+					questions={ questionAsImage ? questionsImageRef.current : questionsTextRef.current }
 					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
-					index={ index }
+					index={ questionAsImage ? indexImage : indexText }
 					setIndex={ questionAsImage ? setIndexImage : setIndexText }
-					choices={ choices }
+					choices={ questionAsImage ? choicesImageRef.current : choicesTextRef.current }
 					setChoices={ questionAsImage ? setChoicesText : setChoicesImage }
-					correct={ correct }
+					correct={ questionAsImage ? correctImageRef.current : correctTextRef.current }
 					setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
-					userAnswer={ userAnswer }
+					userAnswer={ questionAsImage ? userAnswerImageRef.current : userAnswerTextRef.current }
 					setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
 					rounds={ questionAsImage ? roundsImage : roundsText }
 					setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
