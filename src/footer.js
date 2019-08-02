@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { Link } from '@reach/router';
 import { jsx } from '@emotion/core';
-import PropTypes from 'prop-types';
 
 function Footer() {
 	return (
