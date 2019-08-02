@@ -2,7 +2,7 @@
 import { Link } from '@reach/router';
 import ImageView from './imageView';
 import { jsx } from '@emotion/core';
-import { tagAnswer } from './main';
+import { tagAnswer } from './game';
 import PropTypes from 'prop-types';
 import TextView from './textView';
 import Progress from './progress';
@@ -12,7 +12,7 @@ import Choices from './choices';
 /**
  * The body component shows the questions and choices respecting the direction of `questionAsImage`
  */
-function Body({
+function GameBody({
 	questions, setQuestions,
 	index, setIndex,
 	choices, setChoices,
@@ -72,7 +72,7 @@ function Body({
 	);
 };
 
-Body.propTypes = {
+GameBody.propTypes = {
 	questions: PropTypes.array.isRequired,
 	setQuestions: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
@@ -92,4 +92,4 @@ Body.propTypes = {
 	handleAnswer: PropTypes.func.isRequired,
 };
 
-export default Body;
+export default GameBody;

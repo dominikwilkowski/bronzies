@@ -4,7 +4,7 @@ import { useGameData } from './app';
 import { jsx } from '@emotion/core';
 import { useEffect } from 'react';
 import Loading from './loading';
-import Body from './body';
+import GameBody from './gameBody';
 
 /**
  * Simple Fisher–Yates shuffle function https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
@@ -72,7 +72,7 @@ export function tagAnswer( answers, image, tagName, tag ) {
 /**
  * The main game where we pull each components together and store all the state we need for each game mode
  */
-function Main() {
+function Game() {
 	const {
 		questionsDB, setQuestionsDB,
 		questionsImage, setQuestionsImage,
@@ -166,7 +166,7 @@ function Main() {
 	};
 
 	// now let's get the latest from the server
-	const { data, loadingState } = useRemoteData( 'http://localhost:5555/api/questions' );
+	const { data, loadingState } = useRemoteData('http://localhost:5555/api/questions');
 	useEffect( () => {
 		if( loadingState === 'loaded' ) {
 			setQuestionsDB( data );
@@ -208,7 +208,7 @@ function Main() {
 	return (
 		<main>
 			<Loading data={ questionsDB } loadingState={ loadingState }>
-				<Body
+				<GameBody
 					questions={ questionAsImage ? questionsImage : questionsText }
 					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
 					index={ questionAsImage ? indexImage : indexText }
@@ -232,6 +232,6 @@ function Main() {
 	);
 };
 
-Main.propTypes = {};
+Game.propTypes = {};
 
-export default Main;
+export default Game;

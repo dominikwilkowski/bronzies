@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { Fragment, useState, createContext, useContext } from 'react';
-import Main, { shuffle, getNewAnswers } from './main';
+import Game, { shuffle, getNewAnswers } from './game';
 import { jsx, Global } from '@emotion/core';
 import { Router } from '@reach/router';
 import Highscore from './highscore';
@@ -95,7 +95,7 @@ function App() {
 			}} />
 			<QuestionProvider>
 				<Router>
-					<Main path='/' />
+					<Game path='/' />
 					<Highscore path='/highscore' />
 				</Router>
 			</QuestionProvider>
