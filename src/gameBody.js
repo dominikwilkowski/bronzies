@@ -1,13 +1,12 @@
 /** @jsx jsx */
-import { Link } from '@reach/router';
 import ImageView from './imageView';
 import { jsx } from '@emotion/core';
 import { tagAnswer } from './game';
 import PropTypes from 'prop-types';
 import TextView from './textView';
-import Progress from './progress';
 import { Fragment } from 'react';
 import Choices from './choices';
+import Header from './header';
 
 /**
  * The body component shows the questions and choices respecting the direction of `questionAsImage`
@@ -27,14 +26,15 @@ function GameBody({
 }) {
 	return (
 		<Fragment>
-			<header>
-				<label>Switch <input type='checkbox' onChange={ reverseDirection } disabled={ correct } checked={ questionAsImage } /></label>
-				<Progress questions={ questions } current={ index } rounds={ rounds } />
-				index: { index }
-				Logo
-				<Link to='highscore'>Highscore</Link>
-				Score: { score }
-			</header>
+			<Header
+				questions={ questions }
+				index={ index }
+				rounds={ rounds }
+				score={ score }
+				correct={ correct }
+				reverseDirection={ reverseDirection }
+				questionAsImage={ questionAsImage }
+			/>
 			<form onSubmit={ ( event ) => handleAnswer(
 				event,
 				questions,

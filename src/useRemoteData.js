@@ -21,8 +21,8 @@ function useRemoteData( url, timeout = 3000 ) {
 			setLoadingState( loadingStateRef.current );
 			try {
 				const response = await fetch( url );
-				const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
-				await Sleep( 4000 );
+				// const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
+				// await Sleep( 4000 );
 
 				if( response.ok ) {
 					const data = await response.json();
