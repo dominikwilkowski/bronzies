@@ -5,6 +5,7 @@ import { jsx, Global } from '@emotion/core';
 import { Router } from '@reach/router';
 import Highscore from './highscore';
 import { colors } from './theme';
+import About from './about';
 
 /**
  * Context for all game data
@@ -88,6 +89,8 @@ function App() {
 				'body, html': {
 					fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", ' +
 						'"Segoe UI Symbol"',
+					padding: 0,
+					margin: 0,
 					'a': {
 						color: colors[ 0 ],
 					}
@@ -97,6 +100,7 @@ function App() {
 				<Router>
 					<Game path='/' />
 					<Highscore path='/highscore' />
+					<About path='/about' />
 				</Router>
 			</QuestionProvider>
 		</Fragment>

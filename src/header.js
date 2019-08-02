@@ -1,13 +1,30 @@
 /** @jsx jsx */
 import { Link } from '@reach/router';
+import { useGameData } from './app';
 import { jsx } from '@emotion/core';
-import PropTypes from 'prop-types';
 import Progress from './progress';
 
-function ImageView({ questions, index, rounds, score, correct, reverseDirection, questionAsImage }) {
+function ImageView() {
+	const {
+		questionsImage,
+		indexImage,
+		correctImage,
+		roundsImage,
+		questionsText,
+		indexText,
+		correctText,
+		roundsText,
+		questionAsImage, setQuestionAsImage,
+		score,
+	} = useGameData();
+	const questions = questionAsImage ? questionsImage : questionsText;
+	const index = questionAsImage ? indexImage : indexText;
+	const rounds = questionAsImage ? roundsImage : roundsText;
+	const correct = questionAsImage ? correctImage : correctText;
+
 	return (
 		<header>
-			<label>Switch <input type='checkbox' onChange={ reverseDirection } disabled={ correct } checked={ questionAsImage } /></label>
+			<label>Switch <input type='checkbox' onChange={ () => setQuestionAsImage( !questionAsImage ) } disabled={ correct } checked={ questionAsImage } /></label>
 			<Progress questions={ questions } current={ index } rounds={ rounds } />
 			index: { index }
 			Logo
@@ -18,15 +35,6 @@ function ImageView({ questions, index, rounds, score, correct, reverseDirection,
 	);
 };
 
-ImageView.propTypes = {
-	image: PropTypes.string.isRequired,
-	questions: PropTypes.array.isRequired,
-	index: PropTypes.number.isRequired,
-	rounds: PropTypes.number.isRequired,
-	score: PropTypes.number.isRequired,
-	correct: PropTypes.bool.isRequired,
-	reverseDirection: PropTypes.func.isRequired,
-	questionAsImage: PropTypes.bool.isRequired,
-};
+ImageView.propTypes = {};
 
 export default ImageView;

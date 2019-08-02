@@ -7,6 +7,7 @@ import TextView from './textView';
 import { Fragment } from 'react';
 import Choices from './choices';
 import Header from './header';
+import Footer from './footer';
 
 /**
  * The body component shows the questions and choices respecting the direction of `questionAsImage`
@@ -26,15 +27,7 @@ function GameBody({
 }) {
 	return (
 		<Fragment>
-			<Header
-				questions={ questions }
-				index={ index }
-				rounds={ rounds }
-				score={ score }
-				correct={ correct }
-				reverseDirection={ reverseDirection }
-				questionAsImage={ questionAsImage }
-			/>
+			<Header />
 			<form onSubmit={ ( event ) => handleAnswer(
 				event,
 				questions,
@@ -68,6 +61,7 @@ function GameBody({
 					/>
 				</fieldset>
 			</form>
+			<Footer />
 		</Fragment>
 	);
 };
