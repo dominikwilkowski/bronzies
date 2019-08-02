@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import useRemoteData from './useRemoteData';
-import { useEffect, useRef } from 'react';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
+import { useEffect } from 'react';
 import Loading from './loading';
 import Body from './body';
 
@@ -93,16 +93,6 @@ function Main() {
 		wasNoLocalStorage,
 	} = useGameData();
 
-	const questionsImageRef = useRef( questionsImage );
-	const choicesImageRef = useRef( choicesImage );
-	const correctImageRef = useRef( correctImage );
-	const userAnswerImageRef = useRef( userAnswerImage );
-
-	const questionsTextRef = useRef( questionsText );
-	const choicesTextRef = useRef( choicesText );
-	const correctTextRef = useRef( correctText );
-	const userAnswerTextRef = useRef( userAnswerText );
-
 	/**
 	 * If we swap directions we toggle questionAsImage and switch to another question array
 	 */
@@ -180,27 +170,37 @@ function Main() {
 	useEffect( () => {
 		if( loadingState === 'loaded' ) {
 			setQuestionsDB( data );
-			if( wasNoLocalStorage ) {
-				questionsImageRef.current = shuffle( data );
-				setQuestionsImage( questionsImageRef.current );
-				choicesImageRef.current = getNewAnswers( questionsImageRef.current[ 0 ], questionsImageRef.current );
-				setChoicesImage( choicesImageRef.current );
-				correctImageRef.current = false;
-				setCorrectImage( correctImageRef.current );
-				userAnswerImageRef.current = '';
-				setUserAnswerImage( userAnswerImageRef.current );
 
-				questionsTextRef.current = shuffle( data );
-				setQuestionsText( questionsTextRef.current );
-				choicesTextRef.current = getNewAnswers( questionsTextRef.current[ 0 ], questionsTextRef.current );
-				setChoicesText( choicesTextRef.current );
-				correctTextRef.current = false;
-				setCorrectText( correctTextRef.current );
-				userAnswerTextRef.current = '';
-				setUserAnswerText( userAnswerTextRef.current );
+			if( wasNoLocalStorage ) {
+				const newQuestionsImage = shuffle( data );
+				setQuestionsImage( newQuestionsImage );
+				setChoicesImage( getNewAnswers( newQuestionsImage[ 0 ], newQuestionsImage ) );
+				setCorrectImage( false );
+				setUserAnswerImage( '' );
+
+				const newQuestionsText = shuffle( data );
+				setQuestionsText( newQuestionsText );
+				setChoicesText( getNewAnswers( newQuestionsText[ 0 ], newQuestionsText ) );
+				setCorrectText( false );
+				setUserAnswerText( '' );
+
+				localStorage.setItem( 'questions', JSON.stringify( data ) );
 			}
 		}
-	}, [ loadingState ]);
+	}, [
+		data,
+		loadingState,
+		setChoicesImage,
+		setChoicesText,
+		setCorrectImage,
+		setCorrectText,
+		setQuestionsDB,
+		setQuestionsImage,
+		setQuestionsText,
+		setUserAnswerImage,
+		setUserAnswerText,
+		wasNoLocalStorage
+	]);
 
 	/**
 	 * =~=~=~=~=~=~=~=~=~=
@@ -209,15 +209,15 @@ function Main() {
 		<main>
 			<Loading data={ questionsDB } loadingState={ loadingState }>
 				<Body
-					questions={ questionAsImage ? questionsImageRef.current : questionsTextRef.current }
+					questions={ questionAsImage ? questionsImage : questionsText }
 					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
 					index={ questionAsImage ? indexImage : indexText }
 					setIndex={ questionAsImage ? setIndexImage : setIndexText }
-					choices={ questionAsImage ? choicesImageRef.current : choicesTextRef.current }
-					setChoices={ questionAsImage ? setChoicesText : setChoicesImage }
-					correct={ questionAsImage ? correctImageRef.current : correctTextRef.current }
+					choices={ questionAsImage ? choicesImage : choicesText }
+					setChoices={ questionAsImage ? setChoicesImage : setChoicesText }
+					correct={ questionAsImage ? correctImage : correctText }
 					setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
-					userAnswer={ questionAsImage ? userAnswerImageRef.current : userAnswerTextRef.current }
+					userAnswer={ questionAsImage ? userAnswerImage : userAnswerText }
 					setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
 					rounds={ questionAsImage ? roundsImage : roundsText }
 					setRounds={ questionAsImage ? setRoundsImage : setRoundsText }

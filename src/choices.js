@@ -9,12 +9,10 @@ import { colors } from './theme';
 /**
  * The Choices component shows the choices and validates the correctness and shows the next question button
  */
-function Choices({ items, questionAsImage, onAnswer, onSuccess, correct }) {
+function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 	const { right } = useSpring({
 		right: correct ? '0px' : '-300px',
 	});
-
-	right.interpolate( o => console.log(o) );
 
 	return (
 		<ul css={{
@@ -22,7 +20,7 @@ function Choices({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 			margin: 0,
 		}}>
 			{
-				items.map( ( item, key ) => (
+				choices.map( ( choice, key ) => (
 					<li key={ key } css={{
 						position: 'relative',
 						listStyle: 'none',
@@ -31,12 +29,12 @@ function Choices({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 							display: 'block',
 							appearance: 'none',
 							width: '100%',
-							background: item.status
-								? item.status === 'correct'
+							background: choice.status
+								? choice.status === 'correct'
 									? colors[ 3 ]
 									: colors[ 0 ]
 								: 'transparent',
-							color: item.status
+							color: choice.status
 								? '#fff'
 								: '#000',
 							padding: '12px',
@@ -50,16 +48,16 @@ function Choices({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 							'&:disabled': {
 								opacity: 0.3,
 							}
-						}} type='submit' onClick={ event => onAnswer( item.image ) } disabled={ correct }>
+						}} type='submit' onClick={ event => onAnswer( choice.image ) } disabled={ correct }>
 							{
 								questionAsImage
-									? <TextView text={ item.text } />
-									: <ImageView image={ item.image } alt={ item.alt } />
+									? <TextView text={ choice.text } />
+									: <ImageView image={ choice.image } alt={ choice.alt } />
 							}
 						</button>
 						<animated.div style={{ right }} css={{
 							position: 'absolute',
-							display: item.status === 'correct' ? 'block' : 'none',
+							display: choice.status === 'correct' ? 'block' : 'none',
 							top: 0,
 							width: '300px',
 						}}>
@@ -86,7 +84,7 @@ function Choices({ items, questionAsImage, onAnswer, onSuccess, correct }) {
 };
 
 Choices.propTypes = {
-	items: PropTypes.array.isRequired,
+	choices: PropTypes.array.isRequired,
 	questionAsImage: PropTypes.bool.isRequired,
 	onAnswer: PropTypes.func.isRequired,
 	onSuccess: PropTypes.func.isRequired,

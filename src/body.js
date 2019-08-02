@@ -60,7 +60,7 @@ function Body({
 				}}>
 					<legend>Answers:</legend>
 					<Choices
-						items={ choices }
+						choices={ choices }
 						questionAsImage={ questionAsImage }
 						onAnswer={ setUserAnswer }
 						onSuccess={ () => handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) }

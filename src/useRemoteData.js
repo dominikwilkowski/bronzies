@@ -26,7 +26,6 @@ function useRemoteData( url, timeout = 3000 ) {
 
 				if( response.ok ) {
 					const data = await response.json();
-					localStorage.setItem( 'questions', JSON.stringify( data ) );
 					setData( data );
 					loadingStateRef.current = 'loaded';
 					setLoadingState( loadingStateRef.current );
@@ -41,8 +40,8 @@ function useRemoteData( url, timeout = 3000 ) {
 				loadingStateRef.current = 'failed';
 				setLoadingState( loadingStateRef.current );
 			}
-		})( setLoadingState, timeout );
-	}, [ url ] );
+		})();
+	}, [ url, timeout ] );
 
 	return { data, loadingState: loadingStateRef.current };
 };
