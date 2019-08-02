@@ -10,14 +10,14 @@ import Header from './header';
 function Highscore() {
 	const [ highscore, setHighscore ] = useState([]);
 	const {
-		questionsImage, setQuestionsImage,
-		indexImage, setIndexImage,
-		correctImage, setCorrectImage,
-		roundsImage, setRoundsImage,
-		questionsText, setQuestionsText,
-		indexText, setIndexText,
-		correctText, setCorrectText,
-		roundsText, setRoundsText,
+		questionsImage,
+		indexImage,
+		correctImage,
+		roundsImage,
+		questionsText,
+		indexText,
+		correctText,
+		roundsText,
 		questionAsImage, setQuestionAsImage,
 		score,
 	} = useGameData();
