@@ -21,7 +21,7 @@ function Highscore() {
 	// 	score,
 	// } = useGameData();
 
-	const { data, loadingState } = useRemoteData('http://localhost:5555/api/highscore');
+	const { data, loadingState } = useRemoteData('/api/highscore');
 	useEffect( () => {
 		if( loadingState === 'loaded' ) {
 			setHighscore( data );

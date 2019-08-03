@@ -162,7 +162,7 @@ function Game() {
 	};
 
 	// now let's get the latest from the server
-	const { data, loadingState } = useRemoteData('http://localhost:5555/api/questions');
+	const { data, loadingState } = useRemoteData('/api/questions');
 	useEffect( () => {
 		if( loadingState === 'loaded' ) {
 			setQuestionsDB( data );
