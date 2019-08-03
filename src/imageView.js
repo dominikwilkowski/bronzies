@@ -11,8 +11,8 @@ function ImageView({ image, alt }) {
 		}}>
 			<SVG styling={{
 				display: 'block',
-				width: 'auto',
-				height: '150px',
+				width: '300px',
+				height: '190px',
 				margin: '0 auto',
 			}} src={ image } title='What is this signal?' description={ alt } />
 		</figure>

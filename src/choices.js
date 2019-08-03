@@ -53,7 +53,9 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 						}} type='submit' onClick={ event => onAnswer( choice.image ) } disabled={ correct }>
 							{
 								questionAsImage
-									? <TextView text={ choice.text } />
+									? <TextView text={ choice.text } styling={{
+										padding: '12px',
+									}}/>
 									: <ImageView image={ choice.image } alt={ choice.alt } />
 							}
 						</button>
@@ -73,6 +75,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 								color: '#000',
 								padding: '12px',
 								border: '#999 1px solid',
+								borderRight: 'none',
 								fontSize: '21px',
 								lineHeight: 1.2,
 								'&:hover': {
