@@ -2,9 +2,13 @@
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 
-function TextView({ text }) {
+function TextView({ text, styling }) {
 	return (
-		<span>
+		<span css={{
+			display: 'block',
+			textAlign: 'center',
+			...styling,
+		}}>
 			{ text }
 		</span>
 	);

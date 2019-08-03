@@ -25,7 +25,7 @@ function slugify( string ) {
 		.replace(/-+$/, '')       // Trim - from end of text
 }
 
-function SVG({ src, title, description, role = 'img' }) {
+function SVG({ src, title, description, role = 'img', styling }) {
 	const attr = {};
 	if( title || description ) {
 		const ids = [];
@@ -39,7 +39,7 @@ function SVG({ src, title, description, role = 'img' }) {
 	});
 
 	return (
-		<svg role={ role } { ...attr }>
+		<svg role={ role } { ...attr } css={ styling }>
 			{
 				title && <title id={ slugify(`${ src }-title`) }>{ title }</title>
 			}

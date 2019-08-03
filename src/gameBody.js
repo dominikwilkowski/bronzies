@@ -37,17 +37,47 @@ function GameBody({
 				tagAnswer,
 				score,
 			)}>
-				{
-					questionAsImage
-						? <ImageView image={ questions[ index ].image } alt={ questions[ index ].alt } />
-						: <TextView text={ questions[ index ].text } />
-				}
+				<div css={{
+					margin: '2rem 0',
+				}}>
+					{
+						questionAsImage
+							? <ImageView image={ questions[ index ].image } alt={ questions[ index ].alt } />
+							: <TextView text={ questions[ index ].text } styling={{
+								position: 'relative',
+								fontSize: '2rem',
+								lineHeight: 1,
+								':before': {
+									content: '"“"',
+									fontFamily: 'Serif',
+									fontSize: '4rem',
+								},
+								':after': {
+									content: '"”"',
+									fontFamily: 'Serif',
+									fontSize: '4rem',
+								},
+							}} />
+					}
+				</div>
 
 				<fieldset css={{
 					overflow: 'hidden',
 					padding: 0,
+					appearance: 'none',
+					border: 'none',
+					margin: 0,
 				}}>
-					<legend>Answers:</legend>
+					<legend css={{
+						width: '1px',
+						height: '1px',
+						padding: 0,
+						margin: '-1px',
+						overflow: 'hidden',
+						clip: 'rect(0,0,0,0)',
+						border: '0',
+						textIndent: '-999999em',
+					}}>Answers:</legend>
 					<Choices
 						choices={ choices }
 						questionAsImage={ questionAsImage }

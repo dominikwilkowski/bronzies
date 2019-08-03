@@ -88,15 +88,29 @@ function App() {
 	return (
 		<Fragment>
 			<Global styles={{
+				'*': {
+					boxSizing: 'border-box',
+				},
 				'body, html': {
 					fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", ' +
 						'"Segoe UI Symbol"',
 					padding: 0,
 					margin: 0,
-					'a': {
-						color: colors[ 0 ],
-					}
-				}
+					height: '100%',
+				},
+				'body': {
+					background: 'url("background.png")',
+					backgroundAttachment: 'fixed',
+					display: 'grid',
+				},
+				'#root': {
+					minHeight: '100%',
+					display: 'grid',
+					gridTemplateRows: '0fr 1fr auto',
+				},
+				'a': {
+					color: colors[ 0 ],
+				},
 			}} />
 			<QuestionProvider>
 				<Header />

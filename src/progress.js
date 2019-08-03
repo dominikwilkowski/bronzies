@@ -7,7 +7,7 @@ import { colors } from './theme';
 /**
  * A component to show the progress as dashes
  */
-function Progress({ questions, current, rounds }) {
+function Progress({ questions, current }) {
 	return (
 		<Fragment>
 				<ul css={{
@@ -15,8 +15,7 @@ function Progress({ questions, current, rounds }) {
 				listStyle: 'none',
 				display: 'flex',
 				width: '98%',
-				margin: '0 1%',
-				boxSizing: 'border-box',
+				margin: '0.5rem 1%',
 			}}>
 				{
 					questions.map( ( question, i ) => (
@@ -37,7 +36,6 @@ function Progress({ questions, current, rounds }) {
 					))
 				}
 			</ul>
-			<span>{ rounds }</span>
 		</Fragment>
 	);
 };
@@ -45,7 +43,6 @@ function Progress({ questions, current, rounds }) {
 Progress.propTypes = {
 	questions: PropTypes.array.isRequired,
 	current: PropTypes.number.isRequired,
-	rounds: PropTypes.number.isRequired,
 };
 
 export default Progress;

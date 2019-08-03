@@ -24,6 +24,8 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 					<li key={ key } css={{
 						position: 'relative',
 						listStyle: 'none',
+						overflow: 'hidden',
+						margin: '1rem 0',
 					}}>
 						<button css={{
 							display: 'block',
@@ -37,7 +39,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 							color: choice.status
 								? '#fff'
 								: '#000',
-							padding: '12px',
+							padding: '0',
 							border: 'none',
 							transition: 'background 0.3s ease, opcaity 0.3s ease, color 0.3s ease',
 							fontSize: '21px',
@@ -57,8 +59,10 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 						</button>
 						<animated.div style={{ right }} css={{
 							position: 'absolute',
-							display: choice.status === 'correct' ? 'block' : 'none',
+							alignContent: 'center',
+							display: choice.status === 'correct' ? 'grid' : 'none',
 							top: 0,
+							bottom: 0,
 							width: '300px',
 						}}>
 							<button type='button' onClick={ onSuccess } css={{
@@ -68,7 +72,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 								background: '#fff',
 								color: '#000',
 								padding: '12px',
-								border: 'none',
+								border: '#999 1px solid',
 								fontSize: '21px',
 								lineHeight: 1.2,
 								'&:hover': {
