@@ -264,7 +264,7 @@ function Game() {
 								border: '#333 1px solid',
 								transition: 'left 0.3s ease, background 0.3s ease',
 								'input:checked + &': {
-									left: '2px',
+									left: '0',
 								},
 							},
 						}}>Toggle game mode</span>
