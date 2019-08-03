@@ -19,7 +19,7 @@ function ImageView() {
 		<header>
 			index: { index }
 			rounds: { rounds }
-			Logo
+			<h1>Bonzies</h1>
 			<Link to='/highscore'>Highscore</Link>
 			<Link to='/'>Game</Link>
 			Score: { score }

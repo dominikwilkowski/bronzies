@@ -37,6 +37,7 @@ function useRemoteData( url, timeout = 3000 ) {
 				}
 			}
 			catch( error ) {
+				console.error( error );
 				loadingStateRef.current = 'failed';
 				setLoadingState( loadingStateRef.current );
 			}
