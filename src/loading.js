@@ -116,10 +116,7 @@ function Loading({ data, loadingState, children }) {
 								zIndex: 2,
 							}}><Animation loadingState={ loadingState } /></animated.div>
 						: <animated.div key='loaded' style={ props } css={{
-								position: 'absolute',
-								top: 0,
-								left: 0,
-								right: 0,
+								position: 'relative',
 								zIndex: 1,
 							}}>{ children }</animated.div>
 				}

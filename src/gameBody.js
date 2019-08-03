@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import TextView from './textView';
 import { Fragment } from 'react';
 import Choices from './choices';
-import Header from './header';
-import Footer from './footer';
 
 /**
  * The body component shows the questions and choices respecting the direction of `questionAsImage`
@@ -21,13 +19,11 @@ function GameBody({
 	rounds, setRounds,
 	questionAsImage,
 	score,
-	reverseDirection,
 	handleNextQuestion,
 	handleAnswer,
 }) {
 	return (
 		<Fragment>
-			<Header />
 			<form onSubmit={ ( event ) => handleAnswer(
 				event,
 				questions,
@@ -61,7 +57,6 @@ function GameBody({
 					/>
 				</fieldset>
 			</form>
-			<Footer />
 		</Fragment>
 	);
 };
@@ -81,7 +76,6 @@ GameBody.propTypes = {
 	setRounds: PropTypes.func.isRequired,
 	questionAsImage: PropTypes.bool.isRequired,
 	score: PropTypes.number.isRequired,
-	reverseDirection: PropTypes.func.isRequired,
 	handleNextQuestion: PropTypes.func.isRequired,
 	handleAnswer: PropTypes.func.isRequired,
 };

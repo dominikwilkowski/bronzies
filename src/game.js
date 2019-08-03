@@ -3,8 +3,9 @@ import useRemoteData from './useRemoteData';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
 import { useEffect } from 'react';
-import Loading from './loading';
 import GameBody from './gameBody';
+import Progress from './progress';
+import Loading from './loading';
 
 /**
  * Simple Fisher–Yates shuffle function https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
@@ -92,13 +93,6 @@ function Game() {
 		score, setScore,
 		wasNoLocalStorage,
 	} = useGameData();
-
-	/**
-	 * If we swap directions we toggle questionAsImage and switch to another question array
-	 */
-	function reverseDirection( event ) {
-		setQuestionAsImage( !questionAsImage );
-	};
 
 	/**
 	 * The user has found the right answer, let's now go to the next question
@@ -208,6 +202,20 @@ function Game() {
 	return (
 		<main>
 			<Loading data={ questionsDB } loadingState={ loadingState }>
+				<label>
+					Switch
+					<input
+						type='checkbox'
+						onChange={ () => setQuestionAsImage( !questionAsImage ) }
+						disabled={ questionAsImage ? correctImage : correctText }
+						checked={ questionAsImage }
+					/>
+				</label>
+				<Progress
+					questions={ questionAsImage ? questionsImage : questionsText }
+					current={ questionAsImage ? indexImage : indexText }
+					rounds={ questionAsImage ? roundsImage : roundsText }
+				/>
 				<GameBody
 					questions={ questionAsImage ? questionsImage : questionsText }
 					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
@@ -223,7 +231,6 @@ function Game() {
 					setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
 					questionAsImage={ questionAsImage }
 					score={ score }
-					reverseDirection={ reverseDirection }
 					handleNextQuestion={ handleNextQuestion }
 					handleAnswer={ handleAnswer }
 				/>

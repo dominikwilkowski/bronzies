@@ -5,8 +5,6 @@ import { Link } from '@reach/router';
 // import { useGameData } from './app';
 import { jsx } from '@emotion/core';
 import Loading from './loading';
-import Header from './header';
-import Footer from './footer';
 
 function Highscore() {
 	const [ highscore, setHighscore ] = useState([]);
@@ -32,12 +30,8 @@ function Highscore() {
 
 	return (
 		<Loading data={ highscore } loadingState={ loadingState }>
-			<Header />
-
 			<Link to='/'>Go back</Link>
 			data: { JSON.stringify(highscore) }
-
-			<Footer />
 		</Loading>
 	);
 };

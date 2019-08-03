@@ -5,6 +5,8 @@ import { jsx, Global } from '@emotion/core';
 import { Router } from '@reach/router';
 import Highscore from './highscore';
 import { colors } from './theme';
+import Header from './header';
+import Footer from './footer';
 import About from './about';
 
 /**
@@ -97,11 +99,17 @@ function App() {
 				}
 			}} />
 			<QuestionProvider>
-				<Router>
-					<Game path='/' />
-					<Highscore path='/highscore' />
-					<About path='/about' />
-				</Router>
+				<Header />
+				<div css={{
+					position: 'relative',
+				}}>
+					<Router>
+						<Game path='/' />
+						<Highscore path='/highscore' />
+						<About path='/about' />
+					</Router>
+				</div>
+				<Footer />
 			</QuestionProvider>
 		</Fragment>
 	);
