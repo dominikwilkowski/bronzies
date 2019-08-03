@@ -14,7 +14,7 @@ function ImageView({ image, alt }) {
 				width: 'auto',
 				height: '150px',
 				margin: '0 auto',
-			}} src={`/api/assets/sprite.svg#signal1`} title='What is this signal?' description={ alt } />
+			}} src={ image } title='What is this signal?' description={ alt } />
 		</figure>
 	);
 };
