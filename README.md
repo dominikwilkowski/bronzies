@@ -12,6 +12,9 @@ MVP:
 	- [ ] rounds to be added to score?
 - [ ] add about page
 - [ ] fix theme (make sane)
+- [ ] loading animation fading to logo?
+- [ ] add reporting to app
+	- [ ] https://clicky.com/ or https://matomo.org/ or https://usefathom.com/ or https://www.atinternet.com/en/
 - [ ] move all game state into single state object
 - [ ] store svg sprite in localStorage
 - [ ] add practice mode for signals you got wrong most
