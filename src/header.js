@@ -5,12 +5,9 @@ import { colors } from './theme';
 
 function ImageView() {
 	const {
-		roundsImage,
-		roundsText,
+		rounds,
 		score,
-		questionAsImage,
 	} = useGameData();
-	const rounds = questionAsImage ? roundsImage : roundsText;
 
 	return (
 		<header>

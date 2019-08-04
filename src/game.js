@@ -83,16 +83,15 @@ function Game() {
 		choicesImage, setChoicesImage,
 		correctImage, setCorrectImage,
 		userAnswerImage, setUserAnswerImage,
-		roundsImage, setRoundsImage,
 		questionsText, setQuestionsText,
 		indexText, setIndexText,
 		choicesText, setChoicesText,
 		correctText, setCorrectText,
 		userAnswerText, setUserAnswerText,
-		roundsText, setRoundsText,
 		questionAsImage, setQuestionAsImage,
 		history, setHistory,
 		score, setScore,
+		rounds, setRounds,
 		wasNoLocalStorage,
 	} = useGameData();
 
@@ -166,6 +165,7 @@ function Game() {
 	useEffect( () => {
 		if( loadingState === 'loaded' ) {
 			setQuestionsDB( data );
+			localStorage.setItem( 'questions', JSON.stringify( data ) );
 
 			if( wasNoLocalStorage ) {
 				const newQuestionsImage = shuffle( data );
@@ -179,8 +179,6 @@ function Game() {
 				setChoicesText( getNewAnswers( newQuestionsText[ 0 ], newQuestionsText ) );
 				setCorrectText( false );
 				setUserAnswerText( '' );
-
-				localStorage.setItem( 'questions', JSON.stringify( data ) );
 			}
 		}
 	}, [
@@ -276,7 +274,7 @@ function Game() {
 						height: '36px',
 						marginRight: '0.5rem',
 					}}>
-						<Link to='/highscore'>Highscore</Link>
+						<Link to='/highscore'>Score board</Link>
 					</div>
 				</div>
 				<Progress
@@ -294,10 +292,10 @@ function Game() {
 					setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
 					userAnswer={ questionAsImage ? userAnswerImage : userAnswerText }
 					setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
-					rounds={ questionAsImage ? roundsImage : roundsText }
-					setRounds={ questionAsImage ? setRoundsImage : setRoundsText }
 					questionAsImage={ questionAsImage }
 					score={ score }
+					rounds={ rounds }
+					setRounds={ setRounds }
 					handleNextQuestion={ handleNextQuestion }
 					handleAnswer={ handleAnswer }
 				/>

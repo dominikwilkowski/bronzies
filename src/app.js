@@ -40,7 +40,6 @@ const QuestionProvider = ({ children }) => {
 	const [ choicesImage, setChoicesImage ] = useState( newChoicesImage );
 	const [ correctImage, setCorrectImage ] = useState( false );
 	const [ userAnswerImage, setUserAnswerImage ] = useState('');
-	const [ roundsImage, setRoundsImage ] = useState( 1 );
 
 	// state for text-to-image mode
 	const [ questionsText, setQuestionsText ] = useState( shuffle( questionsDB ) );
@@ -49,11 +48,11 @@ const QuestionProvider = ({ children }) => {
 	const [ choicesText, setChoicesText ] = useState( newChoicesText );
 	const [ correctText, setCorrectText ] = useState( false );
 	const [ userAnswerText, setUserAnswerText ] = useState('');
-	const [ roundsText, setRoundsText ] = useState( 1 );
 
 	// state for both modes
 	const [ questionAsImage, setQuestionAsImage ] = useState( true );
 	const [ history, setHistory ] = useState({});
+	const [ rounds, setRounds ] = useState( 1 );
 	const [ score, setScore ] = useState( 0 );
 
 	return (
@@ -64,16 +63,15 @@ const QuestionProvider = ({ children }) => {
 			choicesImage, setChoicesImage,
 			correctImage, setCorrectImage,
 			userAnswerImage, setUserAnswerImage,
-			roundsImage, setRoundsImage,
 			questionsText, setQuestionsText,
 			indexText, setIndexText,
 			choicesText, setChoicesText,
 			correctText, setCorrectText,
 			userAnswerText, setUserAnswerText,
-			roundsText, setRoundsText,
 			questionAsImage, setQuestionAsImage,
 			history, setHistory,
 			score, setScore,
+			rounds, setRounds,
 			wasNoLocalStorage,
 		}}>
 			{ children }

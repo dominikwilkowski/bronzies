@@ -16,7 +16,6 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 
 	return (
 		<ul css={{
-			padding: 0,
 			margin: 0,
 			display: 'grid',
 			gridGap: '1rem',
