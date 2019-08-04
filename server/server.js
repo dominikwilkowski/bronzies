@@ -198,7 +198,7 @@ function getQuestions( req, res, next ) {
 			"id": "579587de4a6c0920359fc69d",
 			"image": "/api/assets/sprite.svg#signal21",
 			"alt": "The right arm waving above the head",
-			"text": "Assistance required",
+			"text": "Assistance required (Water to beach)",
 		},
 		{
 			"id": "579587de4a6c0920359fc69e",

@@ -18,6 +18,22 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 		<ul css={{
 			padding: 0,
 			margin: 0,
+			display: 'grid',
+			gridGap: '1rem',
+			gridTemplateColumns: '1fr',
+			padding: '1rem 0',
+			'@media(min-width: 600px)': {
+				gridTemplateColumns: questionAsImage ? '1fr' : '1fr 1fr',
+			},
+			'@media(min-width: 900px)': {
+				gridTemplateColumns: questionAsImage ? '1fr' : '1fr 1fr 1fr',
+			},
+			'@media(min-width: 1200px)': {
+				gridTemplateColumns: questionAsImage ? '1fr' : '1fr 1fr 1fr 1fr',
+			},
+			'@media(min-width: 1500px)': {
+				gridTemplateColumns: questionAsImage ? '1fr' : '1fr 1fr 1fr 1fr 1fr',
+			},
 		}}>
 			{
 				choices.map( ( choice, key ) => (
@@ -25,7 +41,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 						position: 'relative',
 						listStyle: 'none',
 						overflow: 'hidden',
-						margin: '1rem 0',
+						boxShadow: questionAsImage ? 'none' : '0px 0px 12px -6px rgba(0,0,0,0.75)',
 					}}>
 						<button css={{
 							display: 'block',
