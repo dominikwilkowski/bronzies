@@ -161,7 +161,7 @@ function Game() {
 	};
 
 	// now let's get the latest from the server
-	const { data, loadingState } = useRemoteData('/api/questions');
+	const { data, loadingState } = useRemoteData('/api/signals');
 	useEffect( () => {
 		if( loadingState === 'loaded' ) {
 			setQuestionsDB( data );
@@ -204,11 +204,12 @@ function Game() {
 			<Loading data={ questionsDB } loadingState={ loadingState }>
 				<div css={{
 					overflow: 'hidden',
+					display: 'grid',
+					gridTemplateColumns: '1fr 1fr 1fr',
 				}}>
 					<label css={{
 						display: 'inline-block',
 						position: 'relative',
-						float: 'left',
 						padding: '18px 0',
 						marginLeft: '0.5rem',
 						width: '50px',
@@ -270,17 +271,28 @@ function Game() {
 					<div css={{
 						display: 'grid',
 						alignContent: 'center',
-						float: 'right',
+						height: '36px',
+						marginRight: '0.5rem',
+						textAlign: 'center',
+					}}>
+						<Link to='/mode'>Mode: Signals</Link>
+					</div>
+					<div css={{
+						display: 'grid',
+						alignContent: 'center',
+						textAlign: 'right',
 						height: '36px',
 						marginRight: '0.5rem',
 					}}>
 						<Link to='/highscore'>Score board</Link>
 					</div>
 				</div>
+
 				<Progress
 					questions={ questionAsImage ? questionsImage : questionsText }
 					current={ questionAsImage ? indexImage : indexText }
 				/>
+
 				<GameBody
 					questions={ questionAsImage ? questionsImage : questionsText }
 					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }

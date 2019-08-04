@@ -116,7 +116,7 @@ function App() {
 					position: 'relative',
 				}}>
 					<Router>
-						<Game path='/' />
+						<Game default />
 						<Highscore path='/highscore' />
 						<About path='/about' />
 					</Router>

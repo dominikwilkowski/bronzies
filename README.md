@@ -1,8 +1,28 @@
 bronzies.com
 ============
 
-> A Lifesaver learning app for bronze proficiency level, it tries to teach you the signals and might expand to other areas as well in the future
+## Todos
 
+MVP:
+- [ ] finish highscore page
+	- [ ] form submission
+	- [ ] breakdown of what you got wrong most
+	- [ ] push ups
+	- [ ] show how many in highscore all together
+	- [ ] rounds to be added to score?
+- [ ] add about page
+- [ ] fix theme (make sane)
+- [ ] move all game state into single state object
+- [ ] store svg sprite in localStorage
+- [ ] add practice mode for signals you got wrong most
+- [ ] fix this readme
+
+Next:
+- [ ] add more modes for types of beaches etc
+- [ ] rebuild server
+	- [ ] postgres
+	- [ ] post answer object as opposed to done score
+	- [ ] move to graphql
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -38,13 +58,13 @@ _The newly added entry will have an aditional key to id it: `justadded: true`_
 ## Run the build
 
 ```shell
-npm i
-grunt
+yarn
+yarn start
 ```
 
 ## Run web app
 
-Navigate your browser to the `dev/` folder.
+Navigate your browser to [`http://localhost:3000`](http://localhost:3000).
 
 ## Run the server
 
@@ -98,7 +118,7 @@ forever start -l blender.log --append -o blenderOut.log -e blenderError.log serv
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# Release History App
+### Release History App
 * 0.1.5 - Removed cordova build, changed endpoints
 * 0.1.4 - Added cordova build
 * 0.1.3 - Fixed CSS and highscore issues
@@ -107,7 +127,7 @@ forever start -l blender.log --append -o blenderOut.log -e blenderError.log serv
 * 0.1.0 - Completely refactored the code, No Design yet
 * 0.0.3 - Moved an old version into the repo and developed the RESTful API
 
-# Release History RestAPI
+### Release History RestAPI
 * 0.0.3 - fixed dependencies, changed endpoints
 * 0.0.2 - moved to MongoDB
 * 0.0.1 - Created server, routes and endpoints
