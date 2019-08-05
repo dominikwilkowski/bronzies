@@ -4,6 +4,7 @@ bronzies.com
 ## Todos
 
 MVP:
+- [ ] add roundToggle to toggle what quesions you play
 - [ ] finish highscore page
 	- [ ] form submission
 	- [ ] breakdown of what you got wrong most

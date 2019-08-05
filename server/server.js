@@ -146,12 +146,12 @@ function getSignals( req, res, next ) {
 		// 	"alt": "A person in an IRB waving their right hand on the side",
 		// 	"text": "Boat wishes to return to shore",
 		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc695",
-		// 	"image": "/api/assets/signals.svg#signal13",
-		// 	"alt": "A person kneeling on a rescue board holding both arms straight up",
-		// 	"text": "Emergency evacuation alarm (Water to beach)",
-		// },
+		{
+			"id": "579587de4a6c0920359fc695",
+			"image": "/api/assets/signals.svg#signal13",
+			"alt": "A person kneeling on a rescue board holding both arms straight up",
+			"text": "Emergency evacuation alarm (Water to beach)",
+		},
 		// {
 		// 	"id": "579587de4a6c0920359fc696",
 		// 	"image": "/api/assets/signals.svg#signal14",

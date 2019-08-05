@@ -113,16 +113,19 @@ function Game() {
 		setCorrect( false );
 
 		let newIndex = index;
+		let newQuestions = questions;
 		if( index === questions.length - 1 ) {
-			setQuestions( shuffle( questionsDB ) ); // we only take the questionsDB on new round to not disrupt the round mid-way
+			newIndex = 0;
+			const newQuestions = shuffle( questions );
+			setQuestions( newQuestions );
 			setRounds( rounds + 1 );
-			setIndex( 0 );
+			setIndex( newIndex );
 		}
 		else {
 			newIndex ++;
 			setIndex( newIndex );
 		}
-		const newChoices = getNewAnswers( questions[ newIndex ], questions );
+		const newChoices = getNewAnswers( newQuestions[ newIndex ], newQuestions );
 		setChoices( newChoices );
 	};
 
