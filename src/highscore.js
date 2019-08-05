@@ -46,15 +46,15 @@ function Highscore() {
 	const [ highscore, setHighscore ] = useState([]);
 	const { questionsDB, score, history } = useGameData();
 	const myPosition = getPosition( score, highscore );
-	const mockHistory = {
-		"/api/assets/signals.svg#signal1": 1,
-		"/api/assets/signals.svg#signal19": 4,
-		"/api/assets/signals.svg#signal2": 4,
-		"/api/assets/signals.svg#signal21": 12,
-		"/api/assets/signals.svg#signal22": 1,
-		"/api/assets/signals.svg#signal13": 5,
-	};
-	const wrongAnswers = getSortedWrongAnswers( mockHistory, questionsDB );
+	// const mockHistory = {
+	// 	"/api/assets/signals.svg#signal1": 1,
+	// 	"/api/assets/signals.svg#signal19": 4,
+	// 	"/api/assets/signals.svg#signal2": 4,
+	// 	"/api/assets/signals.svg#signal21": 12,
+	// 	"/api/assets/signals.svg#signal22": 1,
+	// 	"/api/assets/signals.svg#signal13": 5,
+	// };
+	const wrongAnswers = getSortedWrongAnswers( history, /*mockHistory, */questionsDB );
 
 	const { data, loadingState } = useRemoteData('/api/highscore');
 	useEffect( () => {
@@ -80,8 +80,8 @@ function Highscore() {
 			}}>Go back to the game</Link>
 
 			{
-				wrongAnswers.length &&
-					<Fragment>
+				wrongAnswers.length > 0
+					? <Fragment>
 						<p css={{
 							textAlign: 'center',
 						}}>The answers you got wrong the most are:</p>
@@ -112,6 +112,7 @@ function Highscore() {
 							}
 						</ul>
 					</Fragment>
+					: null
 			}
 
 			<form css={{
