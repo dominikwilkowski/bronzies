@@ -105,6 +105,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, round 
 
 function RoundToggle() {
 	const {
+		signals,
 		wrongAnswers,
 		setQuestionsImage,
 		setChoicesImage,
@@ -128,13 +129,13 @@ function RoundToggle() {
 	function handleRoundChange( questions, round ) {
 		const newQuestionsImage = shuffle( questions );
 		setQuestionsImage( newQuestionsImage );
-		const newChoicesImage = getNewAnswers( newQuestionsImage[ 0 ], newQuestionsImage );
+		const newChoicesImage = getNewAnswers( newQuestionsImage[ 0 ], newQuestionsImage, signals );
 		setChoicesImage( newChoicesImage );
 		setIndexImage( 0 );
 
 		const newQuestionsText = shuffle( questions );
 		setQuestionsText( newQuestionsText );
-		const newChoicesText = getNewAnswers( newQuestionsText[ 0 ], newQuestionsText );
+		const newChoicesText = getNewAnswers( newQuestionsText[ 0 ], newQuestionsText, signals );
 		setChoicesText( newChoicesText );
 		setIndexText( 0 );
 

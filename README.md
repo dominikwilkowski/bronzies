@@ -4,7 +4,6 @@ bronzies.com
 ## Todos
 
 MVP:
-- [ ] make sure practice round has enough answers
 - [ ] store svg sprite in localStorage and on page (no remote svg anymore)
 - [ ] finish highscore page
 	- [ ] form submission

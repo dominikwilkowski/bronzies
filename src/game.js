@@ -42,7 +42,17 @@ export function shuffle( array ) {
  *
  * @return {array}                - A subset of the input array, shuffled and including the `current` item
  */
-export function getNewAnswers( current, deck, shuffleDeck = shuffle, limit = 4 ) {
+export function getNewAnswers( current, deck, db = [], shuffleDeck = shuffle, limit = 4 ) {
+	if( deck.length < limit ) {
+		deck = [
+			...deck,
+			...shuffleDeck(
+				db
+					.filter( question => question.image !== current.image ) )
+					.slice( 0, ( limit - deck.length )
+			),
+		];
+	}
 	let newCards = [
 		...shuffleDeck(
 			deck.filter( question => question.image !== current.image )
@@ -86,7 +96,7 @@ export function onUnload( event ) {
 function Game() {
 	const {
 		questionsDB, setQuestionsDB,
-		setSignals,
+		signals, setSignals,
 		questionsImage, setQuestionsImage,
 		indexImage, setIndexImage,
 		choicesImage, setChoicesImage,
@@ -133,7 +143,7 @@ function Game() {
 			newIndex ++;
 			setIndex( newIndex );
 		}
-		const newChoices = getNewAnswers( newQuestions[ newIndex ], newQuestions );
+		const newChoices = getNewAnswers( newQuestions[ newIndex ], newQuestions, signals );
 		setChoices( newChoices );
 	};
 
