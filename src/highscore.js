@@ -44,11 +44,10 @@ export function getSortedWrongAnswers( wrongAnswers, db ) {
 };
 
 function Highscore() {
+	const { signals, score, history, wrongAnswers } = useGameData();
 	const [ highscore, setHighscore ] = useState([]);
-	const { score, history, wrongAnswers } = useGameData();
 	const myPosition = getPosition( score, highscore );
 	const hasPlayed = history.length > 0;
-	const questionsDB = JSON.parse( localStorage.getItem('questions') );
 
 	// const mockHistory = {
 	// 	"/api/assets/signals.svg#signal1": 1,
@@ -58,7 +57,7 @@ function Highscore() {
 	// 	"/api/assets/signals.svg#signal22": 1,
 	// 	"/api/assets/signals.svg#signal13": 5,
 	// };
-	const wrongAnswersDB = getSortedWrongAnswers( wrongAnswers, questionsDB );
+	const wrongAnswersDB = getSortedWrongAnswers( wrongAnswers, signals );
 
 	const { data, loadingState } = useRemoteData('/api/highscore');
 	useEffect( () => {

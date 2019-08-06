@@ -5,11 +5,12 @@ import { shuffle, getNewAnswers } from './game';
 import { Fragment, useState } from 'react';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
+import { colors } from './theme';
 import Button from './button';
 
-function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange }) {
-	const { questionsDB, wrongAnswers } = useGameData();
-	const questions = getSortedWrongAnswers( wrongAnswers, questionsDB );
+function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, round }) {
+	const { signals, wrongAnswers } = useGameData();
+	const questions = getSortedWrongAnswers( wrongAnswers, signals );
 
 	return (
 		<Fragment>
@@ -37,11 +38,21 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange }) {
 					padding: 0,
 				}}>
 					<li css={{
+						position: 'relative',
+						':after': {
+							content: '""',
+							display: round === 'Signals' ? 'block' : 'none',
+							position: 'absolute',
+							top: '1.4rem',
+							left: 0,
+							border: 'transparent 4px solid',
+							borderLeft: `${ colors[ 0 ] } 7px solid`,
+						},
 					}}>
-						<Button onClick={ () => handleRoundChange( JSON.parse( localStorage.getItem('questions') ), 'Signals' ) } styling={{
+						<Button onClick={ () => handleRoundChange( signals, 'Signals' ) } styling={{
 							paddingBottom: '0.5rem',
 						}}>
-							Signals
+							Signals?
 						</Button>
 						<small css={{
 							display: 'block',
@@ -51,11 +62,22 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange }) {
 							Learn the international SLSA signals to communicate between water and shore.
 						</small>
 					</li>
-					<li>
+					<li css={{
+						position: 'relative',
+						':after': {
+							content: '""',
+							display: round === 'Practice' ? 'block' : 'none',
+							position: 'absolute',
+							top: '1.4rem',
+							left: 0,
+							border: 'transparent 4px solid',
+							borderLeft: `${ colors[ 0 ] } 7px solid`,
+						},
+					}}>
 						<Button onClick={ () => handleRoundChange( questions, 'Practice' ) } styling={{
 							paddingBottom: '0.5rem',
 						}}>
-							Practise
+							Practice
 						</Button>
 						<small css={{
 							display: 'block',
@@ -138,7 +160,14 @@ function RoundToggle() {
 								marginLeft: '-7.5rem',
 								boxShadow: '0 10px 10px rgba(100,100,100,0.5)',
 							}}>
-								<Menu key={ isOpen } isOpen={ isOpen } setIsOpen={ setIsOpen } wrongAnswersLength={ wrongAnswersLength } handleRoundChange={ handleRoundChange } />
+								<Menu
+									key={ isOpen }
+									isOpen={ isOpen }
+									setIsOpen={ setIsOpen }
+									wrongAnswersLength={ wrongAnswersLength }
+									handleRoundChange={ handleRoundChange }
+									round={ round }
+								/>
 							</animated.div>
 						: null
 				})

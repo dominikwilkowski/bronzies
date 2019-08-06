@@ -31,6 +31,7 @@ const QuestionProvider = ({ children }) => {
 	}
 
 	// state for question database and loading state
+	const [ signals, setSignals ] = useState( initialQuestionsDB );
 	const [ questionsDB, setQuestionsDB ] = useState( initialQuestionsDB );
 
 	// state for image-to-text mode
@@ -59,6 +60,7 @@ const QuestionProvider = ({ children }) => {
 	return (
 		<GameContext.Provider value={{
 			questionsDB, setQuestionsDB,
+			signals, setSignals,
 			questionsImage, setQuestionsImage,
 			indexImage, setIndexImage,
 			choicesImage, setChoicesImage,

@@ -86,6 +86,7 @@ export function onUnload( event ) {
 function Game() {
 	const {
 		questionsDB, setQuestionsDB,
+		setSignals,
 		questionsImage, setQuestionsImage,
 		indexImage, setIndexImage,
 		choicesImage, setChoicesImage,
@@ -180,6 +181,7 @@ function Game() {
 	useEffect( () => {
 		if( loadingState === 'loaded' ) {
 			setQuestionsDB( data );
+			setSignals( data );
 			localStorage.setItem( 'questions', JSON.stringify( data ) );
 
 			if( wasNoLocalStorage ) {
@@ -204,6 +206,7 @@ function Game() {
 		setCorrectImage,
 		setCorrectText,
 		setQuestionsDB,
+		setSignals,
 		setQuestionsImage,
 		setQuestionsText,
 		setUserAnswerImage,
@@ -238,7 +241,7 @@ function Game() {
 						height: '36px',
 						marginRight: '0.5rem',
 					}}>
-						<Link to='/highscore'>Score board</Link>
+						<Link to='/highscore'>Score&nbsp;board</Link>
 					</div>
 				</div>
 

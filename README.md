@@ -4,20 +4,21 @@ bronzies.com
 ## Todos
 
 MVP:
+- [ ] make sure practice round has enough answers
+- [ ] store svg sprite in localStorage and on page (no remote svg anymore)
 - [ ] finish highscore page
 	- [ ] form submission
 	- [ ] push ups
 	- [ ] rounds/index to be added to score?
 - [ ] fill about page
-- [ ] fix theme (make sane)
 - [ ] loading animation fading to logo?
 - [ ] add reporting to app
 	- [ ] https://clicky.com/ or https://matomo.org/ or https://usefathom.com/ or https://www.atinternet.com/en/
 - [ ] move some game state into single state object
-- [ ] store svg sprite in localStorage and on page (no remote svg anymore)
 - [ ] fix this readme
 
 Next:
+- [ ] fix theme (make sane)
 - [ ] add more modes for types of beaches etc
 - [ ] show how many in highscore all together
 - [ ] rebuild server
