@@ -22,17 +22,24 @@ export function useGameData() {
  */
 const QuestionProvider = ({ children }) => {
 	// first we check local storage for questions
-	const local = JSON.parse( localStorage.getItem('questions') );
+	const localQuestions = JSON.parse( localStorage.getItem('questions') );
 	let initialQuestionsDB = [];
-	let wasNoLocalStorage = true;
-	if( local ) {
-		initialQuestionsDB = local;
-		wasNoLocalStorage = false;
+	if( localQuestions ) {
+		initialQuestionsDB = localQuestions;
 	}
+
+	const localSvg = localStorage.getItem('questions');
+	let initialSvg = [];
+	if( localSvg ) {
+		initialSvg = localSvg;
+	}
+
+	const wasNoLocalStorage = localQuestions && localSvg ? false : true;
 
 	// state for question database and loading state
 	const [ signals, setSignals ] = useState( initialQuestionsDB );
 	const [ questionsDB, setQuestionsDB ] = useState( initialQuestionsDB );
+	const [ svg, setSvg ] = useState( initialSvg );
 
 	// state for image-to-text mode
 	const [ questionsImage, setQuestionsImage ] = useState( shuffle( questionsDB ) );
@@ -60,6 +67,7 @@ const QuestionProvider = ({ children }) => {
 	return (
 		<GameContext.Provider value={{
 			questionsDB, setQuestionsDB,
+			svg, setSvg,
 			signals, setSignals,
 			questionsImage, setQuestionsImage,
 			indexImage, setIndexImage,
@@ -119,6 +127,14 @@ function App() {
 				<div css={{
 					position: 'relative',
 				}}>
+					<div id='svgSprite' css={{
+						position: 'fixed',
+						top: '-2rem',
+						left: '-2rem',
+						width: 0,
+						height: 0,
+						overflow: 'hidden',
+					}}></div>
 					<Router>
 						<Game default />
 						<Highscore path='/highscore' />

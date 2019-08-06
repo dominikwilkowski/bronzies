@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 /**
  * A hook to load data from remote and keep track of the loading state
  */
-function useRemoteData( url, timeout = 3000 ) {
+function useRemoteData( url, isJson = true, timeout = 3000 ) {
 	const [ loadingState, setLoadingState ] = useState('loading');
 	const loadingStateRef = useRef( loadingState );
 	const [ data, setData ] = useState([]);
@@ -25,7 +25,7 @@ function useRemoteData( url, timeout = 3000 ) {
 				// await Sleep( 4000 );
 
 				if( response.ok ) {
-					const data = await response.json();
+					const data = isJson ? await response.json() : await response.text();
 					setData( data );
 					loadingStateRef.current = 'loaded';
 					setLoadingState( loadingStateRef.current );

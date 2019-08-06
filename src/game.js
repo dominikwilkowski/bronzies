@@ -96,6 +96,7 @@ export function onUnload( event ) {
 function Game() {
 	const {
 		questionsDB, setQuestionsDB,
+		svg, setSvg,
 		signals, setSignals,
 		questionsImage, setQuestionsImage,
 		indexImage, setIndexImage,
@@ -187,29 +188,50 @@ function Game() {
 	};
 
 	// now let's get the latest from the server
-	const { data, loadingState } = useRemoteData('/api/signals');
+	const { data, loadingState: dataLoaded } = useRemoteData('/api/signals');
+	const { data: svgData, loadingState: svgLoaded } = useRemoteData( '/api/assets/signals.svg', false );
+	let loadingState = 'loading';
 	useEffect( () => {
-		if( loadingState === 'loaded' ) {
+		if( dataLoaded === 'stale' || svgLoaded === 'stale' ) {
+			loadingState = 'stale';
+		}
+		if( dataLoaded === 'loaded' && svgLoaded === 'loaded' ) {
+			loadingState = 'loaded';
+		}
+
+		if( dataLoaded === 'loaded' ) {
+			localStorage.setItem( 'questions', JSON.stringify( data ) );
 			setQuestionsDB( data );
 			setSignals( data );
-			localStorage.setItem( 'questions', JSON.stringify( data ) );
 
 			if( wasNoLocalStorage ) {
 				const newQuestionsImage = shuffle( data );
 				setQuestionsImage( newQuestionsImage );
 				setChoicesImage( getNewAnswers( newQuestionsImage[ 0 ], newQuestionsImage ) );
 				setCorrectImage( false );
-				setUserAnswerImage( '' );
+				setUserAnswerImage('');
 
 				const newQuestionsText = shuffle( data );
 				setQuestionsText( newQuestionsText );
 				setChoicesText( getNewAnswers( newQuestionsText[ 0 ], newQuestionsText ) );
 				setCorrectText( false );
-				setUserAnswerText( '' );
+				setUserAnswerText('');
 			}
 		}
+
+		if( svgLoaded === 'loaded' ) {
+			localStorage.setItem( 'svg', svgData );
+			setSvg( svgData );
+			document
+				.getElementById('svgSprite')
+				.innerHTML = svgData;
+		}
+
 	}, [
 		data,
+		dataLoaded,
+		svg,
+		svgLoaded,
 		loadingState,
 		setChoicesImage,
 		setChoicesText,
