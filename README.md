@@ -4,25 +4,22 @@ bronzies.com
 ## Todos
 
 MVP:
-- [ ] add roundToggle to toggle what quesions you play
 - [ ] finish highscore page
 	- [ ] form submission
-	- [ ] breakdown of what you got wrong most
 	- [ ] push ups
-	- [ ] show how many in highscore all together
-	- [ ] rounds to be added to score?
-- [ ] add about page
+	- [ ] rounds/index to be added to score?
+- [ ] fill about page
 - [ ] fix theme (make sane)
 - [ ] loading animation fading to logo?
 - [ ] add reporting to app
 	- [ ] https://clicky.com/ or https://matomo.org/ or https://usefathom.com/ or https://www.atinternet.com/en/
-- [ ] move all game state into single state object
-- [ ] store svg sprite in localStorage
-- [ ] add practice mode for signals you got wrong most
+- [ ] move some game state into single state object
+- [ ] store svg sprite in localStorage and on page (no remote svg anymore)
 - [ ] fix this readme
 
 Next:
 - [ ] add more modes for types of beaches etc
+- [ ] show how many in highscore all together
 - [ ] rebuild server
 	- [ ] postgres
 	- [ ] post answer object as opposed to done score
