@@ -8,7 +8,6 @@ import { jsx } from '@emotion/core';
 import { useEffect } from 'react';
 import GameBody from './gameBody';
 import Progress from './progress';
-import { colors } from './theme';
 import Loading from './loading';
 
 /**
@@ -75,6 +74,13 @@ export function tagAnswer( answers, image, tagName, tag ) {
 };
 
 /**
+ * The beforeunload handler
+ */
+export function onUnload( event ) {
+	event.returnValue = 'You still have unsaved score in your game, you will loose if you leave now.';
+};
+
+/**
  * The main game where we pull each components together and store all the state we need for each game mode
  */
 function Game() {
@@ -92,6 +98,7 @@ function Game() {
 		userAnswerText, setUserAnswerText,
 		questionAsImage, setQuestionAsImage,
 		history, setHistory,
+		wrongAnswers, setWrongAnswers,
 		score, setScore,
 		rounds, setRounds,
 		wasNoLocalStorage,
@@ -146,6 +153,9 @@ function Game() {
 	 */
 	function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score ) {
 		event.preventDefault();
+		window.addEventListener( 'beforeunload', onUnload );
+		history.push([ questions[ index ].text, userAnswer ]);
+		setHistory( history );
 
 		if( questions[ index ].image === userAnswer ) {
 			setChoices( tagAnswer( choices, userAnswer, 'status', 'correct' ) );
@@ -156,8 +166,8 @@ function Game() {
 		else {
 			setChoices( tagAnswer( choices, userAnswer, 'status', 'wrong' ) );
 			setQuestions( tagAnswer( questions, questions[ index ].image, 'correct', false ) );
-			history[ questions[ index ].image ] = history[ questions[ index ].image ] ? history[ questions[ index ].image ] + 1 : 1;
-			setHistory( history );
+			wrongAnswers[ questions[ index ].image ] = wrongAnswers[ questions[ index ].image ] ? wrongAnswers[ questions[ index ].image ] + 1 : 1;
+			setWrongAnswers( wrongAnswers );
 			setCorrect( false );
 			setScore( score - 1 );
 		}
@@ -208,9 +218,8 @@ function Game() {
 		<main>
 			<Loading data={ questionsDB } loadingState={ loadingState }>
 				<div css={{
-					overflow: 'hidden',
 					display: 'grid',
-					gridTemplateColumns: '1fr 1fr 1fr',
+					gridTemplateColumns: '1fr auto 1fr',
 				}}>
 					<GameToggle isChecked={ questionAsImage } setIsChecked={ setQuestionAsImage } isDisabled={ questionAsImage ? correctImage : correctText } />
 					<div css={{

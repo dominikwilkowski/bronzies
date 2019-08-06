@@ -118,8 +118,8 @@ function Loading({ data, loadingState, children }) {
 								position: 'relative',
 								zIndex: 1,
 							}}>{ children }</animated.div>
-				}
-			)}
+				})
+			}
 		</Fragment>
 	);
 };

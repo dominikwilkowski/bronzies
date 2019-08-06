@@ -5,6 +5,7 @@ import { Link } from '@reach/router';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
 // import { colors } from './theme';
+import { onUnload } from './game';
 import Loading from './loading';
 
 /**
@@ -30,22 +31,25 @@ function getPosition( score, highscore ) {
 /**
  * Sort all wrong answers by highest first then return an array of them in an array as question object from db
  *
- * @param  {object} history - An object of all wrong answers
- * @param  {array}  db      - A collection of all questions
+ * @param  {object} wrongAnswers - An object of all wrong answers
+ * @param  {array}  db           - A collection of all questions
  *
- * @return {array}          - An array of all wrong answers sorted and as full objects each
+ * @return {array}               - An array of all wrong answers sorted and as full objects each
  */
-function getSortedWrongAnswers( history, db ) {
+export function getSortedWrongAnswers( wrongAnswers, db ) {
 	return Object
-		.entries({ ...history })
+		.entries({ ...wrongAnswers })
 		.sort( ( a, b ) => b[ 1 ] - a[ 1 ] )
 		.map( item => db.find( a => a.image === item[ 0 ] ) );
 };
 
 function Highscore() {
 	const [ highscore, setHighscore ] = useState([]);
-	const { questionsDB, score, history } = useGameData();
+	const { score, history, wrongAnswers } = useGameData();
 	const myPosition = getPosition( score, highscore );
+	const hasPlayed = history.length > 0;
+	const questionsDB = JSON.parse( localStorage.getItem('questions') );
+
 	// const mockHistory = {
 	// 	"/api/assets/signals.svg#signal1": 1,
 	// 	"/api/assets/signals.svg#signal19": 4,
@@ -54,7 +58,7 @@ function Highscore() {
 	// 	"/api/assets/signals.svg#signal22": 1,
 	// 	"/api/assets/signals.svg#signal13": 5,
 	// };
-	const wrongAnswers = getSortedWrongAnswers( history, /*mockHistory, */questionsDB );
+	const wrongAnswersDB = getSortedWrongAnswers( wrongAnswers, questionsDB );
 
 	const { data, loadingState } = useRemoteData('/api/highscore');
 	useEffect( () => {
@@ -62,6 +66,11 @@ function Highscore() {
 			setHighscore( data );
 		}
 	}, [ data, loadingState, setHighscore ]);
+
+	function handleSubmit( event ) {
+		event.preventDefault();
+		window.removeEventListener( 'beforeunload', onUnload );
+	};
 
 	// generated with https://pinetools.com/gradient-generator
 	const gradient = [
@@ -80,7 +89,7 @@ function Highscore() {
 			}}>Go back to the game</Link>
 
 			{
-				wrongAnswers.length > 0
+				wrongAnswersDB.length > 0
 					? <Fragment>
 						<p css={{
 							textAlign: 'center',
@@ -102,7 +111,7 @@ function Highscore() {
 							}
 						}}>
 							{
-								wrongAnswers.slice( 0, 5 ).map( ( answer, i ) => (
+								wrongAnswersDB.slice( 0, 5 ).map( ( answer, i ) => (
 									<li key={ i } css={{
 										margin: '0.5rem 0',
 									}}>
@@ -115,53 +124,57 @@ function Highscore() {
 					: null
 			}
 
-			<form css={{
-				position: 'relative',
-				textAlign: 'center',
-				fontSize: '1.3rem',
-				padding: '0 0 2rem 0',
-				margin: '1rem 0 4rem 0',
-				':after': {
-					content: '""',
-					position: 'absolute',
-					left: 0,
-					right: 0,
-					bottom: '-2rem',
-					height: '2rem',
-					background: 'repeating-linear-gradient( -45deg, transparent, transparent 12px, rgba( 100, 100, 100, 0.1 ) 12px, rgba( 100, 100, 100, 0.1 ) 30px )',
-				}
-			}}>
-				<p>Enter yourself into the score board.</p>
-
-				{
-					myPosition < 50
-						? <p css={{ fontWeight: 800, }}>
-								You made it into the top 50, to position
-								<span css={{
-									color: gradient[ myPosition ],
-									fontSize: '2rem',
-									margin: '0.4rem',
-								}}>
-									{ myPosition }
-								</span>
-							</p>
-						: null
-				}
-
-				<label>
-					<span css={{ display: 'block', }}>Your name:</span>
-					<input type='text' placeholder='Enter your name' css={{
-						apperance: 'none',
-						boxShadow: 'none',
-						border: 'none',
-						padding: '1rem',
-						fontSize: '1.5rem',
-						width: '80%',
-						margin: '0.5rem 0 0 0',
+			{
+				hasPlayed
+					? <form onSubmit={ handleSubmit } css={{
+						position: 'relative',
 						textAlign: 'center',
-					}} />
-				</label>
-			</form>
+						fontSize: '1.3rem',
+						padding: '0 0 2rem 0',
+						margin: '1rem 0 4rem 0',
+						':after': {
+							content: '""',
+							position: 'absolute',
+							left: 0,
+							right: 0,
+							bottom: '-2rem',
+							height: '2rem',
+							background: 'repeating-linear-gradient( -45deg, transparent, transparent 12px, rgba( 100, 100, 100, 0.1 ) 12px, rgba( 100, 100, 100, 0.1 ) 30px )',
+						}
+					}}>
+						<p>Enter yourself into the score board.</p>
+
+						{
+							myPosition < 50
+								? <p css={{ fontWeight: 800, }}>
+										You made it into the top 50, to position
+										<span css={{
+											color: gradient[ myPosition ],
+											fontSize: '2rem',
+											margin: '0.4rem',
+										}}>
+											{ myPosition }
+										</span>
+									</p>
+								: null
+						}
+
+						<label>
+							<span css={{ display: 'block', }}>Your name:</span>
+							<input type='text' placeholder='Enter your name' css={{
+								apperance: 'none',
+								boxShadow: 'none',
+								border: 'none',
+								padding: '1rem',
+								fontSize: '1.5rem',
+								width: '80%',
+								margin: '0.5rem 0 0 0',
+								textAlign: 'center',
+							}} />
+						</label>
+					</form>
+				: null
+			}
 
 			<h2 css={{
 				fontSize: '2rem',

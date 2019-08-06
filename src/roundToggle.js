@@ -1,39 +1,148 @@
 /** @jsx jsx */
-import { animated, useSpring } from 'react-spring';
+import { animated, useTransition } from 'react-spring';
+import { getSortedWrongAnswers } from './highscore';
+import { shuffle, getNewAnswers } from './game';
+import { Fragment, useState } from 'react';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
-import { colors } from './theme';
-import { useState } from 'react';
+import Button from './button';
+
+function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange }) {
+	const { questionsDB, wrongAnswers } = useGameData();
+	const questions = getSortedWrongAnswers( wrongAnswers, questionsDB );
+
+	return (
+		<Fragment>
+			<div css={{
+				position: 'relative',
+				zIndex: 200,
+				padding: '1rem 1rem 1.5rem 1rem',
+				background: 'url("background.png")',
+				textAlign: 'left',
+			}}>
+				<Button onClick={ () => setIsOpen( !isOpen ) } styling={{
+					fontSize: '0.7rem',
+					position: 'absolute',
+					top: 0,
+					right: 0,
+				}}>close</Button>
+				<p css={{
+					margin: '1rem 0 0 0',
+					fontWeight: 600,
+					textAlign: 'center',
+				}}>Choose what to learn</p>
+				<ul css={{
+					listStyle: 'none',
+					margin: 0,
+					padding: 0,
+				}}>
+					<li css={{
+					}}>
+						<Button onClick={ () => handleRoundChange( JSON.parse( localStorage.getItem('questions') ), 'Signals' ) } styling={{
+							paddingBottom: '0.5rem',
+						}}>
+							Signals
+						</Button>
+						<small css={{
+							display: 'block',
+							color: '#000',
+							margin: '0 1rem',
+						}}>
+							Learn the international SLSA signals to communicate between water and shore.
+						</small>
+					</li>
+					<li>
+						<Button onClick={ () => handleRoundChange( questions, 'Practice' ) } styling={{
+							paddingBottom: '0.5rem',
+						}}>
+							Practise
+						</Button>
+						<small css={{
+							display: 'block',
+							color: '#000',
+							margin: '0 1rem',
+						}}>
+							Learn only those signals that you got wrong so far ({ wrongAnswersLength }).
+						</small>
+					</li>
+				</ul>
+			</div>
+			<div onClick={ () => setIsOpen( !isOpen ) } css={{
+				position: 'fixed',
+				top: 0,
+				right: 0,
+				bottom: 0,
+				left: 0,
+				zIndex: 100,
+				background: 'rgba( 0, 0, 0, 0.5 )',
+				cursor: 'pointer',
+			}}></div>
+		</Fragment>
+	);
+}
 
 function RoundToggle() {
-	const { setQuestionsDB } = useGameData();
+	const {
+		wrongAnswers,
+		setQuestionsImage,
+		setChoicesImage,
+		setIndexImage,
+		setQuestionsText,
+		setChoicesText,
+		setIndexText,
+	} = useGameData();
 	const [ round, setRound ] = useState('Signals');
 	const [ isOpen, setIsOpen ] = useState( false );
-	const { opacity } = useSpring({ opacity: isOpen ? 1 : 0 });
+	const wrongAnswersLength = Object.keys( wrongAnswers ).length;
+
+	const transitions = useTransition( isOpen, null, {
+		initial: { opacity: 0 },
+		from: { opacity: 0 },
+		enter: { opacity: 1 },
+		leave: { opacity: 0 },
+		config: { duration: 300 },
+	});
+
+	function handleRoundChange( questions, round ) {
+		const newQuestionsImage = shuffle( questions );
+		setQuestionsImage( newQuestionsImage );
+		const newChoicesImage = getNewAnswers( newQuestionsImage[ 0 ], newQuestionsImage );
+		setChoicesImage( newChoicesImage );
+		setIndexImage( 0 );
+
+		const newQuestionsText = shuffle( questions );
+		setQuestionsText( newQuestionsText );
+		const newChoicesText = getNewAnswers( newQuestionsText[ 0 ], newQuestionsText );
+		setChoicesText( newChoicesText );
+		setIndexText( 0 );
+
+		setRound( round );
+		setIsOpen( false );
+	}
 
 	return (
 		<div css={{
 			position: 'relative',
 		}}>
-			<button type='button' onClick={ () => setIsOpen( !isOpen ) } css={{
-				apperance: 'none',
-				border: 'none',
-				background: 'transparent',
-				padding: '1rem',
-				fontSize: '1rem',
-				color: colors[ 0 ],
-				textDecoration: 'underline',
-				cursor: 'pointer',
-			}}>Round: { round }{isOpen?'open':'closed'}</button>
-			<animated.div style={{ opacity }} css={{
-				position: 'absolute',
-				left: 0,
-				bottom: 0,
-				padding: '2rem',
-				overflow: 'hidden',
-			}}>
-				Pekaboo
-			</animated.div>
+			<Button onClick={ () => setIsOpen( !isOpen ) } mute={ !wrongAnswersLength > 0 }>
+				Round: { round }
+			</Button>
+			{
+				transitions.map( ({ item, props }) => {
+					return item
+						? <animated.div key='loading' style={ props } css={{
+								position: 'absolute',
+								left: '50%',
+								top: '100%',
+								width: '15rem',
+								marginLeft: '-7.5rem',
+								boxShadow: '0 10px 10px rgba(100,100,100,0.5)',
+							}}>
+								<Menu key={ isOpen } isOpen={ isOpen } setIsOpen={ setIsOpen } wrongAnswersLength={ wrongAnswersLength } handleRoundChange={ handleRoundChange } />
+							</animated.div>
+						: null
+				})
+			}
 		</div>
 	);
 };

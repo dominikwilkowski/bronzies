@@ -51,7 +51,8 @@ const QuestionProvider = ({ children }) => {
 
 	// state for both modes
 	const [ questionAsImage, setQuestionAsImage ] = useState( true );
-	const [ history, setHistory ] = useState({});
+	const [ wrongAnswers, setWrongAnswers ] = useState([]);
+	const [ history, setHistory ] = useState([]);
 	const [ rounds, setRounds ] = useState( 1 );
 	const [ score, setScore ] = useState( 0 );
 
@@ -70,6 +71,7 @@ const QuestionProvider = ({ children }) => {
 			userAnswerText, setUserAnswerText,
 			questionAsImage, setQuestionAsImage,
 			history, setHistory,
+			wrongAnswers, setWrongAnswers,
 			score, setScore,
 			rounds, setRounds,
 			wasNoLocalStorage,
