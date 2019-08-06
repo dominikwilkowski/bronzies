@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import useRemoteData from './useRemoteData';
+import { useEffect, useRef } from 'react';
 import RoundToggle from './roundToggle';
 import GameToggle from './gameToggle';
 import { Link } from '@reach/router';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
-import { useEffect } from 'react';
 import GameBody from './gameBody';
 import Progress from './progress';
 import Loading from './loading';
@@ -128,14 +128,14 @@ function Game() {
 	 * @param  {function} setCorrect   - The state setter for correct boolean
 	 * @param  {function} setChoices   - The state setter for choices array
 	 */
-	function handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
+	function handleNextQuestion( questionsDB, questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
 		setCorrect( false );
 
 		let newIndex = index;
 		let newQuestions = questions;
 		if( index === questions.length - 1 ) {
 			newIndex = 0;
-			const newQuestions = shuffle( questions );
+			const newQuestions = shuffle( questionsDB );
 			setQuestions( newQuestions );
 			setRounds( rounds + 1 );
 			setIndex( newIndex );
@@ -190,13 +190,14 @@ function Game() {
 	// now let's get the latest from the server
 	const { data, loadingState: dataLoaded } = useRemoteData('/api/signals');
 	const { data: svgData, loadingState: svgLoaded } = useRemoteData( '/api/assets/signals.svg', false );
-	let loadingState = 'loading';
+	const loadingState = 'loading';
+	const loadingStateRef = useRef( loadingState );
 	useEffect( () => {
 		if( dataLoaded === 'stale' || svgLoaded === 'stale' ) {
-			loadingState = 'stale';
+			loadingStateRef.current = 'stale';
 		}
 		if( dataLoaded === 'loaded' && svgLoaded === 'loaded' ) {
-			loadingState = 'loaded';
+			loadingStateRef.current = 'loaded';
 		}
 
 		if( dataLoaded === 'loaded' ) {
@@ -230,9 +231,9 @@ function Game() {
 	}, [
 		data,
 		dataLoaded,
-		svg,
+		svg, setSvg, svgData,
 		svgLoaded,
-		loadingState,
+		loadingStateRef,
 		setChoicesImage,
 		setChoicesText,
 		setCorrectImage,
@@ -251,7 +252,7 @@ function Game() {
 	 */
 	return (
 		<main>
-			<Loading data={ questionsDB } loadingState={ loadingState }>
+			<Loading loadingState={ loadingStateRef.current }>
 				<div css={{
 					display: 'grid',
 					gridTemplateColumns: '1fr auto 1fr',
@@ -283,6 +284,7 @@ function Game() {
 				/>
 
 				<GameBody
+					questionsDB={ questionsDB }
 					questions={ questionAsImage ? questionsImage : questionsText }
 					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
 					index={ questionAsImage ? indexImage : indexText }

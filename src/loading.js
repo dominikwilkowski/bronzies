@@ -91,8 +91,8 @@ function Animation({ loadingState }) {
  *
  * @param {function} options.Component - A component to display after loading is done
  */
-function Loading({ data, loadingState, children }) {
-	const isLoading = data.length === 0;
+function Loading({ loadingState, children }) {
+	const isLoading = loadingState !== 'loaded';
 	const transitions = useTransition( isLoading, null, {
 		initial: { opacity: 1 },
 		from: { opacity: 1 },

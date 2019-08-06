@@ -42,7 +42,7 @@ function useRemoteData( url, isJson = true, timeout = 3000 ) {
 				setLoadingState( loadingStateRef.current );
 			}
 		})();
-	}, [ url, timeout ] );
+	}, [ url, timeout, isJson ] );
 
 	return { data, loadingState: loadingStateRef.current };
 };

@@ -4,7 +4,6 @@ bronzies.com
 ## Todos
 
 MVP:
-- [ ] fix hydration
 - [ ] store svg sprite in localStorage and on page (no remote svg anymore)
 - [ ] finish highscore page
 	- [ ] form submission

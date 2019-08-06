@@ -81,7 +81,7 @@ function Highscore() {
 	];
 
 	return (
-		<Loading data={ highscore } loadingState={ loadingState }>
+		<Loading loadingState={ loadingState }>
 			<Link to='/' css={{
 				display: 'block',
 				margin: '1rem 0.5rem',

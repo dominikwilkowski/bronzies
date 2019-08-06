@@ -107,12 +107,15 @@ function RoundToggle() {
 	const {
 		signals,
 		wrongAnswers,
+		setQuestionsDB,
 		setQuestionsImage,
 		setChoicesImage,
 		setIndexImage,
+		correctImage,
 		setQuestionsText,
 		setChoicesText,
 		setIndexText,
+		correctText,
 	} = useGameData();
 	const [ round, setRound ] = useState('Signals');
 	const [ isOpen, setIsOpen ] = useState( false );
@@ -127,6 +130,8 @@ function RoundToggle() {
 	});
 
 	function handleRoundChange( questions, round ) {
+		setQuestionsDB( questions );
+
 		const newQuestionsImage = shuffle( questions );
 		setQuestionsImage( newQuestionsImage );
 		const newChoicesImage = getNewAnswers( newQuestionsImage[ 0 ], newQuestionsImage, signals );
@@ -143,11 +148,16 @@ function RoundToggle() {
 		setIsOpen( false );
 	}
 
+	let isMuted = false;
+	if( wrongAnswersLength === 0 || correctImage || correctText ) {
+		isMuted = true;
+	}
+
 	return (
 		<div css={{
 			position: 'relative',
 		}}>
-			<Button onClick={ () => setIsOpen( !isOpen ) } mute={ !wrongAnswersLength > 0 }>
+			<Button onClick={ () => setIsOpen( !isOpen ) } mute={ isMuted }>
 				Round: { round }
 			</Button>
 			{

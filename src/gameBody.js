@@ -11,6 +11,7 @@ import Choices from './choices';
  * The body component shows the questions and choices respecting the direction of `questionAsImage`
  */
 function GameBody({
+	questionsDB,
 	questions, setQuestions,
 	index, setIndex,
 	choices, setChoices,
@@ -82,7 +83,7 @@ function GameBody({
 						choices={ choices }
 						questionAsImage={ questionAsImage }
 						onAnswer={ setUserAnswer }
-						onSuccess={ () => handleNextQuestion( questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) }
+						onSuccess={ () => handleNextQuestion( questionsDB, questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) }
 						correct={ correct }
 					/>
 				</fieldset>
