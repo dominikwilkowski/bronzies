@@ -28,10 +28,13 @@ const QuestionProvider = ({ children }) => {
 		initialQuestionsDB = localQuestions;
 	}
 
-	const localSvg = localStorage.getItem('questions');
+	const localSvg = localStorage.getItem('svg');
 	let initialSvg = [];
 	if( localSvg ) {
 		initialSvg = localSvg;
+		document
+			.getElementById('svgSprite')
+			.innerHTML = localSvg;
 	}
 
 	const wasNoLocalStorage = localQuestions && localSvg ? false : true;
@@ -127,14 +130,6 @@ function App() {
 				<div css={{
 					position: 'relative',
 				}}>
-					<div id='svgSprite' css={{
-						position: 'fixed',
-						top: '-2rem',
-						left: '-2rem',
-						width: 0,
-						height: 0,
-						overflow: 'hidden',
-					}}></div>
 					<Router>
 						<Game default />
 						<Highscore path='/highscore' />

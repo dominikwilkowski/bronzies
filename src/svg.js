@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
 /**
  * Slugify a string
@@ -33,10 +32,6 @@ function SVG({ src, title, description, role = 'img', styling }) {
 		if( description ) ids.push( slugify(`${ src }-desc`) );
 		attr['aria-labelledby'] = `${ ids.join(' ') }`;
 	}
-
-	useEffect( () => {
-		window.svg4everybody();
-	});
 
 	return (
 		<svg role={ role } { ...attr } css={ styling }>

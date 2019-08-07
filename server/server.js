@@ -2,8 +2,10 @@
 
 const corsMiddleware = require('restify-cors-middleware');
 const restify = require('restify');
-const CFONTS = require('cfonts');
+const cfonts = require('cfonts');
 const chalk = require('chalk');
+
+const STAGING = process.argv.includes('debug') ? true : false;
 
 function getHighscore( req, res, next ) {
 	debbug( 'Highscore requested', 'interaction' );
@@ -73,146 +75,7 @@ function postHighscore( req, res, next ) {
 function getSignals( req, res, next ) {
 	debbug( 'Questions requested', 'interaction' );
 
-	const signals = [
-		{
-			"id": "579587de4a6c0920359fc689",
-			"image": "/api/assets/signals.svg#questions-signal1",
-			"alt": "A person on the beach waving both arms above their heads",
-			"text": "To attract attention between a boat and the shore",
-		},
-		{
-			"id": "579587de4a6c0920359fc68a",
-			"image": "/api/assets/signals.svg#questions-signal2",
-			"alt": "A person on the beach holding on arm up steady",
-			"text": "Return to shore",
-		},
-		// {
-		// 	"id": "579587de4a6c0920359fc68b",
-		// 	"image": "/api/assets/signals.svg#questions-signal3",
-		// 	"alt": "A person on the beach holding both arms up steady in 90 degree angle",
-		// 	"text": "Remain stationary",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc68c",
-		// 	"image": "/api/assets/signals.svg#questions-signal4",
-		// 	"alt": "A person on the beach moving one hand above their heads back and forth",
-		// 	"text": "Message not clear, repeat",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc68d",
-		// 	"image": "/api/assets/signals.svg#questions-signal5",
-		// 	"alt": "A person on the beach moving one of their hands in a circular motion while pointing with the other hand in one direction in 90 degree angle",
-		// 	"text": "Pick up swimmers",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc68e",
-		// 	"image": "/api/assets/signals.svg#questions-signal6",
-		// 	"alt": "A person on the beach holding both arms low in a 54 degree angle",
-		// 	"text": "Investigate submerged object",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc68f",
-		// 	"image": "/api/assets/signals.svg#questions-signal7",
-		// 	"alt": "A person on the beach holding both arms up straight",
-		// 	"text": "Proceed further out to sea",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc690",
-		// 	"image": "/api/assets/signals.svg#questions-signal8",
-		// 	"alt": "A person on the beach pointing with one hand in one direction in 90 degree angle",
-		// 	"text": "Go to the left or the right",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc691",
-		// 	"image": "/api/assets/signals.svg#questions-signal9",
-		// 	"alt": "A person on the beach moving their left hand from above their heads to the bottom",
-		// 	"text": "Message understood, all clear",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc692",
-		// 	"image": "/api/assets/signals.svg#questions-signal10",
-		// 	"alt": "A person standing on the beach moving both hands sideways",
-		// 	"text": "Pick up or adjust buoys",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc693",
-		// 	"image": "/api/assets/signals.svg#questions-signal11",
-		// 	"alt": "A person sitting on a rescue board waving with their left arm above their head",
-		// 	"text": "Assistance required",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc694",
-		// 	"image": "/api/assets/signals.svg#questions-signal12",
-		// 	"alt": "A person in an IRB waving their right hand on the side",
-		// 	"text": "Boat wishes to return to shore",
-		// },
-		{
-			"id": "579587de4a6c0920359fc695",
-			"image": "/api/assets/signals.svg#questions-signal13",
-			"alt": "A person kneeling on a rescue board holding both arms straight up",
-			"text": "Emergency evacuation alarm (Water to beach)",
-		},
-		// {
-		// 	"id": "579587de4a6c0920359fc696",
-		// 	"image": "/api/assets/signals.svg#questions-signal14",
-		// 	"alt": "A person kneeling on a rescue board moving the left arm from above their head to the bottom",
-		// 	"text": "Shore signal received and understood",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc697",
-		// 	"image": "/api/assets/signals.svg#questions-signal15",
-		// 	"alt": "A person kneeling on a rescue board holding both arms out in a 90 degree angle",
-		// 	"text": "Search completed",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc698",
-		// 	"image": "/api/assets/signals.svg#questions-signal16",
-		// 	"alt": "A checkered flag with white and red squares",
-		// 	"text": "Emergency evacuation flag",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc699",
-		// 	"image": "/api/assets/signals.svg#questions-signal17",
-		// 	"alt": "One loud sound",
-		// 	"text": "Emergency evacuation alarm",
-		// },
-		// {
-		// 	"id": "579587de4a6c0920359fc69a",
-		// 	"image": "/api/assets/signals.svg#questions-signal18",
-		// 	"alt": "Three loud sounds",
-		// 	"text": "Mass rescue",
-		// },
-		{
-			"id": "579587de4a6c0920359fc69b",
-			"image": "/api/assets/signals.svg#questions-signal19",
-			"alt": "A person holding right arm out with a closed fist and the thumb up",
-			"text": "Helicopter signal—request to enter",
-		},
-		{
-			"id": "579587de4a6c0920359fc69c",
-			"image": "/api/assets/signals.svg#questions-signal20",
-			"alt": "Orange flag with a diagonal blue line through the middle",
-			"text": "Signal Flag",
-		},
-		{
-			"id": "579587de4a6c0920359fc69d",
-			"image": "/api/assets/signals.svg#questions-signal21",
-			"alt": "The right arm waving above the head",
-			"text": "Assistance required (Water to beach)",
-		},
-		{
-			"id": "579587de4a6c0920359fc69e",
-			"image": "/api/assets/signals.svg#questions-signal22",
-			"alt": "Both arms raised to form a cross above the head",
-			"text": "Submerged Patient Missing",
-		},
-		{
-			"id": "579587de4a6c0920359fc69f",
-			"image": "/api/assets/signals.svg#questions-signal23",
-			"alt": "Left arm raised touching the middle of the head with the fingertips",
-			"text": "All Clear/OK",
-		},
-	];
+	const signals = require(`./assets/signals${ STAGING ? '-staging' : '' }.json`);
 	res.send( signals );
 	return next();
 }
@@ -247,7 +110,7 @@ server.get( '/api/signals', getSignals );
 
 server.get( '/api/assets/*', restify.plugins.serveStatic({
 		directory: `${ __dirname }/assets`,
-		file: 'signals.svg',
+		file: `signals${ STAGING ? '-staging' : '' }.svg`,
 		appendRequestPath: false,
 	}) );
 
@@ -256,14 +119,14 @@ server.listen( port, () => {
 
 	console.log('\n\n');
 
-	CFONTS.say('Bronzies', {
+	cfonts.say('Bronzies', {
 		colors: ['#EA1C2E', '#FFD520'],
 		letterSpacing: 0,
 		align: 'center',
 		space: false,
 	});
 
-	CFONTS.say(`${ server.name } listening at 127.0.0.1:${ port }`, {
+	cfonts.say(`${ server.name } listening at 127.0.0.1:${ port }`, {
 		font: 'console',
 		colors: ['white'],
 		background: 'blue',

@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import { useGameData } from './app';
 import ImageView from './imageView';
 import { jsx } from '@emotion/core';
 import { tagAnswer } from './game';
@@ -11,7 +12,6 @@ import Choices from './choices';
  * The body component shows the questions and choices respecting the direction of `questionAsImage`
  */
 function GameBody({
-	questionsDB,
 	questions, setQuestions,
 	index, setIndex,
 	choices, setChoices,
@@ -23,6 +23,8 @@ function GameBody({
 	handleNextQuestion,
 	handleAnswer,
 }) {
+	const { svg } = useGameData();
+
 	return (
 		<Fragment>
 			<form onSubmit={ ( event ) => handleAnswer(
@@ -83,7 +85,7 @@ function GameBody({
 						choices={ choices }
 						questionAsImage={ questionAsImage }
 						onAnswer={ setUserAnswer }
-						onSuccess={ () => handleNextQuestion( questionsDB, questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) }
+						onSuccess={ () => handleNextQuestion( questions, setQuestions, svg, index, setIndex, rounds, setRounds, setCorrect, setChoices ) }
 						correct={ correct }
 					/>
 				</fieldset>

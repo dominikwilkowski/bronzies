@@ -1,6 +1,6 @@
 /** @jsx jsx */
+import { useEffect, useState } from 'react';
 import useRemoteData from './useRemoteData';
-import { useEffect, useRef } from 'react';
 import RoundToggle from './roundToggle';
 import GameToggle from './gameToggle';
 import { Link } from '@reach/router';
@@ -95,7 +95,8 @@ export function onUnload( event ) {
  */
 function Game() {
 	const {
-		questionsDB, setQuestionsDB,
+		questionsDB,
+		setQuestionsDB,
 		svg, setSvg,
 		signals, setSignals,
 		questionsImage, setQuestionsImage,
@@ -128,7 +129,7 @@ function Game() {
 	 * @param  {function} setCorrect   - The state setter for correct boolean
 	 * @param  {function} setChoices   - The state setter for choices array
 	 */
-	function handleNextQuestion( questionsDB, questions, setQuestions, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
+	function handleNextQuestion( questions, setQuestions, svgData, index, setIndex, rounds, setRounds, setCorrect, setChoices ) {
 		setCorrect( false );
 
 		let newIndex = index;
@@ -139,6 +140,9 @@ function Game() {
 			setQuestions( newQuestions );
 			setRounds( rounds + 1 );
 			setIndex( newIndex );
+			document
+				.getElementById('svgSprite')
+				.innerHTML = svgData;
 		}
 		else {
 			newIndex ++;
@@ -190,14 +194,17 @@ function Game() {
 	// now let's get the latest from the server
 	const { data, loadingState: dataLoaded } = useRemoteData('/api/signals');
 	const { data: svgData, loadingState: svgLoaded } = useRemoteData( '/api/assets/signals.svg', false );
-	const loadingState = 'loading';
-	const loadingStateRef = useRef( loadingState );
+	const [ loadingState, setLoadingState ] = useState('loading');
+
 	useEffect( () => {
 		if( dataLoaded === 'stale' || svgLoaded === 'stale' ) {
-			loadingStateRef.current = 'stale';
+			setLoadingState('stale');
+		}
+		if( dataLoaded === 'failed' || svgLoaded === 'failed' ) {
+			setLoadingState('failed');
 		}
 		if( dataLoaded === 'loaded' && svgLoaded === 'loaded' ) {
-			loadingStateRef.current = 'loaded';
+			setLoadingState('loaded');
 		}
 
 		if( dataLoaded === 'loaded' ) {
@@ -223,17 +230,19 @@ function Game() {
 		if( svgLoaded === 'loaded' ) {
 			localStorage.setItem( 'svg', svgData );
 			setSvg( svgData );
-			document
-				.getElementById('svgSprite')
-				.innerHTML = svgData;
-		}
 
+			if( wasNoLocalStorage ) {
+				document
+					.getElementById('svgSprite')
+					.innerHTML = svgData;
+			}
+		}
 	}, [
 		data,
 		dataLoaded,
 		svg, setSvg, svgData,
 		svgLoaded,
-		loadingStateRef,
+		loadingState,
 		setChoicesImage,
 		setChoicesText,
 		setCorrectImage,
@@ -252,7 +261,7 @@ function Game() {
 	 */
 	return (
 		<main>
-			<Loading loadingState={ loadingStateRef.current }>
+			<Loading loadingState={ loadingState }>
 				<div css={{
 					display: 'grid',
 					gridTemplateColumns: '1fr auto 1fr',
@@ -284,7 +293,6 @@ function Game() {
 				/>
 
 				<GameBody
-					questionsDB={ questionsDB }
 					questions={ questionAsImage ? questionsImage : questionsText }
 					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
 					index={ questionAsImage ? indexImage : indexText }
