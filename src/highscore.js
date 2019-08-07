@@ -50,16 +50,22 @@ function Highscore() {
 	const [ isSubmitting, setIsSubmitting ] = useState( false );
 	const myPosition = getPosition( score, highscore.top50 ? highscore.top50 : [] );
 	const hasPlayed = history.length > 0;
-
-	// const mockHistory = {
-	// 	"/api/assets/signals.svg#signal1": 1,
-	// 	"/api/assets/signals.svg#signal19": 4,
-	// 	"/api/assets/signals.svg#signal2": 4,
-	// 	"/api/assets/signals.svg#signal21": 12,
-	// 	"/api/assets/signals.svg#signal22": 1,
-	// 	"/api/assets/signals.svg#signal13": 5,
-	// };
 	const wrongAnswersDB = getSortedWrongAnswers( wrongAnswers, signals );
+	// generated with https://pinetools.com/gradient-generator
+	const gradient = [
+		'#32863b', '#30853d', '#2f843f', '#2e8341', '#2d8243', '#2c8246', '#2b8148', '#2a804a', '#297f4c', '#287f4f',
+		'#277e51', '#267d53', '#257c55', '#247b58', '#237b5a', '#227a5c', '#21795e', '#207861', '#1f7863', '#1e7765',
+		'#1d7667', '#1c756a', '#1b746c', '#1a746e', '#197370', '#187273', '#177175', '#167177', '#157079', '#146f7c',
+		'#136e7e', '#126d80', '#116d82', '#106c85', '#0f6b87', '#0e6a89', '#0d6a8b', '#0c698e', '#0b6890', '#0a6792',
+		'#096694', '#086697', '#076599', '#06649b', '#05639d', '#0463a0', '#0362a2', '#0261a4', '#0160a6', '#0060a8',
+	];
+	const fontScale = [
+		'1.2rem',
+		'1.075rem',
+		'0.95rem',
+		'0.825rem',
+		'0.7rem',
+	];
 
 	const { data, loadingState } = useRemoteData('/api/highscore');
 	useEffect( () => {
@@ -93,15 +99,6 @@ function Highscore() {
 			setIsSubmitting( false );
 		}
 	};
-
-	// generated with https://pinetools.com/gradient-generator
-	const gradient = [
-		'#32863b', '#30853d', '#2f843f', '#2e8341', '#2d8243', '#2c8246', '#2b8148', '#2a804a', '#297f4c', '#287f4f',
-		'#277e51', '#267d53', '#257c55', '#247b58', '#237b5a', '#227a5c', '#21795e', '#207861', '#1f7863', '#1e7765',
-		'#1d7667', '#1c756a', '#1b746c', '#1a746e', '#197370', '#187273', '#177175', '#167177', '#157079', '#146f7c',
-		'#136e7e', '#126d80', '#116d82', '#106c85', '#0f6b87', '#0e6a89', '#0d6a8b', '#0c698e', '#0b6890', '#0a6792',
-		'#096694', '#086697', '#076599', '#06649b', '#05639d', '#0463a0', '#0362a2', '#0261a4', '#0160a6', '#0060a8',
-	];
 
 	return (
 		<Loading loadingState={ loadingState }>
@@ -225,7 +222,7 @@ function Highscore() {
 			}}>Total: { highscore.length }</span>
 			<ol css={{
 				listStyle: 'none',
-				margin: '1rem 0 2rem 0',
+				margin: '1rem 0 4rem 0',
 				padding: 0,
 				textAlign: 'center',
 			}}>
@@ -234,8 +231,9 @@ function Highscore() {
 						? highscore.latest.map( ( score, i ) => (
 								<li key={ i } css={{
 									margin: '0.5rem 0',
+									fontSize: fontScale[ i ],
 								}}>
-									{ score.name } - { score.score }
+									{ score.name } &mdash; <span css={{ fontWeight: 600 }}>{ score.score }</span>
 								</li>
 							))
 						: null
@@ -294,6 +292,7 @@ function Highscore() {
 										fontWeight: 300,
 										fontSize: '3.2rem',
 										paddingLeft: '1.3rem',
+										wordBreak: 'break-all',
 									}}>
 										<span css={{
 											position: 'absolute',
@@ -310,6 +309,7 @@ function Highscore() {
 									<span css={{
 										display: 'block',
 										fontSize: '1.2rem',
+										wordBreak: 'break-all',
 									}}>
 										{ item.name }
 									</span>

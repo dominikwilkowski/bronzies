@@ -24,7 +24,7 @@ function sortHighscore( highscore ) {
 		.slice( 0, 50 );
 	const latest = [ ...highscore ]
 		.sort( ( a, b ) => new Date( b.date ) - new Date( a.date ) )
-		.slice( 0, 10 );
+		.slice( 0, 5 );
 
 	return { top50, latest, length: highscore.length };
 }

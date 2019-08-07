@@ -43,21 +43,23 @@ export function shuffle( array ) {
  * @return {array}                - A subset of the input array, shuffled and including the `current` item
  */
 export function getNewAnswers( current, deck, db = [], shuffleDeck = shuffle, limit = 4 ) {
+	const newDB = [ ...db ];
 	if( deck.length < limit ) {
 		deck = [
 			...deck,
 			...shuffleDeck(
-				db
+				newDB
 					.filter( question => question.image !== current.image ) )
 					.slice( 0, ( limit - deck.length )
 			),
 		];
 	}
+
 	let newCards = [
+		current,
 		...shuffleDeck(
 			deck.filter( question => question.image !== current.image )
 		).slice( 0, limit ),
-		current,
 	];
 	return shuffleDeck( newCards );
 }
