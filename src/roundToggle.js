@@ -170,6 +170,7 @@ function RoundToggle() {
 								width: '15rem',
 								marginLeft: '-7.5rem',
 								boxShadow: '0 10px 10px rgba(100,100,100,0.5)',
+								zIndex: 10,
 							}}>
 								<Menu
 									key={ isOpen }
