@@ -12,40 +12,21 @@ import About from './about';
 /**
  * Context for all game data
  */
+const DBContext = createContext();
 const GameContext = createContext();
 export function useGameData() {
-	return useContext( GameContext );
+	const db = useContext( DBContext );
+	const game = useContext( GameContext );
+
+	return { ...db, ...game };
 };
 
-/**
- * Where we get the data from the server
- */
-const QuestionProvider = ({ children }) => {
-	// first we check local storage for questions
+const GameStateProvider = ({ children }) => {
 	const localQuestions = JSON.parse( localStorage.getItem('questions') );
-	let initialQuestionsDB = [];
-	if( localQuestions ) {
-		initialQuestionsDB = localQuestions;
-	}
-
-	const localSvg = localStorage.getItem('svg');
-	let initialSvg = [];
-	if( localSvg ) {
-		initialSvg = localSvg;
-		document
-			.getElementById('svgSprite')
-			.innerHTML = localSvg;
-	}
-
-	const wasNoLocalStorage = localQuestions && localSvg ? false : true;
-
-	// state for question database and loading state
-	const [ signals, setSignals ] = useState( initialQuestionsDB );
-	const [ questionsDB, setQuestionsDB ] = useState( initialQuestionsDB );
-	const [ svg, setSvg ] = useState( initialSvg );
+	const initialQuestionsDB = localQuestions ? localQuestions : [];
 
 	// state for image-to-text mode
-	const [ questionsImage, setQuestionsImage ] = useState( shuffle( questionsDB ) );
+	const [ questionsImage, setQuestionsImage ] = useState( shuffle( initialQuestionsDB ) );
 	const [ indexImage, setIndexImage ] = useState( 0 );
 	const newChoicesImage = getNewAnswers( questionsImage[ indexImage ], questionsImage );
 	const [ choicesImage, setChoicesImage ] = useState( newChoicesImage );
@@ -53,7 +34,7 @@ const QuestionProvider = ({ children }) => {
 	const [ userAnswerImage, setUserAnswerImage ] = useState('');
 
 	// state for text-to-image mode
-	const [ questionsText, setQuestionsText ] = useState( shuffle( questionsDB ) );
+	const [ questionsText, setQuestionsText ] = useState( shuffle( initialQuestionsDB ) );
 	const [ indexText, setIndexText ] = useState( 0 );
 	const newChoicesText = getNewAnswers( questionsText[ indexText ], questionsText );
 	const [ choicesText, setChoicesText ] = useState( newChoicesText );
@@ -67,11 +48,18 @@ const QuestionProvider = ({ children }) => {
 	const [ rounds, setRounds ] = useState( 1 );
 	const [ score, setScore ] = useState( 0 );
 
+	const localSvg = localStorage.getItem('svg');
+	const svgSprite = document.getElementById('svgSprite').innerHTML;
+	if( !svgSprite ) {
+		document
+			.getElementById('svgSprite')
+			.innerHTML = localSvg;
+	}
+
+	const wasNoLocalStorage = localQuestions && localSvg ? false : true;
+
 	return (
 		<GameContext.Provider value={{
-			questionsDB, setQuestionsDB,
-			svg, setSvg,
-			signals, setSignals,
 			questionsImage, setQuestionsImage,
 			indexImage, setIndexImage,
 			choicesImage, setChoicesImage,
@@ -83,14 +71,37 @@ const QuestionProvider = ({ children }) => {
 			correctText, setCorrectText,
 			userAnswerText, setUserAnswerText,
 			questionAsImage, setQuestionAsImage,
-			history, setHistory,
 			wrongAnswers, setWrongAnswers,
-			score, setScore,
+			history, setHistory,
 			rounds, setRounds,
+			score, setScore,
 			wasNoLocalStorage,
 		}}>
 			{ children }
 		</GameContext.Provider>
+	);
+};
+
+/**
+ * Where we get the data from the server
+ */
+const DBProvider = ({ children }) => {
+	const localQuestions = JSON.parse( localStorage.getItem('questions') );
+	const initialQuestionsDB = localQuestions ? localQuestions : [];
+	const localSvg = localStorage.getItem('svg');
+
+	const [ signals, setSignals ] = useState( initialQuestionsDB );
+	const [ questionsDB, setQuestionsDB ] = useState( initialQuestionsDB );
+	const [ svg, setSvg ] = useState( localSvg );
+
+	return (
+		<DBContext.Provider value={{
+			signals, setSignals,
+			questionsDB, setQuestionsDB,
+			svg, setSvg,
+		}}>
+			{ children }
+		</DBContext.Provider>
 	);
 };
 
@@ -125,19 +136,21 @@ function App() {
 					color: colors[ 0 ],
 				},
 			}} />
-			<QuestionProvider>
-				<Header />
-				<div css={{
-					position: 'relative',
-				}}>
-					<Router>
-						<Game default />
-						<Highscore path='/highscore' />
-						<About path='/about' />
-					</Router>
-				</div>
-				<Footer />
-			</QuestionProvider>
+			<GameStateProvider>
+				<DBProvider>
+					<Header />
+					<div css={{
+						position: 'relative',
+					}}>
+						<Router>
+							<Game default />
+							<Highscore path='/highscore' />
+							<About path='/about' />
+						</Router>
+					</div>
+					<Footer />
+				</DBProvider>
+			</GameStateProvider>
 		</Fragment>
 	);
 };

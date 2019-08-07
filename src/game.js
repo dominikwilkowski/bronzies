@@ -194,7 +194,7 @@ function Game() {
 	// now let's get the latest from the server
 	const { data, loadingState: dataLoaded } = useRemoteData('/api/signals');
 	const { data: svgData, loadingState: svgLoaded } = useRemoteData( '/api/assets/signals.svg', false );
-	const [ loadingState, setLoadingState ] = useState('loading');
+	const [ loadingState, setLoadingState ] = useState( wasNoLocalStorage ? 'loading' : 'loaded' );
 
 	useEffect( () => {
 		if( dataLoaded === 'stale' || svgLoaded === 'stale' ) {
@@ -230,12 +230,6 @@ function Game() {
 		if( svgLoaded === 'loaded' ) {
 			localStorage.setItem( 'svg', svgData );
 			setSvg( svgData );
-
-			if( wasNoLocalStorage ) {
-				document
-					.getElementById('svgSprite')
-					.innerHTML = svgData;
-			}
 		}
 	}, [
 		data,

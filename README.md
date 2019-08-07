@@ -4,7 +4,7 @@ bronzies.com
 ## Todos
 
 MVP:
-- [ ] store svg sprite in localStorage and on page (no remote svg anymore)
+- [ ] stale does not show loading while in the background
 - [ ] finish highscore page
 	- [ ] form submission
 	- [ ] push ups

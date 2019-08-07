@@ -22,7 +22,7 @@ function useRemoteData( url, isJson = true, timeout = 3000 ) {
 			try {
 				const response = await fetch( url );
 				// const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
-				// await Sleep( 4000 );
+				// await Sleep( 5000 );
 
 				if( response.ok ) {
 					const data = isJson ? await response.json() : await response.text();
