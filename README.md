@@ -19,18 +19,14 @@ bronzies.com
 
 MVP:
 - [ ] finish highscore page
-	- [ ] form submission
 	- [ ] push ups
-	- [ ] rounds/index to be added to score?
-- [ ] server handle post and add to highscore
-- [ ] fill about page
+	- [ ] nays
 - [ ] add reporting to app
 	- [ ] https://clicky.com/ or https://matomo.org/ or https://usefathom.com/ or https://www.atinternet.com/en/
 
 Next:
 - [ ] fix theme (make sane)
 - [ ] add more modes for types of beaches etc
-- [ ] show how many in highscore all together
 - [ ] rebuild server
 	- [ ] postgres
 	- [ ] post answer object as opposed to done score
@@ -93,9 +89,7 @@ https://bronzies.com/api/highscore
 https://bronzies.com/api/highscore
 ```
 
-_The newly added entry will have an aditional key to id it: `justadded: true`_
-
-(use: `curl -i -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name": "Superman","nays": 55,"score": 5555555,"date": 777}' http://localhost:5555/highscore`)
+(use: `curl -i -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name": "Superman", "nays": 55, "score": 5555555, "rounds": 777}' http://localhost:5555/api/highscore`)
 
 ### Install on server
 
