@@ -1,14 +1,24 @@
-'use strict';
-
 const corsMiddleware = require('restify-cors-middleware');
 const restify = require('restify');
 const cfonts = require('cfonts');
 const chalk = require('chalk');
 
-const STAGING = process.argv.includes('debug') ? true : false;
+/**
+ * Setting global flag for debugging
+ *
+ * @type {boolean}
+ */
+const DEBUG = process.argv.includes('debug') ? true : false;
 
+/**
+ * Getting the highscore json
+ *
+ * @param  {object}   req  - The request object from express
+ * @param  {object}   res  - The result object from express
+ * @param  {function} next - The next function from express
+ */
 function getHighscore( req, res, next ) {
-	debbug( 'Highscore requested', 'interaction' );
+	debbug( 'Highscore requested', 'interaction', req );
 
 	const highscore = [
 		{"_id":"5c655cbf69bbd1069ee19147","name":"Celeste Hayman BSBLSC","nays":2,"score":1500,"date":"2019-02-14T12:18:58.246Z--2019-02-14T12:19:11.798Z"},
@@ -66,57 +76,101 @@ function getHighscore( req, res, next ) {
 	return next();
 }
 
+/**
+ * Posting new highscore and returning the new json
+ *
+ * @param  {object}   req  - The request object from express
+ * @param  {object}   res  - The result object from express
+ * @param  {function} next - The next function from express
+ */
 function postHighscore( req, res, next ) {
-	debbug( 'Highscore posted', 'interaction' );
+	debbug( 'Highscore posted', 'interaction', req );
 	res.send('not implemented');
 	return next();
 }
 
+/**
+ * Getting signals json
+ *
+ * @param  {object}   req  - The request object from express
+ * @param  {object}   res  - The result object from express
+ * @param  {function} next - The next function from express
+ */
 function getSignals( req, res, next ) {
-	debbug( 'Questions requested', 'interaction' );
+	debbug( 'Signals requested', 'interaction', req );
 
-	const signals = require(`./assets/signals${ STAGING ? '-staging' : '' }.json`);
+	const signals = require(`./assets/signals${ DEBUG ? '-staging' : '' }.json`);
 	res.send( signals );
 	return next();
 }
 
-function debbug( text, code ) {
+/**
+ * The function handler for static files for signal svg sprite
+ *
+ * @type {function}
+ */
+const serverStaticSignalSVG = restify.plugins.serveStatic({
+	directory: `${ __dirname }/assets`,
+	file: `signals${ DEBUG ? '-staging' : '' }.svg`,
+	appendRequestPath: false,
+});
+
+/**
+ * Getting static asset
+ *
+ * @param  {object}   req  - The request object from express
+ * @param  {object}   res  - The result object from express
+ * @param  {function} next - The next function from express
+ */
+function getSignalAsset( req, res, next ) {
+	debbug( 'Signals assets requested', 'interaction', req );
+
+	serverStaticSignalSVG( req, res, next );
+	return next();
+}
+
+/**
+ * A function to report back to stdout what's happening
+ *
+ * @param  {string} text - The text to be logged
+ * @param  {string} code - The kind of message, can be: 'report', 'error' or 'interaction'
+ * @param  {object} req  - The request object from express
+ */
+function debbug( text, code, req ) {
+	const ip = req ? chalk.blueBright(` [${ ( req.headers['x-forwarded-for'] || req.connection.remoteAddress || '' ).split(',')[ 0 ].trim() }]`) : '';
+	const time = chalk.magentaBright( new Date().toISOString() );
+
 	if( code === 'report' ) {
-		console.log( chalk.green('\u2713 ') + text );
+		console.log(`${ chalk.green('\u2713 ') }${ ip } ${ time } ${ text }`);
 	}
 	else if( code === 'error' ) {
-		console.log( chalk.red('\u2717 ') + text );
+		console.log(`${ chalk.red('\u2717 ') }${ ip } ${ time } ${ text }`);
 	}
 	else if( code === 'interaction' ) {
-		console.log( chalk.blue('\u261C ') + text );
+		console.log(`${ chalk.yellow('\u261C ') }${ ip } ${ time } ${ text }`);
 	}
 }
 
+/**
+ * Starting init server
+ */
+const port = 5555;
 const server = restify.createServer({ name: 'Bronzies-API' });
-
-server.use( restify.plugins.bodyParser() );
-
 const cors = corsMiddleware({
 	origins: ['http://127.0.0.1:3000', 'http://localhost:3000'],
 })
 
+server.use( restify.plugins.bodyParser() );
 server.pre( cors.preflight );
 server.use( cors.actual );
 
+// routes
 server.get( '/api/highscore', getHighscore );
 server.post( '/api/highscore', postHighscore );
-
 server.get( '/api/signals', getSignals );
+server.get( '/api/assets/*', getSignalAsset );
 
-server.get( '/api/assets/*', restify.plugins.serveStatic({
-		directory: `${ __dirname }/assets`,
-		file: `signals${ STAGING ? '-staging' : '' }.svg`,
-		appendRequestPath: false,
-	}) );
-
-const port = 5555;
 server.listen( port, () => {
-
 	console.log('\n\n');
 
 	cfonts.say('Bronzies', {
