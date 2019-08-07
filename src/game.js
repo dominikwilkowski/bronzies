@@ -197,14 +197,16 @@ function Game() {
 	const [ loadingState, setLoadingState ] = useState( wasNoLocalStorage ? 'loading' : 'loaded' );
 
 	useEffect( () => {
-		if( dataLoaded === 'stale' || svgLoaded === 'stale' ) {
-			setLoadingState('stale');
-		}
-		if( dataLoaded === 'failed' || svgLoaded === 'failed' ) {
-			setLoadingState('failed');
-		}
-		if( dataLoaded === 'loaded' && svgLoaded === 'loaded' ) {
-			setLoadingState('loaded');
+		if( wasNoLocalStorage ) {
+			if( dataLoaded === 'stale' || svgLoaded === 'stale' ) {
+				setLoadingState('stale');
+			}
+			if( dataLoaded === 'failed' || svgLoaded === 'failed' ) {
+				setLoadingState('failed');
+			}
+			if( dataLoaded === 'loaded' && svgLoaded === 'loaded' ) {
+				setLoadingState('loaded');
+			}
 		}
 
 		if( dataLoaded === 'loaded' ) {

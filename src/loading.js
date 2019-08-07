@@ -39,7 +39,8 @@ function Animation({ loadingState }) {
 			right: 0,
 			top: 0,
 			bottom: 0,
-			backgroundColor: '#fff',
+			background: 'url(splash.jpg) #fff',
+			backgroundSize: 'cover',
 			display: 'grid',
 		}}>
 			<div css={{
@@ -49,26 +50,29 @@ function Animation({ loadingState }) {
 			}}>
 				<div css={{
 					position: 'relative',
-					width: '3rem',
-					height: '3rem',
+					width: '5rem',
+					height: '5rem',
 					border: '1px #000 solid',
 					margin: '1rem auto 1.5rem auto',
 					borderRadius: '100%',
-					background: 'linear-gradient(45deg, transparent 49%, #000 50%, #000 50%, transparent 51%, transparent),' +
-						'linear-gradient(-45deg, transparent 49%, #000 50%, #000 50%, transparent 51%, transparent)',
-					backgroundSize: '16px 16px',
-					backgroundPosition: '0% 0%',
-					animation: `${ loading } 1s infinite linear`,
+					backgroundColor: '#fff',
+					zIndex: 1,
 					':after': {
 						content: '""',
 						display: 'block',
 						position: 'absolute',
-						top: '-1.1rem',
-						left: '-1.1rem',
-						width: '5rem',
-						height: '5rem',
+						top: '0.85rem',
+						left: '0.85rem',
+						width: '3rem',
+						height: '3rem',
 						border: '1px #000 solid',
 						borderRadius: '100%',
+						background: 'linear-gradient(45deg, transparent 49%, #000 50%, #000 50%, transparent 51%, transparent),' +
+							'linear-gradient(-45deg, transparent 49%, #000 50%, #000 50%, transparent 51%, transparent) #fff',
+						backgroundSize: '16px 16px',
+						backgroundPosition: '0% 0%',
+						animation: `${ loading } 1s infinite linear`,
+						zIndex: 2,
 					},
 					':before': loadingState === 'failed'
 						? {
@@ -83,7 +87,9 @@ function Animation({ loadingState }) {
 							}
 						: {},
 				}}></div>
-				<span>{ messages[ loadingState ] }</span>
+				<span css={{
+					textShadow: '0 0 10px #fff',
+				}}>{ messages[ loadingState ] }</span>
 			</div>
 		</div>
 	);

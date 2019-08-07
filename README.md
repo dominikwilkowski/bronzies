@@ -4,16 +4,13 @@ bronzies.com
 ## Todos
 
 MVP:
-- [ ] stale does not show loading while in the background
 - [ ] finish highscore page
 	- [ ] form submission
 	- [ ] push ups
 	- [ ] rounds/index to be added to score?
 - [ ] fill about page
-- [ ] loading animation fading to logo?
 - [ ] add reporting to app
 	- [ ] https://clicky.com/ or https://matomo.org/ or https://usefathom.com/ or https://www.atinternet.com/en/
-- [ ] move some game state into single state object
 - [ ] fix this readme
 
 Next:
