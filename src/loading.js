@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { useTransition, animated } from 'react-spring';
 import { jsx, keyframes } from '@emotion/core';
+import { Link } from '@reach/router';
+import { useGameData } from './app';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
@@ -8,6 +10,9 @@ import { Fragment } from 'react';
  * Animation showing a spinner
  */
 function Animation({ loadingState }) {
+	const { signals } = useGameData();
+	const hasData = signals && document.getElementById('svgSprite').innerHTML;
+
 	const loading = keyframes({
 		from: {
 			backgroundPosition: '0px 0px',
@@ -26,8 +31,23 @@ function Animation({ loadingState }) {
 				display: 'block',
 				fontSize: '1rem',
 			}}>
-				Try refreshing the page and if that doesn't work <a href="https://dominik-wilkowski.com/" rel='noopener noreferrer' target='_blank'>submit an issue to
-				the app</a> or contact the maintainer <a href="https://dominik-wilkowski.com/" rel='noopener noreferrer' target='_blank'>Dominik</a>
+				{
+					hasData
+						? <Fragment>
+								Looks like the server is down right now but you have all the signals saved locally.<br/>You can play the game but can't look at the score board.
+								<span css={{
+									display: 'block',
+									fontWeight: 900,
+									marginTop: '1rem',
+								}}>
+									So <Link to='/'>go back to the game</Link> for now and keep learning.
+								</span>
+							</Fragment>
+						: <Fragment>
+								Try refreshing the page and if that doesn't work <a href="https://dominik-wilkowski.com/" rel='noopener noreferrer' target='_blank'>submit an
+								issue to the app</a> or contact the maintainer <a href="https://dominik-wilkowski.com/" rel='noopener noreferrer' target='_blank'>Dominik</a>
+							</Fragment>
+				}
 			</span>
 		</Fragment>,
 	};
@@ -80,10 +100,11 @@ function Animation({ loadingState }) {
 								position: 'absolute',
 								width: '3rem',
 								textAlign: 'center',
-								left: '0',
-								top: '0',
+								left: '0.9rem',
+								top: '0.8rem',
 								fontSize: '3rem',
 								lineHeight: '1',
+								zIndex: 3,
 							}
 						: {},
 				}}></div>
