@@ -149,7 +149,7 @@ function Highscore() {
 						position: 'relative',
 						textAlign: 'center',
 						fontSize: '1.3rem',
-						padding: '0 0 2rem 0',
+						padding: '0 0.5rem 2rem 0.5rem',
 						margin: '1rem 0 4rem 0',
 						':after': {
 							content: '""',
@@ -162,6 +162,9 @@ function Highscore() {
 						}
 					}}>
 						<p>Enter yourself into the score board with your current score of { score }.</p>
+						<p>
+							According to your score you now have to do <span css={{ fontWeight: 900 }}>{ nays * 5 }</span> pushups.
+						</p>
 
 						{
 							myPosition < 50
