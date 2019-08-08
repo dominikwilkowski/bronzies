@@ -17,10 +17,6 @@ bronzies.com
 
 ## Todos
 
-MVP:
-- [ ] add reporting to app
-	- [ ] https://clicky.com/ or https://matomo.org/ or https://usefathom.com/ or https://www.atinternet.com/en/
-
 Next:
 - [ ] fix theme (make sane)
 - [ ] add more modes for types of beaches etc
