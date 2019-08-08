@@ -61,6 +61,7 @@ export function getNewAnswers( current, deck, db = [], shuffleDeck = shuffle, li
 			deck.filter( question => question.image !== current.image )
 		).slice( 0, limit ),
 	];
+
 	return shuffleDeck( newCards );
 }
 
@@ -138,7 +139,7 @@ function Game() {
 		let newQuestions = questions;
 		if( index === questions.length - 1 ) {
 			newIndex = 0;
-			const newQuestions = shuffle( questionsDB );
+			newQuestions = shuffle( questionsDB );
 			setQuestions( newQuestions );
 			setRounds( rounds + 1 );
 			setIndex( newIndex );
