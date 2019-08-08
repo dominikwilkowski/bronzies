@@ -92,7 +92,6 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 								color: '#000',
 								padding: '12px',
 								border: 'none',
-								boxShadow: '0 0 10px rgba( 0, 0, 0, 0.2 )',
 								fontSize: '21px',
 								lineHeight: 1.2,
 								'&:hover': {
