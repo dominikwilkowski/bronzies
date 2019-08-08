@@ -121,6 +121,9 @@ function App() {
 					padding: 0,
 					margin: 0,
 					height: '100%',
+					'@media(min-width: 550px)': {
+						padding: '0.5rem 1rem',
+					},
 				},
 				'body': {
 					background: 'url("background.png")',

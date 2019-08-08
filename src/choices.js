@@ -40,7 +40,9 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 						position: 'relative',
 						listStyle: 'none',
 						overflow: 'hidden',
-						boxShadow: questionAsImage ? 'none' : '0px 0px 12px -6px rgba(0,0,0,0.75)',
+						'@media(min-width: 600px)': {
+							border: `1px solid ${ colors[ 4 ] }`,
+						}
 					}}>
 						<button css={{
 							display: 'block',
