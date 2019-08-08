@@ -20,12 +20,12 @@ bronzies.com
 Next:
 - [ ] tests via jest and cypress
 - [ ] enable service worker
-- [ ] re-add heart beat screen
+- [ ] re-add cpr beat screen
 - [ ] fix theme (make sane)
 - [ ] add more modes for types of beaches etc
 - [ ] rebuild server
 	- [ ] postgres
-	- [ ] post answer object as opposed to done score
+	- [ ] post history object as opposed to done score
 	- [ ] move to graphql
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -96,14 +96,14 @@ The API runs behind an [NGINX proxy](https://github.com/dominikwilkowski/bronzie
 To make sure the API is started when the system has to reboot, make sure you add a cron task after reboot:
 
 ```shell
-chmod 700 /www/bronzies/node/starter.sh # the starter.sh of this repo
+chmod 700 /www/bronzies/server/starter.sh # the starter.sh of this repo
 crontab -e
 ```
 
 and add:
 
 ```shell
-@reboot /www/bronzies/node/starter.sh
+@reboot /www/bronzies/server/starter.sh
 ```
 
 #### FOREVER node deamon
@@ -113,7 +113,7 @@ register the task:
 
 ```shell
 npm i forever -g
-forever start -l blender.log --append -o blenderOut.log -e blenderError.log server.js
+forever start -l bronzies.log --append -o bronziesOut.log -e bronziesError.log /www/bronzies/server/server.js
 ```
 
 

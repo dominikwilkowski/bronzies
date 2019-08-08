@@ -2,6 +2,7 @@ const corsMiddleware = require('restify-cors-middleware');
 const restify = require('restify');
 const cfonts = require('cfonts');
 const chalk = require('chalk');
+const path = require('path');
 const fs = require('fs');
 
 /**
@@ -39,7 +40,7 @@ function sortHighscore( highscore ) {
 function getHighscore( req, res, next ) {
 	debug( 'Highscore requested', 'interaction', req );
 
-	const highscore = JSON.parse( fs.readFileSync( `./assets/highscore${ DEBUG ? '-staging' : '' }.json`, { encoding: 'utf8' } ) );
+	const highscore = JSON.parse( fs.readFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), { encoding: 'utf8' } ) );
 
 	res.send( sortHighscore( highscore ) );
 	return next();
@@ -55,7 +56,7 @@ function getHighscore( req, res, next ) {
 function postHighscore( req, res, next ) {
 	debug( 'Highscore posted', 'interaction', req );
 	const { score, name, rounds, nays } = req.body;
-	const highscore = JSON.parse( fs.readFileSync( `./assets/highscore${ DEBUG ? '-staging' : '' }.json`, { encoding: 'utf8' } ) );
+	const highscore = JSON.parse( fs.readFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), { encoding: 'utf8' } ) );
 	highscore.push({
 		name,
 		score,
@@ -65,7 +66,7 @@ function postHighscore( req, res, next ) {
 	});
 
 	try {
-		fs.writeFileSync( `./assets/highscore${ DEBUG ? '-staging' : '' }.json`, JSON.stringify( highscore ), { encoding: 'utf8' } );
+		fs.writeFileSync( path.normalize(`${ __dirname }assets/highscore${ DEBUG ? '-staging' : '' }.json`), JSON.stringify( highscore ), { encoding: 'utf8' } );
 	}
 	catch( error ) {
 		debug( error, 'error', req );
