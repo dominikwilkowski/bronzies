@@ -116,6 +116,7 @@ function Game() {
 		history, setHistory,
 		wrongAnswers, setWrongAnswers,
 		score, setScore,
+		nays, setNays,
 		rounds, setRounds,
 		wasNoLocalStorage,
 	} = useGameData();
@@ -189,6 +190,7 @@ function Game() {
 			setWrongAnswers( wrongAnswers );
 			setCorrect( false );
 			setScore( score - 1 );
+			setNays( nays + 1 );
 		}
 
 		setUserAnswer('');

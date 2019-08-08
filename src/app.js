@@ -47,6 +47,7 @@ const GameStateProvider = ({ children }) => {
 	const [ history, setHistory ] = useState([]);
 	const [ rounds, setRounds ] = useState( 1 );
 	const [ score, setScore ] = useState( 0 );
+	const [ nays, setNays ] = useState( 0 );
 
 	const localSvg = localStorage.getItem('svg');
 	const svgSprite = document.getElementById('svgSprite').innerHTML;
@@ -75,6 +76,7 @@ const GameStateProvider = ({ children }) => {
 			history, setHistory,
 			rounds, setRounds,
 			score, setScore,
+			nays, setNays,
 			wasNoLocalStorage,
 		}}>
 			{ children }

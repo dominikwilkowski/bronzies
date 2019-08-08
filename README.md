@@ -20,7 +20,6 @@ bronzies.com
 MVP:
 - [ ] finish highscore page
 	- [ ] push ups
-	- [ ] nays
 - [ ] add reporting to app
 	- [ ] https://clicky.com/ or https://matomo.org/ or https://usefathom.com/ or https://www.atinternet.com/en/
 

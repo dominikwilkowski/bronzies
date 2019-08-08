@@ -44,7 +44,7 @@ export function getSortedWrongAnswers( wrongAnswers, db ) {
 };
 
 function Highscore() {
-	const { signals, score, rounds, history, wrongAnswers } = useGameData();
+	const { signals, score, nays, rounds, history, wrongAnswers } = useGameData();
 	const [ highscore, setHighscore ] = useState([]);
 	const [ name, setName ] = useState('');
 	const [ isSubmitting, setIsSubmitting ] = useState( false );
@@ -76,7 +76,7 @@ function Highscore() {
 
 	async function handleSubmit( event ) {
 		event.preventDefault();
-		if( name && score ) {
+		if( hasPlayed ) {
 			setIsSubmitting( true );
 			// const Sleep = wait => new Promise( resolve => setTimeout( resolve, wait ) );
 			// await Sleep( 5000 );
@@ -90,7 +90,7 @@ function Highscore() {
 					name,
 					score,
 					rounds,
-					nays: 0,
+					nays,
 				}),
 			});
 			setHighscore( await response.json() );
@@ -161,7 +161,7 @@ function Highscore() {
 							background: 'repeating-linear-gradient( -45deg, transparent, transparent 12px, rgba( 100, 100, 100, 0.1 ) 12px, rgba( 100, 100, 100, 0.1 ) 30px )',
 						}
 					}}>
-						<p>Enter yourself into the score board.</p>
+						<p>Enter yourself into the score board with your current score of { score }.</p>
 
 						{
 							myPosition < 50
