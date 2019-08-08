@@ -18,6 +18,9 @@ bronzies.com
 ## Todos
 
 Next:
+- [ ] tests via jest and cypress
+- [ ] enable service worker
+- [ ] re-add heart beat screen
 - [ ] fix theme (make sane)
 - [ ] add more modes for types of beaches etc
 - [ ] rebuild server
