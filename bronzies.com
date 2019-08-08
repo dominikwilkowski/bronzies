@@ -46,6 +46,7 @@ server {
 	listen       [::]:443 ssl http2;
 	server_name  bronzies.com;
 	root         /var/www/html/bronzies;
+	index        index.html;
 
 	ssl on;
 	ssl_certificate      /etc/letsencrypt/live/bronzies.com/fullchain.pem;
@@ -68,8 +69,7 @@ server {
 	# root server
 	#
 	location / {
-		root   /var/www/html/bronzies;
-		index  index.html index.htm;
+		try_files $uri /index.html;
 	}
 
 
