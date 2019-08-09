@@ -18,9 +18,6 @@ bronzies.com
 ## Todos
 
 Next:
-- [ ] fix safari bugs
-	- [ ] loading text to move down before fading
-	- [ ] loading animation not working
 - [ ] tests via jest and cypress
 - [ ] enable service worker
 - [ ] re-add cpr beat screen
@@ -42,6 +39,7 @@ Install the dependencies via [`yarn`](https://yarnpkg.com/) and run `yarn start`
 |-------------------|------------------------------|
 | `yarn start`      | Start CRA development server |
 | `yarn build`      | Build for production         |
+| `yarn deploy:app` | Upload the build app         |
 
 
 **[⬆ back to top](#contents)**
@@ -53,10 +51,11 @@ Install the dependencies via [`yarn`](https://yarnpkg.com/) and run `yarn start`
 The server can be found in the `./server/` folder.
 Install dependencies, inside that folder, with preferably [`yarn`](https://yarnpkg.com/) and run one of the following commands:
 
-| Command           | Description                                             |
-|-------------------|---------------------------------------------------------|
-| `yarn server`     | Start the server that serves the REST endpoint          |
-| `yarn server:dev` | Start the server in staging mode to server staging data |
+| Command              | Description                                             |
+|----------------------|---------------------------------------------------------|
+| `yarn server`        | Start the server that serves the REST endpoint          |
+| `yarn server:dev`    | Start the server in staging mode to server staging data |
+| `yarn deploy:server` | Upload the server files (without `node_modules`)        |
 
 
 **[⬆ back to top](#contents)**

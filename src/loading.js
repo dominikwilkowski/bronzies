@@ -11,7 +11,7 @@ import { Fragment } from 'react';
  */
 function Animation({ loadingState }) {
 	const { signals } = useGameData();
-	const hasData = signals && document.getElementById('svgSprite').innerHTML;
+	const hasData = signals && !!document.getElementById('svgSprite').innerHTML;
 
 	const loading = keyframes({
 		from: {
@@ -24,6 +24,7 @@ function Animation({ loadingState }) {
 
 	const messages = {
 		loading: 'Loading',
+		loaded: 'Loaded',
 		stale: `... still loading data, hang tight`,
 		failed: <Fragment>
 			I can't seem to fetch the data I need
