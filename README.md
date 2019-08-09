@@ -18,6 +18,9 @@ bronzies.com
 ## Todos
 
 Next:
+- [ ] fix safari bugs
+	- [ ] loading text to move down before fading
+	- [ ] loading animation not working
 - [ ] tests via jest and cypress
 - [ ] enable service worker
 - [ ] re-add cpr beat screen

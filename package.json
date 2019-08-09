@@ -15,10 +15,10 @@
 		"nuke": "rm -rf build && rm -rf node_modules && rm yarn.lock"
 	},
 	"dependencies": {
-		"@emotion/core": "^10.0.14",
+		"@emotion/core": "^10.0.15",
 		"@reach/router": "^1.2.1",
-		"react": "^16.8.6",
-		"react-dom": "^16.8.6",
+		"react": "^16.9.0",
+		"react-dom": "^16.9.0",
 		"react-scripts": "3.0.1",
 		"react-spring": "^8.0.27"
 	},
@@ -27,6 +27,7 @@
 		"production": [
 			">0.2%",
 			"not dead",
+			"last 2 safari version",
 			"not op_mini all"
 		],
 		"development": [

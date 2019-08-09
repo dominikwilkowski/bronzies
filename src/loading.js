@@ -62,6 +62,7 @@ function Animation({ loadingState }) {
 			background: 'url(splash.jpg) #fff',
 			backgroundSize: 'cover',
 			display: 'grid',
+			alignContent: 'center',
 		}}>
 			<div css={{
 				margin: 'auto',
