@@ -45,8 +45,7 @@ server {
 	listen       443 ssl http2;
 	listen       [::]:443 ssl http2;
 	server_name  bronzies.com;
-	root         /var/www/html/bronzies;
-	index        index.html;
+	root         /var/www/html/bronzies/;
 
 	ssl on;
 	ssl_certificate      /etc/letsencrypt/live/bronzies.com/fullchain.pem;
@@ -66,10 +65,12 @@ server {
 	ssl_stapling         on;
 	ssl_stapling_verify  on;
 
+
 	# root server
 	#
 	location / {
-		try_files $uri /index.html;
+		root       /var/www/html/bronzies;
+		try_files  $uri $uri/ /index.html;
 	}
 
 
