@@ -52,7 +52,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, round 
 						<Button onClick={ () => handleRoundChange( signals, 'Signals' ) } styling={{
 							paddingBottom: '0.5rem',
 						}}>
-							Signals?
+							Signals
 						</Button>
 						<small css={{
 							display: 'block',

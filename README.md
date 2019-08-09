@@ -28,6 +28,8 @@ Next:
 	- [ ] post history object as opposed to done score
 	- [ ] move to graphql
 
+**[⬆ back to top](#contents)**
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## The app
@@ -40,7 +42,6 @@ Install the dependencies via [`yarn`](https://yarnpkg.com/) and run `yarn start`
 | `yarn start`      | Start CRA development server |
 | `yarn build`      | Build for production         |
 | `yarn deploy:app` | Upload the build app         |
-
 
 **[⬆ back to top](#contents)**
 
@@ -56,10 +57,6 @@ Install dependencies, inside that folder, with preferably [`yarn`](https://yarnp
 | `yarn server`        | Start the server that serves the REST endpoint          |
 | `yarn server:dev`    | Start the server in staging mode to server staging data |
 | `yarn deploy:server` | Upload the server files (without `node_modules`)        |
-
-
-**[⬆ back to top](#contents)**
-
 
 ### RESTful API endpoints
 
@@ -118,6 +115,7 @@ npm i forever -g
 forever start -l bronzies.log --append -o bronziesOut.log -e bronziesError.log /www/bronzies/server/server.js
 ```
 
+**[⬆ back to top](#contents)**
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -138,6 +136,8 @@ forever start -l bronzies.log --append -o bronziesOut.log -e bronziesError.log /
 * 0.0.3 - fixed dependencies, changed endpoints
 * 0.0.2 - moved to MongoDB
 * 0.0.1 - Created server, routes and endpoints
+
+**[⬆ back to top](#contents)**
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 

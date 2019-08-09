@@ -10,7 +10,7 @@
 		"server": "node server/server.js",
 		"server:dev": "node server/server.js debug",
 		"deploy": "npm run build && npm run deploy:server && npm run deploy:app",
-		"deploy:server": "rsync -avzhe --exclude 'node_modules/*' ssh --progress ./server/* deploy@bronzies.com:/var/www/html/bronzies/server",
+		"deploy:server": "rsync -avzhe ssh --progress ./server/* deploy@bronzies.com:/var/www/html/bronzies/server",
 		"deploy:app": "rsync -avzhe ssh --progress ./build/* deploy@bronzies.com:/var/www/html/bronzies/",
 		"nuke": "rm -rf build && rm -rf node_modules && rm yarn.lock"
 	},

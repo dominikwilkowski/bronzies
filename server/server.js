@@ -66,7 +66,7 @@ function postHighscore( req, res, next ) {
 	});
 
 	try {
-		fs.writeFileSync( path.normalize(`${ __dirname }assets/highscore${ DEBUG ? '-staging' : '' }.json`), JSON.stringify( highscore ), { encoding: 'utf8' } );
+		fs.writeFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), JSON.stringify( highscore ), { encoding: 'utf8' } );
 	}
 	catch( error ) {
 		debug( error, 'error', req );
