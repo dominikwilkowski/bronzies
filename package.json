@@ -9,9 +9,10 @@
 		"eject": "react-scripts eject",
 		"server": "node server/server.js",
 		"server:dev": "node server/server.js debug",
-		"deploy": "npm run build && npm run deploy:server && npm run deploy:app",
+		"deploy": "npm run build && npm run deploy:server && npm run deploy:restart && npm run deploy:app",
 		"deploy:server": "rsync --exclude=assets/highscore.json -avzhe ssh --progress ./server/* deploy@bronzies.com:/var/www/html/bronzies/server",
 		"deploy:app": "rsync -avzhe ssh --progress ./build/* deploy@bronzies.com:/var/www/html/bronzies/",
+		"deploy:restart": "ssh deploy@bronzies.com forever restart /www/bronzies/server/server.js",
 		"nuke": "rm -rf build && rm -rf node_modules && rm yarn.lock"
 	},
 	"dependencies": {
