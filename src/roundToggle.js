@@ -8,7 +8,7 @@ import { jsx } from '@emotion/core';
 import { colors } from './theme';
 import Button from './button';
 
-function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, round }) {
+function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, questionType }) {
 	const { signals, wrongAnswers } = useGameData();
 	const questions = getSortedWrongAnswers( wrongAnswers, signals );
 
@@ -41,7 +41,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, round 
 						position: 'relative',
 						':after': {
 							content: '""',
-							display: round === 'Signals' ? 'block' : 'none',
+							display: questionType === 'Signals' ? 'block' : 'none',
 							position: 'absolute',
 							top: '1.4rem',
 							left: 0,
@@ -66,7 +66,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, round 
 						position: 'relative',
 						':after': {
 							content: '""',
-							display: round === 'Practice' ? 'block' : 'none',
+							display: questionType === 'Practice' ? 'block' : 'none',
 							position: 'absolute',
 							top: '1.4rem',
 							left: 0,
@@ -109,6 +109,7 @@ function RoundToggle() {
 		wrongAnswers,
 		setQuestionsDB,
 		setQuestionsImage,
+		questionType, setQuestionType,
 		setChoicesImage,
 		setIndexImage,
 		correctImage,
@@ -117,7 +118,6 @@ function RoundToggle() {
 		setIndexText,
 		correctText,
 	} = useGameData();
-	const [ round, setRound ] = useState('Signals');
 	const [ isOpen, setIsOpen ] = useState( false );
 	const wrongAnswersLength = Object.keys( wrongAnswers ).length;
 
@@ -129,7 +129,7 @@ function RoundToggle() {
 		config: { duration: 300 },
 	});
 
-	function handleRoundChange( questions, round ) {
+	function handleRoundChange( questions, questionType ) {
 		setQuestionsDB( questions );
 
 		const newQuestionsImage = shuffle( questions );
@@ -144,7 +144,7 @@ function RoundToggle() {
 		setChoicesText( newChoicesText );
 		setIndexText( 0 );
 
-		setRound( round );
+		setQuestionType( questionType );
 		setIsOpen( false );
 	}
 
@@ -158,7 +158,7 @@ function RoundToggle() {
 			position: 'relative',
 		}}>
 			<Button onClick={ () => setIsOpen( !isOpen ) } mute={ isMuted }>
-				Round: { round }
+				Round: { questionType }
 			</Button>
 			{
 				transitions.map( ({ item, props }) => {
@@ -178,7 +178,7 @@ function RoundToggle() {
 									setIsOpen={ setIsOpen }
 									wrongAnswersLength={ wrongAnswersLength }
 									handleRoundChange={ handleRoundChange }
-									round={ round }
+									questionType={ questionType }
 								/>
 							</animated.div>
 						: null

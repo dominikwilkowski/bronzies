@@ -19,13 +19,16 @@ bronzies.com
 
 Next:
 - [ ] tests via jest and cypress
+- [ ] make gameToggler a11y
+	- [ ] trap focus
+	- [ ] support esc key close
+	- [ ] aria roles
 - [ ] enable service worker
 - [ ] re-add cpr beat screen
 - [ ] fix theme (make sane)
 - [ ] add more modes for types of beaches etc
 - [ ] rebuild server
 	- [ ] postgres
-	- [ ] post history object as opposed to done score
 	- [ ] move to graphql
 
 **[⬆ back to top](#contents)**

@@ -89,8 +89,9 @@ function Highscore() {
 				body: JSON.stringify({
 					name,
 					score,
-					rounds,
 					nays,
+					history,
+					rounds,
 				}),
 			});
 			setHighscore( await response.json() );

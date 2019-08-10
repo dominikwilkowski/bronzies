@@ -47,6 +47,57 @@ function getHighscore( req, res, next ) {
 }
 
 /**
+ * Convert a question array into an object where the image becomes the key
+ *
+ * @param  {array}  questions - An array of question objects
+ *
+ * @return {object}           - An object with all the original objects but with the image as key for each
+ */
+function convertQuestions( questions ) {
+	const newQuestions = {};
+	questions.map( question => {
+		newQuestions[ question.image ] = question;
+	});
+	return newQuestions;
+}
+
+/**
+ * Parse an history array to find score and nays
+ *
+ * @param  {array}  history - An array of arrays for each move
+ *
+ * @return {object}         - An object with score and nays numbers
+ */
+function calcScore( history ) {
+	if( typeof history !== 'object' ) {
+		return { score: 0, nays: 0 };
+	}
+	let score = 0;
+	let nays = 0;
+	const questions = {};
+	const questionTypes = {
+		'Signals': `signals${ DEBUG ? '-staging' : '' }.json`,
+	};
+	const allQuestions = [ ...new Set( history.map( move => move[ 0 ] ) ) ];
+	allQuestions.map( question => {
+		questions[ question ] = convertQuestions( require(`./assets/${ questionTypes[ question ] }`) );
+	});
+
+	history.map( move => {
+		const solution = questions[ move[ 0 ] ];
+		if( solution[ move[ 1 ] ].text === move[ 2 ] ) {
+			score ++;
+		}
+		else {
+			score --;
+			nays ++;
+		}
+	});
+
+	return { score, nays };
+}
+
+/**
  * Posting new highscore and returning the new json
  *
  * @param  {object}   req  - The request object from express
@@ -55,24 +106,31 @@ function getHighscore( req, res, next ) {
  */
 function postHighscore( req, res, next ) {
 	debug( 'Highscore posted', 'interaction', req );
-	const { score, name, rounds, nays } = req.body;
-	const highscore = JSON.parse( fs.readFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), { encoding: 'utf8' } ) );
-	highscore.push({
-		name,
-		score,
-		rounds,
-		nays,
-		date: new Date().toISOString(),
-	});
+	const { score, name, rounds, nays, history } = req.body;
+	const controlScore = calcScore( history );
 
-	try {
-		fs.writeFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), JSON.stringify( highscore ), { encoding: 'utf8' } );
-	}
-	catch( error ) {
-		debug( error, 'error', req );
-	}
+	if( controlScore.score === score && controlScore.nays === nays ) {
+		const highscore = JSON.parse( fs.readFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), { encoding: 'utf8' } ) );
+		highscore.push({
+			name,
+			score,
+			rounds,
+			nays,
+			date: new Date().toISOString(),
+		});
 
-	res.send( sortHighscore( highscore ) );
+		try {
+			fs.writeFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), JSON.stringify( highscore ), { encoding: 'utf8' } );
+		}
+		catch( error ) {
+			debug( error, 'error', req );
+		}
+
+		res.send( sortHighscore( highscore ) );
+	}
+	else {
+		res.send({ error: 'You’re trying to cheat!!!' });
+	}
 	return next();
 }
 

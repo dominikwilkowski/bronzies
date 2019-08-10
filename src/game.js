@@ -113,6 +113,7 @@ function Game() {
 		correctText, setCorrectText,
 		userAnswerText, setUserAnswerText,
 		questionAsImage, setQuestionAsImage,
+		questionType,
 		history, setHistory,
 		wrongAnswers, setWrongAnswers,
 		score, setScore,
@@ -174,7 +175,7 @@ function Game() {
 	function handleAnswer( event, questions, setQuestions, choices, setChoices, index, userAnswer, setUserAnswer, setCorrect, tagAnswer, score ) {
 		event.preventDefault();
 		window.addEventListener( 'beforeunload', onUnload );
-		history.push([ questions[ index ].text, userAnswer ]);
+		history.push([ questionType, userAnswer, questions[ index ].text ]);
 		setHistory( history );
 
 		if( questions[ index ].image === userAnswer ) {

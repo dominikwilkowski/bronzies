@@ -43,6 +43,7 @@ const GameStateProvider = ({ children }) => {
 
 	// state for both modes
 	const [ questionAsImage, setQuestionAsImage ] = useState( true );
+	const [ questionType, setQuestionType ] = useState('Signals');
 	const [ wrongAnswers, setWrongAnswers ] = useState([]);
 	const [ history, setHistory ] = useState([]);
 	const [ rounds, setRounds ] = useState( 1 );
@@ -72,6 +73,7 @@ const GameStateProvider = ({ children }) => {
 			correctText, setCorrectText,
 			userAnswerText, setUserAnswerText,
 			questionAsImage, setQuestionAsImage,
+			questionType, setQuestionType,
 			wrongAnswers, setWrongAnswers,
 			history, setHistory,
 			rounds, setRounds,

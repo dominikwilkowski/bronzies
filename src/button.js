@@ -5,7 +5,7 @@ import { colors } from './theme';
 
 function Button({ children, onClick, mute, styling }) {
 	return (
-		<button type='button' onClick={ mute ? null : onClick } css={{
+		<button type='button' onClick={ mute ? null : onClick } disabled={ mute } css={{
 			apperance: 'none',
 			border: 'none',
 			background: 'transparent',
