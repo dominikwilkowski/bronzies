@@ -10,8 +10,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - v2-dependencies-
       - run: yarn
       - run: cd server && yarn
       - run: sudo apt-get install tree # for debugging circle builds
@@ -22,7 +22,7 @@ jobs:
           paths:
             - node_modules
             - server/node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v2-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/bronzies/
           paths:
