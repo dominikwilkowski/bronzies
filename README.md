@@ -1,4 +1,4 @@
-bronzies.com
+bronzies.com [![CircleCI](https://circleci.com/gh/dominikwilkowski/bronzies/tree/master.svg?style=svg)](https://circleci.com/gh/dominikwilkowski/bronzies/tree/master)
 ============
 
 > A web app that teaches you the [SLSA](https://sls.com.au/) signals required for the [Bronze Medallion](https://sls.com.au/role/bronze-medallion/).
@@ -18,7 +18,17 @@ bronzies.com
 
 ## How to run
 
-Running the server
+| Command           | Description                                           |
+|-------------------|-------------------------------------------------------|
+| `yarn start`      | Starts server and app concurrently                    |
+| `yarn build`      | Build deploy files inside `build/`                    |
+| `yarn deploy`     | Builds app, deploys all files and restarts the server |
+| `yarn nuke`       | Removes build, `node_modules/` and `yarn.lock` file   |
+| `yarn test`       | Runs all tests                                        |
+| `yarn test:watch` | Runs Jest test watch                                  |
+| `yarn test:cover` | Shows coverage of unit tests                          |
+
+Running the server manually
 
 ```shell
 node server/server.js serve
@@ -27,7 +37,7 @@ node server/server.js serve
 Running the app
 
 ```shell
-yarn start
+yarn start:app
 ```
 
 **[⬆ back to top](#contents)**
@@ -62,7 +72,7 @@ Install the dependencies via [`yarn`](https://yarnpkg.com/) and run `yarn start`
 
 | Command           | Description                  |
 |-------------------|------------------------------|
-| `yarn start`      | Start CRA development server |
+| `yarn start:app`  | Start CRA development server |
 | `yarn build`      | Build for production         |
 | `yarn deploy:app` | Upload the build app         |
 
@@ -75,11 +85,11 @@ Install the dependencies via [`yarn`](https://yarnpkg.com/) and run `yarn start`
 The server can be found in the `./server/` folder.
 Install dependencies, inside that folder, with preferably [`yarn`](https://yarnpkg.com/) and run one of the following commands:
 
-| Command              | Description                                             |
-|----------------------|---------------------------------------------------------|
-| `yarn server`        | Start the server that serves the REST endpoint          |
-| `yarn server:dev`    | Start the server in staging mode to server staging data |
-| `yarn deploy:server` | Upload the server files (without `node_modules`)        |
+| Command                 | Description                                             |
+|-------------------------|---------------------------------------------------------|
+| `yarn start:server`     | Start the server that serves the REST endpoint          |
+| `yarn start:server:dev` | Start the server in staging mode to server staging data |
+| `yarn deploy:server`    | Upload the server files (without `node_modules`)        |
 
 ### RESTful API endpoints
 
