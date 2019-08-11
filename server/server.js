@@ -15,18 +15,19 @@ const DEBUG = process.argv.includes('debug') ? true : false;
 /**
  * Take an array of highscore and sort in in two different ways and return an object
  *
- * @param  {array}    highscore - An array of highscore objects
- * @param  {integer}  top       - The number of top scores
+ * @param  {array}    highscore   - An array of highscore objects
+ * @param  {integer}  top50Limit  - The number of top scores
+ * @param  {integer}  latestLimit - The number of latest posts
  *
- * @return {object}             - An object with two arrays and an integer { top50: [array], latest: [array], length: [integer]}
+ * @return {object}               - An object with two arrays and an integer { top50: [array], latest: [array], length: [integer]}
  */
-function sortHighscore( highscore, top = 50 ) {
+function sortHighscore( highscore, top50Limit = 50, latestLimit = 5 ) {
 	const top50 = [ ...highscore ]
 		.sort( ( a, b ) => b.score - a.score )
-		.slice( 0, top );
+		.slice( 0, top50Limit );
 	const latest = [ ...highscore ]
 		.sort( ( a, b ) => new Date( b.date ) - new Date( a.date ) )
-		.slice( 0, 5 );
+		.slice( 0, latestLimit );
 
 	return { top50, latest, length: highscore.length };
 }
@@ -251,7 +252,6 @@ if( process.argv.includes('serve') ) {
 
 module.exports = exports = {
 	sortHighscore,
-	getHighscore,
 	convertQuestions,
 	calcScore,
 	debug,
