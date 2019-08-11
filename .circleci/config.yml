@@ -1,0 +1,50 @@
+version: 2
+
+jobs:
+# The install job for all dependencies so we can reuse/depend on it in other jobs
+  install_dependencies:
+    working_directory: ~/bronzies
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+      - run: yarn
+      - run: sudo apt-get install tree # for debugging circle builds
+      - run: tree -Ca
+      - run: node -v
+      - run: npm -v
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - persist_to_workspace:
+          root: ~/bronzies/
+          paths:
+            - node_modules
+
+# Running all tests
+  testing:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/bronzies
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/bronzies
+      - run:
+          name: Testing our code
+          command: yarn test
+
+
+workflows:
+  version: 2
+  running_jobs:
+    jobs:
+      - install_dependencies       # First we install dependencies
+      - testing:                   # Second we test our code
+          requires:
+            - install_dependencies
