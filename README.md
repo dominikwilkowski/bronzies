@@ -1,4 +1,4 @@
-bronzies.com
+bronzies.com [![CircleCI](https://circleci.com/gh/dominikwilkowski/bronzies/tree/master.svg?style=svg)](https://circleci.com/gh/dominikwilkowski/bronzies/tree/master)
 ============
 
 > A web app that teaches you the [SLSA](https://sls.com.au/) signals required for the [Bronze Medallion](https://sls.com.au/role/bronze-medallion/).
