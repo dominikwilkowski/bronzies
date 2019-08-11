@@ -1,0 +1,32 @@
+[
+	{
+		"image": "#questions-signal1",
+		"alt": "Alt text",
+		"text": "Choose signal 1"
+	},
+	{
+		"image": "#questions-signal2",
+		"alt": "Alt text",
+		"text": "Choose signal 2"
+	},
+	{
+		"image": "#questions-signal3",
+		"alt": "Alt text",
+		"text": "Choose signal 3"
+	},
+	{
+		"image": "#questions-signal4",
+		"alt": "Alt text",
+		"text": "Choose signal 4"
+	},
+	{
+		"image": "#questions-signal5",
+		"alt": "Alt text",
+		"text": "Choose signal 5"
+	},
+	{
+		"image": "#questions-signal6",
+		"alt": "Alt text",
+		"text": "Choose signal 6"
+	}
+]

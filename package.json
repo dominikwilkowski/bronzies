@@ -1,24 +1,58 @@
 {
 	"name": "bronzies",
-	"version": "0.1.5",
+	"version": "1.0.0",
 	"private": true,
-	"devDependencies": {
-		"grunt": "^0.4.5",
-		"grunt-autoprefixer": "^1.0.0",
-		"grunt-bumpup": "^0.6.1",
-		"grunt-cli": "^0.1.13",
-		"grunt-contrib-clean": "^0.6.0",
-		"grunt-contrib-connect": "^0.6.0",
-		"grunt-contrib-imagemin": "^0.8.1",
-		"grunt-contrib-stylus": "^0.19.0",
-		"grunt-contrib-uglify": "^0.5.1",
-		"grunt-contrib-watch": "^0.5.3",
-		"grunt-copy-to": "0.0.10",
-		"grunt-grunticon": "^2.2.2",
-		"grunt-includes": "^0.4.5",
-		"grunt-svg2storeicons": "^0.2.3",
-		"grunt-svgmin": "^1.0.0",
-		"grunt-text-replace": "^0.3.12",
-		"grunt-wakeup": "0.1.0"
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "CI=true react-scripts test",
+		"test:watch": "react-scripts test",
+		"test:cover": "CI=true react-scripts test --coverage",
+		"eject": "react-scripts eject",
+		"server": "node server/server.js",
+		"server:dev": "node server/server.js debug",
+		"deploy": "npm run build && npm run deploy:server && npm run deploy:restart && npm run deploy:app",
+		"deploy:server": "rsync --exclude=assets/highscore.json -avzhe ssh --progress ./server/* deploy@bronzies.com:/var/www/html/bronzies/server",
+		"deploy:app": "rsync -avzhe ssh --progress ./build/* deploy@bronzies.com:/var/www/html/bronzies/",
+		"deploy:restart": "ssh deploy@bronzies.com forever restart /www/bronzies/server/server.js",
+		"nuke": "rm -rf build && rm -rf node_modules && rm yarn.lock"
+	},
+	"dependencies": {
+		"@emotion/core": "^10.0.15",
+		"@reach/router": "^1.2.1",
+		"react": "^16.9.0",
+		"react-dom": "^16.9.0",
+		"react-scripts": "3.1.0",
+		"react-spring": "^8.0.27"
+	},
+	"proxy": "http://localhost:5555",
+	"jest": {
+		"collectCoverageFrom": [
+			"src/**/*.js",
+			"server/**/*.js",
+			"!<rootDir>/node_modules/",
+			"!<rootDir>/server/node_modules/"
+		],
+		"coverageThreshold": {
+			"global": {
+				"branches": 0,
+				"functions": 0,
+				"lines": 0,
+				"statements": 0
+			}
+		}
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"last 2 safari version",
+			"not op_mini all"
+		],
+		"development": [
+			"last 2 chrome version",
+			"last 2 firefox version",
+			"last 2 safari version"
+		]
 	}
 }

@@ -1,0 +1,19 @@
+{
+	"name": "bronze-RESTfull-API",
+	"version": "1.0.0",
+	"private": true,
+	"devDependencies": {
+		"cfonts": "^2.4.4",
+		"chalk": "^2.4.2",
+		"restify": "^8.4.0"
+	},
+	"scripts": {
+		"nuke": "rm -rf build && rm -rf node_modules && rm yarn.lock"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"dependencies": {
+		"restify-cors-middleware": "^1.1.1"
+	}
+}

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<symbol id="questions-signal1" viewBox="0 0 81 81">
+		<g fill="none" fill-rule="evenodd">
+			<path fill="#1B5694" d="M40.33 16a24.33 24.33 0 1 0 0 48.65 24.33 24.33 0 0 0 0-48.65"/>
+			<text fill="#FFF" font-family="sans-serif" font-size="14" font-weight="bold">
+				<tspan x="31" y="46">01</tspan>
+			</text>
+		</g>
+	</symbol>
+	<symbol id="questions-signal2" viewBox="0 0 81 81">
+		<g fill="none" fill-rule="evenodd">
+			<path fill="#1B5694" d="M40.33 16a24.33 24.33 0 1 0 0 48.65 24.33 24.33 0 0 0 0-48.65"/>
+			<text fill="#FFF" font-family="sans-serif" font-size="14" font-weight="bold">
+				<tspan x="31" y="46">02</tspan>
+			</text>
+		</g>
+	</symbol>
+	<symbol id="questions-signal3" viewBox="0 0 81 81">
+		<g fill="none" fill-rule="evenodd">
+			<path fill="#1B5694" d="M40.33 16a24.33 24.33 0 1 0 0 48.65 24.33 24.33 0 0 0 0-48.65"/>
+			<text fill="#FFF" font-family="sans-serif" font-size="14" font-weight="bold">
+				<tspan x="31" y="46">03</tspan>
+			</text>
+		</g>
+	</symbol>
+	<symbol id="questions-signal4" viewBox="0 0 81 81">
+		<g fill="none" fill-rule="evenodd">
+			<path fill="#1B5694" d="M40.33 16a24.33 24.33 0 1 0 0 48.65 24.33 24.33 0 0 0 0-48.65"/>
+			<text fill="#FFF" font-family="sans-serif" font-size="14" font-weight="bold">
+				<tspan x="31" y="46">04</tspan>
+			</text>
+		</g>
+	</symbol>
+	<symbol id="questions-signal5" viewBox="0 0 81 81">
+		<g fill="none" fill-rule="evenodd">
+			<path fill="#1B5694" d="M40.33 16a24.33 24.33 0 1 0 0 48.65 24.33 24.33 0 0 0 0-48.65"/>
+			<text fill="#FFF" font-family="sans-serif" font-size="14" font-weight="bold">
+				<tspan x="31" y="46">05</tspan>
+			</text>
+		</g>
+	</symbol>
+	<symbol id="questions-signal6" viewBox="0 0 81 81">
+		<g fill="none" fill-rule="evenodd">
+			<path fill="#1B5694" d="M40.33 16a24.33 24.33 0 1 0 0 48.65 24.33 24.33 0 0 0 0-48.65"/>
+			<text fill="#FFF" font-family="sans-serif" font-size="14" font-weight="bold">
+				<tspan x="31" y="46">06</tspan>
+			</text>
+		</g>
+	</symbol>
+</svg>
