@@ -18,7 +18,8 @@ bronzies.com
 ## Todos
 
 Next:
-- [ ] tests via jest and cypress
+- [ ] add cypress tests
+- [ ] add more unit tests
 - [ ] make gameToggler a11y
 	- [ ] trap focus
 	- [ ] support esc key close
@@ -62,6 +63,12 @@ Install dependencies, inside that folder, with preferably [`yarn`](https://yarnp
 | `yarn deploy:server` | Upload the server files (without `node_modules`)        |
 
 ### RESTful API endpoints
+
+| Command                      | Description                                                    |
+|------------------------------|----------------------------------------------------------------|
+| `node server.js serve`       | Run the server and take production data from `assets/`         |
+| `node server.js serve debug` | Run the server but with staging data from `assets/`            |
+| `node server.js test`        | Don't run the server so we can test without starting a process |
 
 *GET signals*
 
@@ -115,7 +122,7 @@ register the task:
 
 ```shell
 npm i forever -g
-forever start -l bronzies.log --append -o bronziesOut.log -e bronziesError.log /www/bronzies/server/server.js
+forever start -l bronzies.log --append -o bronziesOut.log -e bronziesError.log /www/bronzies/server/server.js serve
 ```
 
 **[⬆ back to top](#contents)**

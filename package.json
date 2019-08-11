@@ -5,7 +5,9 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test",
+		"test": "CI=true react-scripts test",
+		"test:watch": "react-scripts test",
+		"test:cover": "CI=true react-scripts test --coverage",
 		"eject": "react-scripts eject",
 		"server": "node server/server.js",
 		"server:dev": "node server/server.js debug",
@@ -24,6 +26,22 @@
 		"react-spring": "^8.0.27"
 	},
 	"proxy": "http://localhost:5555",
+	"jest": {
+		"collectCoverageFrom": [
+			"src/**/*.js",
+			"server/**/*.js",
+			"!<rootDir>/node_modules/",
+			"!<rootDir>/server/node_modules/"
+		],
+		"coverageThreshold": {
+			"global": {
+				"branches": 0,
+				"functions": 0,
+				"lines": 0,
+				"statements": 0
+			}
+		}
+	},
 	"browserslist": {
 		"production": [
 			">0.2%",

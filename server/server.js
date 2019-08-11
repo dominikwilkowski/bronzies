@@ -15,14 +15,15 @@ const DEBUG = process.argv.includes('debug') ? true : false;
 /**
  * Take an array of highscore and sort in in two different ways and return an object
  *
- * @param  {array}  highscore - An array of highscore objects
+ * @param  {array}    highscore - An array of highscore objects
+ * @param  {integer}  top       - The number of top scores
  *
- * @return {object}           - An object with two arrays and an integer { top50: [array], latest: [array], length: [integer]}
+ * @return {object}             - An object with two arrays and an integer { top50: [array], latest: [array], length: [integer]}
  */
-function sortHighscore( highscore ) {
+function sortHighscore( highscore, top = 50 ) {
 	const top50 = [ ...highscore ]
 		.sort( ( a, b ) => b.score - a.score )
-		.slice( 0, 50 );
+		.slice( 0, top );
 	const latest = [ ...highscore ]
 		.sort( ( a, b ) => new Date( b.date ) - new Date( a.date ) )
 		.slice( 0, 5 );
@@ -215,33 +216,43 @@ server.post( '/api/highscore', postHighscore );
 server.get( '/api/signals', getSignals );
 server.get( '/api/assets/*', getSignalAsset );
 
-server.listen( port, () => {
-	console.log('\n\n');
+if( process.argv.includes('serve') ) {
+	server.listen( port, () => {
+		console.log('\n\n');
 
-	cfonts.say('Bronzies', {
-		colors: ['#EA1C2E', '#FFD520'],
-		letterSpacing: 0,
-		align: 'center',
-		space: false,
-	});
-
-	if( DEBUG ) {
-		cfonts.say('debug mode', {
-			font: 'chrome',
-			colors: ['#EA1C2E', '#FFD520', '#EA1C2E'],
+		cfonts.say('Bronzies', {
+			colors: ['#EA1C2E', '#FFD520'],
+			letterSpacing: 0,
 			align: 'center',
 			space: false,
 		});
-	}
 
-	cfonts.say(`${ server.name } listening at 127.0.0.1:${ port }`, {
-		font: 'console',
-		colors: ['white'],
-		background: 'blue',
-		letterSpacing: 0,
-		align: 'center',
-		space: false,
+		if( DEBUG ) {
+			cfonts.say('debug mode', {
+				font: 'chrome',
+				colors: ['#EA1C2E', '#FFD520', '#EA1C2E'],
+				align: 'center',
+				space: false,
+			});
+		}
+
+		cfonts.say(`${ server.name } listening at 127.0.0.1:${ port }`, {
+			font: 'console',
+			colors: ['white'],
+			background: 'blue',
+			letterSpacing: 0,
+			align: 'center',
+			space: false,
+		});
+
+		debug( 'Server started', 'report' );
 	});
+}
 
-	debug( 'Server started', 'report' );
-});
+module.exports = exports = {
+	sortHighscore,
+	getHighscore,
+	convertQuestions,
+	calcScore,
+	debug,
+};
