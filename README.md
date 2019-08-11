@@ -11,7 +11,26 @@ bronzies.com
 * [The server](#the-server)
 	* [RESTful API endpoints](#restful-api-endpoints)
 	* [Install on server](#install-on-server)
+* [Release History](#release-history-app)
 * [License](#license)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## How to run
+
+Running the server
+
+```shell
+node server/server.js serve
+```
+
+Running the app
+
+```shell
+yarn start
+```
+
+**[⬆ back to top](#contents)**
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 

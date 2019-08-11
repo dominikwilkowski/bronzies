@@ -13,6 +13,8 @@ jobs:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
       - run: yarn
+      - run: cd server
+      - run: yarn
       - run: sudo apt-get install tree # for debugging circle builds
       - run: tree -Ca
       - run: node -v
@@ -20,11 +22,13 @@ jobs:
       - save_cache:
           paths:
             - node_modules
+            - server/node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - persist_to_workspace:
           root: ~/bronzies/
           paths:
             - node_modules
+            - server/node_modules
 
 # Running all tests
   testing:
