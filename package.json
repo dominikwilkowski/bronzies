@@ -3,15 +3,17 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"start": "react-scripts start",
+		"start": "concurrently \"yarn start:server\" \"yarn start:app\"",
+		"start:dev": "concurrently \"yarn start:server\" \"yarn start:app:dev\"",
+		"start:app": "react-scripts start",
+		"start:server": "node server/server.js serve",
+		"start:server:dev": "node server/server.js serve debug",
 		"build": "react-scripts build",
 		"test": "CI=true react-scripts test",
 		"test:watch": "react-scripts test",
 		"test:cover": "CI=true react-scripts test --coverage",
 		"eject": "react-scripts eject",
-		"server": "node server/server.js",
-		"server:dev": "node server/server.js debug",
-		"deploy": "npm run build && npm run deploy:server && npm run deploy:restart && npm run deploy:app",
+		"deploy": "yarn build && yarn deploy:server && yarn deploy:restart && yarn deploy:app",
 		"deploy:server": "rsync --exclude=assets/highscore.json -avzhe ssh --progress ./server/* deploy@bronzies.com:/var/www/html/bronzies/server",
 		"deploy:app": "rsync -avzhe ssh --progress ./build/* deploy@bronzies.com:/var/www/html/bronzies/",
 		"deploy:restart": "ssh deploy@bronzies.com forever restart /www/bronzies/server/server.js",
@@ -24,6 +26,9 @@
 		"react-dom": "^16.9.0",
 		"react-scripts": "3.1.0",
 		"react-spring": "^8.0.27"
+	},
+	"devDependencies": {
+		"concurrently": "^4.1.1"
 	},
 	"proxy": "http://localhost:5555",
 	"jest": {
