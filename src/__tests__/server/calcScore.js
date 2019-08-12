@@ -99,7 +99,7 @@ test('calcScore - Calculate complex score and nays', () => {
 		[ "Signals", "#questions-signal6", "Investigate submerged object" ],                      // correct
 		[ "Signals", "#questions-signal14", "Shore signal received and understood" ],             // correct
 		[ "Signals", "#questions-signal3", "Remain stationary" ],                                 // correct
-		[ "Signals", "#questions-signal8", "Go to the left or the right" ],                       // correct
+		[ "Signals", "#questions-signal8", "Go to the left or the right" ],                       // wrong
 		[ "Signals", "#questions-signal21", "Assistance required (Water to beach)" ],             // correct
 		[ "Signals", "#questions-signal2", "Return to shore" ],                                   // correct
 		[ "Signals", "#questions-signal19", "Boat wishes to return to shore" ],                   // wrong
@@ -131,7 +131,7 @@ test('calcScore - Calculate complex score and nays', () => {
 		[ "Signals", "#questions-signal10", "Submerged Patient Missing" ],                        // wrong
 		[ "Signals", "#questions-signal7", "Submerged Patient Missing" ],                         // wrong
 	];
-	// 32 correct - 23 nays = 9
+	// 31 correct - 21 nays = 10
 	const result = {
 		score: 10,
 		nays: 21,
