@@ -212,7 +212,7 @@ function debug( text, code, req ) {
 		console.log(`${ chalk.green('\u2713 ') }${ ip } ${ time } ${ text }`);
 	}
 	else if( code === 'error' ) {
-		console.log(`${ chalk.red('\u2717 ') }${ ip } ${ time } ${ text }`);
+		console.error(`${ chalk.red('\u2717 ') }${ ip } ${ time } ${ text }`);
 	}
 	else if( code === 'interaction' ) {
 		console.log(`${ chalk.yellow('\u261C ') }${ ip } ${ time } ${ text }`);
