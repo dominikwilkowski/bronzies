@@ -49,7 +49,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, questi
 							borderLeft: `${ colors[ 0 ] } 7px solid`,
 						},
 					}}>
-						<Button onClick={ () => handleRoundChange( signals, 'Signals' ) } styling={{
+						<Button onClick={ () => handleRoundChange( signals, 'Signals' ) } mute={ questionType === 'Signals' } styling={{
 							paddingBottom: '0.5rem',
 						}}>
 							Signals
@@ -74,7 +74,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, questi
 							borderLeft: `${ colors[ 0 ] } 7px solid`,
 						},
 					}}>
-						<Button onClick={ () => handleRoundChange( questions, 'Practice' ) } styling={{
+						<Button onClick={ () => handleRoundChange( questions, 'Practice' ) } mute={ questionType === 'Practice' } styling={{
 							paddingBottom: '0.5rem',
 						}}>
 							Practice

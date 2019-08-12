@@ -71,32 +71,53 @@ function convertQuestions( questions ) {
  * @return {object}         - An object with score and nays numbers
  */
 function calcScore( history ) {
-	if( typeof history !== 'object' ) {
-		return { score: 0, nays: 0 };
+	if( !Array.isArray( history ) ) {
+		return { score: 0, nays: 0, isValid: false };
 	}
+	if( !history[ 0 ] ) {
+		return { score: 0, nays: 0, isValid: false };
+	}
+
+	let isValid = true;
 	let score = 0;
 	let nays = 0;
 	const questions = {};
+	// we may add more types soon
 	const questionTypes = {
 		'Signals': `signals${ DEBUG ? '-staging' : '' }.json`,
 	};
 	const allQuestions = [ ...new Set( history.map( move => move[ 0 ] ) ) ];
 	allQuestions.map( question => {
-		questions[ question ] = convertQuestions( require(`./assets/${ questionTypes[ question ] }`) );
+		if( questionTypes[ question ] ) {
+			questions[ question ] = convertQuestions( require(`./assets/${ questionTypes[ question ] }`) )
+		}
+		else {
+			questions[ question ] = null;
+			isValid = false;
+		}
 	});
+
+	if( !isValid ) {
+		return { score: 0, nays: 0, isValid: false };
+	}
 
 	history.map( move => {
 		const solution = questions[ move[ 0 ] ];
-		if( solution[ move[ 1 ] ].text === move[ 2 ] ) {
-			score ++;
+		if( solution[ move[ 1 ] ] ) {
+			if( solution[ move[ 1 ] ].text === move[ 2 ] ) {
+				score ++;
+			}
+			else {
+				score --;
+				nays ++;
+			}
 		}
 		else {
-			score --;
-			nays ++;
+			isValid = false;
 		}
 	});
 
-	return { score, nays };
+	return { score, nays, isValid };
 }
 
 /**
@@ -111,7 +132,7 @@ function postHighscore( req, res, next ) {
 	const { score, name, rounds, nays, history } = req.body;
 	const controlScore = calcScore( history );
 
-	if( controlScore.score === score && controlScore.nays === nays ) {
+	if( controlScore.score === score && controlScore.nays === nays && controlScore.isValid ) {
 		const highscore = JSON.parse( fs.readFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), { encoding: 'utf8' } ) );
 		highscore.push({
 			name,
@@ -191,7 +212,7 @@ function debug( text, code, req ) {
 		console.log(`${ chalk.green('\u2713 ') }${ ip } ${ time } ${ text }`);
 	}
 	else if( code === 'error' ) {
-		console.log(`${ chalk.red('\u2717 ') }${ ip } ${ time } ${ text }`);
+		console.error(`${ chalk.red('\u2717 ') }${ ip } ${ time } ${ text }`);
 	}
 	else if( code === 'interaction' ) {
 		console.log(`${ chalk.yellow('\u261C ') }${ ip } ${ time } ${ text }`);
