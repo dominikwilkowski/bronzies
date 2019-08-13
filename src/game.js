@@ -37,29 +37,28 @@ export function shuffle( array ) {
  *
  * @param  {object}   current     - The item that must be included
  * @param  {array}    deck        - An array of items
- * @param  {function} shuffleDeck - A shuffle function, default: shuffle
+ * @param  {array}    db          - An array of all the questions
  * @param  {Integer}  limit       - The limit of items to be returned, default: 4
+ * @param  {function} shuffleDeck - A shuffle function, default: shuffle
  *
  * @return {array}                - A subset of the input array, shuffled and including the `current` item
  */
-export function getNewAnswers( current, deck, db = [], shuffleDeck = shuffle, limit = 4 ) {
-	const newDB = [ ...db ];
+export function getNewAnswers( current, deck, db = [], limit = 4, shuffleDeck = shuffle ) {
+	const newDB = [ ...db ].filter( question => question.image !== current.image );
+	deck = deck.filter( question => question.image !== current.image );
+
 	if( deck.length < limit ) {
 		deck = [
 			...deck,
 			...shuffleDeck(
-				newDB
-					.filter( question => question.image !== current.image ) )
-					.slice( 0, ( limit - deck.length )
+				newDB.slice( 0, ( limit - deck.length ) )
 			),
 		];
 	}
 
 	let newCards = [
 		current,
-		...shuffleDeck(
-			deck.filter( question => question.image !== current.image )
-		).slice( 0, limit ),
+		...shuffleDeck( deck ).slice( 0, limit ),
 	];
 
 	return shuffleDeck( newCards );
