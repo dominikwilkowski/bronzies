@@ -257,6 +257,36 @@ function Game() {
 		wasNoLocalStorage
 	]);
 
+	const gameState = questionAsImage ? 'questionAsImage' : 'questionAsText';
+	const gameStates = {
+		questionAsImage: {
+			questions: questionsImage,
+			current: indexImage,
+			setQuestions: setQuestionsImage,
+			index: indexImage,
+			setIndex: setIndexImage,
+			choices: choicesImage,
+			setChoices: setChoicesImage,
+			correct: correctImage,
+			setCorrect: setCorrectImage,
+			userAnswer: userAnswerImage,
+			setUserAnswer: setUserAnswerImage,
+		},
+		questionAsText: {
+			questions: questionsText,
+			current: indexText,
+			setQuestions: setQuestionsText,
+			index: indexText,
+			setIndex: setIndexText,
+			choices: choicesText,
+			setChoices: setChoicesText,
+			correct: correctText,
+			setCorrect: setCorrectText,
+			userAnswer: userAnswerText,
+			setUserAnswer: setUserAnswerText,
+		}
+	};
+
 	/**
 	 * =~=~=~=~=~=~=~=~=~=
 	 */
@@ -267,7 +297,7 @@ function Game() {
 					display: 'grid',
 					gridTemplateColumns: '1fr auto 1fr',
 				}}>
-					<GameToggle isChecked={ questionAsImage } setIsChecked={ setQuestionAsImage } isDisabled={ questionAsImage ? correctImage : correctText } />
+					<GameToggle isChecked={ questionAsImage } setIsChecked={ setQuestionAsImage } isDisabled={ gameStates[ gameState ].correct } />
 					<div css={{
 						display: 'grid',
 						alignContent: 'center',
@@ -289,21 +319,21 @@ function Game() {
 				</div>
 
 				<Progress
-					questions={ questionAsImage ? questionsImage : questionsText }
-					current={ questionAsImage ? indexImage : indexText }
+					questions={ gameStates[ gameState ].questions }
+					current={ gameStates[ gameState ].index }
 				/>
 
 				<GameBody
-					questions={ questionAsImage ? questionsImage : questionsText }
-					setQuestions={ questionAsImage ? setQuestionsImage : setQuestionsText }
-					index={ questionAsImage ? indexImage : indexText }
-					setIndex={ questionAsImage ? setIndexImage : setIndexText }
-					choices={ questionAsImage ? choicesImage : choicesText }
-					setChoices={ questionAsImage ? setChoicesImage : setChoicesText }
-					correct={ questionAsImage ? correctImage : correctText }
-					setCorrect={ questionAsImage ? setCorrectImage : setCorrectText }
-					userAnswer={ questionAsImage ? userAnswerImage : userAnswerText }
-					setUserAnswer={ questionAsImage ? setUserAnswerImage : setUserAnswerText }
+					questions={ gameStates[ gameState ].questions }
+					setQuestions={ gameStates[ gameState ].setQuestions }
+					index={ gameStates[ gameState ].index }
+					setIndex={ gameStates[ gameState ].setIndex }
+					choices={ gameStates[ gameState ].choices }
+					setChoices={ gameStates[ gameState ].setChoices }
+					correct={ gameStates[ gameState ].correct }
+					setCorrect={ gameStates[ gameState ].setCorrect }
+					userAnswer={ gameStates[ gameState ].userAnswer }
+					setUserAnswer={ gameStates[ gameState ].setUserAnswer }
 					questionAsImage={ questionAsImage }
 					score={ score }
 					rounds={ rounds }
