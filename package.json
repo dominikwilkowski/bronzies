@@ -10,8 +10,11 @@
 		"start:server:dev": "node server/server.js serve debug",
 		"build": "react-scripts build",
 		"test": "CI=true react-scripts test",
-		"test:watch": "react-scripts test",
-		"test:cover": "CI=true react-scripts test --coverage",
+		"test:unit": "CI=true yarn test:unit && yarn test:e2e",
+		"test:unit:watch": "react-scripts test",
+		"test:unit:cover": "CI=true react-scripts test --coverage",
+		"test:e2e": "yarn start && cypress run",
+		"test:e2e:open": "yarn start && cypress open",
 		"eject": "react-scripts eject",
 		"deploy": "yarn build && yarn deploy:server && yarn deploy:restart && yarn deploy:app",
 		"deploy:server": "rsync --exclude=assets/highscore.json -avzhe ssh --progress ./server/* deploy@bronzies.com:/var/www/html/bronzies/server",
@@ -28,7 +31,8 @@
 		"react-spring": "^8.0.27"
 	},
 	"devDependencies": {
-		"concurrently": "^4.1.1"
+		"concurrently": "^4.1.1",
+		"cypress": "^3.4.1"
 	},
 	"proxy": "http://localhost:5555",
 	"jest": {
