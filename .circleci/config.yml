@@ -20,16 +20,16 @@ jobs:
       - run: npm -v
       - save_cache:
           paths:
-            - ~/.yarn
-            - ~/.cache
+            - ~/bronzies/.yarn
+            - ~/bronzies/.cache
             - node_modules
             - server/node_modules
           key: v4-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/bronzies/
           paths:
-            - ~/.yarn
-            - ~/.cache
+            - ~/bronzies/.yarn
+            - ~/bronzies/.cache
             - node_modules
             - server/node_modules
 
