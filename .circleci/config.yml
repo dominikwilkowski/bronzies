@@ -9,8 +9,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v7-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
-            - v7-dependencies-
+            - v8-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - v8-dependencies-
       - run: yarn
       - run: cd server && yarn
       - run: sudo apt-get install tree # for debugging circle builds
@@ -21,16 +21,16 @@ jobs:
           paths:
             - .yarn
             - .cache
-            - node_modules
-            - server/node_modules
-          key: v7-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - project/node_modules
+            - project/server/node_modules
+          key: v8-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/
           paths:
             - .yarn
             - .cache
-            - node_modules
-            - server/node_modules
+            - project/node_modules
+            - project/server/node_modules
 
 # Running all tests
   testing:
