@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-# The install job for all dependencies so we can reuse/depend on it in other jobs
+  # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
     docker:
       - image: circleci/node:lts
@@ -43,7 +43,7 @@ jobs:
             - .yarn
             - .cache
 
-# Running all tests
+  # Running all tests
   testing:
     docker:
       - image: circleci/node:lts
@@ -73,7 +73,7 @@ workflows:
   version: 2
   running_jobs:
     jobs:
-      - install_dependencies       # First we install dependencies
-      - testing:                   # Second we test our code
+      - install_dependencies # First we install dependencies
+      - testing:             # Second we test our code
           requires:
             - install_dependencies
