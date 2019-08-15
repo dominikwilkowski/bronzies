@@ -12,26 +12,26 @@ jobs:
             - v9-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
             - v9-dependencies-
       - run:
-        name: Install dependencies for app
-        command: yarn
+          name: Install dependencies for app
+          command: yarn
       - run:
-        name: Install dependencies for server
-        command: cd server && yarn
+          name: Install dependencies for server
+          command: cd server && yarn
       - run:
-        name: Adding debugging deps
-        command: sudo apt-get install tree # for debugging circle builds
+          name: Adding debugging deps
+          command: sudo apt-get install tree # for debugging circle builds
       - run:
-        name: Report file structure
-        command: tree -Ca
+          name: Report file structure
+          command: tree -Ca
       - run:
-        name: Node version
-        command: node -v
+          name: Node version
+          command: node -v
       - run:
-        name: npm version
-        command: npm -v
+          name: npm version
+          command: npm -v
       - run:
-        name: Yarn version
-        command: yarn --version
+          name: Yarn version
+          command: yarn --version
       - save_cache:
           paths:
             - .yarn
@@ -52,11 +52,11 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-        name: Installing dependencies from cache
-        command: yarn
+          name: Installing dependencies from cache
+          command: yarn
       - run:
-        name: Installind dependencies for server from cache
-        command: cd server && yarn
+          name: Installind dependencies for server from cache
+          command: cd server && yarn
       - run:
           name: Installing Cypress dependencies
           command: sudo apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
