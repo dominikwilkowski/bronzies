@@ -11,6 +11,7 @@ bronzies.com [![CircleCI](https://circleci.com/gh/dominikwilkowski/bronzies/tree
 * [The server](#the-server)
 	* [RESTful API endpoints](#restful-api-endpoints)
 	* [Install on server](#install-on-server)
+* [Testing](#testing)
 * [Release History](#release-history-app)
 * [License](#license)
 
@@ -21,17 +22,15 @@ bronzies.com [![CircleCI](https://circleci.com/gh/dominikwilkowski/bronzies/tree
 | Command           | Description                                           |
 |-------------------|-------------------------------------------------------|
 | `yarn start`      | Starts server and app concurrently                    |
-| `yarn build`      | Build deploy files inside `build/`                    |
+| `yarn build`      | Create deploy files inside `build/`                   |
+| `yarn test`       | Runs all tests                                        |
 | `yarn deploy`     | Builds app, deploys all files and restarts the server |
 | `yarn nuke`       | Removes build, `node_modules/` and `yarn.lock` file   |
-| `yarn test`       | Runs all tests                                        |
-| `yarn test:watch` | Runs Jest test watch                                  |
-| `yarn test:cover` | Shows coverage of unit tests                          |
 
 Running the server manually
 
 ```shell
-node server/server.js serve
+yarn start:server
 ```
 
 Running the app
@@ -47,16 +46,15 @@ yarn start:app
 ## Todos
 
 Next:
-- [ ] add cypress tests
-	- [ ] check for port from CRA and pass to `start-server-and-test` and `cypress`
+- [ ] add more cypress tests
 - [ ] add more unit tests
 - [ ] make gameToggler a11y
 	- [ ] trap focus
 	- [ ] support esc key close
 	- [ ] aria roles
-- [ ] enable service worker
 - [ ] re-add cpr beat screen
 - [ ] fix theme (make sane)
+- [ ] enable service worker
 - [ ] add more modes for types of beaches etc
 - [ ] rebuild server
 	- [ ] postgres
@@ -91,6 +89,7 @@ Install dependencies, inside that folder, with preferably [`yarn`](https://yarnp
 | `yarn start:server`     | Start the server that serves the REST endpoint          |
 | `yarn start:server:dev` | Start the server in staging mode to server staging data |
 | `yarn deploy:server`    | Upload the server files (without `node_modules`)        |
+| `yarn deploy:restart`   | Restart the remote server app                           |
 
 ### RESTful API endpoints
 
@@ -154,6 +153,26 @@ register the task:
 npm i forever -g
 forever start -l bronzies.log --append -o bronziesOut.log -e bronziesError.log /www/bronzies/server/server.js serve
 ```
+
+**[⬆ back to top](#contents)**
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Testing
+
+Continues integration is setup with [CircleCI](https://circleci.com/) and we're testing with [Jest](https://jestjs.io/) and
+[Cypress](https://www.cypress.io/).
+
+| Command                | Description                                           |
+|------------------------|-------------------------------------------------------|
+| `yarn test`            | Run all tests                                         |
+| `yarn test:unit`       | Run all unit tests with Jest                          |
+| `yarn test:unit:watch` | Runs Jest test watch                                  |
+| `yarn test:unit:cover` | Shows coverage of unit tests                          |
+| `yarn test:e2e`        | Run all end-to-end tests with Cyrpess                 |
+| `yarn test:e2e:server` | Start server for e2e test                             |
+| `yarn test:e2e:run`    | Run e2e test in ci                                    |
+| `yarn test:e2e:open`   | Open Cypress                                          |
 
 **[⬆ back to top](#contents)**
 
