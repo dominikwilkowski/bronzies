@@ -3,15 +3,14 @@ version: 2
 jobs:
 # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
-    working_directory: ~/
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v5-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
-            - v5-dependencies-
+            - v6-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - v6-dependencies-
       - run: yarn
       - run: cd server && yarn
       - run: sudo apt-get install tree # for debugging circle builds
@@ -20,16 +19,16 @@ jobs:
       - run: npm -v
       - save_cache:
           paths:
-            - .yarn
-            - .cache
+            - ~/.yarn
+            - ~/.cache
             - node_modules
             - server/node_modules
-          key: v5-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+          key: v6-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/
           paths:
-            - .yarn
-            - .cache
+            - ~/.yarn
+            - ~/.cache
             - node_modules
             - server/node_modules
 
@@ -37,7 +36,6 @@ jobs:
   testing:
     docker:
       - image: circleci/node:lts
-    working_directory: ~/
     steps:
       - checkout
       - attach_workspace:
@@ -45,6 +43,10 @@ jobs:
       - run:
           name: Testing our code
           command: yarn test
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 
 
 workflows:
