@@ -10,8 +10,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
-            - v3-dependencies-
+            - v4-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - v4-dependencies-
       - run: yarn
       - run: cd server && yarn
       - run: sudo apt-get install tree # for debugging circle builds
@@ -22,12 +22,14 @@ jobs:
           paths:
             - node_modules
             - server/node_modules
-          key: v3-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - /home/circleci/.cache/Cypress
+          key: v4-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/bronzies/
           paths:
             - node_modules
             - server/node_modules
+            - /home/circleci/.cache/Cypress
 
 # Running all tests
   testing:
