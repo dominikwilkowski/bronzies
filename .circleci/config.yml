@@ -9,8 +9,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v9-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
-            - v9-dependencies-
+            - v10-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - v10-dependencies-
       - run:
           name: Install dependencies for app
           command: yarn
@@ -36,7 +36,7 @@ jobs:
           paths:
             - .yarn
             - .cache
-          key: v9-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+          key: v10-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/
           paths:
