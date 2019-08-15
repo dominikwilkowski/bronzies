@@ -9,8 +9,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v6-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
-            - v6-dependencies-
+            - v7-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - v7-dependencies-
       - run: yarn
       - run: cd server && yarn
       - run: sudo apt-get install tree # for debugging circle builds
@@ -23,7 +23,7 @@ jobs:
             - .cache
             - node_modules
             - server/node_modules
-          key: v6-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+          key: v7-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/
           paths:
