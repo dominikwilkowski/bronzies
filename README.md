@@ -48,7 +48,6 @@ yarn start:app
 
 Next:
 - [ ] add cypress tests
-	- [ ] add `start-server-and-test` and tear down tests after run
 	- [ ] check for port from CRA and pass to `start-server-and-test` and `cypress`
 - [ ] add more unit tests
 - [ ] make gameToggler a11y
