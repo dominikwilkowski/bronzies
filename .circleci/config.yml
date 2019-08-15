@@ -3,7 +3,6 @@ version: 2
 jobs:
 # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
-    working_directory: ~/bronzies
     docker:
       - image: circleci/node:lts
     steps:
@@ -20,16 +19,15 @@ jobs:
       - run: npm -v
       - save_cache:
           paths:
-            - .yarn
-            - .cache
+            - ~/.yarn
+            - ~/.cache
             - node_modules
             - server/node_modules
           key: v5-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
-          root: ~/bronzies/
           paths:
-            - .yarn
-            - .cache
+            - ~/.yarn
+            - ~/.cache
             - node_modules
             - server/node_modules
 
@@ -37,11 +35,10 @@ jobs:
   testing:
     docker:
       - image: circleci/node:lts
-    working_directory: ~/bronzies
     steps:
       - checkout
       - attach_workspace:
-          at: ~/bronzies
+          at: ~/
       - run:
           name: Testing our code
           command: yarn test
