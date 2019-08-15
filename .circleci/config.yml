@@ -38,6 +38,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
+      - run: yarn
       - run:
           name: Testing our code
           command: yarn test
