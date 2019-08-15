@@ -19,16 +19,16 @@ jobs:
       - run: npm -v
       - save_cache:
           paths:
-            - ~/.yarn
-            - ~/.cache
+            - .yarn
+            - .cache
             - node_modules
             - server/node_modules
           key: v6-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
           root: ~/
           paths:
-            - ~/.yarn
-            - ~/.cache
+            - .yarn
+            - .cache
             - node_modules
             - server/node_modules
 
