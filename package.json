@@ -9,9 +9,14 @@
 		"start:server": "node server/server.js serve",
 		"start:server:dev": "node server/server.js serve debug",
 		"build": "react-scripts build",
-		"test": "CI=true react-scripts test",
-		"test:watch": "react-scripts test",
-		"test:cover": "CI=true react-scripts test --coverage",
+		"test": "yarn test:unit && yarn test:e2e",
+		"test:unit": "CI=true react-scripts test",
+		"test:unit:watch": "react-scripts test",
+		"test:unit:cover": "CI=true react-scripts test --coverage",
+		"test:e2e": "start-server-and-test test:e2e:server 3000 test:e2e:run",
+		"test:e2e:server": "BROWSER=none start-server-and-test start:server http-get://localhost:5555/api/signals start:app",
+		"test:e2e:run": "cypress run",
+		"test:e2e:open": "cypress open",
 		"eject": "react-scripts eject",
 		"deploy": "yarn build && yarn deploy:server && yarn deploy:restart && yarn deploy:app",
 		"deploy:server": "rsync --exclude=assets/highscore.json -avzhe ssh --progress ./server/* deploy@bronzies.com:/var/www/html/bronzies/server",
@@ -24,11 +29,13 @@
 		"@reach/router": "^1.2.1",
 		"react": "^16.9.0",
 		"react-dom": "^16.9.0",
-		"react-scripts": "3.1.0",
+		"react-scripts": "3.1.1",
 		"react-spring": "^8.0.27"
 	},
 	"devDependencies": {
-		"concurrently": "^4.1.1"
+		"concurrently": "^4.1.1",
+		"cypress": "^3.4.1",
+		"start-server-and-test": "^1.10.0"
 	},
 	"proxy": "http://localhost:5555",
 	"jest": {

@@ -48,6 +48,7 @@ yarn start:app
 
 Next:
 - [ ] add cypress tests
+	- [ ] check for port from CRA and pass to `start-server-and-test` and `cypress`
 - [ ] add more unit tests
 - [ ] make gameToggler a11y
 	- [ ] trap focus

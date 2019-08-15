@@ -3,44 +3,70 @@ version: 2
 jobs:
 # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
-    working_directory: ~/bronzies
     docker:
       - image: circleci/node:lts
     steps:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
-            - v2-dependencies-
-      - run: yarn
-      - run: cd server && yarn
-      - run: sudo apt-get install tree # for debugging circle builds
-      - run: tree -Ca
-      - run: node -v
-      - run: npm -v
+            - v10-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - v10-dependencies-
+      - run:
+          name: Install dependencies for app
+          command: yarn
+      - run:
+          name: Install dependencies for server
+          command: cd server && yarn
+      - run:
+          name: Adding debugging deps
+          command: sudo apt-get install tree # for debugging circle builds
+      - run:
+          name: Report file structure
+          command: tree -Ca
+      - run:
+          name: Node version
+          command: node -v
+      - run:
+          name: npm version
+          command: npm -v
+      - run:
+          name: Yarn version
+          command: yarn --version
       - save_cache:
           paths:
-            - node_modules
-            - server/node_modules
-          key: v2-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
+            - .yarn
+            - .cache
+          key: v10-dependencies-{{ checksum "yarn.lock" }}{{ checksum "server/yarn.lock" }}
       - persist_to_workspace:
-          root: ~/bronzies/
+          root: ~/
           paths:
-            - node_modules
-            - server/node_modules
+            - .yarn
+            - .cache
 
 # Running all tests
   testing:
     docker:
       - image: circleci/node:lts
-    working_directory: ~/bronzies
     steps:
       - checkout
       - attach_workspace:
-          at: ~/bronzies
+          at: ~/
+      - run:
+          name: Installing dependencies from cache
+          command: yarn
+      - run:
+          name: Installind dependencies for server from cache
+          command: cd server && yarn
+      - run:
+          name: Installing Cypress dependencies
+          command: sudo apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
       - run:
           name: Testing our code
           command: yarn test
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
 
 
 workflows:
