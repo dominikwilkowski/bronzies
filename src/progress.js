@@ -18,22 +18,30 @@ function Progress({ questions, current }) {
 				margin: '0.5rem 1%',
 			}}>
 				{
-					questions.map( ( question, i ) => (
-						<li key={ i } css={{
-							display: 'inline-block',
-							flex: 1,
-							borderTop: `4px solid ${
-								current === i
-									? colors[ 2 ]   // if it's the current question
-									: i < current   // if it was in the past and ...
-										? !question.correct
-											? colors[ 0 ] // ... it was the wrong answer
-											: colors[ 3 ] // ... it was the right answer
-										: colors[ 4 ] // if it's in the future
-								}`,
-							margin: '0 2px',
-						}}></li>
-					))
+					questions.map( ( question, i ) => {
+						const status = current === i
+							? 'current'   // if it's the current question
+							: i < current // if it was in the past and ...
+								? !question.correct
+									? 'wrong' // ... it was the wrong answer
+									: 'right' // ... it was the right answer
+								: 'future'  // if it's in the future
+						const statusColors = {
+							current: colors[ 2 ],
+							right: colors[ 3 ],
+							wrong: colors[ 0 ],
+							future: colors[ 4 ],
+						};
+
+						return (
+							<li data-progress-status={ status } key={ i } css={{
+								display: 'inline-block',
+								flex: 1,
+								borderTop: `4px solid ${ statusColors[ status ] }`,
+								margin: '0 2px',
+							}}></li>
+						);
+					})
 				}
 			</ul>
 		</Fragment>
