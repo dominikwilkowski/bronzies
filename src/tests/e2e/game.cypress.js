@@ -19,7 +19,7 @@ Cypress.on('window:load', function(window) {
 
 describe('The game', () => {
 	before( () => {
-		cy.fixture('signals.json').as('signals');
+		cy.fixture('signals-staging.json').as('signals');
 	});
 
 	beforeEach( () => {
@@ -33,9 +33,10 @@ describe('The game', () => {
 		const SIGNALLENGTH = this.signals.length;
 		const $title = Cypress.$('[data-question="true"] title');
 		const questionID = '#'+$title.attr('id').replace( '-title', '' );
-		const answer = SIGNALS[ questionID ].text;
+		const answerText = SIGNALS[ questionID ].text;
+		const correct = new RegExp(`^(${ answerText })$`, 'g');
+		const wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
 
-		const $wrong = Cypress.$(`[data-answer]:not(:contains(${ answer }))`);
 		cy
 			.get('[data-progress-status]').should( $p => {
 				expect( $p ).to.have.length( SIGNALLENGTH );
@@ -43,16 +44,16 @@ describe('The game', () => {
 				const rest = [ ...new Array( SIGNALLENGTH - 1 ) ].map( ( _, item ) => Cypress.$( $p[ item + 1 ] ).attr('data-progress-status') );
 				expect( rest ).to.deep.eq( new Array( SIGNALLENGTH - 1 ).fill('future') );
 			})
-			.wrap( $wrong.eq( 0 ) ).click()
+			.get('[data-answer=""]').contains( wrongs ).click()
 			.get('[data-score]').should('contain', '-1')
-			.wrap( $wrong.eq( 1 ) ).click()
+			.get('[data-answer=""]').contains( wrongs ).click()
 			.get('[data-score]').should('contain', '-2')
-			.get('[data-answer]').contains( answer ).click()
+			.get('[data-answer]').contains( correct ).click()
 			.get('[data-score]').should('contain', '-1')
 			.get('[data-next]').should('be.visible')
 			.get('[data-answer]').should('be.disabled')
-			.wrap( $wrong.eq( 0 ) ).siblings().contains('Next question').should('not.be.visible')
-			.get('[data-answer]').contains( answer ).parent().siblings().contains('Next question').should('be.visible').click()
+			.getAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
+			.getAllByText('Next question ⇢').filter(':visible').click()
 			.get('[data-score]').should('contain', '-1')
 			.get('[data-answer]').should('not.be.disabled')
 			.get('[data-progress-status]').should( $p => {

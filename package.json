@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"start": "concurrently \"yarn start:server\" \"yarn start:app\"",
-		"start:dev": "concurrently \"yarn start:server\" \"yarn start:app:dev\"",
+		"start:dev": "concurrently \"yarn start:server:dev\" \"yarn start:app\"",
 		"start:app": "react-scripts start",
 		"start:server": "node server/server.js serve",
 		"start:server:dev": "node server/server.js serve debug",
@@ -14,7 +14,7 @@
 		"test:unit:watch": "react-scripts test",
 		"test:unit:cover": "CI=true react-scripts test --coverage",
 		"test:e2e": "PORT=3000 start-server-and-test test:e2e:server 3000 test:e2e:run",
-		"test:e2e:server": "BROWSER=none start-server-and-test start:server http-get://localhost:5555/api/signals start:app",
+		"test:e2e:server": "BROWSER=none start-server-and-test start:server:dev http-get://localhost:5555/api/signals start:app",
 		"test:e2e:run": "cypress run",
 		"test:e2e:open": "cypress open",
 		"eject": "react-scripts eject",
@@ -33,6 +33,7 @@
 		"react-spring": "^8.0.27"
 	},
 	"devDependencies": {
+		"@testing-library/cypress": "^4.1.0",
 		"concurrently": "^4.1.1",
 		"cypress": "^3.4.1",
 		"cypress-waitfor": "^1.1.0",

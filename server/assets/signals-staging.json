@@ -7,12 +7,12 @@
 	{
 		"image": "#questions-signal2",
 		"alt": "Alt text",
-		"text": "Choose signal 2"
+		"text": "Choose signal 1-2"
 	},
 	{
 		"image": "#questions-signal3",
 		"alt": "Alt text",
-		"text": "Choose signal 3"
+		"text": "Choose signal 1-3"
 	},
 	{
 		"image": "#questions-signal4",
@@ -22,11 +22,11 @@
 	{
 		"image": "#questions-signal5",
 		"alt": "Alt text",
-		"text": "Choose signal 5"
+		"text": "Choose signal 1-5"
 	},
 	{
 		"image": "#questions-signal6",
 		"alt": "Alt text",
-		"text": "Choose signal 6"
+		"text": "Choose signal 1-6"
 	}
 ]
