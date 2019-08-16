@@ -1,17 +1,17 @@
 describe('The main app', () => {
-	it('Loads data into localStorage and retains is over refresh', () => {
+	it('should load data into localStorage and retains it over browser refreshs', () => {
 		cy.visit('http://localhost:3000');
 		expect( localStorage.getItem('questions') ).to.eq( null );
 		expect( localStorage.getItem('svg') ).to.eq( null );
 
-		setTimeout( async () => {
+		cy.wait( 1000 ).then( () => {
 			expect( localStorage.getItem('questions') ).to.not.eq( null );
 			expect( localStorage.getItem('svg') ).to.not.eq( null );
 
-			await cy.reload();
+			cy.reload();
 
 			expect( localStorage.getItem('questions') ).to.not.eq( null );
 			expect( localStorage.getItem('svg') ).to.not.eq( null );
-		}, 500); // TODO this should not be hardcoded
+		});
 	});
 });
