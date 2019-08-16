@@ -25,7 +25,7 @@ function ImageView() {
 					marginLeft: '0.5rem',
 				}}>
 					Score
-					<span css={{
+					<span data-score css={{
 						display: 'block',
 						fontSize: '3rem',
 						lineHeight: 1,

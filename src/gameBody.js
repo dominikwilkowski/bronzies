@@ -40,7 +40,7 @@ function GameBody({
 				tagAnswer,
 				score,
 			)}>
-				<div css={{
+				<div data-question css={{
 					margin: '2rem 0',
 				}}>
 					{
