@@ -15,7 +15,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 	});
 
 	return (
-		<ul css={{
+		<ul data-answers css={{
 			margin: 0,
 			display: 'grid',
 			gridGap: '1rem',
@@ -44,7 +44,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 							border: `1px solid ${ colors[ 4 ] }`,
 						}
 					}}>
-						<button css={{
+						<button data-answer css={{
 							display: 'block',
 							appearance: 'none',
 							width: '100%',
@@ -84,7 +84,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 							bottom: 0,
 							width: '300px',
 						}}>
-							<button type='button' onClick={ onSuccess } css={{
+							<button data-next type='button' onClick={ onSuccess } css={{
 								display: 'block',
 								appearance: 'none',
 								width: '300px',
