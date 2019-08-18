@@ -19,30 +19,63 @@ Cypress.on('window:load', function(window) {
 
 describe('The game', () => {
 	before( () => {
-		cy.fixture('signals.json').as('signals');
+		cy.fixture('signals-staging.json').as('signals');
 	});
 
 	beforeEach( () => {
 		cy.visit('http://localhost:3000');
 		cy.waitFor('[data-question="true"]');
-		cy.window().then( win => win.onbeforeunload = undefined );
+		// cy.window().then( win => win.onbeforeunload = undefined );
+		// Cypress.env( 'correct', '' );
 	});
 
-	it('Counts score', function() {
+	it('should count score and work as expected', function() {
 		const SIGNALS = convertQuestions( this.signals );
+		const SIGNALLENGTH = this.signals.length;
 		const $title = Cypress.$('[data-question="true"] title');
 		const questionID = '#'+$title.attr('id').replace( '-title', '' );
-		const answer = SIGNALS[ questionID ].text;
+		const answerText = SIGNALS[ questionID ].text;
+		const correct = new RegExp(`^(${ answerText })$`, 'g');
+		const wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
 
-		const $wrong = Cypress.$(`[data-answer]:not(:contains(${ answer }))`);
-		cy.wrap( $wrong.eq( 0 ) ).click();
-		cy.get('[data-score]').should('contain', '-1');
-		cy.wrap( $wrong.eq( 1 ) ).click();
-		cy.get('[data-score]').should('contain', '-2');
-		cy.get('[data-answer]').contains( answer ).click();
-		cy.get('[data-score]').should('contain', '-1');
-		cy.get('[data-next]').should('be.visible');
-
-		// cy.reload();
+		cy
+			.get('[data-progress-status]').should( $p => {
+				expect( $p ).to.have.length( SIGNALLENGTH );
+				expect( Cypress.$( $p[ 0 ] ).attr('data-progress-status') ).to.deep.eq('current');
+				const rest = [ ...new Array( SIGNALLENGTH - 1 ) ].map( ( _, item ) => Cypress.$( $p[ item + 1 ] ).attr('data-progress-status') );
+				expect( rest ).to.deep.eq( new Array( SIGNALLENGTH - 1 ).fill('future') );
+			})
+			.get('[data-answer=""]').contains( wrongs ).click()
+			.get('[data-score]').should('contain', '-1')
+			.get('[data-answer=""]').contains( wrongs ).click()
+			.get('[data-score]').should('contain', '-2')
+			.get('[data-answer]').contains( correct ).click()
+			.get('[data-score]').should('contain', '-1')
+			.get('[data-next]').should('be.visible')
+			.get('[data-answer]').should('be.disabled')
+			.getAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
+			.getAllByText('Next question ⇢').filter(':visible').click()
+			.get('[data-score]').should('contain', '-1')
+			.get('[data-answer]').should('not.be.disabled')
+			.get('[data-progress-status]').should( $p => {
+				expect( Cypress.$( $p[ 0 ] ).attr('data-progress-status') ).to.deep.eq('wrong');
+				expect( Cypress.$( $p[ 1 ] ).attr('data-progress-status') ).to.deep.eq('current');
+				const rest = [ ...new Array( SIGNALLENGTH - 2 ) ].map( ( _, item ) => Cypress.$( $p[ item + 2 ] ).attr('data-progress-status') );
+				expect( rest ).to.deep.eq( new Array( SIGNALLENGTH - 2 ).fill('future') );
+			})
+			// .waitFor('[data-question="true"]')
+			// .wrap( null ).then( () => {
+			// 	return new Cypress.Promise( resolve => {
+			// 		const $title2 = Cypress.$('[data-question="true"] title');
+			// 		const questionID2 = '#'+$title2.attr('id').replace( '-title', '' );
+			// 		const answerText2 = SIGNALS[ questionID2 ].text;
+			// 		const correct = new RegExp(`^(${ answerText2 })$`, 'g');
+			// 		Cypress.env( 'correct', correct );
+			// 		console.log(Cypress.env('correct'));
+			// 		resolve( correct )
+			// 	});
+			// })
+			// .waitFor('[data-question="true"]')
+			// .get('[data-answer]').contains( Cypress.env('correct') ).click()
 	});
 });

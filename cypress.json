@@ -1,5 +1,7 @@
 {
 	"baseUrl": "http://localhost:3000",
 	"integrationFolder": "src/tests/e2e/",
-	"fixturesFolder": "server/assets/"
+	"fixturesFolder": "server/assets/",
+	"viewportWidth": 375,
+	"viewportHeight": 1000
 }

@@ -44,7 +44,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 							border: `1px solid ${ colors[ 4 ] }`,
 						}
 					}}>
-						<button data-answer css={{
+						<button data-answer={ choice.status ? choice.status : '' } css={{
 							display: 'block',
 							appearance: 'none',
 							width: '100%',
@@ -84,7 +84,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 							bottom: 0,
 							width: '300px',
 						}}>
-							<button data-next type='button' onClick={ onSuccess } css={{
+							<button data-next={ choice.status === 'correct' ? 'open' : 'close' } type='button' onClick={ onSuccess } css={{
 								display: 'block',
 								appearance: 'none',
 								width: '300px',
