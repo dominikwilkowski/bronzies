@@ -25,7 +25,6 @@ describe('The game', () => {
 	beforeEach( () => {
 		cy.visit('http://localhost:3000');
 		cy.waitFor('[data-question="true"]');
-		// cy.window().then( win => win.onbeforeunload = undefined );
 		// Cypress.env( 'correct', '' );
 	});
 
