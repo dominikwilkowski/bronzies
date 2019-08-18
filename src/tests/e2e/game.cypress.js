@@ -25,8 +25,8 @@ describe('The game', () => {
 	beforeEach( () => {
 		cy.visit('http://localhost:3000');
 		cy.waitFor('[data-question="true"]');
-		cy.window().then( win => win.onbeforeunload = undefined );
-		Cypress.env( 'correct', '' );
+		// cy.window().then( win => win.onbeforeunload = undefined );
+		// Cypress.env( 'correct', '' );
 	});
 
 	it('should count score and work as expected', function() {
@@ -63,19 +63,19 @@ describe('The game', () => {
 				const rest = [ ...new Array( SIGNALLENGTH - 2 ) ].map( ( _, item ) => Cypress.$( $p[ item + 2 ] ).attr('data-progress-status') );
 				expect( rest ).to.deep.eq( new Array( SIGNALLENGTH - 2 ).fill('future') );
 			})
-			.waitFor('[data-question="true"]')
-			.wrap( null ).then( () => {
-				return new Cypress.Promise( resolve => {
-					const $title2 = Cypress.$('[data-question="true"] title');
-					const questionID2 = '#'+$title2.attr('id').replace( '-title', '' );
-					const answerText2 = SIGNALS[ questionID2 ].text;
-					const correct = new RegExp(`^(${ answerText2 })$`, 'g');
-					Cypress.env( 'correct', correct );
-					console.log(Cypress.env('correct'));
-					resolve( correct )
-				});
-			})
-			.waitFor('[data-question="true"]')
-			.get('[data-answer]').contains( Cypress.env('correct') ).click()
+			// .waitFor('[data-question="true"]')
+			// .wrap( null ).then( () => {
+			// 	return new Cypress.Promise( resolve => {
+			// 		const $title2 = Cypress.$('[data-question="true"] title');
+			// 		const questionID2 = '#'+$title2.attr('id').replace( '-title', '' );
+			// 		const answerText2 = SIGNALS[ questionID2 ].text;
+			// 		const correct = new RegExp(`^(${ answerText2 })$`, 'g');
+			// 		Cypress.env( 'correct', correct );
+			// 		console.log(Cypress.env('correct'));
+			// 		resolve( correct )
+			// 	});
+			// })
+			// .waitFor('[data-question="true"]')
+			// .get('[data-answer]').contains( Cypress.env('correct') ).click()
 	});
 });
