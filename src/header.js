@@ -44,7 +44,7 @@ function ImageView() {
 					marginRight: '0.5rem',
 				}}>
 					Round
-					<span css={{
+					<span data-round css={{
 						display: 'block',
 						fontSize: '3rem',
 						lineHeight: 1,

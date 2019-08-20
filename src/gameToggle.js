@@ -30,6 +30,7 @@ function GameToggle({ isChecked, setIsChecked, isDisabled }) {
 			}
 		}}>
 			<input
+				data-game-toggle
 				css={{
 					opacity: 0,
 				}}
