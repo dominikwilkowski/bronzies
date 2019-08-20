@@ -3,7 +3,7 @@ import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { colors } from './theme';
 
-function Button({ children, onClick, mute, styling }) {
+function Button({ children, onClick, mute, styling, ...props }) {
 	return (
 		<button type='button' onClick={ mute ? null : onClick } disabled={ mute } css={{
 			apperance: 'none',
@@ -16,7 +16,7 @@ function Button({ children, onClick, mute, styling }) {
 			cursor: mute ? 'default' : 'pointer',
 			textAlign: 'inherit',
 			...styling,
-		}}>{ children }</button>
+		}} { ...props } >{ children }</button>
 	);
 };
 

@@ -157,7 +157,7 @@ function RoundToggle() {
 		<div css={{
 			position: 'relative',
 		}}>
-			<Button onClick={ () => setIsOpen( !isOpen ) } mute={ isMuted }>
+			<Button data-round-toggle onClick={ () => setIsOpen( !isOpen ) } mute={ isMuted }>
 				Round: { questionType }
 			</Button>
 			{
