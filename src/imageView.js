@@ -5,7 +5,7 @@ import SVG from './svg';
 
 function ImageView({ image, alt }) {
 	return (
-		<figure css={{
+		<figure data-id={ image } css={{
 			textAlign: 'center',
 			margin: 0,
 		}}>

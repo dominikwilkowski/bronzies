@@ -5,7 +5,7 @@ import { colors } from './theme';
 
 function GameToggle({ isChecked, setIsChecked, isDisabled }) {
 	return (
-		<label css={{
+		<label data-game-toggle-label css={{
 			display: 'inline-block',
 			position: 'relative',
 			padding: '18px 0',
