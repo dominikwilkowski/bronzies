@@ -173,6 +173,7 @@ describe('The game', () => {
 
 	it('should count score and rounds in text2image mode', function() {
 		const SIGNALS = convertQuestions( this.signals );
+		const QUESTIONS = this.signals;
 		const SIGNALLENGTH = this.signals.length;
 		// some hoisting of variables so our (fake) promises have access to them
 		let $title;
@@ -202,9 +203,9 @@ describe('The game', () => {
 					// we get what the question is and store what the right and wrong answers are
 					.wrap( null ).then( () => {
 						$title = Cypress.$('[data-question="true"] span');
-						console.log($title.text());
-						questionID = '#'+$title.text();
-						answerText = SIGNALS[ questionID ].text;
+						const questionImageID = $title.text();
+						answerText = QUESTIONS.find( question => question.text === questionImageID ).text;
+						console.log(answerText);
 						correct = new RegExp(`^(${ answerText })$`, 'g');
 						wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
 					})
