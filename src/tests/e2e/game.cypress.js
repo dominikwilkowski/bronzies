@@ -308,8 +308,68 @@ describe('The game', () => {
 			})
 	});
 
-	// it('should TODO', () => {
-	// 	const SIGNALS = convertQuestions( this.signals );
-	// 	const SIGNALLENGTH = this.signals.length;
-	// });
+	it.only('should keep track of your wrong answers', function() {
+		const SIGNALS = convertQuestions( this.signals );
+		const SIGNALLENGTH = this.signals.length;
+		// some hoisting of variables so our (fake) promises have access to them
+		let $title;
+		let questionID;
+		let answerText;
+		let correct;
+		let wrongs;
+
+		cy
+			.waitFor('[data-question="true"]')
+			.get('[data-round]').should( 'contain', '1' )
+			.get('[data-round-toggle]').should('be.disabled')
+			.wrap( null ).then( () => {
+				$title = Cypress.$('[data-question="true"] title');
+				questionID = '#'+$title.attr('id').replace( '-title', '' );
+				answerText = SIGNALS[ questionID ].text;
+				correct = new RegExp(`^(${ answerText })$`, 'g');
+				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+			})
+			.wrap( null ).then( () => {
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			.get('[data-round-toggle]').should('not.be.disabled')
+			.wrap( null ).then( () => {
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			.wrap( null ).then( () => {
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			.wrap( null ).then( () => {
+				cy.get('[data-answer]').contains( correct ).click();
+			})
+			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.get('[data-round-toggle]').should('not.be.disabled')
+			.wrap( null ).then( () => {
+				$title = Cypress.$('[data-question="true"] title');
+				questionID = '#'+$title.attr('id').replace( '-title', '' );
+				answerText = SIGNALS[ questionID ].text;
+				correct = new RegExp(`^(${ answerText })$`, 'g');
+				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+			})
+			.wrap( null ).then( () => {
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			.wrap( null ).then( () => {
+				cy.get('[data-answer]').contains( correct ).click();
+			})
+			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.get('[data-round-toggle]').should('not.be.disabled')
+			.wrap( null ).then( () => {
+				$title = Cypress.$('[data-question="true"] title');
+				questionID = '#'+$title.attr('id').replace( '-title', '' );
+				answerText = SIGNALS[ questionID ].text;
+				correct = new RegExp(`^(${ answerText })$`, 'g');
+				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+			})
+			.wrap( null ).then( () => {
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			.get('[data-round-toggle]').click()
+			.get('[data-round-toggle-popup]').should( 'contain', 'wrong so far (3)' )
+	});
 });
