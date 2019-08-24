@@ -3,5 +3,5 @@
 	"integrationFolder": "src/tests/e2e/",
 	"fixturesFolder": "server/assets/",
 	"viewportWidth": 375,
-	"viewportHeight": 1000
+	"viewportHeight": 1500
 }
