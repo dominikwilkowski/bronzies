@@ -1,4 +1,4 @@
-import { convertQuestions } from '../../../server/server.js';
+import { convertQuestions } from '../../../server/utils.js';
 
 test('convertQuestions - Convert array into object', () => {
 	const input = [

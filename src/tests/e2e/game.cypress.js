@@ -1,17 +1,4 @@
-/**
- * Convert a question array into an object where the image becomes the key
- *
- * @param  {array}  questions - An array of question objects
- *
- * @return {object}           - An object with all the original objects but with the image as key for each
- */
-function convertQuestions( questions ) {
-	const newQuestions = {};
-	questions.map( question => {
-		newQuestions[ question.image ] = question;
-	});
-	return newQuestions;
-}
+import { convertQuestions } from '../../../server/utils.js';
 
 // fixing beforeunload bug in cypress https://github.com/cypress-io/cypress/issues/2118
 Cypress.on('window:load', window => {

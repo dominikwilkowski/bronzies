@@ -2,6 +2,9 @@
 	"baseUrl": "http://localhost:3000",
 	"integrationFolder": "src/tests/e2e/",
 	"fixturesFolder": "server/assets/",
+	"videosFolder": "src/tests/utils/videos/",
+	"pluginsFile": "src/tests/utils/plugins/index.js",
 	"viewportWidth": 375,
-	"viewportHeight": 1500
+	"viewportHeight": 1500,
+	"supportFile": "src/tests/utils/support/"
 }

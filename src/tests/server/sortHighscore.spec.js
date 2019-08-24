@@ -1,4 +1,4 @@
-import { sortHighscore } from '../../../server/server.js';
+import { sortHighscore } from '../../../server/utils.js';
 
 test('sortHighscore - Sorts data', () => {
 	const input = [
