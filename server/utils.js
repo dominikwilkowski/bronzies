@@ -38,11 +38,12 @@ function convertQuestions( questions ) {
 /**
  * Parse an history array to find score and nays
  *
- * @param  {array}  history - An array of arrays for each move
+ * @param  {array}   history - An array of arrays for each move
+ * @param  {boolean} DEBUG   - Debug mode
  *
- * @return {object}         - An object with score and nays numbers
+ * @return {object}          - An object with score and nays numbers
  */
-function calcScore( history ) {
+function calcScore( history, DEBUG = false ) {
 	if( !Array.isArray( history ) ) {
 		return { score: 0, nays: 0, isValid: false };
 	}

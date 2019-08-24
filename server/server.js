@@ -39,7 +39,7 @@ function getHighscore( req, res, next ) {
 function postHighscore( req, res, next ) {
 	debug( 'Highscore posted', 'interaction', req );
 	const { score, name, rounds, nays, history } = req.body;
-	const controlScore = calcScore( history );
+	const controlScore = calcScore( history, DEBUG );
 
 	if( controlScore.score === score && controlScore.nays === nays && controlScore.isValid ) {
 		const highscore = JSON.parse( fs.readFileSync( path.normalize(`${ __dirname }/assets/highscore${ DEBUG ? '-staging' : '' }.json`), { encoding: 'utf8' } ) );
