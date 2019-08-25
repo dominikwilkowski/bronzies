@@ -1,4 +1,4 @@
-import { calcScore } from '../../../server/server.js';
+import { calcScore } from '../../../server/utils.js';
 
 test('calcScore - Ignores wrong types', () => {
 	const result = {

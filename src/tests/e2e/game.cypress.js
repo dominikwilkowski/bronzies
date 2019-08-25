@@ -1,28 +1,4 @@
-/**
- * Convert a question array into an object where the image becomes the key
- *
- * @param  {array}  questions - An array of question objects
- *
- * @return {object}           - An object with all the original objects but with the image as key for each
- */
-function convertQuestions( questions ) {
-	const newQuestions = {};
-	questions.map( question => {
-		newQuestions[ question.image ] = question;
-	});
-	return newQuestions;
-}
-
-// fixing beforeunload bug in cypress https://github.com/cypress-io/cypress/issues/2118
-Cypress.on('window:load', window => {
-	const original = window.addEventListener;
-	window.addEventListener = () => {
-		if( arguments && arguments[ 0 ] === 'beforeunload' ) {
-			return;
-		}
-		return original.apply( this, arguments );
-	};
-});
+import { convertQuestions } from '../../../server/utils.js';
 
 describe('The game', () => {
 	beforeEach( () => {
@@ -31,6 +7,7 @@ describe('The game', () => {
 	});
 
 	it('should count score and rounds in image2text mode', function() {
+		// getting data from our fixtures
 		const SIGNALS = convertQuestions( this.signals );
 		const SIGNALLENGTH = this.signals.length;
 		// some hoisting of variables so our (fake) promises have access to them
@@ -172,6 +149,7 @@ describe('The game', () => {
 	});
 
 	it('should count score and rounds in text2image mode', function() {
+		// getting data from our fixtures
 		const SIGNALS = convertQuestions( this.signals );
 		const QUESTIONS = this.signals;
 		const SIGNALLENGTH = this.signals.length;
@@ -309,9 +287,11 @@ describe('The game', () => {
 	});
 
 	it('should keep track of your wrong answers', function() {
+		// getting data from our fixtures
 		const SIGNALS = convertQuestions( this.signals );
 		const QUESTIONS = this.signals;
 		const SIGNALLENGTH = this.signals.length;
+		// some hoisting of variables so our (fake) promises have access to them
 		let $title;
 		let questionID;
 		let answerText;
@@ -324,6 +304,7 @@ describe('The game', () => {
 			.waitFor('[data-question="true"]')
 			.get('[data-round]').should( 'contain', '1' )
 			.get('[data-round-toggle]').should('be.disabled')
+			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
 				questionID = '#'+$title.attr('id').replace( '-title', '' );
@@ -332,19 +313,25 @@ describe('The game', () => {
 				correct = new RegExp(`^(${ answerText })$`, 'g');
 				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
 			})
+			// wrong answer
 			.wrap( null ).then( () => {
 				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
+			// wrong answer
 			.wrap( null ).then( () => {
 				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
+			// wrong answer
 			.wrap( null ).then( () => {
 				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
+			// correct answer
 			.wrap( null ).then( () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
+			// next question
 			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
 				questionID = '#'+$title.attr('id').replace( '-title', '' );
@@ -352,25 +339,13 @@ describe('The game', () => {
 				correct = new RegExp(`^(${ answerText })$`, 'g');
 				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
 			})
+			// correct answer
 			.wrap( null ).then( () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
+			// next question
 			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
-			.wrap( null ).then( () => {
-				$title = Cypress.$('[data-question="true"] title');
-				questionID = '#'+$title.attr('id').replace( '-title', '' );
-				history.push( questionID.substr( 1 ) );
-				answerText = SIGNALS[ questionID ].text;
-				correct = new RegExp(`^(${ answerText })$`, 'g');
-				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
-			})
-			.wrap( null ).then( () => {
-				cy.get('[data-answer=""]').contains( wrongs ).click();
-			})
-			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
-			})
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
 				questionID = '#'+$title.attr('id').replace( '-title', '' );
@@ -379,61 +354,99 @@ describe('The game', () => {
 				correct = new RegExp(`^(${ answerText })$`, 'g');
 				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
 			})
+			// wrong answer
 			.wrap( null ).then( () => {
 				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
+			// correct answer
+			.wrap( null ).then( () => {
+				cy.get('[data-answer]').contains( correct ).click();
+			})
+			// correct question
+			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			// getting the current question from the DOM
+			.wrap( null ).then( () => {
+				$title = Cypress.$('[data-question="true"] title');
+				questionID = '#'+$title.attr('id').replace( '-title', '' );
+				history.push( questionID.substr( 1 ) );
+				answerText = SIGNALS[ questionID ].text;
+				correct = new RegExp(`^(${ answerText })$`, 'g');
+				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+			})
+			// wrong answer
+			.wrap( null ).then( () => {
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			// toggle to text2image mode
 			.get('[data-game-toggle-label]').click()
+			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] span');
 				const questionImageID = $title.text();
 				answerText = QUESTIONS.find( question => question.text === questionImageID ).image;
 				history.push( answerText.substr( 1 ) );
 			})
+			// wrong answer
 			.wrap( null ).then( () => {
 				cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`).eq( 0 ).click();
 			})
+			// correct answer
 			.wrap( null ).then( () => {
 				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
 			})
+			// next question
 			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] span');
 				const questionImageID = $title.text();
 				answerText = QUESTIONS.find( question => question.text === questionImageID ).image;
 			})
+			// correct answer
 			.wrap( null ).then( () => {
 				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
 			})
+			// next question
 			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.get('[data-round-toggle]').should( 'contain', 'Signals' )
+			// go into round toggle
 			.get('[data-round-toggle]').click()
 			.get('[data-round-toggle-popup]').then( $item => {
 				uniqeHistory = [ ... new Set( history ) ];
 				expect( $item, 'text content' ).to.contain.text(`wrong so far (${ uniqeHistory.length })`);
 			})
+			// choose practice round
 			.get('button').contains('Practice').click()
 			.get('[data-round-toggle]').should( 'contain', 'Practice' )
+			// now we iterate over all questions we answered wrong and check that they are all there
 			.wrap( null ).then( () => {
 				cy
 					.wrap( uniqeHistory )
 					.each( () => {
 						cy
+							// getting the current question from the DOM
 							.wrap( null ).then( () => {
 								$title = Cypress.$('[data-question="true"] span');
 								const questionImageID = $title.text();
 								answerText = QUESTIONS.find( question => question.text === questionImageID ).image;
 								expect( uniqeHistory.includes( answerText.substr( 1 ) ) ).to.be.true;
 							})
+							// correct answer
 							.wrap( null ).then( () => {
 								cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
 							})
+							// next question
 							.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 					})
 					.get('[data-round]').should( 'contain', '2' )
+					// let's go back to image2text mode
 					.get('[data-game-toggle-label]').click()
 					.get('[data-round]').should( 'contain', '2' )
 					.wrap( uniqeHistory )
+					// now we check again that all questions we answered wrong earlier are in this round
 					.each( () => {
 						cy
+							// getting the current question from the DOM
 							.wrap( null ).then( () => {
 								$title = Cypress.$('[data-question="true"] title');
 								questionID = '#'+$title.attr('id').replace( '-title', '' );
@@ -441,9 +454,11 @@ describe('The game', () => {
 								correct = new RegExp(`^(${ answerText })$`, 'g');
 								expect( uniqeHistory.includes( questionID.substr( 1 ) ) ).to.be.true;
 							})
+							// correct answer
 							.wrap( null ).then( () => {
 								cy.get('[data-answer]').contains( correct ).click();
 							})
+							// next question
 							.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 					})
 					.get('[data-round]').should( 'contain', '3' )

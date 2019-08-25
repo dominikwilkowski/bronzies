@@ -314,7 +314,7 @@ function Game() {
 						height: '36px',
 						marginRight: '0.5rem',
 					}}>
-						<Link to='/highscore'>Score&nbsp;board</Link>
+						<Link data-highscore to='/highscore'>Score&nbsp;board</Link>
 					</div>
 				</div>
 

@@ -1,4 +1,4 @@
-import { debug } from '../../../server/server.js';
+import { debug } from '../../../server/utils.js';
 
 test('debug - Output nothing when code is wrong', () => {
 	console.log = jest.fn();

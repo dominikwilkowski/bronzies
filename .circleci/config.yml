@@ -64,9 +64,9 @@ jobs:
           name: Testing our code
           command: yarn test
       - store_artifacts:
-          path: cypress/videos
+          path: src/tests/utils/videos
       - store_artifacts:
-          path: cypress/screenshots
+          path: src/tests/utils/screenshots
 
 
 workflows:
