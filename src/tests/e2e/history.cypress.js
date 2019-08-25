@@ -7,7 +7,7 @@ describe('The history', () => {
 		cy.visit('http://localhost:3000');
 	});
 
-	it('should count score and rounds in image2text mode', function() {
+	it('should keep track of the wrong answers', function() {
 		// getting data from our fixtures
 		const SIGNALS = convertQuestions( this.signals );
 		const HIGHSCORE = this.highscore;
@@ -23,7 +23,7 @@ describe('The history', () => {
 		cy
 			.waitFor('[data-question="true"]')
 			// go into highscore
-			.get('a').contains('Score').click()
+			.get('a[data-highscore]').click()
 			.waitFor('a[data-back-link]')
 			// check that there are no user sections yet
 			.get('p[data-most-wrong]').should('not.be.visible')
@@ -49,7 +49,7 @@ describe('The history', () => {
 			// next question
 			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// go into highscore
-			.get('a').contains('Score').click()
+			.get('a[data-highscore]').click()
 			.waitFor('a[data-back-link]')
 			// check what's displayed
 			.get('p[data-most-wrong]').should('not.be.visible')
@@ -71,7 +71,7 @@ describe('The history', () => {
 				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
 			// go into highscore
-			.get('a').contains('Score').click()
+			.get('a[data-highscore]').click()
 			.waitFor('a[data-back-link]')
 			.get('p[data-most-wrong]').should('be.visible')
 			.get('form[data-input-form]').should('be.visible')
