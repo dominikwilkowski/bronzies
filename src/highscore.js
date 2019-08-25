@@ -103,7 +103,7 @@ function Highscore() {
 
 	return (
 		<Loading loadingState={ loadingState }>
-			<Link to='/' css={{
+			<Link to='/' data-back-link css={{
 				display: 'block',
 				margin: '1rem 0.5rem',
 			}}>Go back to the game</Link>
@@ -111,42 +111,42 @@ function Highscore() {
 			{
 				wrongAnswersDB.length > 0
 					? <Fragment>
-						<p css={{
-							textAlign: 'center',
-						}}>The answers you got wrong the most are:</p>
-						<ul css={{
-							position: 'relative',
-							padding: '0 0 2rem 0',
-							margin: '0 0 4rem 0',
-							textAlign: 'center',
-							listStyle: 'none',
-							':after': {
-								content: '""',
-								position: 'absolute',
-								left: 0,
-								right: 0,
-								bottom: '-2rem',
-								height: '2rem',
-								background: 'repeating-linear-gradient( -45deg, transparent, transparent 12px, rgba( 100, 100, 100, 0.1 ) 12px, rgba( 100, 100, 100, 0.1 ) 30px )',
-							}
-						}}>
-							{
-								wrongAnswersDB.slice( 0, 5 ).map( ( answer, i ) => (
-									<li key={ i } css={{
-										margin: '0.5rem 0',
-									}}>
-										{ answer.text }
-									</li>
-								))
-							}
-						</ul>
-					</Fragment>
+							<p data-most-wrong css={{
+								textAlign: 'center',
+							}}>The answers you got wrong the most are:</p>
+							<ul css={{
+								position: 'relative',
+								padding: '0 0 2rem 0',
+								margin: '0 0 4rem 0',
+								textAlign: 'center',
+								listStyle: 'none',
+								':after': {
+									content: '""',
+									position: 'absolute',
+									left: 0,
+									right: 0,
+									bottom: '-2rem',
+									height: '2rem',
+									background: 'repeating-linear-gradient( -45deg, transparent, transparent 12px, rgba( 100, 100, 100, 0.1 ) 12px, rgba( 100, 100, 100, 0.1 ) 30px )',
+								}
+							}}>
+								{
+									wrongAnswersDB.slice( 0, 5 ).map( ( answer, i ) => (
+										<li key={ i } css={{
+											margin: '0.5rem 0',
+										}}>
+											{ answer.text }
+										</li>
+									))
+								}
+							</ul>
+						</Fragment>
 					: null
 			}
 
 			{
 				hasPlayed
-					? <form onSubmit={ handleSubmit } css={{
+					? <form data-input-form onSubmit={ handleSubmit } css={{
 						position: 'relative',
 						textAlign: 'center',
 						fontSize: '1.3rem',
@@ -163,9 +163,13 @@ function Highscore() {
 						}
 					}}>
 						<p>Enter yourself into the score board with your current score of { score }.</p>
-						<p>
-							According to your score you now have to do <span css={{ fontWeight: 900 }}>{ nays * 5 }</span> pushups.
-						</p>
+						{
+							nays > 0
+								? <p>
+									According to your score you now have to do <span css={{ fontWeight: 900 }}>{ nays * 5 }</span> pushups.
+								</p>
+								: null
+						}
 
 						{
 							myPosition < 50
