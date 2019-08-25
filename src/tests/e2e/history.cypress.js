@@ -10,6 +10,7 @@ describe('The history', () => {
 	it('should keep track of the wrong answers', function() {
 		// getting data from our fixtures
 		const SIGNALS = convertQuestions( this.signals );
+		const QUESTIONS = this.signals;
 		const HIGHSCORE = this.highscore;
 		// some hoisting of variables so our (fake) promises have access to them
 		let $title;
@@ -19,6 +20,7 @@ describe('The history', () => {
 		let wrongs;
 		let score = 0;
 		let position = 0;
+		const wrongAnswers = [];
 
 		cy
 			.waitFor('[data-question="true"]')
@@ -68,6 +70,7 @@ describe('The history', () => {
 			})
 			// wrong answer
 			.wrap( null ).then( () => {
+				wrongAnswers.push( answerText );
 				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
 			// go into highscore
@@ -75,7 +78,7 @@ describe('The history', () => {
 			.waitFor('a[data-back-link]')
 			.get('p[data-most-wrong]').should('be.visible')
 			.get('form[data-input-form]').should('be.visible')
-			.root().contains('5 pushups').should('be.visible')
+			.root().contains(' 5 pushups').should('be.visible')
 			// go back to game
 			.get('a').contains('Go back to the game').click()
 			.waitFor('[data-question="true"]')
@@ -93,5 +96,81 @@ describe('The history', () => {
 				correct = new RegExp(`^(${ answerText })$`, 'g');
 				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
 			})
+			// wrong answer
+			.wrap( null ).then( () => {
+				wrongAnswers.push( answerText );
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			// correct answer
+			.wrap( null ).then( () => {
+				cy.get('[data-answer]').contains( correct ).click();
+			})
+			// next question
+			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			// getting the current question from the DOM
+			.wrap( null ).then( () => {
+				$title = Cypress.$('[data-question="true"] title');
+				questionID = '#'+$title.attr('id').replace( '-title', '' );
+				answerText = SIGNALS[ questionID ].text;
+				correct = new RegExp(`^(${ answerText })$`, 'g');
+				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+			})
+			// wrong answer
+			.wrap( null ).then( () => {
+				wrongAnswers.push( answerText );
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			// correct answer
+			.wrap( null ).then( () => {
+				cy.get('[data-answer]').contains( correct ).click();
+			})
+			// next question
+			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			// getting the current question from the DOM
+			.wrap( null ).then( () => {
+				$title = Cypress.$('[data-question="true"] title');
+				questionID = '#'+$title.attr('id').replace( '-title', '' );
+				answerText = SIGNALS[ questionID ].text;
+				correct = new RegExp(`^(${ answerText })$`, 'g');
+				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+			})
+			// wrong answer
+			.wrap( null ).then( () => {
+				wrongAnswers.push( answerText );
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			// correct answer
+			.wrap( null ).then( () => {
+				cy.get('[data-answer]').contains( correct ).click();
+			})
+			// next question
+			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			// getting the current question from the DOM
+			.wrap( null ).then( () => {
+				$title = Cypress.$('[data-question="true"] title');
+				questionID = '#'+$title.attr('id').replace( '-title', '' );
+				answerText = SIGNALS[ questionID ].text;
+				correct = new RegExp(`^(${ answerText })$`, 'g');
+				wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+			})
+			// wrong answer
+			.wrap( null ).then( () => {
+				wrongAnswers.push( answerText );
+				cy.get('[data-answer=""]').contains( wrongs ).click();
+			})
+			// go into highscore
+			.get('a[data-highscore]').click()
+			.waitFor('a[data-back-link]')
+			// check that the wrongs have been noted
+			.wrap( null ).then( () => {
+				cy
+					.get('ul[data-most-wrong-list]').should( 'contain', wrongAnswers[ 0 ] )
+					.get('ul[data-most-wrong-list]').should( 'contain', wrongAnswers[ 1 ] )
+					.get('ul[data-most-wrong-list]').should( 'contain', wrongAnswers[ 2 ] )
+					.get('ul[data-most-wrong-list]').should( 'contain', wrongAnswers[ 3 ] )
+					.get('ul[data-most-wrong-list]').should( 'contain', wrongAnswers[ 4 ] )
+			})
+			// check for right pushup count (5*5)
+			.root().contains('25 pushups').should('be.visible')
 	});
 });

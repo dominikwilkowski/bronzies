@@ -114,7 +114,7 @@ function Highscore() {
 							<p data-most-wrong css={{
 								textAlign: 'center',
 							}}>The answers you got wrong the most are:</p>
-							<ul css={{
+							<ul data-most-wrong-list css={{
 								position: 'relative',
 								padding: '0 0 2rem 0',
 								margin: '0 0 4rem 0',
