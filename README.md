@@ -46,7 +46,6 @@ yarn start:app
 ## Todos
 
 Next:
-- [ ] add more cypress tests
 - [ ] add more unit tests
 - [ ] make gameToggler a11y
 	- [ ] trap focus
@@ -54,7 +53,6 @@ Next:
 	- [ ] aria roles
 - [ ] re-add cpr beat screen
 - [ ] fix theme (make sane)
-- [ ] enable service worker
 - [ ] add more modes for types of beaches etc
 - [ ] rebuild server
 	- [ ] postgres
