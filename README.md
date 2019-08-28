@@ -161,6 +161,23 @@ forever start -l bronzies.log --append -o bronziesOut.log -e bronziesError.log /
 Continues integration is setup with [CircleCI](https://circleci.com/) and we're testing with [Jest](https://jestjs.io/) and
 [Cypress](https://www.cypress.io/).
 
+Tests are organized inside the `src/tests` folder.
+
+```sh
+.
+├── app
+│   └── [test-name].spec.js
+├── e2e
+│   └── [test-name].cypress.js
+├── server
+│   └── [test-name].spec.js
+└── utils
+    ├── plugins
+    └── support
+```
+
+Files that end with `.spec.js` are Jest tests and files that end with `.cypress.js` are Cypress tests.
+
 | Command                | Description                                           |
 |------------------------|-------------------------------------------------------|
 | `yarn test`            | Run all tests                                         |
