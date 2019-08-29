@@ -32,10 +32,10 @@ function ImageView() {
 						textAlign: 'center',
 						fontWeight: 900,
 						color: score > 0
-							? colors[ 3 ]
+							? colors.success
 							: score === 0
 								? '#000'
-								: colors[ 0 ],
+								: colors.action,
 					}}>{ score }</span>
 				</div>
 				<div css={{

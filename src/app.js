@@ -140,7 +140,7 @@ function App() {
 					gridTemplateRows: '0fr 1fr auto',
 				},
 				'a': {
-					color: colors[ 0 ],
+					color: colors.action,
 				},
 			}} />
 			<GameStateProvider>

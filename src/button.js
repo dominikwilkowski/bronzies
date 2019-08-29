@@ -11,7 +11,7 @@ function Button({ children, onClick, mute, styling, ...props }) {
 			background: 'transparent',
 			padding: '1rem',
 			fontSize: '1rem',
-			color: mute ? '#000' : colors[ 0 ],
+			color: mute ? '#000' : colors.action,
 			textDecoration: mute ? 'default' : 'underline',
 			cursor: mute ? 'default' : 'pointer',
 			textAlign: 'inherit',

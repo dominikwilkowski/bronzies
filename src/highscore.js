@@ -4,7 +4,6 @@ import useRemoteData from './useRemoteData';
 import { Link } from '@reach/router';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
-// import { colors } from './theme';
 import { onUnload } from './game';
 import Loading from './loading';
 

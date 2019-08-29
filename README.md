@@ -52,7 +52,6 @@ Next:
 	- [ ] support esc key close
 	- [ ] aria roles
 - [ ] re-add cpr beat screen
-- [ ] fix theme (make sane)
 - [ ] add more modes for types of beaches etc
 - [ ] rebuild server
 	- [ ] postgres
