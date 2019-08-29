@@ -41,7 +41,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 						listStyle: 'none',
 						overflow: 'hidden',
 						'@media(min-width: 600px)': {
-							border: `1px solid ${ colors[ 4 ] }`,
+							border: `1px solid ${ colors.background }`,
 						}
 					}}>
 						<button data-answer={ choice.status ? choice.status : '' } css={{
@@ -50,8 +50,8 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 							width: '100%',
 							background: choice.status
 								? choice.status === 'correct'
-									? colors[ 3 ]
-									: colors[ 0 ]
+									? colors.success
+									: colors.action
 								: 'transparent',
 							color: choice.status
 								? '#fff'

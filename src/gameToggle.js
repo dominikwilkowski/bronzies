@@ -58,7 +58,7 @@ function GameToggle({ isChecked, setIsChecked, isDisabled }) {
 					width: '24px',
 					height: '24px',
 					borderRadius: '50%',
-					background: isChecked ? colors[ 0 ] : colors[ 1 ],
+					background: isChecked ? colors.action : colors.reverse,
 					border: '#333 1px solid',
 					transition: 'left 0.3s ease, background 0.3s ease',
 					'input:checked + &': {

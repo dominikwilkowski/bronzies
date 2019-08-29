@@ -27,10 +27,10 @@ function Progress({ questions, current }) {
 									: 'right' // ... it was the right answer
 								: 'future'  // if it's in the future
 						const statusColors = {
-							current: colors[ 2 ],
-							right: colors[ 3 ],
-							wrong: colors[ 0 ],
-							future: colors[ 4 ],
+							current: colors.active,
+							right: colors.success,
+							wrong: colors.action,
+							future: colors.background,
 						};
 
 						return (

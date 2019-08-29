@@ -46,7 +46,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, questi
 							top: '1.4rem',
 							left: 0,
 							border: 'transparent 4px solid',
-							borderLeft: `${ colors[ 0 ] } 7px solid`,
+							borderLeft: `${ colors.action } 7px solid`,
 						},
 					}}>
 						<Button onClick={ () => handleRoundChange( signals, 'Signals' ) } mute={ questionType === 'Signals' } styling={{
@@ -71,7 +71,7 @@ function Menu({ isOpen, setIsOpen, wrongAnswersLength, handleRoundChange, questi
 							top: '1.4rem',
 							left: 0,
 							border: 'transparent 4px solid',
-							borderLeft: `${ colors[ 0 ] } 7px solid`,
+							borderLeft: `${ colors.action } 7px solid`,
 						},
 					}}>
 						<Button onClick={ () => handleRoundChange( questions, 'Practice' ) } mute={ questionType === 'Practice' } styling={{
