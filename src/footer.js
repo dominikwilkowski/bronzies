@@ -17,6 +17,7 @@ function Footer() {
 				height: '50px',
 				margin: '0 auto 1rem auto',
 			}} src='/sprite.svg#slsa-logo' title='SLSA Logo' />
+			<Link to='/cpr'>Heart beat</Link><br/>
 			<Link to='/about'>About the app</Link>
 		</footer>
 	);
