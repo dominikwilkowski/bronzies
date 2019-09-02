@@ -1,9 +1,18 @@
 /** @jsx jsx */
+import { jsx, keyframes } from '@emotion/core';
 import { Link } from '@reach/router';
-import { jsx } from '@emotion/core';
 import SVG from './svg';
 
 function CPR() {
+	const heartbeat = keyframes({
+		'from, to': {
+			transform: 'scale3D( 1, 1, 1 )',
+		},
+		'50%': {
+			transform: 'scale3D( 1.7, 1.5, 1.4 )',
+		}
+	});
+
 	return (
 		<main css={{
 			margin: '0.5rem',
@@ -31,6 +40,7 @@ function CPR() {
 				width: '50px',
 				height: '50px',
 				margin: '0 auto 1rem auto',
+				animation: `${ heartbeat } 0.3s`,
 			}} src='/sprite.svg#heart' title='Heart' />
 		</main>
 	);
