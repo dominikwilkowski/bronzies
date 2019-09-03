@@ -18,7 +18,7 @@ function CPR() {
 			margin: '0.5rem',
 		}}>
 			<Link to='/'>Go back to the game</Link>
-			<h2>Learn how fast the CPR rythm is</h2>
+			<p>Learn how fast the CPR rythm is</p>
 
 			<div css={{
 				position: 'absolute',
