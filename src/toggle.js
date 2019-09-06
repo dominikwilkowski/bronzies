@@ -1,9 +1,15 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
-import { colors } from './theme';
 
-function GameToggle({ isChecked, setIsChecked, isDisabled }) {
+function Toggle({
+	isChecked,
+	setIsChecked,
+	isDisabled,
+	label,
+	checkedColor,
+	uncheckedColor,
+}) {
 	return (
 		<label data-game-toggle-label css={{
 			display: 'inline-block',
@@ -58,22 +64,25 @@ function GameToggle({ isChecked, setIsChecked, isDisabled }) {
 					width: '24px',
 					height: '24px',
 					borderRadius: '50%',
-					background: isChecked ? colors.action : colors.reverse,
+					background: isChecked ? checkedColor : uncheckedColor,
 					border: '#333 1px solid',
 					transition: 'left 0.3s ease, background 0.3s ease',
 					'input:checked + &': {
 						left: '0',
 					},
 				},
-			}}>Toggle game mode</span>
+			}}>{ label }</span>
 		</label>
 	);
 };
 
-GameToggle.propTypes = {
+Toggle.propTypes = {
 	isChecked: PropTypes.bool.isRequired,
 	setIsChecked: PropTypes.func.isRequired,
-	isDisabled: PropTypes.bool.isRequired,
+	isDisabled: PropTypes.bool,
+	label: PropTypes.string,
+	checkedColor: PropTypes.string,
+	uncheckedColor: PropTypes.string,
 };
 
-export default GameToggle;
+export default Toggle;

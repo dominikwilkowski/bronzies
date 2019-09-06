@@ -17,8 +17,16 @@ function Footer() {
 				height: '50px',
 				margin: '0 auto 1rem auto',
 			}} src='/sprite.svg#slsa-logo' title='SLSA Logo' />
-			<Link to='/cpr'>Heart beat</Link><br/>
-			<Link to='/about'>About the app</Link>
+			<Link to='/cpr'>
+				<SVG styling={{
+					height: '1em',
+					width: '1em',
+				}} src='/sprite.svg#heart' title='Heart'
+				/> CPR beat
+			</Link><br/>
+			<div css={{ paddingTop: '2rem' }}>
+				<Link to='/about'>About the app</Link>
+			</div>
 		</footer>
 	);
 };
