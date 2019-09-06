@@ -3,6 +3,7 @@
 	"integrationFolder": "src/tests/e2e/",
 	"fixturesFolder": "server/assets/",
 	"videosFolder": "src/tests/utils/videos/",
+	"screenshotsFolder": "src/tests/utils/screenshots/",
 	"pluginsFile": "src/tests/utils/plugins/index.js",
 	"viewportWidth": 375,
 	"viewportHeight": 1500,

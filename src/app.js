@@ -8,6 +8,7 @@ import { colors } from './theme';
 import Header from './header';
 import Footer from './footer';
 import About from './about';
+import CPR from './cpr';
 
 /**
  * Context for all game data
@@ -153,6 +154,7 @@ function App() {
 							<Game default />
 							<Highscore path='/highscore' />
 							<About path='/about' />
+							<CPR path='/cpr' />
 						</Router>
 					</div>
 					<Footer />

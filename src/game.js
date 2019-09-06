@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react';
 import useRemoteData from './useRemoteData';
 import RoundToggle from './roundToggle';
-import GameToggle from './gameToggle';
 import { Link } from '@reach/router';
 import { useGameData } from './app';
 import { jsx } from '@emotion/core';
 import GameBody from './gameBody';
 import Progress from './progress';
+import { colors } from './theme';
 import Loading from './loading';
+import Toggle from './toggle';
 
 /**
  * Simple Fisher–Yates shuffle function https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
@@ -297,7 +298,14 @@ function Game() {
 					display: 'grid',
 					gridTemplateColumns: '1fr auto 1fr',
 				}}>
-					<GameToggle isChecked={ questionAsImage } setIsChecked={ setQuestionAsImage } isDisabled={ gameStates[ gameState ].correct } />
+					<Toggle
+						isChecked={ questionAsImage }
+						setIsChecked={ setQuestionAsImage }
+						isDisabled={ gameStates[ gameState ].correct }
+						checkedColor={ colors.action }
+						uncheckedColor={ colors.reverse }
+						label='Toggle game mode'
+					/>
 					<div css={{
 						display: 'grid',
 						alignContent: 'center',
