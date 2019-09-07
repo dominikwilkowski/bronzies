@@ -31,7 +31,12 @@ function CPR() {
 					setSound(
 						soundManager.createSound({
 							id: 'beat',
-							url: 'heartbeat.mp3',
+							url: [
+								'heartbeat.mp3',
+								'heartbeat.ogg',
+								'heartbeat.m4a',
+								'heartbeat.wav',
+							],
 							audioTagTimeToLive: 1000,
 						})
 					);
@@ -45,7 +50,12 @@ function CPR() {
 	// Create the interval
 	useInterval( () => {
 		if( refHeart && !mute ) {
-			sound.play();
+			try {
+				sound.play();
+			}
+			catch( error ) {
+				//
+			}
 		}
 
 		setRefHeart( !refHeart );
