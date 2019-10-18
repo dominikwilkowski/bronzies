@@ -49,7 +49,7 @@ describe('The history', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// go into highscore
 			.get('a[data-highscore]').click()
 			.waitFor('a[data-back-link]')
@@ -87,7 +87,7 @@ describe('The history', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -106,7 +106,7 @@ describe('The history', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -125,7 +125,7 @@ describe('The history', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -144,7 +144,7 @@ describe('The history', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');

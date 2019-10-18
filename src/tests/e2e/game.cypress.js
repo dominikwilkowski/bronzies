@@ -82,9 +82,9 @@ describe('The game', () => {
 					.get('[data-answer]').should('be.disabled')
 					.get('[data-game-toggle]').should('be.disabled')
 					.get('[data-round-toggle]').should('be.disabled')
-					.getAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
+					.findAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
 					// now we click to go to the next question
-					.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+					.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 					// let's make sure the score is still the same
 					.wrap( null ).then( () => {
 						cy.get('[data-score]').should( 'contain', score );
@@ -130,9 +130,9 @@ describe('The game', () => {
 			.get('[data-answer]').should('be.disabled')
 			.get('[data-game-toggle]').should('be.disabled')
 			.get('[data-round-toggle]').should('be.disabled')
-			.getAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
+			.findAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
 			.wait( 400 )
-			.getAllByText('Next question ⇢').filter(':visible').click()
+			.findAllByText('Next question ⇢').filter(':visible').click()
 			.wrap( null ).then( () => {
 				cy.get('[data-score]').should( 'contain', score );
 			})
@@ -222,9 +222,9 @@ describe('The game', () => {
 					.get('[data-answer]').should('be.disabled')
 					.get('[data-game-toggle]').should('be.disabled')
 					.get('[data-round-toggle]').should('be.disabled')
-					.getAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
+					.findAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
 					// now we click to go to the next question
-					.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+					.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 					// let's make sure the score is still the same
 					.wrap( null ).then( () => {
 						cy.get('[data-score]').should( 'contain', score );
@@ -268,9 +268,9 @@ describe('The game', () => {
 			.get('[data-answer]').should('be.disabled')
 			.get('[data-game-toggle]').should('be.disabled')
 			.get('[data-round-toggle]').should('be.disabled')
-			.getAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
+			.findAllByText('Next question ⇢').filter(':not(:visible)').should('not.be.visible')
 			.wait( 400 )
-			.getAllByText('Next question ⇢').filter(':visible').click()
+			.findAllByText('Next question ⇢').filter(':visible').click()
 			.wrap( null ).then( () => {
 				cy.get('[data-score]').should( 'contain', score );
 			})
@@ -330,7 +330,7 @@ describe('The game', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -344,7 +344,7 @@ describe('The game', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -363,7 +363,7 @@ describe('The game', () => {
 				cy.get('[data-answer]').contains( correct ).click();
 			})
 			// correct question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -395,7 +395,7 @@ describe('The game', () => {
 				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] span');
@@ -407,7 +407,7 @@ describe('The game', () => {
 				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
 			})
 			// next question
-			.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+			.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 			.get('[data-round-toggle]').should( 'contain', 'Signals' )
 			// go into round toggle
 			.get('[data-round-toggle]').click()
@@ -436,7 +436,7 @@ describe('The game', () => {
 								cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
 							})
 							// next question
-							.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+							.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 					})
 					.get('[data-round]').should( 'contain', '2' )
 					// let's go back to image2text mode
@@ -459,7 +459,7 @@ describe('The game', () => {
 								cy.get('[data-answer]').contains( correct ).click();
 							})
 							// next question
-							.getAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
+							.findAllByText('Next question ⇢', { timeout: 60000 }).filter(':visible').click()
 					})
 					.get('[data-round]').should( 'contain', '3' )
 			});
