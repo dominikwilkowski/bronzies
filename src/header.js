@@ -14,7 +14,7 @@ function ImageView() {
 			<h1 css={{
 				textAlign: 'center',
 				margin: '0.5rem 0 0 0',
-			}}>Bonzies</h1>
+			}}>Bronzies</h1>
 			<div css={{
 				overflow: 'hidden',
 				fontSize: '0.8rem',

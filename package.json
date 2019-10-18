@@ -25,20 +25,20 @@
 		"nuke": "rm -rf build && rm -rf node_modules && rm yarn.lock"
 	},
 	"dependencies": {
-		"@emotion/core": "^10.0.16",
+		"@emotion/core": "^10.0.21",
 		"@reach/router": "^1.2.1",
-		"react": "^16.9.0",
-		"react-dom": "^16.9.0",
-		"react-scripts": "3.1.1",
+		"react": "^16.10.2",
+		"react-dom": "^16.10.2",
+		"react-scripts": "3.2.0",
 		"react-spring": "^8.0.27",
 		"soundmanager2": "^2.97.20170602"
 	},
 	"devDependencies": {
-		"@testing-library/cypress": "^4.1.1",
-		"concurrently": "^4.1.2",
+		"@testing-library/cypress": "^5.0.2",
+		"concurrently": "^5.0.0",
 		"cypress": "^3.4.1",
 		"cypress-waitfor": "^1.1.0",
-		"start-server-and-test": "^1.10.0"
+		"start-server-and-test": "^1.10.6"
 	},
 	"proxy": "http://localhost:5555",
 	"jest": {
