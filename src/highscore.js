@@ -43,7 +43,7 @@ export function getSortedWrongAnswers( wrongAnswers, db ) {
 };
 
 function Highscore() {
-	const { signals, score, nays, rounds, history, wrongAnswers } = useGameData();
+	const { signals, score, resetScore, nays, rounds, history, wrongAnswers } = useGameData();
 	const [ highscore, setHighscore ] = useState([]);
 	const [ name, setName ] = useState('');
 	const [ isSubmitting, setIsSubmitting ] = useState( false );
@@ -96,6 +96,7 @@ function Highscore() {
 			setHighscore( await response.json() );
 			window.removeEventListener( 'beforeunload', onUnload );
 			setName('');
+			resetScore();
 			setIsSubmitting( false );
 		}
 	};
@@ -162,6 +163,9 @@ function Highscore() {
 						}
 					}}>
 						<p>Enter yourself into the score board with your current score of { score }.</p>
+						<strong css={{
+							fontStyle: 'italic',
+						}}>(Your score will be set to zero)</strong>
 						{
 							nays > 0
 								? <p>
