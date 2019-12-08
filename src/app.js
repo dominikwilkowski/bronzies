@@ -51,6 +51,30 @@ const GameStateProvider = ({ children }) => {
 	const [ score, setScore ] = useState( 0 );
 	const [ nays, setNays ] = useState( 0 );
 
+	// reset states to start (for highscore entry)
+	const resetScore = () => {
+		const questionsImage = shuffle( initialQuestionsDB );
+		setQuestionsImage( questionsImage );
+		setIndexImage( 0 );
+		setChoicesImage( getNewAnswers( questionsImage[ 0 ], questionsImage ) );
+		setCorrectImage( false );
+		setUserAnswerImage('');
+
+		const questionsText = shuffle( initialQuestionsDB )
+		setQuestionsText( questionsText );
+		setIndexText( 0 );
+		setChoicesText( getNewAnswers( questionsText[ 0 ], questionsText ) );
+		setCorrectText( false );
+		setUserAnswerText('');
+
+		setQuestionAsImage( true );
+		setWrongAnswers([]);
+		setHistory([]);
+		setRounds( 1 );
+		setScore( 0 );
+		setNays( 0 );
+	}
+
 	const localSvg = localStorage.getItem('svg');
 	const svgSprite = document.getElementById('svgSprite').innerHTML;
 	if( !svgSprite ) {
@@ -81,6 +105,7 @@ const GameStateProvider = ({ children }) => {
 			score, setScore,
 			nays, setNays,
 			wasNoLocalStorage,
+			resetScore,
 		}}>
 			{ children }
 		</GameContext.Provider>
