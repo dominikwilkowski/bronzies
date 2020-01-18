@@ -107,13 +107,28 @@ function getSignalAsset( req, res, next ) {
 }
 
 /**
+ * Getting version
+ *
+ * @param  {object}   req  - The request object from express
+ * @param  {object}   res  - The result object from express
+ * @param  {function} next - The next function from express
+ */
+function getVersion( req, res, next ) {
+	debug( 'Version requested', 'interaction', req );
+
+	const { version } = require(`./package.json`);
+	res.send({ version });
+	return next();
+}
+
+/**
  * Starting init server
  */
 const port = 5555;
 const server = restify.createServer({ name: 'Bronzies-API' });
 const cors = corsMiddleware({
 	origins: ['http://127.0.0.1:3000', 'http://localhost:3000'],
-})
+});
 
 server.use( restify.plugins.bodyParser() );
 server.pre( cors.preflight );
@@ -124,6 +139,7 @@ server.get( '/api/highscore', getHighscore );
 server.post( '/api/highscore', postHighscore );
 server.get( '/api/signals', getSignals );
 server.get( '/api/assets/*', getSignalAsset );
+server.get( '/api/version', getVersion );
 
 if( process.argv.includes('serve') ) {
 	server.listen( port, () => {

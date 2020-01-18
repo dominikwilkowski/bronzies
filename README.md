@@ -120,6 +120,12 @@ https://bronzies.com/api/highscore
 https://bronzies.com/api/highscore
 ```
 
+*GET version*
+
+```
+https://bronzies.com/api/version
+```
+
 (use: `curl -i -H "Content-Type: application/json" -H "Accept: application/json" -X POST -d '{"name": "Superman", "nays": 55, "score": 5555555, "rounds": 777}' http://localhost:5555/api/highscore`)
 
 ### Install on server
@@ -194,6 +200,7 @@ Files that end with `.spec.js` are Jest tests and files that end with `.cypress.
 
 ### Release History App
 
+* 1.0.1 - Added versions to about screen
 * 1.0.0 - Complete rewrite in react
 * 0.1.5 - Removed cordova build, changed endpoints
 * 0.1.4 - Added cordova build
@@ -205,6 +212,7 @@ Files that end with `.spec.js` are Jest tests and files that end with `.cypress.
 
 ### Release History Server
 
+* 1.0.1 - Added version route
 * 1.0.0 - Complete rewrite
 * 0.0.3 - fixed dependencies, changed endpoints
 * 0.0.2 - moved to MongoDB

@@ -1,15 +1,28 @@
 /** @jsx jsx */
+import { version as appVersion } from '../package.json';
+import { Fragment, useState, useEffect } from 'react';
+import useRemoteData from './useRemoteData';
 import { Link } from '@reach/router';
 import { jsx } from '@emotion/core';
+import Spinner from './spinner';
 
 function About() {
+	const [ serverVersion, setServerVersion ] = useState('');
+
+	const { data, loadingState } = useRemoteData('/api/version');
+	useEffect( () => {
+		if( loadingState === 'loaded' ) {
+			setServerVersion( data.version );
+		}
+	}, [ data, loadingState, setServerVersion ]);
+
 	return (
 		<main css={{
 			margin: '0.5rem',
 		}}>
 			<Link to='/'>Go back to the game</Link>
 			<h2>Hi there <span role='img' aria-label='waving hand'>👋</span></h2>
-			<p css={{
+			<div css={{
 				position: 'relative',
 				paddingBottom: '2rem',
 				marginBottom: '5rem',
@@ -25,7 +38,25 @@ function About() {
 			}}>
 				My name is <a href='https://dominik-wilkowski.com' rel='noopener noreferrer' target='_blank'>Dominik</a> and I'm a
 				trainer at <a href='https://bondisurfclub.com' rel='noopener noreferrer' target='_blank'>BSBSLC</a>.
-			</p>
+
+				<span css={{
+					display: 'block',
+					marginTop: '1rem',
+					fontSize: '0.7rem',
+				}}>
+					APP: v{appVersion}
+				</span>
+				<div css={{
+					display: 'block',
+					fontSize: '0.7rem',
+				}}>
+					Server: {
+						loadingState !== 'loaded'
+						? <Spinner/>
+						: <Fragment>v{serverVersion}</Fragment>
+					}
+				</div>
+			</div>
 
 			<div css={{
 				display: 'grid',
