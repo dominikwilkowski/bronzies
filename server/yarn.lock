@@ -66,10 +66,10 @@ bunyan@^1.8.12:
     mv "~2"
     safe-json-stringify "~1"
 
-cfonts@^2.4.8:
-  version "2.4.8"
-  resolved "https://registry.npmjs.org/cfonts/-/cfonts-2.4.8.tgz#43f956b7cd3f41480e0ea495aa330e652ffb1d56"
-  integrity sha512-7HIISAdFyoKkZd3HvGvCDjYFnRBc/bHiJ0I+DfzKpIOc2u90d2mutfkGCgEudnTiRY7d97ItgHaUAOXBQFdUrQ==
+cfonts@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.npmjs.org/cfonts/-/cfonts-2.8.0.tgz#ffdb7042654f769f2397367def786a018495cd78"
+  integrity sha512-XprUOKd9+PjOw6ECzYvwj6oBEOLMaWErfk6UUw2TcqsQ+HgqhfmkyVDr6cZhhOm3WO+4Hpw6ueh37rk3ZE/siw==
   dependencies:
     chalk "^3.0.0"
     window-size "^1.1.1"
@@ -109,24 +109,24 @@ csv-generate@^3.2.4:
   resolved "https://registry.npmjs.org/csv-generate/-/csv-generate-3.2.4.tgz#440dab9177339ee0676c9e5c16f50e2b3463c019"
   integrity sha512-qNM9eqlxd53TWJeGtY1IQPj90b563Zx49eZs8e0uMyEvPgvNVmX1uZDtdzAcflB3PniuH9creAzcFOdyJ9YGvA==
 
-csv-parse@^4.8.2:
-  version "4.8.5"
-  resolved "https://registry.npmjs.org/csv-parse/-/csv-parse-4.8.5.tgz#32e92a0e0acedab141bd5c5a3ad6fc3316f2c72d"
-  integrity sha512-rpsLmlLWJZifmLzZEVGbZ9phWnJyi+cCbCGYr4vX2NaHFtgbmQPFk+WmMkmMkQXgsIUn6CgnK9cTuUAfFjoXbA==
+csv-parse@^4.8.8:
+  version "4.8.8"
+  resolved "https://registry.npmjs.org/csv-parse/-/csv-parse-4.8.8.tgz#0acbc4598c1f28652c4250599108096b3a0a68ae"
+  integrity sha512-Kv3Ilz2GV58dOoHBXRCTF8ijxlLjl80bG3d67XPI6DNqffb3AnbPbKr/WvCUMJq5V0AZYi6sukOaOQAVpfuVbg==
 
-csv-stringify@^5.3.4:
+csv-stringify@^5.3.6:
   version "5.3.6"
   resolved "https://registry.npmjs.org/csv-stringify/-/csv-stringify-5.3.6.tgz#2655e2e1c01b97b3963bccbc9407b8fb876dc589"
   integrity sha512-kPcRbMvo5NLLD71TAqW5K+g9kbM2HpIZJLAzm73Du8U+5TXmDp9YtXKCBLyxEh0q3Jbg8QhNFBz3b5VJzjZ/jw==
 
 csv@^5.1.1:
-  version "5.3.1"
-  resolved "https://registry.npmjs.org/csv/-/csv-5.3.1.tgz#8ceb548813182d3d76a13889878c6b06104927b0"
-  integrity sha512-UBO4x5EYpihikfjHUQ7dCTIgC+e9TrWWZbCcoMr935tcAZfXT1MZKHLD+aYSHs1jwW2G1uljpFfJ4XxYwQ6t5w==
+  version "5.3.2"
+  resolved "https://registry.npmjs.org/csv/-/csv-5.3.2.tgz#50b344e25dfbb8c62684a1bcec18c22468b2161e"
+  integrity sha512-odDyucr9OgJTdGM2wrMbJXbOkJx3nnUX3Pt8SFOwlAMOpsUQlz1dywvLMXJWX/4Ib0rjfOsaawuuwfI5ucqBGQ==
   dependencies:
     csv-generate "^3.2.4"
-    csv-parse "^4.8.2"
-    csv-stringify "^5.3.4"
+    csv-parse "^4.8.8"
+    csv-stringify "^5.3.6"
     stream-transform "^2.0.1"
 
 dashdash@^1.12.0:
@@ -235,18 +235,18 @@ fast-decode-uri-component@^1.0.0:
   integrity sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==
 
 find-my-way@^2.0.1:
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/find-my-way/-/find-my-way-2.2.1.tgz#248e939243af1b9df368bcc9b8c8286306caae7d"
-  integrity sha512-pzZA9/PlhDGG5PRzmd4vH4AbKW7FO68RE7q2I3NzjJHcVPukYbDA7bPdArg7ySKfS6pKki+qhrawFoN6aNZfjA==
+  version "2.2.2"
+  resolved "https://registry.npmjs.org/find-my-way/-/find-my-way-2.2.2.tgz#0d119a6daa354e20d61591a850a112d424c5bc06"
+  integrity sha512-zk3eOsS1tABNQjII0vCbhkqgsX/COpRUxl0b5rlA41V2Ft7jWDr30LhYq4BZXLAlzw5yskg24XQG/U1wCT30vQ==
   dependencies:
     fast-decode-uri-component "^1.0.0"
     safe-regex2 "^2.0.0"
     semver-store "^0.3.0"
 
 formidable@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/formidable/-/formidable-1.2.1.tgz#70fb7ca0290ee6ff961090415f4b3df3d2082659"
-  integrity sha512-Fs9VRguL0gqGHkXS5GQiMCr1VhZBxz0JnJs4JmMp/2jL18Fmbzvv7vOFRU+U8TBkHEE/CX1qDXzJplVULgsLeg==
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/formidable/-/formidable-1.2.2.tgz#bf69aea2972982675f00865342b982986f6b8dd9"
+  integrity sha512-V8gLm+41I/8kguQ4/o1D3RIHRmhYFG4pnNyonvua+40rqcEmT4+V71yaZ3B457xbbgCsCfjSPi65u/W6vK1U5Q==
 
 fresh@0.5.2:
   version "0.5.2"
@@ -307,9 +307,9 @@ http-errors@~1.6.2:
     statuses ">= 1.4.0 < 2"
 
 http-signature@^1.2.0:
-  version "1.3.1"
-  resolved "https://registry.npmjs.org/http-signature/-/http-signature-1.3.1.tgz#739fe2f8897ba84798e3e54b699a9008a8724ff9"
-  integrity sha512-Y29YKEc8MQsjch/VzkUVJ+2MXd9WcR42fK5u36CZf4G8bXw2DXMTWuESiB0R6m59JAWxlPPw5/Fri/t/AyyueA==
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/http-signature/-/http-signature-1.3.2.tgz#ae5ebf18631967a2ba660283606e336c0207c950"
+  integrity sha512-sjgXeFLIVJ54n1+HWOvazGkIQpaawFGIQ1PYPORaFNWpPHJ28ZuDgWljvMIhAIcOelTtrh9e5wVB3IorxjiZDA==
   dependencies:
     assert-plus "^1.0.0"
     jsprim "^1.2.2"
@@ -520,9 +520,9 @@ path-is-absolute@^1.0.0:
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
 
 pidusage@^2.0.17:
-  version "2.0.17"
-  resolved "https://registry.npmjs.org/pidusage/-/pidusage-2.0.17.tgz#6b4a2b4a09026f0e9828f7e5627837e4c0672581"
-  integrity sha512-N8X5v18rBmlBoArfS83vrnD0gIFyZkXEo7a5pAS2aT0i2OLVymFb2AzVg+v8l/QcXnE1JwZcaXR8daJcoJqtjw==
+  version "2.0.18"
+  resolved "https://registry.npmjs.org/pidusage/-/pidusage-2.0.18.tgz#9ccef35df5508a5a4b0838c712ea9b79609aff34"
+  integrity sha512-Y/VfKfh3poHjMEINxU+gJTeVOBjiThQeFAmzR7z56HSNiMx+etl+yBhk42nRPciPYt/VZl8DQLVXNC6P5vH11A==
   dependencies:
     safe-buffer "^5.1.2"
 
@@ -555,9 +555,9 @@ readable-stream@^2.0.1:
     util-deprecate "~1.0.1"
 
 readable-stream@^3.0.6:
-  version "3.5.0"
-  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.5.0.tgz#465d70e6d1087f6162d079cd0b5db7fbebfd1606"
-  integrity sha512-gSz026xs2LfxBPudDuI41V1lka8cxg64E66SGe78zJlsUofOg/yqwezdIcdfwik6B4h8LFmWPA9ef9X3FiNFLA==
+  version "3.6.0"
+  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.0.tgz#337bbda3adc0706bd3e024426a286d4b4b2c9198"
+  integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
   dependencies:
     inherits "^2.0.3"
     string_decoder "^1.1.1"
