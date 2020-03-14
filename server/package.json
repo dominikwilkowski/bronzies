@@ -8,7 +8,7 @@
 		"restify": "^8.5.1"
 	},
 	"scripts": {
-		"nuke": "rm -rf build && rm -rf node_modules && rm yarn.lock"
+		"nuke": "rm -rf node_modules && rm yarn.lock"
 	},
 	"engines": {
 		"node": ">=8"
