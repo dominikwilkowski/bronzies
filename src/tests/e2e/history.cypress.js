@@ -71,7 +71,7 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-cy-id="answers"]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
 			// go into highscore
 			.get('a[data-highscore]').click()
@@ -99,7 +99,7 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-cy-id="answers"]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
@@ -118,7 +118,7 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-cy-id="answers"]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
@@ -137,7 +137,7 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-cy-id="answers"]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
@@ -156,7 +156,7 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-cy-id="answers"]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).click();
 			})
 			// go into highscore
 			.get('a[data-highscore]').click()
