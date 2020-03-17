@@ -86,6 +86,7 @@ function Choices({ choices, questionAsImage, onAnswer, onSuccess, correct }) {
 						}}>
 							<button
 								data-next={ choice.status === 'correct' ? 'open' : 'close' }
+								data-cy-id='Next question'
 								type='button'
 								onClick={ choice.status === 'correct' ? onSuccess : null }
 								css={{
