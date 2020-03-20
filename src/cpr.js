@@ -1,18 +1,17 @@
 /** @jsx jsx */
-import { soundManager } from 'soundmanager2/script/soundmanager2-nodebug';
-// import { soundManager } from 'soundmanager2'; // debug version
 import { jsx, keyframes } from '@emotion/core';
-import { useState, useEffect } from 'react';
 import useInterval from './useInterval';
 import { Link } from '@reach/router';
+import { useState, } from 'react';
 import { colors } from './theme';
+import useSound from 'use-sound';
 import Toggle from './toggle';
 import SVG from './svg';
 
 function CPR() {
-	const [ refHeart, setRefHeart ] = useState( false );
+	const [ playSound ] = useSound('heartbeat.mp3');
+	const [ refBeat, setBeat ] = useState( false );
 	const [ mute, setMute ] = useState( true );
-	const [ sound, setSound ] = useState({});
 
 	const heartbeat = keyframes({
 		'from, to': {
@@ -23,42 +22,18 @@ function CPR() {
 		}
 	});
 
-	// Setup soundManager
-	useEffect( () => {
-		if( soundManager.ok() ) {
-			soundManager.setup({
-				onready: () => {
-					setSound(
-						soundManager.createSound({
-							id: 'beat',
-							url: [
-								'heartbeat.mp3',
-								'heartbeat.ogg',
-								'heartbeat.m4a',
-								'heartbeat.wav',
-							],
-							audioTagTimeToLive: 1000,
-						})
-					);
-				},
-			});
-		}
-
-		return () => soundManager.destroySound('beat');
-	}, []);
-
 	// Create the interval
 	useInterval( () => {
-		if( refHeart && !mute ) {
+		if( refBeat && !mute ) {
 			try {
-				sound.play();
+				playSound();
 			}
 			catch( error ) {
-				//
+				console.log( error );
 			}
 		}
 
-		setRefHeart( !refHeart );
+		setBeat( !refBeat );
 	}, 250 );
 
 	return (
@@ -86,7 +61,7 @@ function CPR() {
 					maxWidth: '400px',
 					maxHeight: '400px',
 					margin: '0 auto 1rem auto',
-					animation: `${ refHeart ? heartbeat : null } 0.3s`,
+					animation: `${ refBeat ? heartbeat : null } 0.3s`,
 				}} src='/sprite.svg#heart' title='Heart' />
 				<div css={{
 					position: 'absolute',
