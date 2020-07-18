@@ -36,9 +36,9 @@
 	"devDependencies": {
 		"@testing-library/cypress": "^6.0.0",
 		"concurrently": "^5.2.0",
-		"cypress": "^4.9.0",
+		"cypress": "^4.10.0",
 		"cypress-waitfor": "^1.1.0",
-		"start-server-and-test": "^1.11.0"
+		"start-server-and-test": "^1.11.2"
 	},
 	"proxy": "http://localhost:5555",
 	"jest": {
