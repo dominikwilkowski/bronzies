@@ -34,11 +34,11 @@
 		"use-sound": "^1.0.2"
 	},
 	"devDependencies": {
-		"@testing-library/cypress": "^7.0.0",
+		"@testing-library/cypress": "^7.0.1",
 		"concurrently": "^5.3.0",
-		"cypress": "^5.2.0",
+		"cypress": "^5.4.0",
 		"cypress-waitfor": "^1.1.0",
-		"start-server-and-test": "^1.11.3"
+		"start-server-and-test": "^1.11.5"
 	},
 	"proxy": "http://localhost:5555",
 	"jest": {
