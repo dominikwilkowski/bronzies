@@ -1,10 +1,13 @@
-version: 2
+version: 2.1
+orbs:
+  node: circleci/node@3.0.1
+  cypress: cypress-io/cypress@1.16.1
 
 jobs:
   # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
-    docker:
-      - image: circleci/node:lts
+    executor:
+      name: node/default
     steps:
       - checkout
       - restore_cache:
@@ -45,8 +48,8 @@ jobs:
 
   # Running all tests
   testing:
-    docker:
-      - image: circleci/node:lts
+    executor:
+      name: node/default
     steps:
       - checkout
       - attach_workspace:
