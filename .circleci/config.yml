@@ -1,13 +1,10 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.1
-  cypress: cypress-io/cypress@1.16.1
 
 jobs:
   # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
-    executor:
-      name: node/default
+    docker:
+      - image: circleci/node:lts
     steps:
       - checkout
       - restore_cache:
@@ -48,8 +45,8 @@ jobs:
 
   # Running all tests
   testing:
-    executor:
-      name: node/default
+    docker:
+      - image: circleci/node:lts
     steps:
       - checkout
       - attach_workspace:
@@ -66,7 +63,6 @@ jobs:
       - run:
           name: Testing our code
           command: yarn test
-          wait-on: 'http://localhost:5555'
       - store_artifacts:
           path: src/tests/utils/videos
       - store_artifacts:
