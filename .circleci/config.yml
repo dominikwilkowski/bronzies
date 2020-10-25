@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.1
-  cypress: cypress-io/cypress@1.16.1
+  cypress: cypress-io/cypress@1.26.0
 
 jobs:
   # The install job for all dependencies so we can reuse/depend on it in other jobs
