@@ -63,6 +63,7 @@ jobs:
       - run:
           name: Testing our code
           command: yarn test
+          wait-on: 'http://localhost:5555'
       - store_artifacts:
           path: src/tests/utils/videos
       - store_artifacts:
