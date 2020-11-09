@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { useEffect, useState } from 'react';
 import useRemoteData from './useRemoteData';
 import RoundToggle from './roundToggle';

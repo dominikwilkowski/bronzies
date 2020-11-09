@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { useGameData } from './app';
 import ImageView from './imageView';
 import { jsx } from '@emotion/core';

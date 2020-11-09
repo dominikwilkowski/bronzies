@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { animated, useTransition } from 'react-spring';
 import { getSortedWrongAnswers } from './highscore';
 import { shuffle, getNewAnswers } from './game';

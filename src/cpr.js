@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { jsx, keyframes } from '@emotion/core';
 import useInterval from './useInterval';
 import { Link } from '@reach/router';
