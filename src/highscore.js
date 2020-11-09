@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { Fragment, useState, useEffect } from 'react';
 import useRemoteData from './useRemoteData';
 import { Link } from '@reach/router';

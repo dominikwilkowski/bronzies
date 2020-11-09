@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { Link } from '@reach/router';
 import { jsx } from '@emotion/core';
 import SVG from './svg';

@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { version as appVersion } from '../package.json';
 import { Fragment, useState, useEffect } from 'react';
 import useRemoteData from './useRemoteData';

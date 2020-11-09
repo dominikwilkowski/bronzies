@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { useSpring, animated } from 'react-spring';
 import ImageView from './imageView';
 import { jsx } from '@emotion/core';

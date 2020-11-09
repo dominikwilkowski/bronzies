@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/core */
 import { useTransition, animated } from 'react-spring';
 import { jsx, keyframes } from '@emotion/core';
 import { Link } from '@reach/router';
