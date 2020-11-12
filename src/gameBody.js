@@ -1,7 +1,8 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { useGameData } from './app';
 import ImageView from './imageView';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import { tagAnswer } from './game';
 import PropTypes from 'prop-types';
 import TextView from './textView';

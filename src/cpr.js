@@ -1,5 +1,6 @@
-/** @jsxImportSource @emotion/core */
-import { jsx, keyframes } from '@emotion/core';
+/** @jsxImportSource @emotion/react */
+
+import { jsx, keyframes } from '@emotion/react';
 import useInterval from './useInterval';
 import { Link } from '@reach/router';
 import { useState, } from 'react';

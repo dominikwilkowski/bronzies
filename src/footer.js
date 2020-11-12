@@ -1,6 +1,7 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { Link } from '@reach/router';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import SVG from './svg';
 
 function Footer() {

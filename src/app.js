@@ -1,7 +1,8 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { Fragment, useState, createContext, useContext } from 'react';
 import Game, { shuffle, getNewAnswers } from './game';
-import { jsx, Global } from '@emotion/core';
+import { jsx, Global } from '@emotion/react';
 import { Router } from '@reach/router';
 import Highscore from './highscore';
 import { colors } from './theme';

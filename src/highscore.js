@@ -1,9 +1,10 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { Fragment, useState, useEffect } from 'react';
 import useRemoteData from './useRemoteData';
 import { Link } from '@reach/router';
 import { useGameData } from './app';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import { onUnload } from './game';
 import Loading from './loading';
 

@@ -1,10 +1,11 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { useEffect, useState } from 'react';
 import useRemoteData from './useRemoteData';
 import RoundToggle from './roundToggle';
 import { Link } from '@reach/router';
 import { useGameData } from './app';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import GameBody from './gameBody';
 import Progress from './progress';
 import { colors } from './theme';
