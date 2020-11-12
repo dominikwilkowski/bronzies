@@ -1,6 +1,7 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { useTransition, animated } from 'react-spring';
-import { jsx, keyframes } from '@emotion/core';
+import { jsx, keyframes } from '@emotion/react';
 import { Link } from '@reach/router';
 import { useGameData } from './app';
 import PropTypes from 'prop-types';

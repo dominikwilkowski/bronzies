@@ -1,5 +1,6 @@
-/** @jsxImportSource @emotion/core */
-import { jsx } from '@emotion/core';
+/** @jsxImportSource @emotion/react */
+
+import { jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
 import { colors } from './theme';
 

@@ -1,6 +1,7 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { useGameData } from './app';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import { colors } from './theme';
 
 function ImageView() {

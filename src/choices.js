@@ -1,7 +1,8 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { useSpring, animated } from 'react-spring';
 import ImageView from './imageView';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
 import TextView from './textView';
 import { colors } from './theme';

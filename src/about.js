@@ -1,9 +1,10 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { version as appVersion } from '../package.json';
 import { Fragment, useState, useEffect } from 'react';
 import useRemoteData from './useRemoteData';
 import { Link } from '@reach/router';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import Spinner from './spinner';
 
 function About() {

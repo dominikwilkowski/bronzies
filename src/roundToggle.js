@@ -1,10 +1,11 @@
-/** @jsxImportSource @emotion/core */
+/** @jsxImportSource @emotion/react */
+
 import { animated, useTransition } from 'react-spring';
 import { getSortedWrongAnswers } from './highscore';
 import { shuffle, getNewAnswers } from './game';
 import { Fragment, useState } from 'react';
 import { useGameData } from './app';
-import { jsx } from '@emotion/core';
+import { jsx } from '@emotion/react';
 import { colors } from './theme';
 import Button from './button';
 
