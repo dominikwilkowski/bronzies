@@ -1,4 +1,4 @@
-bronzies.com [![CircleCI](https://circleci.com/gh/dominikwilkowski/bronzies/tree/master.svg?style=svg)](https://circleci.com/gh/dominikwilkowski/bronzies/tree/master)
+bronzies.com [![CircleCI](https://circleci.com/gh/dominikwilkowski/bronzies/tree/main.svg?style=svg)](https://circleci.com/gh/dominikwilkowski/bronzies/tree/main)
 ============
 
 > A web app that teaches you the [SLSA](https://sls.com.au/) signals required for the [Bronze Medallion](https://sls.com.au/role/bronze-medallion/).
@@ -129,7 +129,7 @@ https://bronzies.com/api/version
 
 ### Install on server
 
-The API runs behind an [NGINX proxy](https://github.com/dominikwilkowski/bronzies/blob/master/bronzies.com).
+The API runs behind an [NGINX proxy](https://github.com/dominikwilkowski/bronzies/blob/main/bronzies.com).
 
 #### CRON task
 
@@ -227,7 +227,7 @@ Files that end with `.spec.js` are Jest tests and files that end with `.cypress.
 ## License
 
 Copyright (c) Dominik Wilkowski.
-Licensed under [GNU-GPLv3](https://raw.githubusercontent.com/https://github.com/dominikwilkowski/bronzies/master/LICENSE).
+Licensed under [GNU-GPLv3](https://raw.githubusercontent.com/https://github.com/dominikwilkowski/bronzies/main/LICENSE).
 
 **[⬆ back to top](#contents)**
 
