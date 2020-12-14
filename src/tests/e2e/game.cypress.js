@@ -59,6 +59,8 @@ describe('The game', () => {
 						score --;
 						cy.get('[data-score]').should( 'contain', score );
 					})
+					// check that there is no "Next Question" button visible
+					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
 					// click another wrong answer
 					.wrap( null ).then( () => {
 						cy.get('[data-answer=""]').contains( wrongs ).click();
@@ -68,6 +70,8 @@ describe('The game', () => {
 						score --;
 						cy.get('[data-score]').should( 'contain', score );
 					})
+					// check that there is no "Next Question" button visible
+					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
 					// now we select the right answer
 					.wrap( null ).then( () => {
 						cy.get('[data-answer]').contains( correct ).click();
@@ -82,7 +86,6 @@ describe('The game', () => {
 					.get('[data-answer]').should('be.disabled')
 					.get('[data-game-toggle]').should('be.disabled')
 					.get('[data-round-toggle]').should('be.disabled')
-					.get('button[data-cy-id="Next question"]').filter(':not(:visible)').should('not.be.visible')
 					// now we click to go to the next question
 					.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
 					// let's make sure the score is still the same
@@ -199,6 +202,8 @@ describe('The game', () => {
 						score --;
 						cy.get('[data-score]').should( 'contain', score );
 					})
+					// check that there is no "Next Question" button visible
+					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
 					// click another wrong answer
 					.wrap( null ).then( () => {
 						cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`).eq( 1 ).click();
@@ -208,6 +213,8 @@ describe('The game', () => {
 						score --;
 						cy.get('[data-score]').should( 'contain', score );
 					})
+					// check that there is no "Next Question" button visible
+					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
 					// now we select the right answer
 					.wrap( null ).then( () => {
 						cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();

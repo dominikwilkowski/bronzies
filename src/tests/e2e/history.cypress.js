@@ -28,8 +28,8 @@ describe('The history', () => {
 			.get('a[data-highscore]').click()
 			.waitFor('a[data-back-link]')
 			// check that there are no user sections yet
-			.get('p[data-most-wrong]').should('not.be.visible')
-			.get('form[data-input-form]').should('not.be.visible')
+			.get('p[data-most-wrong]').should('not.exist')
+			.get('form[data-input-form]').should('not.exist')
 			.root().should( 'contain', 'Latest entries' )
 			.root().should( 'contain', `Total: ${ HIGHSCORE.length }` )
 			.root().should( 'contain', 'Score board' )
@@ -54,9 +54,9 @@ describe('The history', () => {
 			.get('a[data-highscore]').click()
 			.waitFor('a[data-back-link]')
 			// check what's displayed
-			.get('p[data-most-wrong]').should('not.be.visible')
+			.get('p[data-most-wrong]').should('not.exist')
 			.get('form[data-input-form]').should('be.visible')
-			.root().contains('pushups').should('not.be.visible')
+			.root().contains('pushups').should('not.exist')
 			// go back to game
 			.get('a').contains('Go back to the game').click()
 			.waitFor('[data-question="true"]')
