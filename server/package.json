@@ -4,7 +4,7 @@
 	"private": true,
 	"devDependencies": {
 		"cfonts": "^2.9.1",
-		"chalk": "^4.1.0",
+		"chalk": "^4.1.1",
 		"restify": "^8.5.1"
 	},
 	"scripts": {

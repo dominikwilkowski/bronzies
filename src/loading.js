@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 
-import { useTransition, animated } from 'react-spring';
 import { jsx, keyframes } from '@emotion/react';
 import { Link } from '@reach/router';
 import { useGameData } from './app';
@@ -126,32 +125,27 @@ function Animation({ loadingState }) {
  */
 function Loading({ loadingState, children }) {
 	const isLoading = loadingState !== 'loaded';
-	const transitions = useTransition( isLoading, null, {
-		initial: { opacity: 1 },
-		from: { opacity: 1 },
-		enter: { opacity: 1 },
-		leave: { opacity: 0 },
-		config: { duration: 700 },
-	});
 
 	return (
 		<Fragment>
 			{
-				transitions.map( ({ item, props }) => {
-					return item
-						? <animated.div key='loading' style={ props } css={{
-								position: 'absolute',
-								backgroundColor: '#fff',
-								top: 0,
-								left: 0,
-								right: 0,
-								zIndex: 2,
-							}}><Animation loadingState={ loadingState } /></animated.div>
-						: <animated.div key='loaded' style={ props } css={{
-								position: 'relative',
-								zIndex: 1,
-							}}>{ children }</animated.div>
-				})
+				isLoading
+					? <div css={{
+							position: 'absolute',
+							backgroundColor: '#fff',
+							top: 0,
+							left: 0,
+							right: 0,
+							zIndex: 2,
+						}}>
+							<Animation loadingState={ loadingState } />
+						</div>
+					: <div css={{
+							position: 'relative',
+							zIndex: 1,
+						}}>
+							{ children }
+						</div>
 			}
 		</Fragment>
 	);

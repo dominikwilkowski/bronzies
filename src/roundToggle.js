@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 
-import { animated, useTransition } from 'react-spring';
 import { getSortedWrongAnswers } from './highscore';
 import { shuffle, getNewAnswers } from './game';
 import { Fragment, useState } from 'react';
@@ -122,14 +121,6 @@ function RoundToggle() {
 	const [ isOpen, setIsOpen ] = useState( false );
 	const wrongAnswersLength = Object.keys( wrongAnswers ).length;
 
-	const transitions = useTransition( isOpen, null, {
-		initial: { opacity: 0 },
-		from: { opacity: 0 },
-		enter: { opacity: 1 },
-		leave: { opacity: 0 },
-		config: { duration: 300 },
-	});
-
 	function handleRoundChange( questions, questionType ) {
 		setQuestionsDB( questions );
 
@@ -162,28 +153,26 @@ function RoundToggle() {
 				Round: { questionType }
 			</Button>
 			{
-				transitions.map( ({ item, props }) => {
-					return item
-						? <animated.div key='loading' style={ props } css={{
-								position: 'absolute',
-								left: '50%',
-								top: '100%',
-								width: '15rem',
-								marginLeft: '-7.5rem',
-								boxShadow: '0 10px 10px rgba(100,100,100,0.5)',
-								zIndex: 10,
-							}}>
-								<Menu
-									key={ isOpen }
-									isOpen={ isOpen }
-									setIsOpen={ setIsOpen }
-									wrongAnswersLength={ wrongAnswersLength }
-									handleRoundChange={ handleRoundChange }
-									questionType={ questionType }
-								/>
-							</animated.div>
-						: null
-				})
+				isOpen
+					? <div css={{
+							position: 'absolute',
+							left: '50%',
+							top: '100%',
+							width: '15rem',
+							marginLeft: '-7.5rem',
+							boxShadow: '0 10px 10px rgba(100,100,100,0.5)',
+							zIndex: 10,
+						}}>
+							<Menu
+								key={ isOpen }
+								isOpen={ isOpen }
+								setIsOpen={ setIsOpen }
+								wrongAnswersLength={ wrongAnswersLength }
+								handleRoundChange={ handleRoundChange }
+								questionType={ questionType }
+							/>
+						</div>
+					: null
 			}
 		</div>
 	);
