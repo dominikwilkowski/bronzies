@@ -3,7 +3,7 @@
 	"version": "1.0.1",
 	"private": true,
 	"devDependencies": {
-		"cfonts": "^2.9.3",
+		"cfonts": "^2.10.0",
 		"chalk": "^4.1.2",
 		"restify": "^8.5.1"
 	},
