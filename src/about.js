@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import { version as appVersion } from '../package.json';
 import { Fragment, useState, useEffect } from 'react';
 import useRemoteData from './useRemoteData';
 import { Link } from '@reach/router';
 import { jsx } from '@emotion/react';
+import pkg from '../package.json';
 import Spinner from './spinner';
 
 function About() {
@@ -45,7 +45,7 @@ function About() {
 					marginTop: '1rem',
 					fontSize: '0.7rem',
 				}}>
-					APP: v{appVersion}
+					APP: v{pkg.version}
 				</span>
 				<div css={{
 					display: 'block',
