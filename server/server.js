@@ -103,7 +103,6 @@ function getSignalAsset( req, res, next ) {
 	debug( 'Signals assets requested', 'interaction', req );
 
 	serverStaticSignalSVG( req, res, next );
-	return next();
 }
 
 /**
