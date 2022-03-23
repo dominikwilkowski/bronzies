@@ -1,10 +1,12 @@
 version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
 
 jobs:
   # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
     docker:
-      - image: circleci/node:lts
+      - image: cypress/included:8.7.0
     steps:
       - checkout
       - restore_cache:
@@ -19,7 +21,7 @@ jobs:
           command: cd server && yarn
       - run:
           name: Adding debugging deps
-          command: sudo apt-get install tree # for debugging circle builds
+          command: apt-get install tree # for debugging circle builds
       - run:
           name: Report file structure
           command: tree -Ca
@@ -46,7 +48,7 @@ jobs:
   # Running all tests
   testing:
     docker:
-      - image: circleci/node:lts
+      - image: cypress/included:8.7.0
     steps:
       - checkout
       - attach_workspace:
@@ -57,9 +59,9 @@ jobs:
       - run:
           name: Installind dependencies for server from cache
           command: cd server && yarn
-      - run:
-          name: Installing Cypress dependencies
-          command: sudo apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+      # - run:
+      #     name: Installing Cypress dependencies
+      #     command: sudo apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
       - run:
           name: Testing our code
           command: yarn test
