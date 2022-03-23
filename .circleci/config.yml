@@ -21,7 +21,7 @@ jobs:
           command: cd server && yarn
       - run:
           name: Adding debugging deps
-          command: sudo apt-get install tree # for debugging circle builds
+          command: apt-get install tree # for debugging circle builds
       - run:
           name: Report file structure
           command: tree -Ca
