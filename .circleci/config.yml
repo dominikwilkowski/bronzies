@@ -6,7 +6,7 @@ jobs:
   # The install job for all dependencies so we can reuse/depend on it in other jobs
   install_dependencies:
     docker:
-      - image: cypress/base-14
+      - image: cypress/included:14.15.0
     steps:
       - checkout
       - restore_cache:
@@ -48,7 +48,7 @@ jobs:
   # Running all tests
   testing:
     docker:
-      - image: cypress/base-14
+      - image: cypress/included:14.15.0
     steps:
       - checkout
       - attach_workspace:
