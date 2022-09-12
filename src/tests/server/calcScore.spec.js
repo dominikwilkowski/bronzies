@@ -17,10 +17,10 @@ test('calcScore - Ignores wrong types', () => {
 
 test('calcScore - Ignores arrays with missing item', () => {
 	const input = [
-		[ 'Signals', '#questions-signal4', 'Message not clear, repeat' ],
-		[ 'Signals', '#questions-signal44', 'Message not clear, repeat' ],
-		[ '#questions-signal4', 'Message not clear, repeat' ],
-		[ 'Signals', '#questions-signal4', 'Message not clear, repeat' ],
+		[ 'Signals', '#questions-signal3', 'Remain stationary' ],
+		[ 'Signals', '#questions-signal44', 'Remain stationary' ],
+		[ '#questions-signal3', 'Remain stationary' ],
+		[ 'Signals', '#questions-signal3', 'Remain stationary' ],
 	];
 	const result = {
 		score: 0,
@@ -33,9 +33,9 @@ test('calcScore - Ignores arrays with missing item', () => {
 
 test('calcScore - Ignores arrays with wrong image', () => {
 	const input = [
-		[ 'Signals', '#questions-signal4', 'Message not clear, repeat' ],
-		[ 'Signals', '#questions-signal44', 'Message not clear, repeat' ],
-		[ 'Signals', '#questions-signal4', 'Message not clear, repeat' ],
+		[ 'Signals', '#questions-signal3', 'Remain stationary' ],
+		[ 'Signals', '#questions-signal44', 'Remain stationary' ],
+		[ 'Signals', '#questions-signal3', 'Remain stationary' ],
 	];
 	const result = {
 		score: 2,
@@ -48,7 +48,7 @@ test('calcScore - Ignores arrays with wrong image', () => {
 
 test('calcScore - Calculate simple score', () => {
 	const input = [
-		[ 'Signals', '#questions-signal4', 'Message not clear, repeat' ],
+		[ 'Signals', '#questions-signal8', 'Go to the left or the right' ],
 		[ 'Signals', '#questions-signal3', 'Remain stationary' ],
 		[ 'Signals', '#questions-signal5', 'Pick up swimmers' ],
 	];
@@ -63,7 +63,7 @@ test('calcScore - Calculate simple score', () => {
 
 test('calcScore - Calculate simple nays', () => {
 	const input = [
-		[ 'Signals', '#questions-signal4', 'Remain stationary' ],
+		[ 'Signals', '#questions-signal2', 'Remain stationary' ],
 		[ 'Signals', '#questions-signal3', 'Message not clear, repeat' ],
 		[ 'Signals', '#questions-signal5', 'Pick up swimmers2' ],
 	];
@@ -79,30 +79,30 @@ test('calcScore - Calculate simple nays', () => {
 test('calcScore - Calculate complex score and nays', () => {
 	const input = [
 		[ "Signals", "#questions-signal9", "Message understood, all clear" ],                     // correct
-		[ "Signals", "#questions-signal19", "Helicopter signal—request to enter" ],               // correct
+		[ "Signals", "#questions-signal18", "Mass rescue" ],                                      // correct
 		[ "Signals", "#questions-signal23", "Message not clear, repeat" ],                        // wrong
-		[ "Signals", "#questions-signal4", "Message not clear, repeat" ],                         // correct
+		[ "Signals", "#questions-signal11", "Assistance required" ],                              // correct
 		[ "Signals", "#questions-signal22", "Signal Flag" ],                                      // wrong
-		[ "Signals", "#questions-signal19", "Signal Flag" ],                                      // wrong
+		[ "Signals", "#questions-signal11", "Mass rescue" ],                                      // wrong
 		[ "Signals", "#questions-signal14", "Signal Flag" ],                                      // wrong
 		[ "Signals", "#questions-signal17", "Signal Flag" ],                                      // wrong
 		[ "Signals", "#questions-signal20", "Signal Flag" ],                                      // correct
 		[ "Signals", "#questions-signal11", "Assistance required" ],                              // correct
 		[ "Signals", "#questions-signal5", "Pick up swimmers" ],                                  // correct
-		[ "Signals", "#questions-signal15", "Search completed" ],                                 // correct
+		[ "Signals", "#questions-signal23", "All Clear/OK" ],                                     // correct
 		[ "Signals", "#questions-signal22", "Submerged Patient Missing" ],                        // correct
 		[ "Signals", "#questions-signal12", "Pick up or adjust buoys" ],                          // wrong
 		[ "Signals", "#questions-signal10", "Pick up or adjust buoys" ],                          // correct
 		[ "Signals", "#questions-signal16", "Emergency evacuation flag" ],                        // correct
 		[ "Signals", "#questions-signal2", "Proceed further out to sea" ],                        // wrong
 		[ "Signals", "#questions-signal7", "Proceed further out to sea" ],                        // correct
-		[ "Signals", "#questions-signal6", "Investigate submerged object" ],                      // correct
+		[ "Signals", "#questions-signal11", "Assistance required" ],                              // correct
 		[ "Signals", "#questions-signal14", "Shore signal received and understood" ],             // correct
 		[ "Signals", "#questions-signal3", "Remain stationary" ],                                 // correct
 		[ "Signals", "#questions-signal8", "Go to the left or the right" ],                       // wrong
 		[ "Signals", "#questions-signal21", "Assistance required (Water to beach)" ],             // correct
 		[ "Signals", "#questions-signal2", "Return to shore" ],                                   // correct
-		[ "Signals", "#questions-signal19", "Boat wishes to return to shore" ],                   // wrong
+		[ "Signals", "#questions-signal11", "Mass rescue" ],                                      // wrong
 		[ "Signals", "#questions-signal12", "Boat wishes to return to shore" ],                   // correct
 		[ "Signals", "#questions-signal13", "Emergency evacuation alarm (Water to beach)" ],      // correct
 		[ "Signals", "#questions-signal17", "Emergency evacuation alarm" ],                       // correct
@@ -113,7 +113,7 @@ test('calcScore - Calculate complex score and nays', () => {
 		[ "Signals", "#questions-signal11", "Mass rescue" ],                                      // wrong
 		[ "Signals", "#questions-signal18", "Mass rescue" ],                                      // correct
 		[ "Signals", "#questions-signal2", "Return to shore" ],                                   // correct
-		[ "Signals", "#questions-signal6", "Investigate submerged object" ],                      // correct
+		[ "Signals", "#questions-signal11", "Assistance required" ],                              // correct
 		[ "Signals", "#questions-signal17", "Emergency evacuation alarm" ],                       // correct
 		[ "Signals", "#questions-signal20", "Shore signal received and understood" ],             // wrong
 		[ "Signals", "#questions-signal14", "Shore signal received and understood" ],             // correct
@@ -125,7 +125,7 @@ test('calcScore - Calculate complex score and nays', () => {
 		[ "Signals", "#questions-signal13", "Emergency evacuation alarm (Water to beach)" ],      // correct
 		[ "Signals", "#questions-signal16", "Message not clear, repeat" ],                        // wrong
 		[ "Signals", "#questions-signal8", "Message not clear, repeat" ],                         // correct
-		[ "Signals", "#questions-signal4", "Message not clear, repeat" ],                         // correct
+		[ "Signals", "#questions-signal21", "Assistance required (Water to beach)" ],             // correct
 		[ "Signals", "#questions-signal12", "Submerged Patient Missing" ],                        // wrong
 		[ "Signals", "#questions-signal9", "Submerged Patient Missing" ],                         // wrong
 		[ "Signals", "#questions-signal10", "Submerged Patient Missing" ],                        // wrong

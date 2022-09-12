@@ -15,19 +15,9 @@
 		"text": "Remain stationary"
 	},
 	{
-		"image": "#questions-signal4",
-		"alt": "A person on the beach moving one hand above their heads back and forth",
-		"text": "Message not clear, repeat"
-	},
-	{
 		"image": "#questions-signal5",
 		"alt": "A person on the beach moving one of their hands in a circular motion while pointing with the other hand in one direction in 90 degree angle",
 		"text": "Pick up swimmers"
-	},
-	{
-		"image": "#questions-signal6",
-		"alt": "A person on the beach holding both arms low in a 54 degree angle",
-		"text": "Investigate submerged object"
 	},
 	{
 		"image": "#questions-signal7",
@@ -70,11 +60,6 @@
 		"text": "Shore signal received and understood"
 	},
 	{
-		"image": "#questions-signal15",
-		"alt": "A person kneeling on a rescue board holding both arms out in a 90 degree angle",
-		"text": "Search completed"
-	},
-	{
 		"image": "#questions-signal16",
 		"alt": "A checkered flag with white and red squares",
 		"text": "Emergency evacuation flag"
@@ -88,11 +73,6 @@
 		"image": "#questions-signal18",
 		"alt": "Three loud sounds",
 		"text": "Mass rescue"
-	},
-	{
-		"image": "#questions-signal19",
-		"alt": "A person holding right arm out with a closed fist and the thumb up",
-		"text": "Helicopter signal—request to enter"
 	},
 	{
 		"image": "#questions-signal20",
