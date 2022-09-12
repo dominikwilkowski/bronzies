@@ -199,6 +199,7 @@ Files that end with `.spec.js` are Jest tests and files that end with `.cypress.
 
 ### Release History App
 
+* 1.1.1 - Updated dependencies
 * 1.1.0 - Updated dependencies and moved to emotion 11
 * 1.0.3 - Updated to React 17, updated dependencies
 * 1.0.2 - Fixed sound in CPR screen
@@ -214,6 +215,7 @@ Files that end with `.spec.js` are Jest tests and files that end with `.cypress.
 
 ### Release History Server
 
+* 1.0.2 - Removed some flags for 35th edition of the PSAR manual
 * 1.0.1 - Added version route
 * 1.0.0 - Complete rewrite
 * 0.0.3 - fixed dependencies, changed endpoints
