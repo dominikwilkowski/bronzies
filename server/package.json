@@ -9,9 +9,9 @@
 		"node": ">=8"
 	},
 	"dependencies": {
-		"cfonts": "^2.10.0",
+		"cfonts": "^3",
 		"chalk": "^4",
-		"restify": "^8.6.1",
+		"restify": "^11",
 		"restify-cors-middleware": "^1.1.1"
 	}
 }

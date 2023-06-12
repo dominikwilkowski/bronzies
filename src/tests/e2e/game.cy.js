@@ -20,7 +20,6 @@ describe('The game', () => {
 		let position = 0;
 
 		cy
-			.waitFor('[data-question="true"]')
 			.get('[data-round]').should( 'contain', '1' )
 			// we check that all remaining progress steps display in future state and that all are there
 			.get('[data-progress-status]').should( $p => {
@@ -164,7 +163,6 @@ describe('The game', () => {
 		let position = 0;
 
 		cy
-			.waitFor('[data-question="true"]')
 			.get('[data-round]').should( 'contain', '1' )
 			// we check that all remaining progress steps display in future state and that all are there
 			.get('[data-progress-status]').should( $p => {
@@ -308,7 +306,6 @@ describe('The game', () => {
 		let uniqeHistory;
 
 		cy
-			.waitFor('[data-question="true"]')
 			.get('[data-round]').should( 'contain', '1' )
 			.get('[data-round-toggle]').should('be.disabled')
 			// getting the current question from the DOM
