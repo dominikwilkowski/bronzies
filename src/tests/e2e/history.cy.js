@@ -23,10 +23,8 @@ describe('The history', () => {
 		const wrongAnswers = [];
 
 		cy
-			.waitFor('[data-question="true"]')
 			// go into highscore
 			.get('a[data-highscore]').click()
-			.waitFor('a[data-back-link]')
 			// check that there are no user sections yet
 			.get('p[data-most-wrong]').should('not.exist')
 			.get('form[data-input-form]').should('not.exist')
@@ -36,7 +34,6 @@ describe('The history', () => {
 			.root().should( 'contain', 'Top 50' )
 			// go back to game
 			.get('a').contains('Go back to the game').click()
-			.waitFor('[data-question="true"]')
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -52,14 +49,12 @@ describe('The history', () => {
 			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
 			// go into highscore
 			.get('a[data-highscore]').click()
-			.waitFor('a[data-back-link]')
 			// check what's displayed
 			.get('p[data-most-wrong]').should('not.exist')
 			.get('form[data-input-form]').should('be.visible')
 			.root().contains('pushups').should('not.exist')
 			// go back to game
 			.get('a').contains('Go back to the game').click()
-			.waitFor('[data-question="true"]')
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -75,13 +70,11 @@ describe('The history', () => {
 			})
 			// go into highscore
 			.get('a[data-highscore]').click()
-			.waitFor('a[data-back-link]')
 			.get('p[data-most-wrong]').should('be.visible')
 			.get('form[data-input-form]').should('be.visible')
 			.root().contains(' 5 pushups').should('be.visible')
 			// go back to game
 			.get('a').contains('Go back to the game').click()
-			.waitFor('[data-question="true"]')
 			// correct answer
 			.wrap( null ).then( () => {
 				cy.get('[data-answer]').contains( correct ).click();
@@ -160,7 +153,6 @@ describe('The history', () => {
 			})
 			// go into highscore
 			.get('a[data-highscore]').click()
-			.waitFor('a[data-back-link]')
 			// check that the wrongs have been noted
 			.wrap( null ).then( () => {
 				cy
