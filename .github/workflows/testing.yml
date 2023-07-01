@@ -56,8 +56,11 @@ jobs:
       - name: Install server dependencies
         run: cd server && yarn --frozen-lockfile
 
-      - name: Cypress run
+      - name: E2E tests
         uses: cypress-io/github-action@v5
         with:
-          start: npm start:dev
+          start: "npm start:dev"
           browser: chrome
+
+      - name: Unit tests
+        run: npm run test:unit
