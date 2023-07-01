@@ -59,7 +59,7 @@ jobs:
       - name: E2E tests
         uses: cypress-io/github-action@v5
         with:
-          start: "npm start:dev"
+          start: npm run start:dev
           browser: chrome
 
       - name: Unit tests
