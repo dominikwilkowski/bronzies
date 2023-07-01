@@ -33,6 +33,7 @@
 		"use-sound": "^4.0.1"
 	},
 	"devDependencies": {
+		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@testing-library/cypress": "^9.0.0",
 		"concurrently": "^8.2.0",
 		"cypress": "^12.14.0",
