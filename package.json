@@ -41,9 +41,6 @@
 		"react-scripts": "5.0.1",
 		"start-server-and-test": "^2.0.0"
 	},
-	"resolutions": {
-		"axios": "0.21.2"
-	},
 	"proxy": "http://localhost:5555",
 	"jest": {
 		"collectCoverageFrom": [
