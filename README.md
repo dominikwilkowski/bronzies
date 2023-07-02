@@ -1,4 +1,4 @@
-bronzies.com 
+bronzies.com [![CI testing](https://github.com/dominikwilkowski/bronzies/actions/workflows/testing.yml/badge.svg)](https://github.com/dominikwilkowski/bronzies/actions/workflows/testing.yml)
 ============
 
 > A web app that teaches you the [SLSA](https://sls.com.au/) signals required for the [Bronze Medallion](https://sls.com.au/role/bronze-medallion/).
