@@ -2,7 +2,7 @@
 
 import { jsx, keyframes } from '@emotion/react';
 import useInterval from './useInterval';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import { useState, } from 'react';
 import { colors } from './theme';
 import useSound from 'use-sound';

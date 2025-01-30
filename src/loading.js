@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { jsx, keyframes } from '@emotion/react';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import { useGameData } from './app';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';

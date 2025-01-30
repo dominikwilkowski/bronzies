@@ -4,7 +4,7 @@ import { useGameData } from './app';
 import { jsx } from '@emotion/react';
 import { colors } from './theme';
 
-function ImageView() {
+function Header() {
 	const {
 		rounds,
 		score,
@@ -58,6 +58,6 @@ function ImageView() {
 	);
 };
 
-ImageView.propTypes = {};
+Header.propTypes = {};
 
-export default ImageView;
+export default Header;

@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
 import { Fragment, useState, createContext, useContext } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Game, { shuffle, getNewAnswers } from './game';
 import { jsx, Global } from '@emotion/react';
-import { Router } from '@reach/router';
 import Highscore from './highscore';
 import { colors } from './theme';
 import Header from './header';
@@ -172,18 +172,21 @@ function App() {
 			}} />
 			<GameStateProvider>
 				<DBProvider>
-					<Header />
-					<div css={{
-						position: 'relative',
-					}}>
-						<Router>
-							<Game default />
-							<Highscore path='/highscore' />
-							<About path='/about' />
-							<CPR path='/cpr' />
-						</Router>
-					</div>
-					<Footer />
+					<BrowserRouter>
+						<Header />
+						<div css={{
+							position: 'relative',
+						}}>
+							<Routes>
+								<Route path="/" element={<Game />} />
+								<Route path="/highscore" element={<Highscore />} />
+								<Route path="/about" element={<About />} />
+								<Route path="/cpr" element={<CPR />} />
+								<Route path="*" element={<Game />} />
+							</Routes>
+						</div>
+						<Footer />
+					</BrowserRouter>
 				</DBProvider>
 			</GameStateProvider>
 		</Fragment>

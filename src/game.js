@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import useRemoteData from './useRemoteData';
 import RoundToggle from './roundToggle';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import { useGameData } from './app';
 import { jsx } from '@emotion/react';
 import GameBody from './gameBody';

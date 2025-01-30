@@ -2,7 +2,7 @@
 
 import { Fragment, useState, useEffect } from 'react';
 import useRemoteData from './useRemoteData';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import { useGameData } from './app';
 import { jsx } from '@emotion/react';
 import { onUnload } from './game';

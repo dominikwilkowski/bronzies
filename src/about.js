@@ -2,7 +2,7 @@
 
 import { Fragment, useState, useEffect } from 'react';
 import useRemoteData from './useRemoteData';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import { jsx } from '@emotion/react';
 import pkg from '../package.json';
 import Spinner from './spinner';
@@ -78,8 +78,8 @@ function About() {
 					<a css={{
 						display: 'block',
 						marginBottom: '3rem',
-					}} href='https://twitter.com/wilkowskidom' rel='noopener noreferrer' target='_blank'>
-						Reach out on twitter ⇠
+					}} href='https://bsky.app/profile/dominik-wilkowski.com' rel='noopener noreferrer' target='_blank'>
+						Reach out on Bluesky ⇠
 					</a>
 				</div>
 
