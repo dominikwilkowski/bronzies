@@ -4,6 +4,7 @@ describe("The about page", () => {
 			.root()
 			.should("contain", "About the app")
 			.contains("About the app")
+			.should("be.visible")
 			.scrollIntoView()
 			.click({ force: true })
 			.root()
