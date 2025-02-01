@@ -6,7 +6,6 @@ describe("The about page", () => {
 			.get("a")
 			.contains("About the app")
 			.realClick()
-			.wait(500)
 			.root()
 			.should("contain", "Dominik")
 			.get("a")
