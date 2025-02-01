@@ -1,5 +1,9 @@
 import { convertQuestions } from '../../../server/utils.js';
 
+function escapeRegex(str = '') {
+	return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 describe('The game', () => {
 	beforeEach( () => {
 		cy.fixture('signals-staging.json').as('signals');
@@ -32,14 +36,18 @@ describe('The game', () => {
 			// first we go through an entire round programmatically
 			.wrap( new Array( SIGNALLENGTH ) )
 			.each( () => {
-				cy
+				cy.log(`========== ${position} ==========`);
+				cy.get('[data-question="true"] title')
 					// we get what the question is and store what the right and wrong answers are
-					.wrap( null ).then( () => {
-						$title = Cypress.$('[data-question="true"] title');
-						questionID = '#'+$title.attr('id').replace( '-title', '' );
-						answerText = SIGNALS[ questionID ].text;
-						correct = new RegExp(`^(${ answerText })$`, 'g');
-						wrongs = new RegExp(`^(?!${ answerText }$).*$`, 'gm');
+					.then((title) => {
+						$title = title;
+						const idAttr = $title.attr('id');
+						questionID = '#' + idAttr.replace('-title', '');
+						answerText = SIGNALS[questionID].text;
+
+						const safeAnswer = escapeRegex(SIGNALS[questionID].text);
+						wrongs = new RegExp(`^(?!${safeAnswer}$).*$`);
+						correct = new RegExp(`^${safeAnswer}$`);
 					})
 					// we check the progress bar
 					.get('[data-progress-status]').should( $p => {
@@ -50,51 +58,49 @@ describe('The game', () => {
 						}
 					})
 					// we click the wrong answer
-					.wrap( null ).then( () => {
-						cy.get('[data-answer=""]').contains( wrongs, { timeout: 60000 } ).click();
-					})
-					// check the score has now one less
-					.wrap( null ).then( () => {
+					.then(() => {
 						score --;
-						cy.get('[data-score]').should( 'contain', score );
+						cy.contains('button[data-answer=""]', wrongs).realClick()
+						// check the score has now one less
+						.get('[data-score]').should( 'contain', score )
+						// check that there is no "Next Question" button visible
+						.get('button[data-cy-id="Next question"]').should( 'not.be.visible' );
 					})
-					// check that there is no "Next Question" button visible
-					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
-					// click another wrong answer
-					.wrap( null ).then( () => {
-						cy.get('[data-answer=""]').contains( wrongs ).click();
-					})
-					// again score should have subtracted
-					.wrap( null ).then( () => {
+					// we click the wrong answer
+					.then(() => {
 						score --;
-						cy.get('[data-score]').should( 'contain', score );
+						cy.contains('button[data-answer=""]', wrongs).realClick()
+						// check the score has now one less
+						.get('[data-score]').should( 'contain', score )
+						// check that there is no "Next Question" button visible
+						.get('button[data-cy-id="Next question"]').should( 'not.be.visible' );
 					})
-					// check that there is no "Next Question" button visible
-					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
-					// now we select the right answer
-					.wrap( null ).then( () => {
-						cy.get('[data-answer]').contains( correct ).click();
+					.then(() => {
+						cy.contains('button[data-answer]', correct).each($btn => {
+							cy.log($btn.text());
+						})
 					})
-					// score now has one more point
-					.wrap( null ).then( () => {
+					// we click the right answer
+					.then(() => {
 						score ++;
-						cy.get('[data-score]').should( 'contain', score );
+						cy.contains('button[data-answer]', correct).realClick().then(() => {
+							cy
+								// check the score has now one more
+								.get('[data-score]').should( 'contain', score )
+								// check that there is no "Next Question" button visible
+								.get('[data-next]').should('be.visible')
+								.get('[data-answer]').should('be.disabled')
+								.get('[data-game-toggle]').should('be.disabled')
+								.get('[data-round-toggle]').should('be.disabled')
+								// now we click to go to the next question
+								.get('button[data-cy-id="Next question"]').filter(':visible').realClick()
+								// let's make sure the score is still the same
+								.get('[data-score]').should( 'contain', score )
+								.get('[data-answer]').should('not.be.disabled')
+								.get('[data-game-toggle]').should('not.be.disabled')
+								.get('[data-round-toggle]').should('not.be.disabled');
+						})
 					})
-					// check that inputs are disabled
-					.get('[data-next]').should('be.visible')
-					.get('[data-answer]').should('be.disabled')
-					.get('[data-game-toggle]').should('be.disabled')
-					.get('[data-round-toggle]').should('be.disabled')
-					// now we click to go to the next question
-					.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
-					// let's make sure the score is still the same
-					.wrap( null ).then( () => {
-						cy.get('[data-score]').should( 'contain', score );
-					})
-					// all inputs are clickable again
-					.get('[data-answer]').should('not.be.disabled')
-					.get('[data-game-toggle]').should('not.be.disabled')
-					.get('[data-round-toggle]').should('not.be.disabled')
 					// this is where we iterate on the position for the next question
 					.wrap( null ).then( () => {
 						position ++;
@@ -120,7 +126,7 @@ describe('The game', () => {
 			})
 			// now let's select the correct answer right away
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// we should have more score
 			.wrap( null ).then( () => {
@@ -134,7 +140,7 @@ describe('The game', () => {
 			.get('[data-round-toggle]').should('be.disabled')
 			.get('button[data-cy-id="Next question"]').filter(':not(:visible)').should('not.be.visible')
 			.wait( 400 )
-			.get('button[data-cy-id="Next question"]').filter(':visible').click()
+			.get('button[data-cy-id="Next question"]').filter(':visible').realClick()
 			.wrap( null ).then( () => {
 				cy.get('[data-score]').should( 'contain', score );
 			})
@@ -172,7 +178,7 @@ describe('The game', () => {
 				const rest = [ ...new Array( SIGNALLENGTH ) ].map( ( _, item ) => Cypress.$( $p[ item ] ).attr('data-progress-status') );
 				expect( rest ).to.deep.eq( [ 'current', ...new Array( SIGNALLENGTH - 1 ).fill('future') ] );
 			})
-			.get('[data-game-toggle-label]').click()
+			.get('[data-game-toggle-label]').realClick()
 			// first we go through an entire round programmatically
 			.wrap( new Array( SIGNALLENGTH ) )
 			.each( () => {
@@ -193,7 +199,7 @@ describe('The game', () => {
 					})
 					// we click the wrong answer
 					.wrap( null ).then( () => {
-						cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`, { timeout: 60000 }).eq( 0 ).click();
+						cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`, { timeout: 60000 }).eq( 0 ).realClick();
 					})
 					// check the score has now one less
 					.wrap( null ).then( () => {
@@ -204,7 +210,7 @@ describe('The game', () => {
 					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
 					// click another wrong answer
 					.wrap( null ).then( () => {
-						cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`).eq( 1 ).click();
+						cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`).eq( 1 ).realClick();
 					})
 					// again score should have subtracted
 					.wrap( null ).then( () => {
@@ -215,7 +221,7 @@ describe('The game', () => {
 					.get('button[data-cy-id="Next question"]').should( 'not.be.visible' )
 					// now we select the right answer
 					.wrap( null ).then( () => {
-						cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
+						cy.get(`[data-answer=""] [data-id="${ answerText }"]`).realClick();
 					})
 					// score now has one more point
 					.wrap( null ).then( () => {
@@ -229,7 +235,7 @@ describe('The game', () => {
 					.get('[data-round-toggle]').should('be.disabled')
 					.get('button[data-cy-id="Next question"]').filter(':not(:visible)').should('not.be.visible')
 					// now we click to go to the next question
-					.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+					.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 					// let's make sure the score is still the same
 					.wrap( null ).then( () => {
 						cy.get('[data-score]').should( 'contain', score );
@@ -261,7 +267,7 @@ describe('The game', () => {
 			})
 			// now let's select the correct answer right away
 			.wrap( null ).then( () => {
-				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
+				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).realClick();
 			})
 			// we should have more score
 			.wrap( null ).then( () => {
@@ -275,7 +281,7 @@ describe('The game', () => {
 			.get('[data-round-toggle]').should('be.disabled')
 			.get('button[data-cy-id="Next question"]').filter(':not(:visible)').should('not.be.visible')
 			.wait( 400 )
-			.get('button[data-cy-id="Next question"]').filter(':visible').click()
+			.get('button[data-cy-id="Next question"]').filter(':visible').realClick()
 			.wrap( null ).then( () => {
 				cy.get('[data-score]').should( 'contain', score );
 			})
@@ -319,22 +325,22 @@ describe('The game', () => {
 			})
 			// wrong answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// wrong answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// wrong answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -345,10 +351,10 @@ describe('The game', () => {
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -360,14 +366,14 @@ describe('The game', () => {
 			})
 			// wrong answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// correct question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -379,10 +385,10 @@ describe('The game', () => {
 			})
 			// wrong answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// toggle to text2image mode
-			.get('[data-game-toggle-label]').click()
+			.get('[data-game-toggle-label]').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] span');
@@ -392,14 +398,14 @@ describe('The game', () => {
 			})
 			// wrong answer
 			.wrap( null ).then( () => {
-				cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`).eq( 0 ).click();
+				cy.get(`[data-answer=""] [data-id]:not([data-id="${ answerText }"])`).eq( 0 ).realClick();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
+				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] span');
@@ -408,19 +414,19 @@ describe('The game', () => {
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
+				cy.get(`[data-answer=""] [data-id="${ answerText }"]`).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			.get('[data-round-toggle]').should( 'contain', 'Signals' )
 			// go into round toggle
-			.get('[data-round-toggle]').click()
+			.get('[data-round-toggle]').realClick()
 			.get('[data-round-toggle-popup]').then( $item => {
 				uniqeHistory = [ ... new Set( history ) ];
 				expect( $item, 'text content' ).to.contain.text(`wrong so far (${ uniqeHistory.length })`);
 			})
 			// choose practice round
-			.get('button').contains('Practice').click()
+			.get('button').contains('Practice').realClick()
 			.get('[data-round-toggle]').should( 'contain', 'Practice' )
 			// now we iterate over all questions we answered wrong and check that they are all there
 			.wrap( null ).then( () => {
@@ -437,14 +443,14 @@ describe('The game', () => {
 							})
 							// correct answer
 							.wrap( null ).then( () => {
-								cy.get(`[data-answer=""] [data-id="${ answerText }"]`).click();
+								cy.get(`[data-answer=""] [data-id="${ answerText }"]`).realClick();
 							})
 							// next question
-							.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+							.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 					})
 					.get('[data-round]').should( 'contain', '2' )
 					// let's go back to image2text mode
-					.get('[data-game-toggle-label]').click()
+					.get('[data-game-toggle-label]').realClick()
 					.get('[data-round]').should( 'contain', '2' )
 					.wrap( uniqeHistory )
 					// now we check again that all questions we answered wrong earlier are in this round
@@ -460,10 +466,10 @@ describe('The game', () => {
 							})
 							// correct answer
 							.wrap( null ).then( () => {
-								cy.get('[data-answer]').contains( correct ).click();
+								cy.get('[data-answer]').contains( correct ).realClick();
 							})
 							// next question
-							.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+							.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 					})
 					.get('[data-round]').should( 'contain', '3' )
 			});

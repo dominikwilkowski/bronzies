@@ -24,7 +24,7 @@ describe('The history', () => {
 
 		cy
 			// go into highscore
-			.get('a[data-highscore]').click()
+			.get('a[data-highscore]').realClick()
 			// check that there are no user sections yet
 			.get('p[data-most-wrong]').should('not.exist')
 			.get('form[data-input-form]').should('not.exist')
@@ -33,7 +33,7 @@ describe('The history', () => {
 			.root().should( 'contain', 'Score board' )
 			.root().should( 'contain', 'Top 50' )
 			// go back to game
-			.get('a').contains('Go back to the game').click()
+			.get('a').contains('Go back to the game').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -43,18 +43,18 @@ describe('The history', () => {
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// go into highscore
-			.get('a[data-highscore]').click()
+			.get('a[data-highscore]').realClick()
 			// check what's displayed
 			.get('p[data-most-wrong]').should('not.exist')
 			.get('form[data-input-form]').should('be.visible')
 			.root().contains('pushups').should('not.exist')
 			// go back to game
-			.get('a').contains('Go back to the game').click()
+			.get('a').contains('Go back to the game').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -66,21 +66,21 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// go into highscore
-			.get('a[data-highscore]').click()
+			.get('a[data-highscore]').realClick()
 			.get('p[data-most-wrong]').should('be.visible')
 			.get('form[data-input-form]').should('be.visible')
 			.root().contains(' 5 pushups').should('be.visible')
 			// go back to game
-			.get('a').contains('Go back to the game').click()
+			.get('a').contains('Go back to the game').realClick()
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -92,14 +92,14 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -111,14 +111,14 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -130,14 +130,14 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// correct answer
 			.wrap( null ).then( () => {
-				cy.get('[data-answer]').contains( correct ).click();
+				cy.get('[data-answer]').contains( correct ).realClick();
 			})
 			// next question
-			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').click()
+			.get('button[data-cy-id="Next question"]', { timeout: 60000 }).filter(':visible').realClick()
 			// getting the current question from the DOM
 			.wrap( null ).then( () => {
 				$title = Cypress.$('[data-question="true"] title');
@@ -149,10 +149,10 @@ describe('The history', () => {
 			// wrong answer
 			.wrap( null ).then( () => {
 				wrongAnswers.push( answerText );
-				cy.get('[data-answer=""]').contains( wrongs ).click();
+				cy.get('[data-answer=""]').contains( wrongs ).realClick();
 			})
 			// go into highscore
-			.get('a[data-highscore]').click()
+			.get('a[data-highscore]').realClick()
 			// check that the wrongs have been noted
 			.wrap( null ).then( () => {
 				cy

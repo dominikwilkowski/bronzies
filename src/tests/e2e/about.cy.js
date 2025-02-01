@@ -3,7 +3,7 @@ describe('The about page', () => {
 		cy
 			.visit('http://localhost:3000')
 			.root().should('contain', 'About the app')
-			.get('a').contains('About the app').click()
+			.get('a').contains('About the app').realClick()
 			.root().should('contain', 'Dominik')
 			.get('a').contains('Dominik').invoke( 'attr', 'href' ).should('equal', 'https://dominik-wilkowski.com')
 			.root().should('contain', 'submit an issue')
