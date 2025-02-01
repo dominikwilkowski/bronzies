@@ -45,13 +45,13 @@ describe("The history", () => {
 			.realClick()
 			// getting the current question from the DOM
 			.then(() => {
-				$title = Cypress.$('[data-question="true"] title');
+				return cy.get('[data-question="true"] title').should("exist");
+			})
+			.then(($title) => {
 				questionID = "#" + $title.attr("id").replace("-title", "");
 				answerText = SIGNALS[questionID].text;
 				correct = new RegExp(`^(${answerText})$`, "g");
-			})
-			// correct answer
-			.then(() => {
+				// correct answer
 				cy.get("[data-answer]").contains(correct).realClick();
 			})
 			// next question
@@ -75,14 +75,14 @@ describe("The history", () => {
 			.realClick()
 			// getting the current question from the DOM
 			.then(() => {
-				$title = Cypress.$('[data-question="true"] title');
+				return cy.get('[data-question="true"] title').should("exist");
+			})
+			.then(($title) => {
 				questionID = "#" + $title.attr("id").replace("-title", "");
 				answerText = SIGNALS[questionID].text;
 				correct = new RegExp(`^(${answerText})$`, "g");
 				wrongs = new RegExp(`^(?!${answerText}$).*$`, "gm");
-			})
-			// wrong answer
-			.then(() => {
+				// wrong answer
 				wrongAnswers.push(answerText);
 				cy.get('[data-answer=""]').contains(wrongs).realClick();
 			})
@@ -110,14 +110,14 @@ describe("The history", () => {
 			.realClick()
 			// getting the current question from the DOM
 			.then(() => {
-				$title = Cypress.$('[data-question="true"] title');
+				return cy.get('[data-question="true"] title').should("exist");
+			})
+			.then(($title) => {
 				questionID = "#" + $title.attr("id").replace("-title", "");
 				answerText = SIGNALS[questionID].text;
 				correct = new RegExp(`^(${answerText})$`, "g");
 				wrongs = new RegExp(`^(?!${answerText}$).*$`, "gm");
-			})
-			// wrong answer
-			.then(() => {
+				// wrong answer
 				wrongAnswers.push(answerText);
 				cy.get('[data-answer=""]').contains(wrongs).realClick();
 			})
@@ -131,14 +131,14 @@ describe("The history", () => {
 			.realClick()
 			// getting the current question from the DOM
 			.then(() => {
-				$title = Cypress.$('[data-question="true"] title');
+				return cy.get('[data-question="true"] title').should("exist");
+			})
+			.then(($title) => {
 				questionID = "#" + $title.attr("id").replace("-title", "");
 				answerText = SIGNALS[questionID].text;
 				correct = new RegExp(`^(${answerText})$`, "g");
 				wrongs = new RegExp(`^(?!${answerText}$).*$`, "gm");
-			})
-			// wrong answer
-			.then(() => {
+				// wrong answer
 				wrongAnswers.push(answerText);
 				cy.get('[data-answer=""]').contains(wrongs).realClick();
 			})
@@ -152,14 +152,14 @@ describe("The history", () => {
 			.realClick()
 			// getting the current question from the DOM
 			.then(() => {
-				$title = Cypress.$('[data-question="true"] title');
+				return cy.get('[data-question="true"] title').should("exist");
+			})
+			.then(($title) => {
 				questionID = "#" + $title.attr("id").replace("-title", "");
 				answerText = SIGNALS[questionID].text;
 				correct = new RegExp(`^(${answerText})$`, "g");
 				wrongs = new RegExp(`^(?!${answerText}$).*$`, "gm");
-			})
-			// wrong answer
-			.then(() => {
+				// wrong answer
 				wrongAnswers.push(answerText);
 				cy.get('[data-answer=""]').contains(wrongs).realClick();
 			})
@@ -173,14 +173,14 @@ describe("The history", () => {
 			.realClick()
 			// getting the current question from the DOM
 			.then(() => {
-				$title = Cypress.$('[data-question="true"] title');
+				return cy.get('[data-question="true"] title').should("exist");
+			})
+			.then(($title) => {
 				questionID = "#" + $title.attr("id").replace("-title", "");
 				answerText = SIGNALS[questionID].text;
 				correct = new RegExp(`^(${answerText})$`, "g");
 				wrongs = new RegExp(`^(?!${answerText}$).*$`, "gm");
-			})
-			// wrong answer
-			.then(() => {
+				// wrong answer
 				wrongAnswers.push(answerText);
 				cy.get('[data-answer=""]').contains(wrongs).realClick();
 			})
