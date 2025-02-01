@@ -62,3 +62,10 @@ jobs:
 
       - name: E2E tests
         run: yarn test
+
+      - name: Archive cypress videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos
+          path: /home/runner/work/bronzies/bronzies/src/tests/utils/videos/*.mp4
+          retention-days: 5
