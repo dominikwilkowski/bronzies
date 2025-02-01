@@ -65,7 +65,9 @@ jobs:
 
       - name: Archive cypress videos
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: videos
-          path: /home/runner/work/bronzies/bronzies/src/tests/utils/videos/*.mp4
+          path: src/tests/utils/videos/*.mp4
           retention-days: 5
+          if-no-files-found: warn
